@@ -1,0 +1,70 @@
+
+  <!-- <button (click)="nueva()">Nueva</button> -->
+<div class="mat-elevation-z8">
+
+  <table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Id Factura</th>
+    <th scope="col" sortable="name" >Cliente</th>
+    <th scope="col" sortable="name" >Numero Factura</th>
+    <th scope="col" sortable="area" >Fecha</th>
+    <th scope="col" sortable="population" >Total</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of allFacturas">
+    <th scope="row">{{ item.idFactura }}</th>
+    <td>
+      {{ item.nombreCliente }}
+    </td>
+    <td>{{ item.numeroFactura}}</td>
+    <td>{{ item.fechaEmision | date }}</td>
+    <td>{{ item.totalFactura | number }}</td>
+  </tr>
+  </tbody>
+</table>
+  <!--  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Id Column 
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row">{{row.idFactura}}</td>
+    </ng-container>
+
+    <!-- Numero Factura Column 
+    <ng-container matColumnDef="numeroFactura">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero Factura</th>
+      <td mat-cell *matCellDef="let row">{{row.numeroFactura}}</td>
+    </ng-container>
+
+        <!-- Fecha Factura Column 
+        <ng-container matColumnDef="fechaEmision">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+          <td mat-cell *matCellDef="let row">{{row.fechaEmision}}</td>
+        </ng-container>
+
+        <!-- Fecha Factura Column 
+        <ng-container matColumnDef="totalFactura">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td mat-cell *matCellDef="let row">{{row.totalFactura}}</td>
+        </ng-container>
+
+        <!-- Fecha Factura Column 
+        <!-- <ng-container matColumnDef="ok">
+          <th mat-header-cell  mat-sort-header>Acciones</th>
+          <td mat-cell *matCellDef="let row">{{row.totalFactura}}</td>
+        </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table> -->
+
+ <!-- <mat-paginator #paginator 
+      [length]="dataSource?.data?.length"
+      [pageIndex]="0"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      aria-label="Select page">
+  </mat-paginator> -->
+</div>

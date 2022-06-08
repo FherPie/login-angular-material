@@ -1,0 +1,211 @@
+<form #form="ngForm" (ngSubmit)="login(form)">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Factura </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Ruc" value="1234567890"  name="ruc" type="text" ngModel required>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Nombre Cliente"  name="nombreCliente" type="text" ngModel required>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Identificacion Cliente"   name="identificacionCliente" type="text" ngModel required>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Dirección Cliente"  name="direccionCliente" type="text" ngModel required>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Telefono Cliente"  name="telefonoCliente" type="number" ngModel required>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Correo Electronico Cliente"  name="correoElectronicoCliente" type="email" ngModel required>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Numero Factura"  name="numeroFactura" type="text" ngModel required>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Fecha Emision"  name="fechaEmision" type="text" ngModel required>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Direccion Matriz"  name="direccionMatriz" type="text" ngModel required>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Telefono"  value="16125"  name="telefono" type="number" ngModel required>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Descuento"  name="totalDescuento" type="number" ngModel required>
+        </mat-form-field>
+      </div>
+    </div>
+      <!-- <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="First name" formControlName="firstName">
+            <mat-error *ngIf="addressForm.controls['firstName'].hasError('required')">
+              First name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Last name" formControlName="lastName">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div> -->
+      <!-- <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Address" formControlName="address"></textarea>
+            <mat-error *ngIf="addressForm.controls['address'].hasError('required')">
+              Address is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div> -->
+      <!-- <div class="row" *ngIf="!hasUnitNumber">
+        <div class="col">
+          <button mat-button type="button" (click)="hasUnitNumber = !hasUnitNumber">
+            + Add C/O, Apt, Suite, Unit
+          </button>
+        </div>
+      </div> -->
+      <!-- <div class="row" *ngIf="hasUnitNumber">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Address 2" formControlName="address2"></textarea>
+          </mat-form-field>
+        </div>
+      </div> -->
+      <!-- <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="City" formControlName="city">
+            <mat-error *ngIf="addressForm.controls['city'].hasError('required')">
+              City is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="State" formControlName="state">
+              <mat-option *ngFor="let state of states" [value]="state.abbreviation">
+                {{ state.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="addressForm.controls['state'].hasError('required')">
+              State is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div> -->
+      <!-- <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput #postalCode maxlength="5" placeholder="Postal Code" type="number" formControlName="postalCode">
+            <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+          </mat-form-field>
+        </div>
+      </div> -->
+      <!-- <div class="row">
+        <div class="col">
+          <mat-radio-group formControlName="shipping">
+            <mat-radio-button value="free">Free Shipping</mat-radio-button>
+            <mat-radio-button value="priority">Priority Shipping</mat-radio-button>
+            <mat-radio-button value="nextday">Next Day Shipping</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div> -->
+
+      <form #form2="ngForm" (ngSubmit)="agregarDetalle(form2)">
+        <mat-card class="shipping-card">
+          <mat-card-header>
+            <mat-card-title>Detalles</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="Producto" value="1234567890"  name="producto" type="text" ngModel required>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="numeroItems"  name="numeroItems" type="number" ngModel required>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="precioUnitario"  value="16125"  name="precioUnitario" type="number" ngModel required>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <!-- [disabled]="form.invalid" -->
+            <button mat-raised-button color="primary" [disabled]="form2.invalid"   expand="block" type="submit">Agregar Item Factura</button>
+          </mat-card-actions>
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col" sortable="name" >Producto</th>
+            <th scope="col" sortable="name" >Numero Items</th>
+            <th scope="col" sortable="area" >Precio Unitario</th>
+            <th scope="col" sortable="area" >Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of itemsFactura; let i = index"   [class.active]="i == currentIndex">
+            <th scope="row">{{ item.producto }}</th>
+            <td>{{ item.numeroItems}}</td>
+            <td>{{ item.precioUnitario | number }}</td>
+            <td (click)="deleteDetalle(i)" >x</td>
+          </tr>
+          </tbody>
+        </table>
+       </mat-card>
+      </form>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <!-- <button mat-raised-button color="primary"  [disabled]="form.invalid  || itemsFactura.length == 0" expand="block" type="submit">Guardar Factura</button> -->
+      <button mat-raised-button color="primary"  [disabled]="form.invalid" expand="block" type="submit">Guardar Factura</button>
+    </mat-card-actions>
+  </mat-card>
+  </form>
+
+  
+
+<div class="mat-elevation-z8">
+
+</div>
