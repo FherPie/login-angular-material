@@ -3,7 +3,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Factura } from  '../factura';
 import { ItemFactura } from  '../itemFactura';
 import { DataService } from '../DataService';
-
+import * as _moment from 'moment';
+//import {default as _rollupMoment} from 'moment';
+//const moment = _rollupMoment || _moment;
+import {FormControl} from '@angular/forms';
+import * as moment from 'moment';
 
 export interface PeriodicElement {
   name: string;
@@ -41,6 +45,7 @@ export class CreacionFacturaComponent {
 
   itemsFactura: ItemFactura[] = [];
   currentIndex = -1;
+  date = moment();
 
   //dataSource2 = ELEMENT_DATA;
   dataSource2 = this.itemsFactura;
@@ -135,16 +140,19 @@ export class CreacionFacturaComponent {
   }
 
 
-  login(form: { value: any; }){
+  agregarFactura(form: { value: any; }){
     this.factura=form.value;
+    this.factura.fechaEmision=this.date.format("YYYY-MM-DD HH:mm:ss"); 
     console.log(this.factura);
-    // this.authService.login(form.value).subscribe(res=>{
-     
-    //   this.router.navigateByUrl('home');
-    // },
-    // err=>{
-    //   this.presentToast(err.error);
-    // } );
+    this.dataService.createData(this.factura)
+    .subscribe(
+      response => {
+        console.log(response);
+        //this.submitted = true;
+      },
+      error => {
+        console.log(error);
+      });
   }
 
   agregarDetalle(form2: { value: any; }){

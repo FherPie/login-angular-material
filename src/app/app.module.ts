@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
 
+
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VistaFacturaComponent } from './vista-factura/vista-factura.component';
@@ -26,6 +27,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { VistaFactura2Component } from './vista-factura2/vista-factura2.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MY_FORMATS } from './myDateFormats';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+
 
 @NgModule({
   declarations: [
@@ -55,9 +62,17 @@ import { VistaFactura2Component } from './vista-factura2/vista-factura2.componen
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    FormsModule
+    FormsModule,
+    MatDatepickerModule,
+    MatDatepickerModule,
+    MatButtonModule,
+    MatNativeDateModule,
   ],
-  providers: [DataService],
+// providers: [DataService, { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+//  { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+ // ],
+  providers: [DataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

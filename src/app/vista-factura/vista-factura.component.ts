@@ -35,7 +35,7 @@ export class VistaFacturaComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+    //this.table.dataSource = this.dataSource;
   }
 
 
