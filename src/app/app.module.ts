@@ -29,7 +29,7 @@ import { MatListModule } from '@angular/material/list';
 import { VistaFactura2Component } from './vista-factura2/vista-factura2.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MY_FORMATS } from './myDateFormats';
+import { MY_FORMATS as MY_FORMAT_DATE } from './myDateFormats';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
@@ -68,11 +68,11 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
     MatButtonModule,
     MatNativeDateModule,
   ],
-// providers: [DataService, { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-//  { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
- // ],
-  providers: [DataService
-  ],
+providers: [DataService, { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+ { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT_DATE }
+ ],
+  // providers: [DataService
+  // ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

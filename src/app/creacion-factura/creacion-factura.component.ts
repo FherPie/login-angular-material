@@ -45,7 +45,9 @@ export class CreacionFacturaComponent {
 
   itemsFactura: ItemFactura[] = [];
   currentIndex = -1;
-  date = moment();
+  fechaFactura = moment();
+
+
 
   //dataSource2 = ELEMENT_DATA;
   dataSource2 = this.itemsFactura;
@@ -140,9 +142,11 @@ export class CreacionFacturaComponent {
   }
 
 
+  
+
   agregarFactura(form: { value: any; }){
     this.factura=form.value;
-    this.factura.fechaEmision=this.date.format("YYYY-MM-DD HH:mm:ss"); 
+    this.factura.fechaEmision=this.fechaFactura.format("YYYY-MM-DD HH:mm:ss"); 
     console.log(this.factura);
     this.dataService.createData(this.factura)
     .subscribe(
