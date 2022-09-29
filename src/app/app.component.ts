@@ -10,12 +10,21 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class AppComponent {
 
-  constructor(private router: Router, private  dataService:  DataService) {}
+  constructor(private router: Router, private  app:  DataService) {
+
+    //  this.app.authenticate(undefined, undefined);
+
+  }
+
+
+  public authenticated(): boolean{
+    return this.app.authenticated;
+  }
 
   allFacturas: Factura[] = [];
 
   ngOnInit() {
-    this.dataService.getDataList().subscribe(res => this.allFacturas = res);
+    //this.dataService.getDataList().subscribe(res => this.allFacturas = res);
   }
 
 

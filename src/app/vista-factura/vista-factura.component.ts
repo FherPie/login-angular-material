@@ -17,6 +17,8 @@ export class VistaFacturaComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<Factura>;
   dataSource: VistaFacturaDataSource;
+  title='Demo';
+  greeting={'id': 'xxx', 'content': 'Hello World!!'}
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id',  'numeroFactura', 'fechaEmision', 'totalFactura' ];
@@ -29,7 +31,7 @@ export class VistaFacturaComponent implements AfterViewInit {
   allFacturas: Factura[] = [];
 
   ngOnInit() {
-    this.dataService.getDataList().subscribe(res => this.allFacturas = res);
+   // this.dataService.getDataList().subscribe(res => this.allFacturas = res);
   }
 
   ngAfterViewInit(): void {

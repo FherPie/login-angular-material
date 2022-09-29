@@ -11,7 +11,7 @@ export class Factura {
     fechaEmision?: string;
     direccionMatriz?: string;
     correoElectronicoCliente?: string;
-    totalDescuento?: string;
+    totalDescuento: number = 0;
     telefono?: string;
     identificacionCliente?: string;
   }

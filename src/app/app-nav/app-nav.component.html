@@ -1,4 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
+  <!-- <div [hidden]="!authenticated()">
+    <h1>Greeting</h1>
+    <p>The ID is {{greeting.id}}</p>
+    <p>The content is {{greeting.content}}</p>
+  </div> -->
   <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
@@ -10,6 +15,15 @@
       <a mat-list-item href="#">Link 3</a> -->
        <a mat-list-item routerLink='/vista-factura'>Facturas</a>
        <a mat-list-item routerLink='/creacion-factura'>Creación Facturas</a>
+       <a mat-list-item routerLink='/clientes'>Clientes</a>
+       <a mat-list-item routerLink='/productos'>Productos</a>
+       <a mat-list-item routerLink='/agregarProductos'>Creacion de Productos</a>
+       <a mat-list-item routerLink='/compras'>Compras</a>
+       <a mat-list-item routerLink='/proveedores'>Proveedores</a>
+       <a mat-list-item routerLink='/inventario'>Inventario</a>
+       <a mat-list-item routerLink='/vista-factura'>Home</a>
+       <!-- <a mat-list-item routerLink='/login'>Login</a> -->
+       <a mat-list-item (click)="logout()">Logout</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -22,7 +36,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Factura</span>
+      <!-- <span>Factura</span> -->
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>

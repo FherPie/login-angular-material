@@ -1,35 +1,16 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { Factura } from  '../factura';
 import { ItemFactura } from  '../itemFactura';
 import { DataService } from '../DataService';
-import * as _moment from 'moment';
+//import * as _moment from 'moment';
 //import {default as _rollupMoment} from 'moment';
 //const moment = _rollupMoment || _moment;
 import {FormControl} from '@angular/forms';
 import * as moment from 'moment';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
-
+import { ClientLite } from '../client/client.model2';
+import { ClientService } from '../client/client.service';
+import { ProductoLite } from '../producto/producto.model2';
 
 
 @Component({
@@ -37,9 +18,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './creacion-factura.component.html',
   styleUrls: ['./creacion-factura.component.css']
 })
-export class CreacionFacturaComponent {
-
-  displayedColumns2: string[] = ['producto', 'numeroItems', 'precioUnitario'];
+export class CreacionFacturaComponent implements OnInit, OnDestroy {
   
   factura = new Factura();
 
@@ -47,9 +26,23 @@ export class CreacionFacturaComponent {
   currentIndex = -1;
   fechaFactura = moment();
 
+  @ViewChild('form',{static:true}) ngForm: NgForm | undefined;
 
+   
+  @ViewChild('form2',{static:true}) 2: NgForm | undefined;
 
-  //dataSource2 = ELEMENT_DATA;
+  totalFactura= 0.0;
+  subTotalFactura= 0.0;
+  totalImpuestosFactura=0.0;
+  totalDescuentosFactura=0.0;
+  searchinofClients: ClientLite[]= [];
+  clienteSelected?: ClientLite;
+  indexClienteSelected?: number;
+
+  searchofProductos: ProductoLite[]= [];
+  productoSelected?: ProductoLite;
+  indexProductoSelected?: number;
+
   dataSource2 = this.itemsFactura;
 
   // addressForm = this.fb.group({
@@ -66,105 +59,61 @@ export class CreacionFacturaComponent {
   //   shipping: ['free', Validators.required]
   // });
 
-  // hasUnitNumber = false;
+  constructor(private fb: FormBuilder,  private  dataService:  DataService, private clienteService: ClientService) {
+  }
 
-  // states = [
-  //   {name: 'Alabama', abbreviation: 'AL'},
-  //   {name: 'Alaska', abbreviation: 'AK'},
-  //   {name: 'American Samoa', abbreviation: 'AS'},
-  //   {name: 'Arizona', abbreviation: 'AZ'},
-  //   {name: 'Arkansas', abbreviation: 'AR'},
-  //   {name: 'California', abbreviation: 'CA'},
-  //   {name: 'Colorado', abbreviation: 'CO'},
-  //   {name: 'Connecticut', abbreviation: 'CT'},
-  //   {name: 'Delaware', abbreviation: 'DE'},
-  //   {name: 'District Of Columbia', abbreviation: 'DC'},
-  //   {name: 'Federated States Of Micronesia', abbreviation: 'FM'},
-  //   {name: 'Florida', abbreviation: 'FL'},
-  //   {name: 'Georgia', abbreviation: 'GA'},
-  //   {name: 'Guam', abbreviation: 'GU'},
-  //   {name: 'Hawaii', abbreviation: 'HI'},
-  //   {name: 'Idaho', abbreviation: 'ID'},
-  //   {name: 'Illinois', abbreviation: 'IL'},
-  //   {name: 'Indiana', abbreviation: 'IN'},
-  //   {name: 'Iowa', abbreviation: 'IA'},
-  //   {name: 'Kansas', abbreviation: 'KS'},
-  //   {name: 'Kentucky', abbreviation: 'KY'},
-  //   {name: 'Louisiana', abbreviation: 'LA'},
-  //   {name: 'Maine', abbreviation: 'ME'},
-  //   {name: 'Marshall Islands', abbreviation: 'MH'},
-  //   {name: 'Maryland', abbreviation: 'MD'},
-  //   {name: 'Massachusetts', abbreviation: 'MA'},
-  //   {name: 'Michigan', abbreviation: 'MI'},
-  //   {name: 'Minnesota', abbreviation: 'MN'},
-  //   {name: 'Mississippi', abbreviation: 'MS'},
-  //   {name: 'Missouri', abbreviation: 'MO'},
-  //   {name: 'Montana', abbreviation: 'MT'},
-  //   {name: 'Nebraska', abbreviation: 'NE'},
-  //   {name: 'Nevada', abbreviation: 'NV'},
-  //   {name: 'New Hampshire', abbreviation: 'NH'},
-  //   {name: 'New Jersey', abbreviation: 'NJ'},
-  //   {name: 'New Mexico', abbreviation: 'NM'},
-  //   {name: 'New York', abbreviation: 'NY'},
-  //   {name: 'North Carolina', abbreviation: 'NC'},
-  //   {name: 'North Dakota', abbreviation: 'ND'},
-  //   {name: 'Northern Mariana Islands', abbreviation: 'MP'},
-  //   {name: 'Ohio', abbreviation: 'OH'},
-  //   {name: 'Oklahoma', abbreviation: 'OK'},
-  //   {name: 'Oregon', abbreviation: 'OR'},
-  //   {name: 'Palau', abbreviation: 'PW'},
-  //   {name: 'Pennsylvania', abbreviation: 'PA'},
-  //   {name: 'Puerto Rico', abbreviation: 'PR'},
-  //   {name: 'Rhode Island', abbreviation: 'RI'},
-  //   {name: 'South Carolina', abbreviation: 'SC'},
-  //   {name: 'South Dakota', abbreviation: 'SD'},
-  //   {name: 'Tennessee', abbreviation: 'TN'},
-  //   {name: 'Texas', abbreviation: 'TX'},
-  //   {name: 'Utah', abbreviation: 'UT'},
-  //   {name: 'Vermont', abbreviation: 'VT'},
-  //   {name: 'Virgin Islands', abbreviation: 'VI'},
-  //   {name: 'Virginia', abbreviation: 'VA'},
-  //   {name: 'Washington', abbreviation: 'WA'},
-  //   {name: 'West Virginia', abbreviation: 'WV'},
-  //   {name: 'Wisconsin', abbreviation: 'WI'},
-  //   {name: 'Wyoming', abbreviation: 'WY'}
-  // ];
+  ngOnDestroy(): void {
+  }
 
 
-  constructor(private fb: FormBuilder,  private  dataService:  DataService) {
 
+  ngOnInit(): void {
+  this.ngForm?.form.valueChanges.subscribe(x=> {
+  if(x.nombreCliente.length>=3){
+    this.clienteService.findByNombres(x.nombreCliente).subscribe(
+      ( response: any) => {
+        console.log(response);
+        this.searchinofClients=response;
+       },
+      (  error: any) => {
+        console.log(error);
+      }
+    );
+  }
 
-    
+  if(x.nombreCliente.length==0){
+    this.clienteSelected= undefined;
+  }
+
+  });
+
   }
 
   onSubmit(): void {
     alert('Thanks!');
   }
 
-
-  
-
   agregarFactura(form: { value: any; }){
     this.factura=form.value;
     this.factura.fechaEmision=this.fechaFactura.format("YYYY-MM-DD HH:mm:ss"); 
     console.log(this.factura);
-    this.dataService.createData(this.factura)
-    .subscribe(
-      response => {
-        console.log(response);
-        //this.submitted = true;
-      },
-      error => {
-        console.log(error);
-      });
+    // this.dataService.createData(this.factura)
+    // .subscribe(
+    //   response => {
+    //     console.log(response);
+    //   },
+    //   error => {
+    //     console.log(error);
+    //   });
   }
 
   agregarDetalle(form2: { value: any; }){
     //console.log(form2.value);
-    const data={producto: form2.value.producto, numeroItems: form2.value.numeroItems, precioUnitario: form2.value.precioUnitario};
+    const data={producto: form2.value.producto, numeroItems: form2.value.numeroItems, precioUnitario: form2.value.precioUnitario, descuentoUnitario: form2.value.descuentoUnitario};
     this.itemsFactura.push(data);
     //console.log(this.itemsFactura);
     //this.dataSource2 = this.itemsFactura;
+    this.calculoTotales();
   }
 
   deleteDetalle(index: number): void{
@@ -172,6 +121,28 @@ export class CreacionFacturaComponent {
     if (index !== -1) {
         this.itemsFactura.splice(index, 1);
     } 
+    this.calculoTotales();
   }
+  calculoTotales(): void{
+    //CALCULO SUBTOTAL
+    for (var item of this.itemsFactura) {
+     this.subTotalFactura+= item.numeroItems*item.precioUnitario;
+    }
+    //CALCULO DESCUENTOS
+    for (var item of this.itemsFactura) {
+      if(item.descuentoUnitario>0){
+      this.totalDescuentosFactura+= (item.numeroItems*item.precioUnitario)*(item.descuentoUnitario/100);
+     }
+     if(this.factura.totalDescuento>0){
+     this.totalDescuentosFactura+=this.subTotalFactura
+     }
+     } 
+  }
+
+   setActiveClient(client: ClientLite, index:number){
+     this.clienteSelected= client;
+     this.indexClienteSelected= index;
+     this.searchinofClients=[];
+   }
 
 }

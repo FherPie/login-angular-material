@@ -26,12 +26,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { VistaFactura2Component } from './vista-factura2/vista-factura2.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MY_FORMATS as MY_FORMAT_DATE } from './myDateFormats';
+import { ClientModule } from './client/client.module';
+
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MY_FORMATS as MY_FORMAT_DATE } from './myDateFormats';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ProductoModule } from './producto/producto.module';
+import { LoginComponent } from './login/login.component';
+
+
+
 
 
 @NgModule({
@@ -40,8 +46,7 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
     VistaFacturaComponent,
     CreacionFacturaComponent,
     AppNavComponent,
-    VistaFactura2Component
-  ],
+    LoginComponent  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -64,11 +69,12 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
     MatListModule,
     FormsModule,
     MatDatepickerModule,
-    MatDatepickerModule,
     MatButtonModule,
     MatNativeDateModule,
+    ClientModule,
+    ProductoModule
   ],
-providers: [DataService, { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+providers: [DataService, { provide: DateAdapter, useClass:  MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
  { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT_DATE }
  ],
   // providers: [DataService

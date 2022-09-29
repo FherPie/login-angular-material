@@ -34,7 +34,7 @@ export class VistaFacturaDataSource extends DataSource<Factura> {
 
   constructor(private  dataService:  DataService) {
     super();
-    this.dataService.getDataList().subscribe(res => this.data = res);
+    //this.dataService.getDataList().subscribe(res => this.data = res);
   }
 
 
@@ -50,8 +50,8 @@ export class VistaFacturaDataSource extends DataSource<Factura> {
       // Combine everything that affects the rendered data into one update
       // stream for the data-table to consume.
       //observableOf(this.data).subscribe(res =>console.log(res));
-      this.dataService.getDataList().subscribe(res => this.data = res);
-      this.dataService.getDataList().subscribe(res => this.data = res)
+      //this.dataService.getDataList().subscribe(res => this.data = res);
+      //this.dataService.getDataList().subscribe(res => this.data = res)
       return merge(observableOf(this.data), this.paginator.page, this.sort.sortChange)
         .pipe(map(() => {
           return [...this.data ];
