@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ClientLite } from '../client.model2';
 import { ClientService } from '../client.service';
+import { ClienteServiceServer } from '../cliente.service.server';
 
 @Component({
   selector: 'app-client-list',
@@ -9,14 +10,37 @@ import { ClientService } from '../client.service';
 })
 export class ClientListComponent implements OnInit {
 
-  constructor(private clienteService: ClientService) { }
+  constructor(private clienteService: ClienteServiceServer) { }
 
   @Input() showEditButton: boolean= true;
   clients: ClientLite[] = [];
   currentClient!: ClientLite;
   identification = '';
   currentIndex = -1;
+  fileToUpload: File | any = null;
 
+  onFileSelected(event:any) {
+    const target = event.target as HTMLInputElement;
+    //console.log(target);
+   // console.log(target.files);
+    this.fileToUpload = event.target.files[0]
+    console.log(this.fileToUpload);
+    if(this.fileToUpload){
+      this.onSaveFile();
+    }
+    }
+
+      
+  onSaveFile() {
+    const formData: FormData = new FormData();
+    formData.append('file', this.fileToUpload);
+    console.log(formData);
+    this.clienteService.subirArchivoExcelImportacion(formData,"archivoExcelProdcutos")
+    .subscribe(resp => {
+      alert("Uploaded")
+    })
+    // return this.httpClient.post(YOUR_API_URL, formData);
+ }
 
   ngOnInit(): void {
     this.retrieveClients();
@@ -39,7 +63,7 @@ export class ClientListComponent implements OnInit {
     if(this.identification==null){  
       this.identification='';
     }
-    this.clienteService.findByIdentification(this.identification)
+    this.clienteService.searchByNombre(this.identification)
       .subscribe(
         (        data: ClientLite[]) => {
           this.clients = data;

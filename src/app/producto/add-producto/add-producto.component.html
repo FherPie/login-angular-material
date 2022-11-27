@@ -1,13 +1,5 @@
 
 
-
-<div class="container">
-  <p> Id: <span>{{greeting.id}}</span></p>
-  <i class="fa fa-address-card" aria-hidden="true"></i>
-  <p> Content: <span>{{greeting.content}}</span></p>
-
-</div>
-
 <div class="container">
     <div  *ngIf="!submitted" class="row">
         <form #form="ngForm" (ngSubmit)="agregarProducto(form)">

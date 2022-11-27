@@ -11,6 +11,8 @@ import * as moment from 'moment';
 import { ClientLite } from '../client/client.model2';
 import { ClientService } from '../client/client.service';
 import { ProductoLite } from '../producto/producto.model2';
+import { ClienteServiceServer } from '../client/cliente.service.server';
+import { ProductoServiceServer } from '../producto/producto.service.server';
 
 
 @Component({
@@ -21,6 +23,8 @@ import { ProductoLite } from '../producto/producto.model2';
 export class CreacionFacturaComponent implements OnInit, OnDestroy {
   
   factura = new Factura();
+  totalDescuento:number=0;
+  impuestoAlaVenta:number=12;
 
   itemsFactura: ItemFactura[] = [];
   currentIndex = -1;
@@ -29,12 +33,13 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
   @ViewChild('form',{static:true}) ngForm: NgForm | undefined;
 
    
-  @ViewChild('form2',{static:true}) 2: NgForm | undefined;
+  @ViewChild('form2',{static:true}) ngForm2: NgForm | undefined;
 
   totalFactura= 0.0;
   subTotalFactura= 0.0;
   totalImpuestosFactura=0.0;
   totalDescuentosFactura=0.0;
+  
   searchinofClients: ClientLite[]= [];
   clienteSelected?: ClientLite;
   indexClienteSelected?: number;
@@ -45,21 +50,8 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
 
   dataSource2 = this.itemsFactura;
 
-  // addressForm = this.fb.group({
-  //   nombreCliente: null,
-  //   nombreCliente: [null, Validators.required],
-  //   lastName: [null, Validators.required],
-  //   address: [null, Validators.required],
-  //   address2: null,
-  //   city: [null, Validators.required],
-  //   state: [null, Validators.required],
-  //   postalCode: [null, Validators.compose([
-  //     Validators.required, Validators.minLength(5), Validators.maxLength(5)])
-  //   ],
-  //   shipping: ['free', Validators.required]
-  // });
-
-  constructor(private fb: FormBuilder,  private  dataService:  DataService, private clienteService: ClientService) {
+  constructor(private fb: FormBuilder,  private  dataService:  DataService, private clienteService: ClienteServiceServer
+    , private prodcutoService: ProductoServiceServer) {
   }
 
   ngOnDestroy(): void {
@@ -68,9 +60,12 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+
+
+    //INICIO ESCUCHA PARA CLIENTE AUTOCOMPLETAR
   this.ngForm?.form.valueChanges.subscribe(x=> {
   if(x.nombreCliente.length>=3){
-    this.clienteService.findByNombres(x.nombreCliente).subscribe(
+    this.clienteService.searchByNombre(x.nombreCliente).subscribe(
       ( response: any) => {
         console.log(response);
         this.searchinofClients=response;
@@ -83,9 +78,30 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
 
   if(x.nombreCliente.length==0){
     this.clienteSelected= undefined;
-  }
+  }});
+  //FIN ESCUCHA PARA CLIENTE AUTOCOMPLETAR
 
-  });
+
+
+  
+//INICIO ESCUCHA PARA PRODCUTO AUTOCOMPLETAR
+    this.ngForm2?.form.valueChanges.subscribe(x=> {
+    if(x.productoNombre.length>=3){
+      this.prodcutoService.searchByNombre(x.productoNombre).subscribe(
+        ( response: any) => {
+          console.log(response);
+          this.searchofProductos=response;
+         },
+        (  error: any) => {
+          console.log(error);
+        }
+      );
+    }
+  
+    if(x.productoNombre.length==0){
+      this.productoSelected= undefined;
+    }});
+    //FIN ESCUCHA PARA PRODCUTO AUTOCOMPLETAR
 
   }
 
@@ -95,23 +111,28 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
 
   agregarFactura(form: { value: any; }){
     this.factura=form.value;
-    this.factura.fechaEmision=this.fechaFactura.format("YYYY-MM-DD HH:mm:ss"); 
+    // this.factura.fechaEmision=this.fechaFactura.format("YYYY-MM-DD HH:mm:ss"); 
+    //this.factura.fechaEmision=this.fechaFactura.date().toString(); 
+    this.factura.totalDescuento=this.totalDescuento; 
+    this.factura.idCliente=this.clienteSelected?.idCliente;
+    this.factura.itemsFactura=[];
+    this.factura.itemsFactura=this.itemsFactura;
     console.log(this.factura);
-    // this.dataService.createData(this.factura)
-    // .subscribe(
-    //   response => {
-    //     console.log(response);
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   });
+    this.dataService.createData(this.factura)
+    .subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      });
   }
 
   agregarDetalle(form2: { value: any; }){
     //console.log(form2.value);
-    const data={producto: form2.value.producto, numeroItems: form2.value.numeroItems, precioUnitario: form2.value.precioUnitario, descuentoUnitario: form2.value.descuentoUnitario};
+    const data={productoId:this.productoSelected?.idProducto,  nombreProducto: form2.value.productoNombre, numeroItems: form2.value.numeroItems, precioUnitario: form2.value.precioUnitario, descuentoUnitario: form2.value.descuentoUnitario};
     this.itemsFactura.push(data);
-    //console.log(this.itemsFactura);
+    console.log(this.itemsFactura);
     //this.dataSource2 = this.itemsFactura;
     this.calculoTotales();
   }
@@ -123,20 +144,40 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
     } 
     this.calculoTotales();
   }
+
+  encerarTotales(){
+    this.subTotalFactura=0.0;
+    this.totalDescuentosFactura=0.0;
+    this.totalFactura=0.0;
+    this.totalImpuestosFactura=0.0;
+  }
+
   calculoTotales(): void{
+    this.encerarTotales();
     //CALCULO SUBTOTAL
     for (var item of this.itemsFactura) {
-     this.subTotalFactura+= item.numeroItems*item.precioUnitario;
+     this.subTotalFactura+= (item.numeroItems*item.precioUnitario);
     }
+     //FIN CALCULO SUBTOTAL
     //CALCULO DESCUENTOS
     for (var item of this.itemsFactura) {
       if(item.descuentoUnitario>0){
       this.totalDescuentosFactura+= (item.numeroItems*item.precioUnitario)*(item.descuentoUnitario/100);
      }
-     if(this.factura.totalDescuento>0){
-     this.totalDescuentosFactura+=this.subTotalFactura
      }
-     } 
+
+     console.log(this.totalDescuento);
+
+     if(this.totalDescuento>0){
+       this.totalDescuentosFactura+=((this.subTotalFactura-this.totalDescuentosFactura)*this.totalDescuento/100)
+     }
+       this.totalImpuestosFactura= ((this.subTotalFactura-this.totalDescuentosFactura)*this.impuestoAlaVenta/100)
+
+       this.totalFactura= (this.subTotalFactura-this.totalDescuentosFactura)+ ((this.subTotalFactura-this.totalDescuentosFactura)*this.impuestoAlaVenta/100)
+
+     console.log(this.totalDescuento);
+     //FIN CALCULO DESCUENTOS
+
   }
 
    setActiveClient(client: ClientLite, index:number){
@@ -145,4 +186,16 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
      this.searchinofClients=[];
    }
 
+
+   setActiveProduct(producto: ProductoLite, index:number){
+    
+    this.productoSelected= producto;
+    this.indexProductoSelected= index;
+    this.searchofProductos=[];
+    this.ngForm2?.controls['productoNombre'].setValue(this.productoSelected.nombre);
+    this.ngForm2?.controls['numeroItems'].setValue(1);
+    this.ngForm2?.controls['precioUnitario'].setValue(this.productoSelected.precioUnitario);
+    this.ngForm2?.controls['descuentoUnitario'].setValue(this.productoSelected.descuentoUnitario);
+    console.log(this.productoSelected);
+  }
 }

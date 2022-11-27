@@ -18,7 +18,7 @@
               <tbody>
               <tr *ngFor="let item of searchinofClients; let i=index" [class.active]="i == currentIndex"
               (click)="setActiveClient(item, i)" >
-                <td > {{item.nombre }} {{ item.apellido }} {{ item.identificacion }}</td>
+                <td > {{item.nombres }} {{ item.apellidos }} {{ item.identificacion }}</td>
               </tr>
               </tbody>
             </table>
@@ -27,10 +27,9 @@
         </div>
        <div *ngIf="clienteSelected" >
         <mat-card class="shipping-card">
-          <p><strong>Nombre:</strong> {{clienteSelected.nombre}} <strong>Apellido:</strong> {{clienteSelected.apellido}} <strong>Identificacion:</strong> {{clienteSelected.identificacion}} </p>
+          <p><strong>Nombre:</strong> {{clienteSelected.nombres}} <strong>Apellido:</strong> {{clienteSelected.apellidos}} <strong>Identificacion:</strong> {{clienteSelected.identificacion}} </p>
           <p> <strong> Teléfono: </strong> {{clienteSelected.telefono}} <strong> Email: </strong> {{clienteSelected.email}} </p>
         </mat-card>
-         
        </div>  
        <div *ngIf="!clienteSelected" >
         <div class="col">
@@ -86,11 +85,14 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Descuento" name="totalDescuento" type="number" ngModel required>
+            <input matInput placeholder="Descuento" name="totalDescuento" type="number" [(ngModel)]="totalDescuento" required>
           </mat-form-field>
         </div>
       </div>
+
       <form #form2="ngForm" (ngSubmit)="agregarDetalle(form2)">
+        
+
         <mat-card class="shipping-card">
           <mat-card-header>
             <mat-card-title>Detalles</mat-card-title>
@@ -99,25 +101,24 @@
             <div class="row">
               <div class="col">
                 <mat-form-field class="full-width">
-                  <input matInput placeholder="Producto"  name="producto" type="text" ngModel
-                    required>
-                </mat-form-field>
-                
-                <div class="mat-elevation-z8"  *ngIf="searchinofClients.length >0 && !clienteSelected">
+                  <input matInput placeholder="Nombre del Producto"  name="productoNombre" type="text" ngModel
+                    required>   
+                <div class="mat-elevation-z8"  *ngIf="searchofProductos.length >0 && !productoSelected">
                   <table class="table">
                   <thead>
                   <tr>
-                    <th >Nombres e Identificación</th>
+                    <th >Producto / Proveedor</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr *ngFor="let item of searchinofClients; let i=index" [class.active]="i == currentIndex"
-                  (click)="setActiveClient(item, i)" >
-                    <td > {{item.nombre }} {{ item.apellido }} {{ item.identificacion }}</td>
+                  <tr *ngFor="let item of searchofProductos; let i=index" [class.active]="i == currentIndex"
+                  (click)="setActiveProduct(item, i)" >
+                    <td > {{item.nombre }} {{ item.precioVenta }}</td>
                   </tr>
                   </tbody>
                 </table>
                 </div>
+              </mat-form-field>
               </div>
               <div class="col">
                 <mat-form-field class="full-width">
@@ -132,11 +133,9 @@
               </div>
               <div class="col">
                 <mat-form-field class="full-width">
-                  <input matInput placeholder="descuentoUnitario"  name="descuentoUnitario" type="number" ngModel
-                    required>
+                  <input matInput placeholder="descuentoUnitario"  name="descuentoUnitario" type="number" ngModel>
                 </mat-form-field>
               </div>
-
             </div>
           </mat-card-content>
           <mat-card-actions>
@@ -156,7 +155,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of itemsFactura; let i = index" [class.active]="i == currentIndex">
-                <th scope="row">{{ item.producto }}</th>
+                <th scope="row">{{ item.nombreProducto }}</th>
                 <td>{{ item.numeroItems}}</td>
                 <td>{{ item.precioUnitario | number }}</td>
                 <td>{{ item.descuentoUnitario | number }}</td>
@@ -170,7 +169,7 @@
           <mat-divider></mat-divider>
           <mat-list-item><h2>Total Descuentos= {{totalDescuentosFactura}}</h2> </mat-list-item>
           <mat-divider></mat-divider>
-          <mat-list-item><h2>Total Impuestos= {{totalImpuestosFactura}}</h2></mat-list-item>
+          <mat-list-item><h2>Total Impuestos  ({{impuestoAlaVenta}}%)= {{totalImpuestosFactura}} </h2></mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item><h2>Total Factura= {{totalFactura}}</h2></mat-list-item>
         </mat-list>
@@ -178,9 +177,9 @@
 
     </mat-card-content>
     <mat-card-actions>
-      <!-- <button mat-raised-button color="primary"  [disabled]="form.invalid  || itemsFactura.length == 0" expand="block" type="submit">Guardar Factura</button> -->
-      <button mat-raised-button color="primary" [disabled]="form.invalid" expand="block" type="submit">Guardar
-        Factura</button>
+      <button mat-raised-button color="primary"  [disabled]="form.invalid  || itemsFactura.length == 0" expand="block" type="submit">Guardar Factura</button>
+      <!-- <button mat-raised-button color="primary" [disabled]="form.invalid" expand="block" type="submit">Guardar
+        Factura</button> -->
     </mat-card-actions>
   </mat-card>
 </form>

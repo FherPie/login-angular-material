@@ -3,14 +3,18 @@ import { Factura } from  './factura';
 import { tap } from  'rxjs/operators';
 import { Observable, BehaviorSubject, of } from  'rxjs';
 import { HttpClient, HttpHeaders, HttpResponse } from  '@angular/common/http';
+//import { GlobalConstants } from './global-constants';
+import{ GlobalConstants } from '../global-constants';
 
 //https://www.c-sharpcorner.com/article/learn-about-asynchronous-service-in-angular/
+const baseUrl = GlobalConstants.baseUrlVenta;
 
 @Injectable()
 export class DataService {
     //GET_OPE:  string  =  'http://186.4.141.253:255/api/factura';
-    //POST_OPE:  string  =  'http://186.4.141.253:255/api/factura';
+   // POST_OPE:  string  =  'http://localhost:8080/api/';
 
+    private httpHeader=new HttpHeaders({'Content-type': 'application/json'});
     authenticated=false;
     dataList: Factura[] = [];
     constructor(private http:HttpClient){}
@@ -30,9 +34,13 @@ export class DataService {
     //       );
     // }
 
-    // createData(data: any): Observable<any> {
-    //     return this.httpClient.post(this.POST_OPE, data);
-    // }
+    //  createData(data: any, resource: string): Observable<any> {
+    //     return this.http.post(resource, data, {headers: this.httpHeader});
+    //  }
+
+     createData(data: any): Observable<any> {
+        return this.http.post(baseUrl, data);
+      }
 
 
     // removedata(data: Factura) {
@@ -46,8 +54,6 @@ export class DataService {
     const headers= new HttpHeaders(credentials ?{
         authorization: 'Basic '+btoa(credentials.username+':'+credentials.password)
     }:{});
-
-
     console.log("LISTO LISTO ");
     this.http.get<HttpResponse<any>>('/api/user', {headers: headers}).subscribe(response=>{
         console.log("SERSTUS"+response);

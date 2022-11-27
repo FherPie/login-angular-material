@@ -1,8 +1,9 @@
 export class ProductoLite {
-    productoId?: number;
+    idProducto?: number;
     nombre?: string;
     precioUnitario?: number;
     stock?: number;
     precioCompra?: number;
     precioVenta?: number;
+    descuentoUnitario?: number;
 }

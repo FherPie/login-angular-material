@@ -7,16 +7,15 @@
  [(ngModel)]="nombreProducto" />
 <mat-card-actions align="end">
     <button mat-button>Buscar</button>
+    <div class="form-group">
+      <label for="file">Importar desde Excel</label>
+      <input type="file" id="file" class="file-input" accept=".xlsx" (change)="onFileSelected($event)" />
+  </div>
 </mat-card-actions>
 </mat-card>
 </div>
 
 <div class="row">
-  {{productsList.length}}
-
-  <div *ngFor="let prodcutos2 of productsList;">
-     {{prodcutos2.nombre}}
-  </div>
 <div class="col-md-6">
     <div class="mat-elevation-z8">
         <table class="table">
@@ -48,7 +47,7 @@
         <label><strong>Precio Unitario: </strong></label>{{currentProduct.precioUnitario}}
     </div>
 
-    <a *ngIf="showEditButton" class="m-3 btn btn-sm btn-warning" routerLink="/productos/{{currentProduct.productoId}}">
+    <a *ngIf="showEditButton" class="m-3 btn btn-sm btn-warning" routerLink="/productos/{{currentProduct.idProducto}}">
       Edit
     </a>
 

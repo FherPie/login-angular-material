@@ -43,8 +43,8 @@ export class ProductoDetailsComponent implements OnInit {
   }
 
   actualizarProducto(){
-    console.log(this.currentProducto.productoId);
-    this.productoService.updateProducto(this.currentProducto.productoId, this.currentProducto);
+    console.log(this.currentProducto.idProducto);
+    this.productoService.updateProducto(this.currentProducto.idProducto, this.currentProducto);
     // .subscribe(response=>{
     //      console.log(response);
     //      this.message="Actualizar producto";

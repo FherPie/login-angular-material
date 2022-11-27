@@ -17,11 +17,13 @@ export class AddProductoComponent implements OnInit {
   producto = new ProductoLite();
   form: FormGroup = new FormGroup({});
   submitted = false;
-  greeting: any={'id': 'xxx', 'content': 'Hello World!!'}
 
   constructor(private productoService: ProductoServiceServer, private fb: FormBuilder, 
     private http: HttpClient, private app: DataService) {
      }
+
+
+  
   ngOnInit(): void {
     this.form = this.fb.group({
       nombre: ['', [Validators.required]],

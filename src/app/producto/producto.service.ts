@@ -20,7 +20,7 @@ export class ProductoService {
   findByIdProducto(id:any): Observable<any>{
    const productsObservable= new Observable(observer => {
    setTimeout(()=> {
-      observer.next(this.products.filter(x=> x.productoId==id));
+      observer.next(this.products.filter(x=> x.idProducto==id));
      },1000);
    });
     return productsObservable;
@@ -45,23 +45,23 @@ export class ProductoService {
 
   
 createProduct(data: ProductoLite) {
-    data.productoId= this.products.length+1;
+    data.idProducto= this.products.length+1;
     this.products.push(data);
     console.log(this.products);
 }
 
   products: ProductoLite[] = [{
-    productoId: 1,
+    idProducto: 1,
     nombre: "Bio Pet",
     precioUnitario: 10.0
   },
   {
-    productoId: 2,
+    idProducto: 2,
     nombre: "Vit Force Adultos",
     precioUnitario: 6.0
   },
   {
-    productoId: 3,
+    idProducto: 3,
     nombre: "Nutra Pro Arena 4 kg",
     precioUnitario: 2.0
   }];

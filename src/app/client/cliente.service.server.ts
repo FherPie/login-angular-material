@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import{ GlobalConstants } from '../../global-constants';
-const baseUrl = GlobalConstants.baseUrlCuentas;
+const baseUrl = GlobalConstants.baseUrlCliente;
 @Injectable({
   providedIn: 'root'
 })
-export class ProductoServiceServer {
+export class ClienteServiceServer {
   
   constructor(private http: HttpClient) { }
   getAll(): Observable<any> {
@@ -27,13 +27,11 @@ export class ProductoServiceServer {
   deleteAll(): Observable<any> {
     return this.http.delete(baseUrl);
   }
-
   searchByNombre(nombre: any): Observable<any> {
-    return this.http.get(`/api/productoConNombreContiene?nombre=${nombre}`);
+    return this.http.get(`/api/clienteConNombreContiene?apellidos=${nombre}`);
   }
 
   subirArchivoExcelImportacion(formData: FormData,nameFile: any ): Observable<any> {
-    console.log('llega al serviciO');
     return this.http.post(`${baseUrl+'/uploadFile'}/${nameFile}`, formData);
   }
 }
