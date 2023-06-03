@@ -12,7 +12,7 @@ import { ProductoDetailsComponent } from './producto/producto-details/producto-d
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'productos', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'vista-factura', component:VistaFacturaComponent },
   { path: 'creacion-factura', component:CreacionFacturaComponent },
   { path: 'clientes', component:ClientListComponent },

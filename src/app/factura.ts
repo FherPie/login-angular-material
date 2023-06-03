@@ -2,14 +2,14 @@ import * as moment from "moment";
 import { ItemFactura } from  './itemFactura';
 
 export class Factura {
-    idFactura:number=0;
+    id:number=0;
     ruc?: string;
-    numeroFactura: number = 0;
+    numeroFactura: string='';
     nombreCliente?: string;
     telefonoCliente?: string;
+    total?: string;
+    fechaEmision?:string;
     direccionCliente?: string;
-    totalFactura?: string;
-    fechaEmision?: string;
     direccionMatriz?: string;
     correoElectronicoCliente?: string;
     totalDescuento: number = 0;
@@ -17,4 +17,8 @@ export class Factura {
     identificacionCliente?: string;
     itemsFactura: ItemFactura[] = [];
     idCliente?: number;
+    codigo?: string;
+    estado?: string;
+    formaPago?: string;
+    fechayHora?: string;
   }

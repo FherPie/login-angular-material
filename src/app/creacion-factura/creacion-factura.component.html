@@ -1,189 +1,189 @@
 <form #form="ngForm" (ngSubmit)="agregarFactura(form)">
-  <mat-card >
-    <mat-card-header>
-      <mat-card-title>Factura </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Nombre Cliente" name="nombreCliente" type="text" ngModel required>
-            <div class="mat-elevation-z8"  *ngIf="searchinofClients.length >0 && !clienteSelected">
-              <table class="table">
+    <mat-card >
+      <mat-card-header>
+        <mat-card-title>Factura </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Nombre Cliente" name="nombreCliente" type="text" ngModel required>
+              <div class="mat-elevation-z8"  *ngIf="searchinofClients.length >0 && !clienteSelected">
+                <table class="table">
+                <thead>
+                <tr>
+                  <th >Nombres e Identificación</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of searchinofClients; let i=index" [class.active]="i == currentIndex"
+                (click)="setActiveClient(item, i)" >
+                  <td > {{item.nombres }} {{ item.apellidos }} {{ item.identificacion }}</td>
+                </tr>
+                </tbody>
+              </table>
+              </div>
+            </mat-form-field>
+          </div>
+         <div *ngIf="clienteSelected" >
+          <mat-card class="shipping-card">
+            <p><strong>Nombre:</strong> {{clienteSelected.nombres}} <strong>Apellido:</strong> {{clienteSelected.apellidos}} <strong>Identificacion:</strong> {{clienteSelected.identificacion}} </p>
+            <p> <strong> Teléfono: </strong> {{clienteSelected.telefono}} <strong> Email: </strong> {{clienteSelected.email}} </p>
+          </mat-card>
+         </div>  
+         <div *ngIf="!clienteSelected" >
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Identificacion Cliente" name="identificacionCliente" type="text" ngModel
+                required  >
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Dirección Cliente" name="direccionCliente" type="text" ngModel required>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Telefono Cliente" name="telefonoCliente" type="number" ngModel required>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Correo Electronico Cliente" name="correoElectronicoCliente" type="email"
+                ngModel required>
+            </mat-form-field>
+          </div>
+         </div>
+        </div>
+        <div class="row">
+          <!-- <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Numero Factura" name="numeroFactura" type="text" ngModel required>
+            </mat-form-field>
+          </div> -->
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput [matDatepicker]="picker" placeholder="Fecha Emision" name="date" type="text"  [(ngModel)]="fechaFactura"
+                required>
+              <mat-hint>YYYY/MM/DD</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <!-- <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Direccion Matriz" name="direccionMatriz" type="text" ngModel required>
+            </mat-form-field>
+          </div> -->
+          <!-- <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Telefono" value="16125" name="telefono" type="number" ngModel required>
+            </mat-form-field>
+          </div> -->
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Descuento" name="totalDescuento" type="number" [(ngModel)]="totalDescuento" required>
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <form #form2="ngForm" (ngSubmit)="agregarDetalle(form2)">
+          
+  
+          <mat-card class="shipping-card">
+            <mat-card-header>
+              <mat-card-title>Detalles</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="Nombre del Producto"  name="productoNombre" type="text" ngModel
+                      required>   
+                  <div class="mat-elevation-z8"  *ngIf="searchofProductos.length >0 && !productoSelected">
+                    <table class="table">
+                    <thead>
+                    <tr>
+                      <th >Producto / Proveedor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of searchofProductos; let i=index" [class.active]="i == currentIndex"
+                    (click)="setActiveProduct(item, i)" >
+                      <td > {{item.nombre }} {{ item.precioVenta }}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  </div>
+                </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="numeroItems" name="numeroItems" type="number" ngModel required>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="precioUnitario"  name="precioUnitario" type="number" ngModel
+                      required>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="descuentoUnitario"  name="descuentoUnitario" type="number" ngModel>
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card-content>
+            <mat-card-actions>
+              <!-- [disabled]="form.invalid" -->
+              <button mat-raised-button color="primary" [disabled]="form2.invalid" expand="block" type="submit">Agregar
+                Item Factura</button>
+            </mat-card-actions>
+            <table class="table">
               <thead>
-              <tr>
-                <th >Nombres e Identificación</th>
-              </tr>
+                <tr>
+                  <th scope="col" sortable="name">Producto</th>
+                  <th scope="col" sortable="name">Numero Items</th>
+                  <th scope="col" sortable="area">Precio Unitario</th>
+                  <th scope="col" sortable="area">Descuento Unitario</th>
+                  <th scope="col" sortable="area">Acciones</th>
+                </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let item of searchinofClients; let i=index" [class.active]="i == currentIndex"
-              (click)="setActiveClient(item, i)" >
-                <td > {{item.nombres }} {{ item.apellidos }} {{ item.identificacion }}</td>
-              </tr>
+                <tr *ngFor="let item of itemsFactura; let i = index" [class.active]="i == currentIndex">
+                  <th scope="row">{{ item.nombreProducto }}</th>
+                  <td>{{ item.numeroItems}}</td>
+                  <td>{{ item.precioUnitario | number }}</td>
+                  <td>{{ item.descuentoUnitario | number }}</td>
+                  <td (click)="deleteDetalle(i)">x</td>
+                </tr>
               </tbody>
             </table>
-            </div>
-          </mat-form-field>
-        </div>
-       <div *ngIf="clienteSelected" >
-        <mat-card class="shipping-card">
-          <p><strong>Nombre:</strong> {{clienteSelected.nombres}} <strong>Apellido:</strong> {{clienteSelected.apellidos}} <strong>Identificacion:</strong> {{clienteSelected.identificacion}} </p>
-          <p> <strong> Teléfono: </strong> {{clienteSelected.telefono}} <strong> Email: </strong> {{clienteSelected.email}} </p>
-        </mat-card>
-       </div>  
-       <div *ngIf="!clienteSelected" >
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Identificacion Cliente" name="identificacionCliente" type="text" ngModel
-              required  >
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Dirección Cliente" name="direccionCliente" type="text" ngModel required>
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Telefono Cliente" name="telefonoCliente" type="number" ngModel required>
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Correo Electronico Cliente" name="correoElectronicoCliente" type="email"
-              ngModel required>
-          </mat-form-field>
-        </div>
-       </div>
-      </div>
-      <div class="row">
-        <!-- <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Numero Factura" name="numeroFactura" type="text" ngModel required>
-          </mat-form-field>
-        </div> -->
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput [matDatepicker]="picker" placeholder="Fecha Emision" name="date" type="text"  [(ngModel)]="fechaFactura"
-              required>
-            <mat-hint>YYYY/MM/DD</mat-hint>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <!-- <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Direccion Matriz" name="direccionMatriz" type="text" ngModel required>
-          </mat-form-field>
-        </div> -->
-        <!-- <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Telefono" value="16125" name="telefono" type="number" ngModel required>
-          </mat-form-field>
-        </div> -->
-      </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Descuento" name="totalDescuento" type="number" [(ngModel)]="totalDescuento" required>
-          </mat-form-field>
-        </div>
-      </div>
-
-      <form #form2="ngForm" (ngSubmit)="agregarDetalle(form2)">
-        
-
-        <mat-card class="shipping-card">
-          <mat-card-header>
-            <mat-card-title>Detalles</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <div class="row">
-              <div class="col">
-                <mat-form-field class="full-width">
-                  <input matInput placeholder="Nombre del Producto"  name="productoNombre" type="text" ngModel
-                    required>   
-                <div class="mat-elevation-z8"  *ngIf="searchofProductos.length >0 && !productoSelected">
-                  <table class="table">
-                  <thead>
-                  <tr>
-                    <th >Producto / Proveedor</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let item of searchofProductos; let i=index" [class.active]="i == currentIndex"
-                  (click)="setActiveProduct(item, i)" >
-                    <td > {{item.nombre }} {{ item.precioVenta }}</td>
-                  </tr>
-                  </tbody>
-                </table>
-                </div>
-              </mat-form-field>
-              </div>
-              <div class="col">
-                <mat-form-field class="full-width">
-                  <input matInput placeholder="numeroItems" name="numeroItems" type="number" ngModel required>
-                </mat-form-field>
-              </div>
-              <div class="col">
-                <mat-form-field class="full-width">
-                  <input matInput placeholder="precioUnitario"  name="precioUnitario" type="number" ngModel
-                    required>
-                </mat-form-field>
-              </div>
-              <div class="col">
-                <mat-form-field class="full-width">
-                  <input matInput placeholder="descuentoUnitario"  name="descuentoUnitario" type="number" ngModel>
-                </mat-form-field>
-              </div>
-            </div>
-          </mat-card-content>
-          <mat-card-actions>
-            <!-- [disabled]="form.invalid" -->
-            <button mat-raised-button color="primary" [disabled]="form2.invalid" expand="block" type="submit">Agregar
-              Item Factura</button>
-          </mat-card-actions>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col" sortable="name">Producto</th>
-                <th scope="col" sortable="name">Numero Items</th>
-                <th scope="col" sortable="area">Precio Unitario</th>
-                <th scope="col" sortable="area">Descuento Unitario</th>
-                <th scope="col" sortable="area">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of itemsFactura; let i = index" [class.active]="i == currentIndex">
-                <th scope="row">{{ item.nombreProducto }}</th>
-                <td>{{ item.numeroItems}}</td>
-                <td>{{ item.precioUnitario | number }}</td>
-                <td>{{ item.descuentoUnitario | number }}</td>
-                <td (click)="deleteDetalle(i)">x</td>
-              </tr>
-            </tbody>
-          </table>
-        </mat-card>
-        <mat-list>
-          <mat-list-item><h2> Subtotal =  {{subTotalFactura}} </h2></mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item><h2>Total Descuentos= {{totalDescuentosFactura}}</h2> </mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item><h2>Total Impuestos  ({{impuestoAlaVenta}}%)= {{totalImpuestosFactura}} </h2></mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item><h2>Total Factura= {{totalFactura}}</h2></mat-list-item>
-        </mat-list>
-      </form>
-
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary"  [disabled]="form.invalid  || itemsFactura.length == 0" expand="block" type="submit">Guardar Factura</button>
-      <!-- <button mat-raised-button color="primary" [disabled]="form.invalid" expand="block" type="submit">Guardar
-        Factura</button> -->
-    </mat-card-actions>
-  </mat-card>
-</form>
-
-<div class="mat-elevation-z8">
-
-</div>
+          </mat-card>
+          <mat-list>
+            <mat-list-item><h2> Subtotal =  {{subTotalFactura}} </h2></mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item><h2>Total Descuentos= {{totalDescuentosFactura}}</h2> </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item><h2>Total Impuestos  ({{impuestoAlaVenta}}%)= {{totalImpuestosFactura}} </h2></mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item><h2>Total Factura= {{totalFactura}}</h2></mat-list-item>
+          </mat-list>
+        </form>
+  
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary"  [disabled]="form.invalid  || itemsFactura.length == 0" expand="block" type="submit">Guardar Factura</button>
+        <!-- <button mat-raised-button color="primary" [disabled]="form.invalid" expand="block" type="submit">Guardar
+          Factura</button> -->
+      </mat-card-actions>
+    </mat-card>
+  </form>
+  
+  <div class="mat-elevation-z8">
+  
+  </div>

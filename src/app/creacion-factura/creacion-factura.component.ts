@@ -111,10 +111,13 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
 
   agregarFactura(form: { value: any; }){
     this.factura=form.value;
-    // this.factura.fechaEmision=this.fechaFactura.format("YYYY-MM-DD HH:mm:ss"); 
+    this.factura.fechaEmision=this.fechaFactura.format("YYYY-MM-DDTHH:mm:ss"); 
     //this.factura.fechaEmision=this.fechaFactura.date().toString(); 
+    this.factura.codigo="001";
+    this.factura.formaPago="Efectivo"
+    this.factura.estado="Nueva"
     this.factura.totalDescuento=this.totalDescuento; 
-    this.factura.idCliente=this.clienteSelected?.idCliente;
+     this.factura.idCliente=this.clienteSelected?.idCliente;
     this.factura.itemsFactura=[];
     this.factura.itemsFactura=this.itemsFactura;
     console.log(this.factura);

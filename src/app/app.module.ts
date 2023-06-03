@@ -36,6 +36,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ProductoModule } from './producto/producto.module';
 import { LoginComponent } from './login/login.component';
 
+import {MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { DialogAnimationsExampleDialog2 } from './vista-factura/vista-factura.component';
+
 
 
 
@@ -46,7 +50,7 @@ import { LoginComponent } from './login/login.component';
     VistaFacturaComponent,
     CreacionFacturaComponent,
     AppNavComponent,
-    LoginComponent  ],
+    LoginComponent,DialogAnimationsExampleDialog2  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -72,11 +76,13 @@ import { LoginComponent } from './login/login.component';
     MatButtonModule,
     MatNativeDateModule,
     ClientModule,
-    ProductoModule
+    ProductoModule,
+    MatDialogModule,
+    MatMenuModule
   ],
-providers: [DataService, { provide: DateAdapter, useClass:  MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
- { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT_DATE }
- ],
+providers: [DataService,  { provide: DateAdapter, useClass:  MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+ { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT_DATE }, {provide: MatDialogRef, useValue:{}}
+ ], 
   // providers: [DataService
   // ],
   bootstrap: [AppComponent]

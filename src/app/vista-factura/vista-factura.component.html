@@ -1,27 +1,43 @@
 <!-- <button (click)="nueva()">Nueva</button> -->
 
-<h1>Welcome {{title}}!</h1>
-<div class="mat-elevation-z8">
+
+
+<h1 style="background-color: #69cbb8; text-align:center">{{title}}
+  <button mat-raised-button color="" (click)="buscar()">   <mat-icon>search</mat-icon> Buscar </button>
+
+</h1>
+<!-- <button   color="warn">
+  <mat-icon>search</mat-icon>
+  Buscar
+</button> -->
+
+<div class="mat-elevation-z8" style="background-color: bisque;">
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Id Factura</th>
+        <th scope="col"><mat-icon>account_balance_wallet</mat-icon> Id Factura</th>
         <th scope="col" sortable="name">Cliente</th>
         <th scope="col" sortable="name">Numero Factura</th>
         <th scope="col" sortable="area">Fecha</th>
         <th scope="col" sortable="population">Total</th>
+        <th scope="col" sortable="population">Acciones</th>
       </tr>
+      
     </thead>
     <tbody>
-      <tr *ngFor="let item of allFacturas">
-        <th scope="row">{{ item.idFactura }}</th>
+      <mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></mat-row>
+      <tr *ngFor="let item of allFacturas; let index=index">
+        <th scope="row">{{ index+1 }}</th>
         <td>
           {{ item.nombreCliente }}
         </td>
-        <td>{{ item.numeroFactura}}</td>
-        <td>{{ item.fechaEmision | date }}</td>
-        <td>{{ item.totalFactura | number }}</td>
+        <td>{{ item.id}}0000</td>
+        <td>{{ item.fechayHora | date: 'dd/MM/yy hh:mm:ss' }}</td>
+        <td>{{ item.total }}</td>
+        <td>Ver</td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<!-- <dialog-animations-example-dialog2 *ngIf="verBuscar" (counterChange)="onCounterChange($event)"></dialog-animations-example-dialog2> -->

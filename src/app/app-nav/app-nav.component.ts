@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -12,9 +12,10 @@ import { finalize } from "rxjs/operators";
   templateUrl: './app-nav.component.html',
   styleUrls: ['./app-nav.component.css']
 })
-export class AppNavComponent {
+export class AppNavComponent implements OnInit {
 
   greeting= {};
+  usuario:any;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -25,8 +26,14 @@ export class AppNavComponent {
   constructor(private breakpointObserver: BreakpointObserver,
      private app: DataService, private http: HttpClient,
       private router: Router) {
+     
     //this.app.authenticate(undefined, undefined);
     //http.get('/api/resource').subscribe(data => this.greeting = data);
+  }
+  ngOnInit(): void {
+   //while(true){
+    this.usuario= JSON.parse(localStorage.getItem("usuario")|| '{}');
+   //}
   }
 
   

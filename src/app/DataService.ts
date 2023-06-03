@@ -11,35 +11,35 @@ const baseUrl = GlobalConstants.baseUrlVenta;
 
 @Injectable()
 export class DataService {
-    //GET_OPE:  string  =  'http://186.4.141.253:255/api/factura';
+    GET_OPE:  string  =  'http://186.4.141.253:255/api/venta';
    // POST_OPE:  string  =  'http://localhost:8080/api/';
 
     private httpHeader=new HttpHeaders({'Content-type': 'application/json'});
     authenticated=false;
     dataList: Factura[] = [];
-    constructor(private http:HttpClient){}
+    // constructor(private http:HttpClient){}
 
-    // constructor(private  httpClient:  HttpClient) {
-    //     //this.dataList = Mockdata.dataList;
-    //     //this.getDataList().subscribe(res => this.dataList = res);
-    //     console.log("Pasa por Constructor Servicio")
-    // }
+    constructor(private  httpClient:  HttpClient) {
+        //this.dataList = Mockdata.dataList;
+        //this.getDataList().subscribe(res => this.dataList = res);
+        console.log("Pasa por Constructor Servicio")
+    }
 
-    // getDataList(): Observable < Factura[] > {
-    //     console.log("Pasa por Get data List Servicio")
-    //     return this.httpClient.get<Factura []>(`${this.GET_OPE}`).pipe(
-    //         tap(async (res:  Factura[] ) => {
-    //             return of(res);
-    //         })
-    //       );
-    // }
+    getDataList(): Observable < Factura[] > {
+        console.log("Pasa por Get data List Servicio")
+        return this.httpClient.get<Factura []>(`${baseUrl}`).pipe(
+            tap(async (res:  Factura[] ) => {
+                return of(res);
+            })
+          );
+    }
 
     //  createData(data: any, resource: string): Observable<any> {
     //     return this.http.post(resource, data, {headers: this.httpHeader});
     //  }
 
      createData(data: any): Observable<any> {
-        return this.http.post(baseUrl, data);
+        return this.httpClient.post(baseUrl, data);
       }
 
 
@@ -55,7 +55,7 @@ export class DataService {
         authorization: 'Basic '+btoa(credentials.username+':'+credentials.password)
     }:{});
     console.log("LISTO LISTO ");
-    this.http.get<HttpResponse<any>>('/api/user', {headers: headers}).subscribe(response=>{
+    this.httpClient.get<HttpResponse<any>>('/api/user', {headers: headers}).subscribe(response=>{
         console.log("SERSTUS"+response);
         this.authenticated= true;
         // if(response){

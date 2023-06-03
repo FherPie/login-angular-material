@@ -1,0 +1,89 @@
+
+
+<form #form="ngForm" (ngSubmit)="traerFacturasBusqueda(form)" >
+
+<h1 mat-dialog-title>Buscar Facturas</h1>
+<div mat-dialog-content>
+
+
+  <mat-card-content>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Nombre Cliente" name="nombreCliente" type="text" ngModel required>
+          <div class="mat-elevation-z8"  *ngIf="searchinofClients.length >0 && !clienteSelected">
+            <table class="table">
+            <thead>
+            <tr>
+              <th >Nombres e Identificación</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of searchinofClients; let i=index" [class.active]="i == currentIndex"
+            (click)="setActiveClient(item, i)" >
+              <td > {{item.nombres }} {{ item.apellidos }} {{ item.identificacion }}</td>
+            </tr>
+            </tbody>
+          </table>
+          </div>
+        </mat-form-field>
+      </div>
+     <div *ngIf="clienteSelected" >
+      <mat-card class="shipping-card">
+        <p><strong>Nombre:</strong> {{clienteSelected.nombres}} <strong>Apellido:</strong> {{clienteSelected.apellidos}} <strong>Identificacion:</strong> {{clienteSelected.identificacion}} </p>
+        <p> <strong> Teléfono: </strong> {{clienteSelected.telefono}} <strong> Email: </strong> {{clienteSelected.email}} </p>
+      </mat-card>
+     </div>  
+     <!-- <div *ngIf="!clienteSelected" >
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Identificacion Cliente" name="identificacionCliente" type="text" ngModel
+            required  >
+        </mat-form-field>
+      </div>
+     </div> -->
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <mat-form-field class="full-width">
+          <input matInput [matDatepicker]="picker" placeholder="Desde" name="date" type="text"  [(ngModel)]="data.desde"
+            required>
+          <mat-hint>YYYY/MM/DD</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+      </div>
+      <div class="col-4 ml-2">
+        <mat-form-field class="full-width">
+          <input matInput [matDatepicker]="picker" placeholder="Hasta" name="date" type="text"  [(ngModel)]="data.hasta"
+            required>
+          <mat-hint>YYYY/MM/DD</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+
+        <mat-form-field>
+          <mat-label>Estado</mat-label>
+          <select matNativeControl required formControlName="estado" [(ngModel)]="data.estado" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+            <option value="ACTIVO">ACTIVO</option>
+            <option value="INACTIVO">INACTIVO</option>
+          </select>
+        </mat-form-field>
+
+      </div>
+    </div>
+
+  </mat-card-content>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="closeDialog()">Cerrar</button>
+  <button mat-button mat-dialog-close cdkFocusInitial  >Buscar</button>
+</div>
+
+
+</form>
