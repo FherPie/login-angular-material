@@ -1,10 +1,10 @@
-<h1 mat-dialog-title>Delete file</h1>
+<h1 mat-dialog-title>Ingreso</h1>
 <div mat-dialog-content>
 
-  <!-- <div class="alert alert-danger" [hidden]="!error">
+  <div class="alert alert-danger" [hidden]="!error">
     There was a problem logging in. Please try again.
   </div>
-  <form role="form" (submit)="login()">
+  <form role="form" >
     <div class="form-group">
       <label for="username">Username:</label> <input type="text"
         class="form-control" id="username" name="username" [(ngModel)]="credentials.username"/>
@@ -13,11 +13,8 @@
       <label for="password">Password:</label> <input type="password"
         class="form-control" id="password" name="password" [(ngModel)]="credentials.password"/>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form> -->
+    <br/>
+    <button type="submit" class="btn btn-primary" mat-button cdkFocusInitial  (click)="closeDialog()" >Submit</button>
+  </form>
+</div>
 
-</div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>No</button>
-  <button mat-button mat-dialog-close cdkFocusInitial (click)="closeDialog()" >Cerrar</button>
-</div>

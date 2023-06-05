@@ -34,7 +34,7 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS as MY_FORMAT_DATE } from './myDateFormats';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ProductoModule } from './producto/producto.module';
-import { LoginComponent } from './login/login.component';
+import { DialogAnimationsExampleDialog, LoginComponent } from './login/login.component';
 
 import {MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
@@ -50,7 +50,7 @@ import { DialogAnimationsExampleDialog2 } from './vista-factura/vista-factura.co
     VistaFacturaComponent,
     CreacionFacturaComponent,
     AppNavComponent,
-    LoginComponent,DialogAnimationsExampleDialog2  ],
+    LoginComponent,DialogAnimationsExampleDialog2, DialogAnimationsExampleDialog ],
   imports: [
     BrowserModule,
     HttpClientModule,
