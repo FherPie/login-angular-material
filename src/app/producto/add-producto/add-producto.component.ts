@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { DataService } from 'src/app/DataService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PreviousRouteService } from 'src/app/previous-route.service';
 
 @Component({
   selector: 'app-add-producto',
@@ -23,7 +24,8 @@ export class AddProductoComponent implements OnInit {
 
   constructor(private productoService: ProductoServiceServer, private fb: FormBuilder, 
     private http: HttpClient, private app: DataService,
-    private route: ActivatedRoute, private router: Router) {}
+    private route: ActivatedRoute, private router: Router,
+    private previousRouteService : PreviousRouteService) {}
 
 
   
@@ -80,4 +82,10 @@ export class AddProductoComponent implements OnInit {
   irProductos(): void {
     this.router.navigateByUrl('/productos');
   }
+
+  navegarAtras(){
+    console.log("Previor",this.previousRouteService.getPrevious());
+    this.router.navigateByUrl(this.previousRouteService.getPrevious());
+  }
+  
 }

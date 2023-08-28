@@ -1,6 +1,10 @@
 
-
 <div class="container">
+    
+<mat-card> 
+    <div class="col-md-6">   <button class="btn btn-info text-white btn-block" style="width: 100%;" 
+        (click)="navegarAtras()">Atras</button></div>
+</mat-card>
     {{currentProducto | json}}
     <div  *ngIf="!submitted" class="row">
         <form  [formGroup]="form" (ngSubmit)="agregarProducto(form)">
