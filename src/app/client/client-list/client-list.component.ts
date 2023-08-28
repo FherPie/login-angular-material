@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ClientLite } from '../client.model2';
-import { ClientService } from '../client.service';
 import { ClienteServiceServer } from '../cliente.service.server';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-client-list',
@@ -10,7 +11,7 @@ import { ClienteServiceServer } from '../cliente.service.server';
 })
 export class ClientListComponent implements OnInit {
 
-  constructor(private clienteService: ClienteServiceServer) { }
+  constructor(private clienteService: ClienteServiceServer,  private router: Router) { }
 
   @Input() showEditButton: boolean= true;
   clients: ClientLite[] = [];
@@ -77,6 +78,12 @@ export class ClientListComponent implements OnInit {
   setActiveClient(client: ClientLite, index: number): void {
     this.currentClient = client;
     this.currentIndex = index;
+  }
+
+
+  
+  agregarClientes(): void {
+    this.router.navigateByUrl('/addClient');
   }
 
 }

@@ -9,10 +9,9 @@ import { DataService } from '../DataService';
 import {FormControl} from '@angular/forms';
 import * as moment from 'moment';
 import { ClientLite } from '../client/client.model2';
-import { ClientService } from '../client/client.service';
 import { ProductoLite } from '../producto/producto.model2';
-import { ClienteServiceServer } from '../client/cliente.service.server';
 import { ProductoServiceServer } from '../producto/producto.service.server';
+import { ClienteServiceServer } from '../client/cliente.service.server';
 
 
 @Component({

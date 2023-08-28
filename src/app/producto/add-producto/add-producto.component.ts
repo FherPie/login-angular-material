@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ProductoLite } from '../producto.model2';
-import { ProductoService } from '../producto.service';
 import { ProductoServiceServer } from '../producto.service.server';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { DataService } from 'src/app/DataService';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-producto',
@@ -14,17 +14,30 @@ import { DataService } from 'src/app/DataService';
 })
 export class AddProductoComponent implements OnInit {
 
+  @ViewChild('form') Form!: NgForm;
+
   producto = new ProductoLite();
   form: FormGroup = new FormGroup({});
   submitted = false;
+  currentProducto: any;
 
   constructor(private productoService: ProductoServiceServer, private fb: FormBuilder, 
-    private http: HttpClient, private app: DataService) {
-     }
+    private http: HttpClient, private app: DataService,
+    private route: ActivatedRoute, private router: Router) {}
 
 
   
   ngOnInit(): void {
+    this.setearForm();
+    if(this.route.snapshot.paramMap.get("id")){
+      console.log("viene el id",this.route.snapshot.paramMap.get("id") );
+      this.getProducto(this.route.snapshot.paramMap.get("id"))
+    }
+
+  }
+
+  setearForm(){
+    this.form.reset
     this.form = this.fb.group({
       nombre: ['', [Validators.required]],
       precioUnitario: ['', [Validators.required]],
@@ -32,6 +45,20 @@ export class AddProductoComponent implements OnInit {
       precioCompra: ['', [Validators.required]],
     })
   }
+
+  getProducto(id:string | null): void {
+    this.productoService.get(id)
+    .subscribe(data => {
+      this.currentProducto= data;
+       this.form.controls.nombre.setValue(this.currentProducto.nombre);
+       this.form.controls.precioUnitario.setValue(this.currentProducto.precioUnitario);
+       this.form.controls.stock.setValue(this.currentProducto.stock);
+       this.form.controls.precioCompra.setValue(this.currentProducto.precioCompra);
+    }, error=>{
+      console.error(error);
+    })
+  }
+
 
   agregarProducto(form: { value: any; }) {
     this.producto = form.value;
@@ -50,4 +77,7 @@ export class AddProductoComponent implements OnInit {
     this.producto = new ProductoLite();
   }
 
+  irProductos(): void {
+    this.router.navigateByUrl('/productos');
+  }
 }

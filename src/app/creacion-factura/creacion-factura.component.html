@@ -3,7 +3,17 @@
       <mat-card-header>
         <mat-card-title>Factura </mat-card-title>
       </mat-card-header>
+
+
+
+
       <mat-card-content>
+        <div class="row">
+          <div class="col-6">
+        <mat-card >
+          <mat-card-header>
+            <mat-card-title>Datos de la Factura </mat-card-title>
+          </mat-card-header>
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
@@ -89,11 +99,18 @@
             </mat-form-field>
           </div>
         </div>
-  
+        <mat-card-actions>
+          <button mat-raised-button color="primary"  [disabled]="form.invalid  || itemsFactura.length == 0" expand="block" type="submit">Guardar Factura</button>
+          <!-- <button mat-raised-button color="primary" [disabled]="form.invalid" expand="block" type="submit">Guardar
+            Factura</button> -->
+        </mat-card-actions>
+      </mat-card>
+    </div>
+      
+
+    <div class="col-6">
         <form #form2="ngForm" (ngSubmit)="agregarDetalle(form2)">
-          
-  
-          <mat-card class="shipping-card">
+          <mat-card >
             <mat-card-header>
               <mat-card-title>Detalles</mat-card-title>
             </mat-card-header>
@@ -164,6 +181,8 @@
               </tbody>
             </table>
           </mat-card>
+          <br/>
+          <mat-card >
           <mat-list>
             <mat-list-item><h2> Subtotal =  {{subTotalFactura}} </h2></mat-list-item>
             <mat-divider></mat-divider>
@@ -173,14 +192,14 @@
             <mat-divider></mat-divider>
             <mat-list-item><h2>Total Factura= {{totalFactura}}</h2></mat-list-item>
           </mat-list>
+          </mat-card>
         </form>
-  
+    </div>
+
+      </div>
+
       </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary"  [disabled]="form.invalid  || itemsFactura.length == 0" expand="block" type="submit">Guardar Factura</button>
-        <!-- <button mat-raised-button color="primary" [disabled]="form.invalid" expand="block" type="submit">Guardar
-          Factura</button> -->
-      </mat-card-actions>
+ 
     </mat-card>
   </form>
   

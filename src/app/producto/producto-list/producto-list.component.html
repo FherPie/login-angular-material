@@ -1,12 +1,40 @@
+
+<mat-card>
 <div class="container">
+  
 <div class="row">
     <mat-card>
 <mat-card-title>Lista de productos</mat-card-title>
 <mat-card-subtitle></mat-card-subtitle>
-<input type="text" class="form-control" placeholder="Buscar Producto" 
- [(ngModel)]="nombreProducto" />
+
+ <mat-card-actions align="start">
+
+<div class="row">
+ 
+  <div class="col-md-6">
+    <input type="text" class="form-control" placeholder="Buscar Producto" 
+    [(ngModel)]="nombreProducto" />
+  </div>
+
+  <div class="col-md-3">
+    <button class="btn btn-info text-white btn-block btn-sm" style="width: 100%;" (click)="agregarProductos()" >Nuevo</button>
+  </div>
+
+<div class="col-md-3">
+  <button class="btn btn-secondary text-white btn-block  btn-sm" style="width: 100%;" >Buscar</button>
+</div>
+
+
+</div>
+
+
+
+</mat-card-actions>
+
+
 <mat-card-actions align="end">
-    <button mat-button>Buscar</button>
+
+
     <div class="form-group">
       <label for="file">Importar desde Excel</label>
       <input type="file" id="file" class="file-input" accept=".xlsx" (change)="onFileSelected($event)" />
@@ -15,10 +43,15 @@
 </mat-card>
 </div>
 
+
+<br/>
+
+<mat-card>
 <div class="row">
-<div class="col-md-6">
+
+<div class="col-md-8">
     <div class="mat-elevation-z8">
-        <table class="table">
+        <table class="table"   >
             <thead>
                 <tr>
                 <td>nombre</td>
@@ -34,10 +67,20 @@
                 </tr>
             </tbody>
         </table>
+
+        <!-- <mat-table #table     mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> nombre </th>
+            <td mat-cell *matCellDef="let product"> {{product.nombre}} </td>
+          </ng-container>
+
+        </mat-table> -->
+
+
     </div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-4">
   <div *ngIf="currentProduct">
     <h4>Producto Seleccionado</h4>
     <div>
@@ -61,5 +104,8 @@
 </div>
 
 </div>
+</mat-card>
 
 </div>
+
+</mat-card>

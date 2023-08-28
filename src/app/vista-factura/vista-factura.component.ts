@@ -9,8 +9,8 @@ import { Factura } from  '../factura';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
 import { ClientLite } from '../client/client.model2';
-import { ClienteServiceServer } from '../client/cliente.service.server';
 import * as moment from 'moment';
+import { ClienteServiceServer } from '../client/cliente.service.server';
 
 
 export interface DialogData {
@@ -20,6 +20,7 @@ export interface DialogData {
   hasta: moment.Moment;
   cedula: string;
   estado: string;
+  clienteSelected?: ClientLite;
 }
 
 @Component({
@@ -39,6 +40,8 @@ export class VistaFacturaComponent implements AfterViewInit {
   indexClienteSelected?: number;
   verBuscar:boolean=false;
   desde = moment();
+  hasta = moment();
+  estado: string="";
 
   
   title='Facturas';
@@ -79,10 +82,9 @@ export class VistaFacturaComponent implements AfterViewInit {
     console.log("Buscar");
     const dialogRef =   this.dialog.open(DialogAnimationsExampleDialog2, {
       height: '400px',
-      width: '600px',
-      position: {top: '10px', left:'10px'} ,
+      width: '300px',
       disableClose: true,
-      data: {desde: this.desde}
+      data: {desde: this.desde, hasta: this.hasta, clienteSelected: this.clienteSelected, estado: this.estado}
     });
 
 

@@ -26,19 +26,22 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { ClientModule } from './client/client.module';
 
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS as MY_FORMAT_DATE } from './myDateFormats';
 import { MatNativeDateModule } from '@angular/material/core';
-import { ProductoModule } from './producto/producto.module';
 import { DialogAnimationsExampleDialog, LoginComponent } from './login/login.component';
 
 import {MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { DialogAnimationsExampleDialog2 } from './vista-factura/vista-factura.component';
+import { ClientListComponent } from './client/client-list/client-list.component';
+import { AddClientComponent } from './client/add-client/add-client.component';
+import { AddProductoComponent } from './producto/add-producto/add-producto.component';
+import { ProductoListComponent } from './producto/producto-list/producto-list.component';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -50,8 +53,13 @@ import { DialogAnimationsExampleDialog2 } from './vista-factura/vista-factura.co
     VistaFacturaComponent,
     CreacionFacturaComponent,
     AppNavComponent,
+    ClientListComponent,
+    AddClientComponent,
+    AddProductoComponent,
+    ProductoListComponent,
     LoginComponent,DialogAnimationsExampleDialog2, DialogAnimationsExampleDialog ],
   imports: [
+    CommonModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -65,18 +73,16 @@ import { DialogAnimationsExampleDialog2 } from './vista-factura/vista-factura.co
     MatSelectModule,
     MatRadioModule,
     MatCardModule,
+    FormsModule,
     ReactiveFormsModule,
     LayoutModule,
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    FormsModule,
     MatDatepickerModule,
     MatButtonModule,
     MatNativeDateModule,
-    ClientModule,
-    ProductoModule,
     MatDialogModule,
     MatMenuModule
   ],

@@ -1,6 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ProductoLite } from '../producto.model2';
 import { ProductoServiceServer } from '../producto.service.server';
+import { DataSource } from '@angular/cdk/table';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-producto-list',
@@ -17,7 +22,11 @@ export class ProductoListComponent implements OnInit {
  nombreProducto = '';
  fileToUpload: File | any = null;
 
-  constructor(private productoService: ProductoServiceServer) { }
+ dataSource: MatTableDataSource<ProductoLite> | undefined;
+displayedColumns = [];
+//@ViewChild(MatSort) sort: MatSort;
+
+  constructor(private productoService: ProductoServiceServer,private router: Router) { }
 
 
   onFileSelected(event:any) {
@@ -52,6 +61,10 @@ export class ProductoListComponent implements OnInit {
       .subscribe(
         ( data: ProductoLite[]) => {
           this.productsList = data;
+
+          this.dataSource= new MatTableDataSource(this.productsList);
+
+
           console.log("loque llega");
           console.log(data);
         },
@@ -73,6 +86,10 @@ export class ProductoListComponent implements OnInit {
   setProductoActive(producto: ProductoLite, index: number){
    this.currentProduct= producto;
    this.currentIndex=index;
+  }
+
+  agregarProductos(): void {
+    this.router.navigateByUrl('/agregarProductos');
   }
 
 }
