@@ -4,59 +4,96 @@
     <p>The ID is {{greeting.id}}</p>
     <p>The content is {{greeting.content}}</p>
   </div> -->
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false" style=" background-image:  url('paper.gif');
-      background-color: #cccccc; min-height: 100vh;">
-    <mat-toolbar>       <mat-icon >home</mat-icon> Menu</mat-toolbar>
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+    style="
+      background-image: url('paper.gif');
+      background-color: #cccccc;
+      min-height: 100vh;
+    "
+  >
+    <mat-toolbar> <mat-icon>home</mat-icon> Menu</mat-toolbar>
     <mat-nav-list>
-       <a mat-list-item routerLink='/vista-factura'>     <mat-icon>account_balance_wallet</mat-icon> &nbsp; Facturas</a>
-       <a mat-list-item routerLink='/creacion-factura' > <mat-icon>account_box</mat-icon>&nbsp; Creación Facturas</a>
-       <a mat-list-item routerLink='/clientes'> <mat-icon>account_box</mat-icon> &nbsp;Clientes</a>
-       <a mat-list-item routerLink='/productos'>	<mat-icon>add_shopping_cart</mat-icon>&nbsp;Productos</a>
-       <a mat-list-item routerLink='/agregarProductos'>	<mat-icon>all_out</mat-icon>&nbsp;Creacion de Productos</a>
-       <a mat-list-item routerLink='/compras'>	<mat-icon>book</mat-icon>&nbsp;Compras</a>
-       <a mat-list-item routerLink='/proveedores'><mat-icon>card_travel</mat-icon>&nbsp;Proveedores</a>
-       <a mat-list-item routerLink='/inventario'><mat-icon>dashboard</mat-icon>&nbsp; Inventario</a>
-       <!-- <a mat-list-item routerLink='/vista-factura'>Home</a> -->
-       <!-- <a mat-list-item routerLink='/login'>Login</a> -->
-       <a mat-list-item (click)="logout()"><mat-icon>exit_to_app</mat-icon>&nbsp;Logout</a>
+      <a mat-list-item routerLink="/vista-factura">
+        <mat-icon>account_balance_wallet</mat-icon> &nbsp; Facturas</a
+      >
+      <a mat-list-item routerLink="/creacion-factura">
+        <mat-icon>account_box</mat-icon>&nbsp; Creación Facturas</a
+      >
+      <a mat-list-item routerLink="/clientes">
+        <mat-icon>account_box</mat-icon> &nbsp;Clientes</a
+      >
+      <a mat-list-item routerLink="/productos">
+        <mat-icon>add_shopping_cart</mat-icon>&nbsp;Productos</a
+      >
+      <a mat-list-item routerLink="/agregarProductos">
+        <mat-icon>all_out</mat-icon>&nbsp;Creacion de Productos</a
+      >
+      <a mat-list-item routerLink="/compras">
+        <mat-icon>book</mat-icon>&nbsp;Compras</a
+      >
+      <a mat-list-item routerLink="/proveedores"
+        ><mat-icon>card_travel</mat-icon>&nbsp;Proveedores</a
+      >
+      <a mat-list-item routerLink="/inventario"
+        ><mat-icon>dashboard</mat-icon>&nbsp; Inventario</a
+      >
+      <a mat-list-item routerLink="/maestros"
+        ><mat-icon>account_box</mat-icon>&nbsp; Maestro</a
+      >
+      <a mat-list-item routerLink="/detalles"
+        ><mat-icon>description</mat-icon>&nbsp; Detalle</a
+      >
+      <a mat-list-item (click)="logout()"
+        ><mat-icon>exit_to_app</mat-icon>&nbsp;Logout</a
+      >
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content  style="justify-content: end;"  >
-    <mat-toolbar color="primary"   style=" justify-content: end;" >
-     
-      <small style="align-items: right;"> <mat-icon style="vertical-align: middle;">photo_camera</mat-icon>&nbsp; {{usuario.username}} <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>dialpad</mat-icon>
-          <span>Redial</span>
+  <mat-sidenav-content style="justify-content: end">
+    <mat-toolbar color="primary" style="justify-content: end">
+      <small style="align-items: right">
+        <mat-icon style="vertical-align: middle">photo_camera</mat-icon>&nbsp;
+        {{ usuario.username }}
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>more_vert</mat-icon>
         </button>
-        <button mat-menu-item disabled>
-          <mat-icon>voicemail</mat-icon>
-          <span>Check voice mail</span>
-        </button>
-        <button mat-menu-item>
-          <mat-icon>notifications_off</mat-icon>
-          <span>Disable alerts</span>
-        </button>
-      </mat-menu></small>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>dialpad</mat-icon>
+            <span>Redial</span>
+          </button>
+          <button mat-menu-item disabled>
+            <mat-icon>voicemail</mat-icon>
+            <span>Check voice mail</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>notifications_off</mat-icon>
+            <span>Disable alerts</span>
+          </button>
+        </mat-menu></small
+      >
 
-   
       <button
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        *ngIf="isHandset$ | async"
+      >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <!-- <span>Factura</span> -->
     </mat-toolbar>
     <!-- Add Content Here -->
-    <router-outlet style="padding: 30px ;"></router-outlet>
+    <router-outlet style="padding: 30px"></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

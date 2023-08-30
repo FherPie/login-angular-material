@@ -6,90 +6,90 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-producto-list',
   templateUrl: './producto-list.component.html',
-  styleUrls: ['./producto-list.component.css']
+  styleUrls: ['./producto-list.component.css'],
 })
 export class ProductoListComponent implements OnInit {
+  @Input() showEditButton: boolean = true;
 
- @Input() showEditButton: boolean= true;
+  productsList: ProductoLite[] = [];
+  currentProduct!: ProductoLite;
+  currentIndex = -1;
+  nombreProducto = '';
+  fileToUpload: File | any = null;
 
- productsList: ProductoLite[] = [];
- currentProduct!: ProductoLite;
- currentIndex = -1;
- nombreProducto = '';
- fileToUpload: File | any = null;
+  dataSource: MatTableDataSource<ProductoLite> | undefined;
+  displayedColumns = [];
 
- dataSource: MatTableDataSource<ProductoLite> | undefined;
-displayedColumns = [];
-//@ViewChild(MatSort) sort: MatSort;
+  constructor(
+    private productoService: ProductoServiceServer,
+    private router: Router
+  ) {}
 
-  constructor(private productoService: ProductoServiceServer,private router: Router) { }
+  onFileSelected(event: any) {
+    const target = event.target as HTMLInputElement;
 
-
-  onFileSelected(event:any) {
-  const target = event.target as HTMLInputElement;
-  //console.log(target);
- // console.log(target.files);
-  this.fileToUpload = event.target.files[0]
-  console.log(this.fileToUpload);
-  if(this.fileToUpload){
-    this.onSaveFile();
+    this.fileToUpload = event.target.files[0];
+    console.log(this.fileToUpload);
+    if (this.fileToUpload) {
+      this.onSaveFile();
+    }
   }
-  }
 
-  
   onSaveFile() {
     const formData: FormData = new FormData();
     formData.append('file', this.fileToUpload);
     console.log(formData);
-    this.productoService.subirArchivoExcelImportacion(formData,"archivoExcelProdcutos")
-    .subscribe(resp => {
-      alert("Uploaded")
-    })
-    // return this.httpClient.post(YOUR_API_URL, formData);
- }
+    this.productoService
+      .subirArchivoExcelImportacion(formData, 'archivoExcelProdcutos')
+      .subscribe((resp) => {
+        alert('Uploaded');
+      });
+  }
 
   ngOnInit(): void {
     this.retrieveProductos();
   }
 
   retrieveProductos(): void {
-    this.productoService.getAll()
-      .subscribe(
-        ( data: ProductoLite[]) => {
-          this.productsList = data;
+    this.productoService.getAll().subscribe(
+      (data: ProductoLite[]) => {
+        this.productsList = data;
 
-          this.dataSource= new MatTableDataSource(this.productsList);
+        this.dataSource = new MatTableDataSource(this.productsList);
 
-
-          console.log("loque llega");
-          console.log(data);
-        },
-        (        error: any) => {
-          console.log(error);
-        });
+        console.log('loque llega');
+        console.log(data);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
-  buscarPorNombre():void {
-    if(this.nombreProducto==null){
-      this.nombreProducto='';
+  buscarPorNombre(): void {
+    if (this.nombreProducto == null) {
+      this.nombreProducto = '';
     }
-    this.productoService.searchByNombre(this.nombreProducto)
-    .subscribe((data: ProductoLite[])=>{this.productsList= data;
-      console.log(data);
-    },(error:any)=>{console.log(error)}) 
+    this.productoService.searchByNombre(this.nombreProducto).subscribe(
+      (data: ProductoLite[]) => {
+        this.productsList = data;
+        console.log(data);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
-  setProductoActive(producto: ProductoLite, index: number){
-   this.currentProduct= producto;
-   this.currentIndex=index;
+  setProductoActive(producto: ProductoLite, index: number) {
+    this.currentProduct = producto;
+    this.currentIndex = index;
   }
 
   agregarProductos(): void {
     this.router.navigateByUrl('/agregarProductos');
   }
-
 }

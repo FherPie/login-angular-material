@@ -42,6 +42,10 @@ import { AddClientComponent } from './client/add-client/add-client.component';
 import { AddProductoComponent } from './producto/add-producto/add-producto.component';
 import { ProductoListComponent } from './producto/producto-list/producto-list.component';
 import { CommonModule } from '@angular/common';
+import { MaestroListComponent } from './maestro/maestro-list/maestro-list.component';
+import { MaestroAddComponent } from './maestro/maestro-add/maestro-add.component';
+import { DetalleAddComponent } from './detalle/detalle-add/detalle-add.component';
+import { DetalleListComponent } from './detalle/detalle-list/detalle-list.component';
 
 
 
@@ -57,7 +61,7 @@ import { CommonModule } from '@angular/common';
     AddClientComponent,
     AddProductoComponent,
     ProductoListComponent,
-    LoginComponent,DialogAnimationsExampleDialog2, DialogAnimationsExampleDialog ],
+    LoginComponent,DialogAnimationsExampleDialog2, DialogAnimationsExampleDialog, MaestroListComponent, MaestroAddComponent, DetalleAddComponent, DetalleListComponent ],
   imports: [
     CommonModule,
     BrowserModule,
