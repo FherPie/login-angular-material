@@ -81,8 +81,8 @@ export class VistaFacturaComponent implements AfterViewInit {
     this.verBuscar=true;
     console.log("Buscar");
     const dialogRef =   this.dialog.open(DialogAnimationsExampleDialog2, {
-      height: '400px',
-      width: '300px',
+      height: '500px',
+      width: '600px',
       disableClose: true,
       data: {desde: this.desde, hasta: this.hasta, clienteSelected: this.clienteSelected, estado: this.estado}
     });

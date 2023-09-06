@@ -1,6 +1,6 @@
 
-
-<form #form="ngForm" (ngSubmit)="traerFacturasBusqueda(form)" >
+<!-- 
+<form #form="ngForm" (ngSubmit)="traerFacturasBusqueda(form)" > -->
 
 <h1 mat-dialog-title>Buscar Facturas</h1>
 <div mat-dialog-content>
@@ -8,7 +8,10 @@
 
   <mat-card-content>
     <div class="row">
+
+
       <div class="col-12">
+        <form #form="ngForm">
         <mat-form-field class="full-width">
           <input matInput placeholder="Nombre Cliente" name="nombreCliente" type="text" ngModel required>
           <div class="mat-elevation-z8"  *ngIf="searchinofClients.length >0 && !clienteSelected">
@@ -27,7 +30,11 @@
           </table>
           </div>
         </mat-form-field>
+        </form>
+
       </div>
+
+
      <div *ngIf="clienteSelected" >
       <mat-card class="shipping-card">
         <p><strong>Nombre:</strong> {{clienteSelected.nombres}} <strong>Apellido:</strong> {{clienteSelected.apellidos}} <strong>Identificacion:</strong> {{clienteSelected.identificacion}} </p>
@@ -67,7 +74,7 @@
 
         <mat-form-field>
           <mat-label>Estado</mat-label>
-          <select matNativeControl required formControlName="estado" [(ngModel)]="data.estado" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+          <select matNativeControl required  [(ngModel)]="data.estado" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
             <option value="ACTIVO">ACTIVO</option>
             <option value="INACTIVO">INACTIVO</option>
           </select>
@@ -86,4 +93,4 @@
 </div>
 
 
-</form>
+<!-- </form> -->
