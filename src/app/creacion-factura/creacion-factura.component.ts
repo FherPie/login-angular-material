@@ -120,7 +120,7 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
     this.factura.itemsFactura=[];
     this.factura.itemsFactura=this.itemsFactura;
     console.log(this.factura);
-    this.dataService.createData(this.factura)
+    this.dataService.guardarVenta(this.factura)
     .subscribe(
       response => {
         console.log(response);

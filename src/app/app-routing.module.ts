@@ -13,6 +13,7 @@ import { MaestroListComponent } from './maestro/maestro-list/maestro-list.compon
 import { MaestroAddComponent } from './maestro/maestro-add/maestro-add.component';
 import { DetalleListComponent } from './detalle/detalle-list/detalle-list.component';
 import { DetalleAddComponent } from './detalle/detalle-add/detalle-add.component';
+import { ProductsComponent } from './app-table/products/products.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'detalles', component: DetalleListComponent },
   { path: 'agregar-detalle', component: DetalleAddComponent },
   { path: 'detalle/:id', component: DetalleAddComponent },
+  { path: 'products', component:ProductsComponent },
 ];
 
 @NgModule({

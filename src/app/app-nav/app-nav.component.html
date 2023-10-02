@@ -1,9 +1,4 @@
 <mat-sidenav-container class="sidenav-container">
-  <!-- <div [hidden]="!authenticated()">
-    <h1>Greeting</h1>
-    <p>The ID is {{greeting.id}}</p>
-    <p>The content is {{greeting.content}}</p>
-  </div> -->
   <mat-sidenav
     #drawer
     class="sidenav"
@@ -12,10 +7,9 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
     style="
-      background-image: url('paper.gif');
       background-color: #cccccc;
       min-height: 100vh;
-    "
+    "           
   >
     <mat-toolbar> <mat-icon>home</mat-icon> Menu</mat-toolbar>
     <mat-nav-list>
@@ -91,7 +85,6 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <!-- <span>Factura</span> -->
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet style="padding: 30px"></router-outlet>

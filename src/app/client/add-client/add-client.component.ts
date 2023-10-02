@@ -15,6 +15,51 @@ export class AddClientComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public fields:any []=[
+      {
+        type: 'text',
+        name: 'nombres',
+        label: 'Nombres',
+        value: '',
+        required:true
+      },
+      {
+        type: 'text',
+        name: 'apellidos',
+        label: 'Apellidos',
+        value: '',
+        required:true
+      },
+      {
+        type: 'text',
+        name: 'telefono',
+        label: 'Telefono',
+        value: '',
+        required:true
+      },      
+      {
+        type: 'text',
+        name: 'direccion',
+        label: 'Direccion',
+        value: '',
+        required:true
+      },
+      {
+        type: 'text',
+        name: 'identificacion',
+        label: 'Identificacion',
+        value: '',
+        required:true
+      },
+      {
+        type: 'text',
+        name: 'email',
+        label: 'Email',
+        value: '',
+        required:true
+      }
+  ]
+
   agregarCliente(form: { value: any; }) {
     this.cliente = form.value;
     console.log(this.cliente);

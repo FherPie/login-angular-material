@@ -1,0 +1,127 @@
+
+table tbody tr.selected td, table tbody tr.selected:hover td {
+    background: #E8E8E8;
+}
+table tbody tr:hover td {
+    background: #DCDCDC !important;
+}
+
+table thead tr th::first-letter {
+    text-transform: uppercase;
+}
+
+table tbody::before {
+content: '';
+}
+
+table tbody tr td  {
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.header {
+    height: 50px;
+    vertical-align: middle;
+    background: #13B3AC;
+}
+
+table th, table td { 
+    padding-left: 30px; 
+    height: 50px;
+    vertical-align: middle;
+    color: #2b6582;
+}
+
+table th {
+    padding-bottom: 10px;
+    color: white;
+}
+
+table tbody tr:last-child td:first-child{
+    border-bottom-left-radius: 10px !important;
+    border: none;
+}
+table tbody tr:last-child td:last-child{
+    border-bottom-right-radius: 10px !important;
+    border: none;
+}
+
+table {
+    margin-bottom: 0px;
+}
+
+.panel {
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    margin: 15px;
+}
+
+.panel-header {
+    height: 56px;
+    background: #2b6582;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    padding: 15px;
+    border-bottom: 2px solid white;
+}
+
+.panel-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    padding-left: 5px;
+    padding-top: 3px;
+}
+
+.panel-action {
+    margin-top: -32px;
+    float: right;
+    list-style-type: none;
+    flex-direction: row;
+    margin-right: -3px;
+}
+
+.panel-action {
+    padding-top: 7px;
+}
+
+.panel-action li {
+    display: inline;
+
+    a{ 
+        padding: 16px;
+        padding-bottom: 17px;
+        color: white;
+    }
+}
+
+.panel-action .panel-item a:hover {
+    background: #13B3AC;
+}
+
+.panel-body {
+    background: #F5F5F5;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+   // overflow: auto;
+    max-height: 85vh;
+}
+
+.separator {
+    border-left: 2px solid white;
+    margin-right: -32px;
+    margin-left: 0px;
+}
+
+.modal-content {
+    background: transparent !important;
+    border: none;
+}
+
+.capitalize::first-letter {
+    text-transform: uppercase;
+}
+

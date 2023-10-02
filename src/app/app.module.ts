@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { VistaFacturaComponent } from './vista-factura/vista-factura.component';
+import { DialogBuscarFactura, VistaFacturaComponent } from './vista-factura/vista-factura.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -36,7 +36,6 @@ import { DialogAnimationsExampleDialog, LoginComponent } from './login/login.com
 
 import {MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
-import { DialogAnimationsExampleDialog2 } from './vista-factura/vista-factura.component';
 import { ClientListComponent } from './client/client-list/client-list.component';
 import { AddClientComponent } from './client/add-client/add-client.component';
 import { AddProductoComponent } from './producto/add-producto/add-producto.component';
@@ -46,6 +45,13 @@ import { MaestroListComponent } from './maestro/maestro-list/maestro-list.compon
 import { MaestroAddComponent } from './maestro/maestro-add/maestro-add.component';
 import { DetalleAddComponent } from './detalle/detalle-add/detalle-add.component';
 import { DetalleListComponent } from './detalle/detalle-list/detalle-list.component';
+import { ComprasListComponent } from './compras/compras-list/compras-list.component';
+import { TablePaginationBuilderComponent } from './dynamic-table-builder/table-pagination-builder';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { AppTableModule } from './app-table/app-table.module';
+import { TableComponent } from './app-table/table/table.component';
+import { InputComponent } from './app-table/input/input.component';
+import { ProductsComponent } from './app-table/products/products.component';
 
 
 
@@ -61,7 +67,10 @@ import { DetalleListComponent } from './detalle/detalle-list/detalle-list.compon
     AddClientComponent,
     AddProductoComponent,
     ProductoListComponent,
-    LoginComponent,DialogAnimationsExampleDialog2, DialogAnimationsExampleDialog, MaestroListComponent, MaestroAddComponent, DetalleAddComponent, DetalleListComponent ],
+    LoginComponent,DialogBuscarFactura, DialogAnimationsExampleDialog,
+     MaestroListComponent, MaestroAddComponent, DetalleAddComponent, DetalleListComponent,
+     ComprasListComponent, TablePaginationBuilderComponent
+    ],
   imports: [
     CommonModule,
     BrowserModule,
@@ -88,7 +97,9 @@ import { DetalleListComponent } from './detalle/detalle-list/detalle-list.compon
     MatButtonModule,
     MatNativeDateModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTooltipModule,
+    AppTableModule
   ],
 providers: [DataService,  { provide: DateAdapter, useClass:  MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
  { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT_DATE }, {provide: MatDialogRef, useValue:{}}

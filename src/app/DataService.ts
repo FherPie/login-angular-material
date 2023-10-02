@@ -2,53 +2,58 @@ import {Injectable} from '@angular/core';
 import { Factura } from  './factura';
 import { tap } from  'rxjs/operators';
 import { Observable, BehaviorSubject, of } from  'rxjs';
-import { HttpClient, HttpHeaders, HttpResponse } from  '@angular/common/http';
-//import { GlobalConstants } from './global-constants';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from  '@angular/common/http';
 import{ GlobalConstants } from '../global-constants';
 
 //https://www.c-sharpcorner.com/article/learn-about-asynchronous-service-in-angular/
-const baseUrl = GlobalConstants.baseUrlVenta;
+const baseUrl = GlobalConstants.baseUrl;
 
 @Injectable()
 export class DataService {
-    GET_OPE:  string  =  'http://186.4.141.253:255/api/venta';
-   // POST_OPE:  string  =  'http://localhost:8080/api/';
+
 
     private httpHeader=new HttpHeaders({'Content-type': 'application/json'});
     authenticated=false;
     dataList: Factura[] = [];
-    // constructor(private http:HttpClient){}
+
 
     constructor(private  httpClient:  HttpClient) {
-        //this.dataList = Mockdata.dataList;
-        //this.getDataList().subscribe(res => this.dataList = res);
+
         console.log("Pasa por Constructor Servicio")
     }
 
-    getDataList(): Observable < Factura[] > {
+    getDataListFactura(): Observable < Factura[] > {
         console.log("Pasa por Get data List Servicio")
-        return this.httpClient.get<Factura []>(`${baseUrl}`).pipe(
+        return this.httpClient.get<Factura []>(`${baseUrl}`+'/listarVenta').pipe(
             tap(async (res:  Factura[] ) => {
                 return of(res);
             })
           );
     }
 
-    //  createData(data: any, resource: string): Observable<any> {
-    //     return this.http.post(resource, data, {headers: this.httpHeader});
-    //  }
 
-     createData(data: any): Observable<any> {
-        return this.httpClient.post(baseUrl, data);
+
+
+
+    getDataListFacturawithFilter(idCliente: number, desde: string, hasta: string): Observable < Factura[] > {
+        let params = new HttpParams()
+        .set('clienteId', idCliente)
+        .set('startDate', desde)
+        .set('endDate', hasta)
+
+        return this.httpClient.get<Factura []>(`${baseUrl}`+'/reporteVentaxFechas', {params: params}).pipe(
+            tap(async (res:  Factura[] ) => {
+                return of(res);
+            })
+          );
+    }
+
+
+     guardarVenta(data: any): Observable<any> {
+        return this.httpClient.post(baseUrl+'/guardarVenta', data);
       }
 
 
-    // removedata(data: Factura) {
-    //     let index = this.dataList.indexOf(data);
-    //     if (index !== -1) {
-    //         this.dataList.splice(index, 1);
-    //     }
-    // }
 
    public authenticate(credentials: { username: string; password: string; } | undefined, callback: (() => any) | undefined){
     const headers= new HttpHeaders(credentials ?{

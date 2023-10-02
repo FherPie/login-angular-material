@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-compras-list',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComprasListComponent implements OnInit {
 
+
+  @ViewChild('productosTemplate') ProductsComponent: TemplateRef<any> | undefined;
   constructor() { }
 
   ngOnInit(): void {

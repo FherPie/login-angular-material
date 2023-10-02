@@ -1,0 +1,38 @@
+<div class="form-floating mb-3">
+    <input *ngIf="type=='image'"
+           type="text"
+           class="form-control shadow-none"
+           (click)="onChangeImage($event)"
+           [value]="val!=undefined?val:value"
+           readonly />
+  
+    <input *ngIf="type=='text'"
+           type="text"
+           class="form-control shadow-none"
+           (change)="change($event)"
+           [value]="val!=undefined?val:value" />
+  
+    <input *ngIf="type=='number'"
+           type="number"
+           class="form-control shadow-none"
+           (change)="change($event)"
+           [value]="val!=undefined?val:value" />
+  
+    <select *ngIf="type=='boolean'"
+            class="form-control shadow-none"
+            (change)="onChangeBoolean($event);change($event)"
+            [value]="val!=undefined?val:value">
+  
+      <option disabled
+              selected
+              style="display:none">
+      </option>
+      <option>
+        true
+      </option>
+      <option>
+        false
+      </option>
+    </select>
+    <label>{{label}}</label>
+  </div>
