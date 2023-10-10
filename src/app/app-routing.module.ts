@@ -34,6 +34,7 @@ const routes: Routes = [
   { path: 'agregar-detalle', component: DetalleAddComponent },
   { path: 'detalle/:id', component: DetalleAddComponent },
   { path: 'products', component:ProductsComponent },
+  { path: 'addClient/:id', component: AddClientComponent },
 ];
 
 @NgModule({

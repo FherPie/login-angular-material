@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, NgForm, Validators } from '@angular/forms';
+import { UntypedFormBuilder, NgForm, Validators } from '@angular/forms';
 import { Factura } from  '../factura';
 import { ItemFactura } from  '../itemFactura';
 import { DataService } from '../DataService';
@@ -49,7 +49,7 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
 
   dataSource2 = this.itemsFactura;
 
-  constructor(private fb: FormBuilder,  private  dataService:  DataService, private clienteService: ClienteServiceServer
+  constructor(private fb: UntypedFormBuilder,  private  dataService:  DataService, private clienteService: ClienteServiceServer
     , private prodcutoService: ProductoServiceServer) {
   }
 

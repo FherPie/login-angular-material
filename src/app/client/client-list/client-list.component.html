@@ -28,7 +28,7 @@
 <mat-card>
   <div class="container">
   <div class="row">
-    <!-- <div class="col-md-8">
+    <div class="col-md-8">
       <div class="input-group mb-3">
         <div class="input-group-append">
       
@@ -38,7 +38,7 @@
           <input type="file" id="file" class="file-input" accept=".xlsx" (change)="onFileSelected($event)" />
       </div>
       </div>
-    </div> -->
+    </div>
     <div class="col-md-8">
       <div class="mat-elevation-z8">
         <table class="table">
@@ -90,7 +90,7 @@
             <label><strong>Status:</strong></label>
             {{ currentClient.estado ? "Published" : "Pending" }}
           </div> -->
-        <a *ngIf="showEditButton" class="m-3 btn btn-sm btn-warning" routerLink="/clientes/{{ currentClient.idCliente }}">
+        <a *ngIf="showEditButton" class="m-3 btn btn-sm btn-warning" routerLink="/addClient/{{ currentClient.idCliente }}">
           Edit
         </a>
       </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { Maestro } from '../maestro.model';
 import { MaestroServiceServer } from '../maestro.service.server';
 import { HttpClient } from '@angular/common/http';
@@ -16,7 +16,7 @@ export class MaestroAddComponent implements OnInit {
   @ViewChild('form') Form!: NgForm;
 
   maestro = new Maestro();
-  form: FormGroup = new FormGroup({});
+  form: UntypedFormGroup = new UntypedFormGroup({});
   submitted = false;
   currentMaestro: any;
 
@@ -24,7 +24,7 @@ export class MaestroAddComponent implements OnInit {
 
   constructor(
     private maestroService: MaestroServiceServer,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private http: HttpClient,
     private app: DataService,
     private route: ActivatedRoute,

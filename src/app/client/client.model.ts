@@ -1,4 +1,4 @@
-export class Client {
+export class ClientDto {
     clienteId?: number;
     persona!: {
         edad?: number;

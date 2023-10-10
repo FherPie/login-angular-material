@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { ProductoLite } from '../producto.model2';
 import { ProductoServiceServer } from '../producto.service.server';
 import { HttpClient } from '@angular/common/http';
@@ -17,13 +17,13 @@ export class AddProductoComponent implements OnInit {
   @ViewChild('form') Form!: NgForm;
 
   producto = new ProductoLite();
-  form: FormGroup = new FormGroup({});
+  form: UntypedFormGroup = new UntypedFormGroup({});
   submitted = false;
   currentProducto: any;
 
   constructor(
     private productoService: ProductoServiceServer,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private http: HttpClient,
     private app: DataService,
     private route: ActivatedRoute,

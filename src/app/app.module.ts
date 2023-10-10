@@ -52,6 +52,8 @@ import { AppTableModule } from './app-table/app-table.module';
 import { TableComponent } from './app-table/table/table.component';
 import { InputComponent } from './app-table/input/input.component';
 import { ProductsComponent } from './app-table/products/products.component';
+import { CardModule } from 'primeng/card';
+
 
 
 
@@ -99,7 +101,8 @@ import { ProductsComponent } from './app-table/products/products.component';
     MatDialogModule,
     MatMenuModule,
     MatTooltipModule,
-    AppTableModule
+    AppTableModule,
+    CardModule
   ],
 providers: [DataService,  { provide: DateAdapter, useClass:  MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
  { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT_DATE }, {provide: MatDialogRef, useValue:{}}

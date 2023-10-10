@@ -1,6 +1,6 @@
 import { DetalleService } from './../detalle.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { Detalle } from '../detalle.model';
 import { DetalleServiceServer } from '../detalle.service.server';
 import { HttpClient } from '@angular/common/http';
@@ -19,7 +19,7 @@ export class DetalleAddComponent implements OnInit {
   @ViewChild('form') Form!: NgForm;
 
   detalle = new Detalle();
-  form: FormGroup = new FormGroup({});
+  form: UntypedFormGroup = new UntypedFormGroup({});
   submitted = false;
   currentDetalle: any;
 
@@ -29,7 +29,7 @@ export class DetalleAddComponent implements OnInit {
   maestrosList: Maestro[] = [];
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private http: HttpClient,
     private app: DataService,
     private route: ActivatedRoute,
