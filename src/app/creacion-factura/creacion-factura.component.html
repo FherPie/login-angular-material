@@ -1,5 +1,5 @@
 <form #form="ngForm" (ngSubmit)="agregarFactura(form)">
-    <mat-card >
+    <mat-card appearance="outlined" >
       <mat-card-header>
         <mat-card-title>Factura </mat-card-title>
       </mat-card-header>
@@ -10,7 +10,7 @@
       <mat-card-content>
         <div class="row">
           <div class="col-6">
-        <mat-card >
+        <mat-card appearance="outlined" >
           <mat-card-header>
             <mat-card-title>Datos de la Factura </mat-card-title>
           </mat-card-header>
@@ -36,7 +36,7 @@
             </mat-form-field>
           </div>
          <div *ngIf="clienteSelected" >
-          <mat-card class="shipping-card">
+          <mat-card appearance="outlined" class="shipping-card">
             <p><strong>Nombre:</strong> {{clienteSelected.nombres}} <strong>Apellido:</strong> {{clienteSelected.apellidos}} <strong>Identificacion:</strong> {{clienteSelected.identificacion}} </p>
             <p> <strong> Teléfono: </strong> {{clienteSelected.telefono}} <strong> Email: </strong> {{clienteSelected.email}} </p>
           </mat-card>
@@ -110,7 +110,7 @@
 
     <div class="col-6">
         <form #form2="ngForm" (ngSubmit)="agregarDetalle(form2)">
-          <mat-card >
+          <mat-card appearance="outlined" >
             <mat-card-header>
               <mat-card-title>Detalles</mat-card-title>
             </mat-card-header>
@@ -182,7 +182,7 @@
             </table>
           </mat-card>
           <br/>
-          <mat-card >
+          <mat-card appearance="outlined" >
           <mat-list>
             <mat-list-item><h2> Subtotal =  {{subTotalFactura}} </h2></mat-list-item>
             <mat-divider></mat-divider>

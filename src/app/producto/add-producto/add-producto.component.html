@@ -1,5 +1,5 @@
 <div class="container">
-  <mat-card>
+  <mat-card appearance="outlined">
     <div class="col-md-6">
       <button
         class="btn btn-info text-white btn-block"
@@ -13,12 +13,12 @@
   {{ currentProducto | json }}
   <div *ngIf="!submitted" class="row">
     <form [formGroup]="form" (ngSubmit)="agregarProducto(form)">
-      <mat-card>
+      <mat-card appearance="outlined">
         <mat-card-header>
           <mat-card-title>Productos </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <mat-card>
+          <mat-card appearance="outlined">
             <div class="container">
               <div class="row">
                 <div class="col-md-12">
@@ -86,7 +86,7 @@
     </form>
   </div>
   <div *ngIf="submitted" class="row">
-    <mat-card>
+    <mat-card appearance="outlined">
       <h4>Producto registrado</h4>
       <div class="container">
         <div class="row">

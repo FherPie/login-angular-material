@@ -1,11 +1,11 @@
 import { UpperCasePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyOption as MatOption } from '@angular/material/legacy-core';
-import { MatLegacyPaginator as MatPaginator, MatLegacyPaginatorIntl as MatPaginatorIntl } from '@angular/material/legacy-paginator';
-import { MatLegacySelect as MatSelect } from '@angular/material/legacy-select';
+import { MatOption } from '@angular/material/core';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { MatSelect } from '@angular/material/select';
 import { MatSort } from '@angular/material/sort';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatTableDataSource } from '@angular/material/table';
 
 /**
  * @title Table with pagination

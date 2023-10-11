@@ -1,7 +1,7 @@
 table {
     width: 100%;
   }
-  .mat-cell > span.truncate-text {
+  .mat-mdc-cell > span.truncate-text {
       text-overflow: ellipsis; 
       overflow: hidden; 
       white-space: nowrap;
@@ -17,7 +17,7 @@ table {
   } 
   
   /* Hack for more air flow between elements */
-  .mat-header-cell, .mat-cell {
+  .mat-mdc-header-cell, .mat-mdc-cell {
     padding: 0 16px;
   } 
   

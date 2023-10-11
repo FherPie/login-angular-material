@@ -2,12 +2,12 @@
   <div *ngIf="!submitted" class="row">
     <div *ngIf="isEdit">
       <form [formGroup]="form" (ngSubmit)="actualizarDetalle(form)">
-        <mat-card>
+        <mat-card appearance="outlined">
           <mat-card-header>
             <mat-card-title>Actualizar Detalle </mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <mat-card>
+            <mat-card appearance="outlined">
               <div class="container">
                 <div class="row">
                   <div class="col-md-12">
@@ -83,12 +83,12 @@
 
     <div *ngIf="!isEdit">
       <form [formGroup]="form" (ngSubmit)="agregarDetalle(form)">
-        <mat-card>
+        <mat-card appearance="outlined">
           <mat-card-header>
             <mat-card-title>Crear Detalle </mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <mat-card>
+            <mat-card appearance="outlined">
               <div class="container">
                 <div class="row">
                   <div class="col-md-12">
@@ -164,7 +164,7 @@
   </div>
 
   <div *ngIf="submitted" class="row">
-    <mat-card>
+    <mat-card appearance="outlined">
       <h4>Detalle registrado</h4>
       <div class="container">
         <div class="row">

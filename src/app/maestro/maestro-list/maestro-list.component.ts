@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MaestroServiceServer } from '../maestro.service.server';
 import { Router } from '@angular/router';
 import { Maestro } from '../maestro.model';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-maestro-list',
