@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Detalle } from '../detalle.model';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { DetalleServiceServer } from '../detalle.service.server';
 import { Router } from '@angular/router';
 
