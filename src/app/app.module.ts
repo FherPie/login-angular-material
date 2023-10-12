@@ -53,6 +53,8 @@ import { TableComponent } from './app-table/table/table.component';
 import { InputComponent } from './app-table/input/input.component';
 import { ProductsComponent } from './app-table/products/products.component';
 import { CardModule } from 'primeng/card';
+import { AutocompleteComponent } from './autocomplete/autocomplete.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 
@@ -71,7 +73,7 @@ import { CardModule } from 'primeng/card';
     ProductoListComponent,
     LoginComponent,DialogBuscarFactura, DialogAnimationsExampleDialog,
      MaestroListComponent, MaestroAddComponent, DetalleAddComponent, DetalleListComponent,
-     ComprasListComponent, TablePaginationBuilderComponent
+     ComprasListComponent, TablePaginationBuilderComponent, AutocompleteComponent
     ],
   imports: [
     CommonModule,
@@ -102,7 +104,8 @@ import { CardModule } from 'primeng/card';
     MatMenuModule,
     MatTooltipModule,
     AppTableModule,
-    CardModule
+    CardModule,
+    MatAutocompleteModule
   ],
 providers: [DataService,  { provide: DateAdapter, useClass:  MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
  { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT_DATE }, {provide: MatDialogRef, useValue:{}}
