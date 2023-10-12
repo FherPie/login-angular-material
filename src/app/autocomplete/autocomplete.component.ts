@@ -10,7 +10,7 @@ export class AutocompleteComponent {
 
 myControl= new FormControl("");
 
-options=[{"option":"Angular"},{"option":"Java"}, {"option":"Spring"}];
+options=[{"option":"Angular"},{"option":"Java"}, {"option":"Spring"}, {"option":"Scala"}];
 
 
 
