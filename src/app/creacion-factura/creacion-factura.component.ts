@@ -15,7 +15,7 @@ import { ClienteServiceServer } from '../client/cliente.service.server';
 
 
 @Component({
-  selector: 'app-creacion-factura',
+  selector: 'creacion-factura',
   templateUrl: './creacion-factura.component.html',
   styleUrls: ['./creacion-factura.component.css']
 })

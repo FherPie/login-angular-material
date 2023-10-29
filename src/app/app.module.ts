@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DialogBuscarFactura, VistaFacturaComponent } from './vista-factura/vista-factura.component';
+import { DialogBuscarFactura, DialogNuevaFactura, VistaFacturaComponent } from './vista-factura/vista-factura.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -71,7 +71,7 @@ import { CardModule } from 'primeng/card';
     ProductoListComponent,
     LoginComponent,DialogBuscarFactura, DialogAnimationsExampleDialog,
      MaestroListComponent, MaestroAddComponent, DetalleAddComponent, DetalleListComponent,
-     ComprasListComponent, TablePaginationBuilderComponent
+     ComprasListComponent, TablePaginationBuilderComponent, DialogNuevaFactura
     ],
   imports: [
     CommonModule,

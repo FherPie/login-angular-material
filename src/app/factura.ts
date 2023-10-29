@@ -21,4 +21,5 @@ export class Factura {
     estado?: string;
     formaPago?: string;
     fechayHora?: string;
+    fechaFormat:string | undefined;
   }
