@@ -1,1 +1,76 @@
-<p>add-client works!</p>
+
+
+<div class="container">
+    <div  *ngIf="!submitted" class="row">
+        <form #form="ngForm" (ngSubmit)="agregarCliente(form)">
+            <mat-card appearance="outlined">
+                <mat-card-header>
+                    <mat-card-title>Cliente</mat-card-title>
+               </mat-card-header>
+                <mat-card-content>
+                    <mat-card appearance="outlined">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <mat-form-field class="full-width">
+                                    <input matInput placeholder="Identificacion" name="identificacion" type="text" ngModel
+                                        required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-12">
+                                <mat-form-field class="full-width">
+                                    <input matInput placeholder="Nombres" name="nombres" type="text" ngModel
+                                        required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-12">
+                                <mat-form-field class="full-width">
+                                    <input matInput placeholder="Apellidos" name="apellidos" type="text" ngModel
+                                        required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-12">
+                                <mat-form-field class="full-width">
+                                    <input matInput placeholder="Direccion" name="direccion" type="text"
+                                        ngModel required>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-12">
+                                <mat-form-field class="full-width">
+                                    <input matInput placeholder="Teléfono" name="telefono" type="text"
+                                        ngModel required>
+                                </mat-form-field>
+                            </div>
+
+                            
+                            <div class="col-md-12">
+                                <mat-form-field class="full-width">
+                                    <input matInput placeholder="Teléfono" name="telefono" type="text"
+                                        ngModel required>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                    </div>
+                   </mat-card>
+                </mat-card-content>
+                <mat-card-actions style="text-align: center;">
+                    <button class="btn btn-success" style="width: 20%;"  [disabled]="form.invalid">Guardar</button>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+    </div>
+    <div  *ngIf="submitted" class="row">
+
+    <mat-card appearance="outlined">
+        <h4>Producto registrado</h4>
+        <div class="container">
+             <div class="row">
+               <div class="col-md-6">   <button class="btn btn-success btn-block" style="width: 100%;" (click)="newCliente()">Agregar</button></div>
+               <div class="col-md-6">   <button class="btn btn-info text-white btn-block" style="width: 100%;" (click)="irClientes()">Ir a Productos</button></div>
+             </div>
+
+        </div>   
+
+    </mat-card>

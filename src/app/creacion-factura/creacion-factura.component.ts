@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, NgForm, Validators } from '@angular/forms';
+import { UntypedFormBuilder, NgForm, Validators } from '@angular/forms';
 import { Factura } from  '../factura';
 import { ItemFactura } from  '../itemFactura';
 import { DataService } from '../DataService';
@@ -9,14 +9,13 @@ import { DataService } from '../DataService';
 import {FormControl} from '@angular/forms';
 import * as moment from 'moment';
 import { ClientLite } from '../client/client.model2';
-import { ClientService } from '../client/client.service';
 import { ProductoLite } from '../producto/producto.model2';
-import { ClienteServiceServer } from '../client/cliente.service.server';
 import { ProductoServiceServer } from '../producto/producto.service.server';
+import { ClienteServiceServer } from '../client/cliente.service.server';
 
 
 @Component({
-  selector: 'app-creacion-factura',
+  selector: 'creacion-factura',
   templateUrl: './creacion-factura.component.html',
   styleUrls: ['./creacion-factura.component.css']
 })
@@ -50,7 +49,7 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
 
   dataSource2 = this.itemsFactura;
 
-  constructor(private fb: FormBuilder,  private  dataService:  DataService, private clienteService: ClienteServiceServer
+  constructor(private fb: UntypedFormBuilder,  private  dataService:  DataService, private clienteService: ClienteServiceServer
     , private prodcutoService: ProductoServiceServer) {
   }
 
@@ -121,7 +120,7 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
     this.factura.itemsFactura=[];
     this.factura.itemsFactura=this.itemsFactura;
     console.log(this.factura);
-    this.dataService.createData(this.factura)
+    this.dataService.guardarVenta(this.factura)
     .subscribe(
       response => {
         console.log(response);

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import{ GlobalConstants } from '../../global-constants';
-const baseUrl = GlobalConstants.baseUrlCuentas;
+const baseUrl = GlobalConstants.baseUrlProductos;
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoServiceServer {
   
   constructor(private http: HttpClient) { }
+  
   getAll(): Observable<any> {
     return this.http.get(baseUrl);
   }

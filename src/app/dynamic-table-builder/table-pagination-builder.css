@@ -1,0 +1,30 @@
+table {
+    width: 100%;
+  }
+  .mat-mdc-cell > span.truncate-text {
+      text-overflow: ellipsis; 
+      overflow: hidden; 
+      white-space: nowrap;
+  }
+  
+  .form-field {
+    width: 100%;
+    min-height: 64px;
+  }
+  
+  .hide-not-found-msg {
+      display:none;
+  } 
+  
+  /* Hack for more air flow between elements */
+  .mat-mdc-header-cell, .mat-mdc-cell {
+    padding: 0 16px;
+  } 
+  
+  .m-5 {
+    margin: 5px;
+  }
+  
+  .select-all{
+    margin: 5px 17px;
+  }

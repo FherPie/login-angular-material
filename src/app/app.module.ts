@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { VistaFacturaComponent } from './vista-factura/vista-factura.component';
+import { DialogBuscarFactura, DialogNuevaFactura, VistaFacturaComponent } from './vista-factura/vista-factura.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -26,19 +26,34 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { ClientModule } from './client/client.module';
 
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS as MY_FORMAT_DATE } from './myDateFormats';
 import { MatNativeDateModule } from '@angular/material/core';
-import { ProductoModule } from './producto/producto.module';
 import { DialogAnimationsExampleDialog, LoginComponent } from './login/login.component';
 
 import {MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
-import { DialogAnimationsExampleDialog2 } from './vista-factura/vista-factura.component';
+import { ClientListComponent } from './client/client-list/client-list.component';
+import { AddClientComponent } from './client/add-client/add-client.component';
+import { AddProductoComponent } from './producto/add-producto/add-producto.component';
+import { ProductoListComponent } from './producto/producto-list/producto-list.component';
+import { CommonModule } from '@angular/common';
+import { MaestroListComponent } from './maestro/maestro-list/maestro-list.component';
+import { MaestroAddComponent } from './maestro/maestro-add/maestro-add.component';
+import { DetalleAddComponent } from './detalle/detalle-add/detalle-add.component';
+import { DetalleListComponent } from './detalle/detalle-list/detalle-list.component';
+import { ComprasListComponent } from './compras/compras-list/compras-list.component';
+import { TablePaginationBuilderComponent } from './dynamic-table-builder/table-pagination-builder';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { AppTableModule } from './app-table/app-table.module';
+import { TableComponent } from './app-table/table/table.component';
+import { InputComponent } from './app-table/input/input.component';
+import { ProductsComponent } from './app-table/products/products.component';
+import { CardModule } from 'primeng/card';
+
 
 
 
@@ -50,8 +65,16 @@ import { DialogAnimationsExampleDialog2 } from './vista-factura/vista-factura.co
     VistaFacturaComponent,
     CreacionFacturaComponent,
     AppNavComponent,
-    LoginComponent,DialogAnimationsExampleDialog2, DialogAnimationsExampleDialog ],
+    ClientListComponent,
+    AddClientComponent,
+    AddProductoComponent,
+    ProductoListComponent,
+    LoginComponent,DialogBuscarFactura, DialogAnimationsExampleDialog,
+     MaestroListComponent, MaestroAddComponent, DetalleAddComponent, DetalleListComponent,
+     ComprasListComponent, TablePaginationBuilderComponent, DialogNuevaFactura
+    ],
   imports: [
+    CommonModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -65,20 +88,21 @@ import { DialogAnimationsExampleDialog2 } from './vista-factura/vista-factura.co
     MatSelectModule,
     MatRadioModule,
     MatCardModule,
+    FormsModule,
     ReactiveFormsModule,
     LayoutModule,
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    FormsModule,
     MatDatepickerModule,
     MatButtonModule,
     MatNativeDateModule,
-    ClientModule,
-    ProductoModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTooltipModule,
+    AppTableModule,
+    CardModule
   ],
 providers: [DataService,  { provide: DateAdapter, useClass:  MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
  { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT_DATE }, {provide: MatDialogRef, useValue:{}}

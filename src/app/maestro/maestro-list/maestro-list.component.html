@@ -1,0 +1,81 @@
+<mat-card appearance="outlined">
+  <div class="container">
+    <div class="row">
+      <mat-card appearance="outlined">
+        <mat-card-title>Lista de Maestros</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+
+        <mat-card-actions align="start">
+          <div class="row">
+            <div class="col-md-3">
+              <button
+                class="btn btn-info text-white btn-block btn-sm"
+                style="width: 100%"
+                (click)="agregarMaestro()"
+              >
+                Nuevo
+              </button>
+            </div>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <br />
+
+    <mat-card appearance="outlined">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="mat-elevation-z8">
+            <table class="table">
+              <thead>
+                <tr>
+                  <td>Nombre</td>
+                  <td>Descripcion</td>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr
+                  *ngFor="let maestro of maestrosList; let i = index"
+                  [class.active]="i == currentIndex"
+                  (click)="setMaestroActive(maestro, i)"
+                >
+                  <td>{{ maestro.nombre }}</td>
+                  <td>{{ maestro.descripcion }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div *ngIf="currentMaestro">
+            <h4>Maestro Seleccionado</h4>
+            <div>
+              <label><strong>Nombre: </strong></label
+              >{{ currentMaestro.nombre }}
+            </div>
+            <div>
+              <label><strong>Descripcion: </strong></label
+              >{{ currentMaestro.descripcion }}
+            </div>
+
+            <a
+              *ngIf="showEditButton"
+              class="m-3 btn btn-sm btn-warning"
+              routerLink="/maestro/{{ currentMaestro.id }}"
+            >
+              Edit
+            </a>
+          </div>
+
+          <div *ngIf="!currentMaestro">
+            <br />
+            <p>Por favor seleccionar un maestro...</p>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</mat-card>

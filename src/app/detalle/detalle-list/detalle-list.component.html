@@ -1,0 +1,107 @@
+<mat-card appearance="outlined">
+  <div class="container">
+    <div class="row">
+      <mat-card appearance="outlined">
+        <mat-card-title>Lista de Detalles</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+
+        <mat-card-actions align="start">
+          <div class="row">
+            <div class="col-md-3">
+              <button
+                class="btn btn-info text-white btn-block btn-sm"
+                style="width: 100%"
+                (click)="agregarDetalle()"
+              >
+                Nuevo
+              </button>
+            </div>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <br />
+
+    <mat-card appearance="outlined">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="mat-elevation-z8">
+            <table class="table">
+              <thead>
+                <tr>
+                  <td>Nombre</td>
+                  <td>Descripcion</td>
+                  <td>Parametros</td>
+                  <td>Maestro</td>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr
+                  *ngFor="let detalle of detallesList; let i = index"
+                  [class.active]="i == currentIndex"
+                  (click)="setDetalleActive(detalle, i)"
+                >
+                  <td>{{ detalle.nombre }}</td>
+                  <td>{{ detalle.descripcion }}</td>
+                  <td>
+                    {{ detalle.parametros }}
+                  </td>
+                  <td>
+                    <b>Nombre: </b>
+                    {{ detalle.maestro?.nombre }}
+                    <br />
+                    <b>Descripcion: </b>
+                    {{ detalle.maestro?.descripcion }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div *ngIf="currentDetalle">
+            <h4>Detalle Seleccionado</h4>
+            <div>
+              <label><strong>Nombre: </strong></label>
+              {{ currentDetalle.nombre }}
+            </div>
+            <div>
+              <label><strong>Descripcion: </strong></label>
+              {{ currentDetalle.descripcion }}
+            </div>
+            <br />
+            <div>
+              <label><strong>- Maestro </strong></label>
+              <br />
+              <br />
+              <div>
+                <label><strong>Nombre: </strong></label>
+                {{ currentDetalle.maestro?.nombre }}
+              </div>
+              <div>
+                <label><strong>Descripcion: </strong></label>
+                {{ currentDetalle.maestro?.descripcion }}
+              </div>
+            </div>
+
+            <a
+              *ngIf="showEditButton"
+              class="m-3 btn btn-sm btn-warning"
+              routerLink="/detalle/{{ currentDetalle.id }}"
+            >
+              Editar
+            </a>
+          </div>
+
+          <div *ngIf="!currentDetalle">
+            <br />
+            <p>Por favor seleccionar un detlale...</p>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</mat-card>

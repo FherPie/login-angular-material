@@ -1,0 +1,132 @@
+<div class="modal fade"
+     id="create" role="dialog" >
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="panel">
+                <div class="panel-header">
+                    <h5 class="panel-title">CREATE</h5>
+                    <ul class="panel-action">
+                        <li class="panel-item"
+                            data-bs-dismiss="modal"
+                            (click)="_onCreate()"><a>
+                                <mat-icon>save</mat-icon>
+                            </a></li>
+                        <li class="panel-item"><a data-bs-dismiss="modal">
+
+                            
+                        </a></li>
+                    </ul>
+                </div>
+                <div *ngIf="resetCreate==true"
+                     class="panel-body"
+                     style="padding: 20px; padding-bottom: 8px;">
+                    <app-input *ngFor="let item of columns"
+                               label="{{item.name}}"
+                               type="{{item.type}}"
+                               (change)="onChangeCreate(item.name,$event)"
+                               [style.display]="item.hidden ? 'none' : 'block'"></app-input>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade"
+     id="update">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="panel">
+                <div class="panel-header">
+                    <h5 class="panel-title">UPDATE</h5>
+                    <ul class="panel-action">
+                        <li class="panel-item"><a data-bs-dismiss="modal"
+                               (click)="_onUpdate()"><i class="fa-solid fa-floppy-disk fa-lg"></i></a></li>
+                        <li class="panel-item"><a data-bs-dismiss="modal"><i
+                                   class="fa-sharp fa-solid fa-circle-xmark fa-lg"></i></a></li>
+                    </ul>
+                </div>
+                <div *ngIf="selected!=undefined"
+                     class="panel-body"
+                     style="padding: 20px; padding-bottom: 8px;">
+                    <app-input #inputupdate
+                               *ngFor="let item of columns"
+                               label="{{item.name}}"
+                               type="{{item.type}}"
+                               val="{{selected[item.name]}}"
+                               (change)="onChangeUpdate(item.name,$event)"
+                               (setValue)="test($event)"
+                               [style.display]="item.hidden ? 'none' : 'block'"></app-input>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <h5 class="panel-title">{{title}}</h5>
+        <ul class="panel-action">
+            <li *ngIf="canCreate"
+                class="panel-item">
+                <a data-bs-toggle="modal"
+                   data-bs-target="#create"
+                   (click)="goCreate()">
+                   <mat-icon>create</mat-icon>
+                </a>
+            </li>
+            <li class="panel-item">
+                <a [style.pointer-events]="selected!=undefined? 'auto':'none'"
+                   data-bs-toggle="modal"
+                   data-bs-target="#update">
+                   <mat-icon>update</mat-icon>
+
+                </a>
+            </li>
+            <li class="panel-item"><a (click)="_onRefresh()">
+                <mat-icon>update</mat-icon>
+            </a></li>
+            <li *ngIf="canDelete"
+                class="panel-item">
+                <a [style.pointer-events]="selected!=undefined? 'auto':'none'"
+                   (click)="_onDelete()">
+                    <mat-icon>delete</mat-icon>
+                </a>
+            </li>
+            <li class="panel-item">
+                <a (click)="_onPrev()">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                </a>
+            </li>
+            <li class="panel-item">
+                <a style="pointer-events: none;">
+                    
+                        {{page}}
+                   
+                </a>
+            </li>
+            <li class="panel-item">
+                <a (click)="_onNext()">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <thead class="header">
+                <tr>
+                    <th *ngFor="let index of columns" style="background: #13B3AC;">{{index.name}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr #element
+                    *ngFor="let _ of rows; let i = index"
+                    (click)="onSelect( element, rows[i] )">
+                    <td *ngFor="let item of columns">
+                        <div>{{rows[i][item.name]}}</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

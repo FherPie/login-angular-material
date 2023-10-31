@@ -3,6 +3,13 @@ import { Router } from '@angular/router';
 import { DataService } from '../DataService';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
+
+export interface DialogData {
+  username: string;
+  password: string;
+}
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,10 +22,18 @@ export class LoginComponent implements OnInit {
    }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(DialogAnimationsExampleDialog, {
+    const dialogRef =  this.dialog.open(DialogAnimationsExampleDialog, {
       height: '400px',
       width: '600px',
       disableClose: true
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.credentials.username="patito";
+      this.credentials.password="raulito";
+      this.login();
+      console.log(result);
     });
 
   }
@@ -49,6 +64,11 @@ export class LoginComponent implements OnInit {
   closeDialog(){
     this.dialog.closeAll();
   }
+
+ 
+
+
+
 
 }
 
