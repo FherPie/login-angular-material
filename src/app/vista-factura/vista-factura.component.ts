@@ -116,6 +116,16 @@ export class VistaFacturaComponent implements AfterViewInit {
     });
   }
 
+edit(){
+  const dialogRef = this.dialog.open(DialogNuevaFactura, {
+    height: '95%',
+    width: '95%',
+    disableClose: true,
+    position: {top: '10px'} ,
+    data: { desde: this.desde, hasta: this.hasta, clienteSelected: this.clienteSelected, estado: this.estado }
+  });
+}
+
 
       
 
