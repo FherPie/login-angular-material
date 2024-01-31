@@ -12,13 +12,9 @@ const baseUrl = GlobalConstants.baseUrl;
 export class DataService {
 
 
-    private httpHeader=new HttpHeaders({'Content-type': 'application/json'});
     authenticated=false;
     dataList: Factura[] = [];
-
-
     constructor(private  httpClient:  HttpClient) {
-
         console.log("Pasa por Constructor Servicio")
     }
 
@@ -30,10 +26,6 @@ export class DataService {
             })
           );
     }
-
-
-
-
 
     getDataListFacturawithFilter(idCliente: number, desde: string, hasta: string): Observable < Factura[] > {
         let params = new HttpParams()
@@ -48,29 +40,8 @@ export class DataService {
           );
     }
 
-
      guardarVenta(data: any): Observable<any> {
         return this.httpClient.post(baseUrl+'/guardarVenta', data);
       }
-
-
-
-   public authenticate(credentials: { username: string; password: string; } | undefined, callback: (() => any) | undefined){
-    const headers= new HttpHeaders(credentials ?{
-        authorization: 'Basic '+btoa(credentials.username+':'+credentials.password)
-    }:{});
-    console.log("LISTO LISTO ");
-    this.httpClient.get<HttpResponse<any>>('/api/user', {headers: headers}).subscribe(response=>{
-        console.log("SERSTUS"+response);
-        this.authenticated= true;
-        // if(response){
-        //     this.authenticated= true;
-        //     }else{
-        //     this.authenticated= false;
-        // }
-        return callback && callback();
-    });
-}
-
 
 }

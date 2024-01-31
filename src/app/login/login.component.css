@@ -1,4 +1,4 @@
-div{
-    /* background-image: url("img_tree.gif"), url("paper.gif"); */
-    background-color: #cccccc;
+
+::ng-deep  .cdk-overlay-dark-backdrop {
+    background: #00ffd9 !important;
 }

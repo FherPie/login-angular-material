@@ -26,13 +26,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS as MY_FORMAT_DATE } from './myDateFormats';
 import { MatNativeDateModule } from '@angular/material/core';
-import { DialogAnimationsExampleDialog, LoginComponent } from './login/login.component';
 
 import {MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
@@ -53,6 +53,7 @@ import { TableComponent } from './app-table/table/table.component';
 import { InputComponent } from './app-table/input/input.component';
 import { ProductsComponent } from './app-table/products/products.component';
 import { CardModule } from 'primeng/card';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -62,21 +63,30 @@ import { CardModule } from 'primeng/card';
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    AppNavComponent,
+    MaestroListComponent,
+    MaestroAddComponent,
+    DetalleAddComponent,
+    DetalleListComponent,
+
     VistaFacturaComponent,
     CreacionFacturaComponent,
-    AppNavComponent,
     ClientListComponent,
     AddClientComponent,
     AddProductoComponent,
     ProductoListComponent,
-    LoginComponent,DialogBuscarFactura, DialogAnimationsExampleDialog,
-     MaestroListComponent, MaestroAddComponent, DetalleAddComponent, DetalleListComponent,
-     ComprasListComponent, TablePaginationBuilderComponent, DialogNuevaFactura
+    DialogBuscarFactura,
+    ComprasListComponent, 
+    TablePaginationBuilderComponent, 
+    DialogNuevaFactura
     ],
   imports: [
     CommonModule,
     BrowserModule,
     HttpClientModule,
+    FormsModule,
+    
     BrowserAnimationsModule,
     MatSliderModule,
     MatTableModule,
@@ -88,7 +98,6 @@ import { CardModule } from 'primeng/card';
     MatSelectModule,
     MatRadioModule,
     MatCardModule,
-    FormsModule,
     ReactiveFormsModule,
     LayoutModule,
     MatToolbarModule,
@@ -102,7 +111,8 @@ import { CardModule } from 'primeng/card';
     MatMenuModule,
     MatTooltipModule,
     AppTableModule,
-    CardModule
+    CardModule,
+    MatExpansionModule
   ],
 providers: [DataService,  { provide: DateAdapter, useClass:  MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
  { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT_DATE }, {provide: MatDialogRef, useValue:{}}

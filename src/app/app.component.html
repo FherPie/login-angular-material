@@ -1,25 +1,118 @@
-<!-- <div class="main">
- <h1>My To Do List</h1>
-  <h2>What would you like to do today?</h2>
 
-  <ul>
-    <li *ngFor="let item of items">{{item.description}}</li>
-  </ul>
-</div> -->
+<mat-toolbar color="primary" style="justify-content: end"  *ngIf="isLoggeIn">
+        
+    <small  style="align-items: right">
+      <mat-icon style="vertical-align: middle">photo_camera</mat-icon>&nbsp;
+      {{ username }}
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>dialpad</mat-icon>
+          <span>Redial</span>
+        </button>
+        <button mat-menu-item disabled>
+          <mat-icon>voicemail</mat-icon>
+          <span>Check voice mail</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>notifications_off</mat-icon>
+          <span>Disable alerts</span>
+        </button>
+      </mat-menu>
+      </small>
+    <button
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      (click)="drawer.toggle()"
+      *ngIf="(isHandset$ | async)"
+    >
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+  </mat-toolbar>
 
-<!-- <mat-slider min="1" max="100" step="1" value="50"></mat-slider>
-<div class="main">
-  <h4>Factura</h4>
- <h5>Nro. Factu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total</h5>
-    <div *ngFor="let item of allFacturas">{{item.numeroFactura}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.totalFactura}}</div>
-</div> -->
-<!-- <div [hidden]="authenticated()">
-<app-login></app-login>
-</div> -->
-<!-- [hidden]="!authenticated()" -->
-<div >
-<app-app-nav></app-app-nav>
-</div>
+
+<mat-sidenav-container class="app-container">
+    <mat-sidenav
+      #drawer
+      class="app-sidenav"
+      fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false"
+      style=" min-height: 100vh;">
+      <mat-toolbar  *ngIf="isLoggeIn" > <mat-icon>home</mat-icon> Menu</mat-toolbar>
+      <mat-nav-list   *ngIf="isLoggeIn" >
+
+        <mat-expansion-panel [class.mat-elevation-z0]="true"  *ngIf="showMenuSecurity">
+            <mat-expansion-panel-header>
+                Modulo Seguridad
+            </mat-expansion-panel-header>
+            <mat-nav-list>
+             <a mat-list-item routerLink="/maestros"
+                ><mat-icon>account_box</mat-icon>&nbsp; Maestro</a
+              >
+              <a mat-list-item routerLink="/detalles"
+                ><mat-icon>description</mat-icon>&nbsp; Detalle</a
+              >
+            </mat-nav-list>
+        </mat-expansion-panel>
 
 
+        <mat-expansion-panel [class.mat-elevation-z0]="true" *ngIf="showMenuConsultory">
+            <mat-expansion-panel-header>
+                Modulo Consultorio
+            </mat-expansion-panel-header>
+            <mat-nav-list>
+                <a mat-list-item routerLink="/clientes">
+                    <mat-icon>account_box</mat-icon> &nbsp;Paciente</a
+                  >
+                  <a mat-list-item routerLink="/productos">
+                    <mat-icon>add_shopping_cart</mat-icon>&nbsp;Servicios</a
+                  >
+            </mat-nav-list>
+        </mat-expansion-panel>
 
+  
+     
+        
+        <mat-expansion-panel [class.mat-elevation-z0]="true" *ngIf="showMenuFinance">
+            <mat-expansion-panel-header>
+                Modulo Finanzas
+            </mat-expansion-panel-header>
+            <mat-nav-list>
+                <a mat-list-item routerLink="/vista-factura">
+                    <mat-icon>account_balance_wallet</mat-icon> &nbsp; Facturas</a
+                  >
+                  <a mat-list-item routerLink="/creacion-factura">
+                    <mat-icon>account_box</mat-icon>&nbsp; Creación Facturas</a
+                  >
+            </mat-nav-list>
+        </mat-expansion-panel>
+   
+   
+ 
+        <a mat-list-item (click)="logout()"
+          ><mat-icon>exit_to_app</mat-icon>&nbsp;Logout</a
+        >
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content style="justify-content: end" class="sidenav-content">
+      <!-- Add Content Here -->
+   
+        <!-- Components open here -->
+        <div class="app-sidenav-content">
+            <router-outlet></router-outlet>
+        </div>
+      
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
+
+  
