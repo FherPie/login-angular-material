@@ -19,5 +19,8 @@ export class GlobalConstants {
 
 
 
-
+//JWT
 //https://www.bezkoder.com/spring-boot-jwt-authentication/
+
+
+//https://stackblitz.com/edit/angular-web-apps?file=src%2Fapp%2Fapp.component.html

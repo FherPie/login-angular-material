@@ -49,10 +49,9 @@ import { ComprasListComponent } from './compras/compras-list/compras-list.compon
 import { TablePaginationBuilderComponent } from './dynamic-table-builder/table-pagination-builder';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AppTableModule } from './app-table/app-table.module';
-import { TableComponent } from './app-table/table/table.component';
-import { InputComponent } from './app-table/input/input.component';
-import { ProductsComponent } from './app-table/products/products.component';
 import { CardModule } from 'primeng/card';
+import { AutocompleteComponent } from './autocomplete/autocomplete.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { LoginComponent } from './login/login.component';
 
 
@@ -63,22 +62,26 @@ import { LoginComponent } from './login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     AppNavComponent,
     MaestroListComponent,
     MaestroAddComponent,
     DetalleAddComponent,
     DetalleListComponent,
-
     VistaFacturaComponent,
     CreacionFacturaComponent,
     ClientListComponent,
     AddClientComponent,
     AddProductoComponent,
     ProductoListComponent,
-    DialogBuscarFactura,
-    ComprasListComponent, 
-    TablePaginationBuilderComponent, 
+    LoginComponent,
+    DialogBuscarFactura, 
+     MaestroListComponent, 
+     MaestroAddComponent, 
+     DetalleAddComponent, 
+     DetalleListComponent,
+     ComprasListComponent, 
+     TablePaginationBuilderComponent, 
+     AutocompleteComponent,
     DialogNuevaFactura
     ],
   imports: [
@@ -112,6 +115,7 @@ import { LoginComponent } from './login/login.component';
     MatTooltipModule,
     AppTableModule,
     CardModule,
+    MatAutocompleteModule,
     MatExpansionModule
   ],
 providers: [DataService,  { provide: DateAdapter, useClass:  MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

@@ -14,6 +14,7 @@ import { MaestroAddComponent } from './maestro/maestro-add/maestro-add.component
 import { DetalleListComponent } from './detalle/detalle-list/detalle-list.component';
 import { DetalleAddComponent } from './detalle/detalle-add/detalle-add.component';
 import { ProductsComponent } from './app-table/products/products.component';
+import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { AppNavComponent } from './app-nav/app-nav.component';
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'maestro/:id', component: MaestroAddComponent },
   { path: 'detalle/:id', component: DetalleAddComponent },
   { path: 'addClient/:id', component: AddClientComponent },
+  { path: 'autocomplete', component: AutocompleteComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 
