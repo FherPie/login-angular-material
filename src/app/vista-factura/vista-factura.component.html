@@ -4,7 +4,7 @@
 
 <h1 style="background-color: #69cbb8; text-align:center">{{title}}
   <button mat-raised-button color="" (click)="buscar()">   <mat-icon>search</mat-icon> Buscar </button>
-
+  <button mat-raised-button color="" (click)="nueva()">   <mat-icon>create_new_folder</mat-icon> Nueva </button>
 </h1>
 <!-- <button   color="warn">
   <mat-icon>search</mat-icon>
@@ -31,13 +31,12 @@
         <td>
           {{ item.nombreCliente }}
         </td>
-        <td>{{ item.id}}0000</td>
-        <td>{{ item.fechayHora | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+        <td>{{ item.numeroFactura}}</td>
+        <td>{{ item.fechaFormat}}</td>
         <td>{{ item.total }}</td>
-        <td>Ver</td>
+        <td> <button mat-raised-button color="" (click)="edit()">   <mat-icon>edit</mat-icon></button></td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<!-- <dialog-animations-example-dialog2 *ngIf="verBuscar" (counterChange)="onCounterChange($event)"></dialog-animations-example-dialog2> -->

@@ -57,6 +57,7 @@ export class TableComponent {
 		this.create = {}
 		this.resetCreate = true
 	}
+	
 	create: any = {}
 	resetCreate: boolean = false
 	onChangeCreate( label: any, value: any ) { this.create[ label ] = value.target.value }

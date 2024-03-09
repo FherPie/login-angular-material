@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DialogBuscarFactura, VistaFacturaComponent } from './vista-factura/vista-factura.component';
+import { DialogBuscarFactura, DialogNuevaFactura, VistaFacturaComponent } from './vista-factura/vista-factura.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -26,13 +26,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS as MY_FORMAT_DATE } from './myDateFormats';
 import { MatNativeDateModule } from '@angular/material/core';
-import { DialogAnimationsExampleDialog, LoginComponent } from './login/login.component';
 
 import {MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
@@ -49,12 +49,10 @@ import { ComprasListComponent } from './compras/compras-list/compras-list.compon
 import { TablePaginationBuilderComponent } from './dynamic-table-builder/table-pagination-builder';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AppTableModule } from './app-table/app-table.module';
-import { TableComponent } from './app-table/table/table.component';
-import { InputComponent } from './app-table/input/input.component';
-import { ProductsComponent } from './app-table/products/products.component';
 import { CardModule } from 'primeng/card';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -64,21 +62,34 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 @NgModule({
   declarations: [
     AppComponent,
+    AppNavComponent,
+    MaestroListComponent,
+    MaestroAddComponent,
+    DetalleAddComponent,
+    DetalleListComponent,
     VistaFacturaComponent,
     CreacionFacturaComponent,
-    AppNavComponent,
     ClientListComponent,
     AddClientComponent,
     AddProductoComponent,
     ProductoListComponent,
-    LoginComponent,DialogBuscarFactura, DialogAnimationsExampleDialog,
-     MaestroListComponent, MaestroAddComponent, DetalleAddComponent, DetalleListComponent,
-     ComprasListComponent, TablePaginationBuilderComponent, AutocompleteComponent
+    LoginComponent,
+    DialogBuscarFactura, 
+     MaestroListComponent, 
+     MaestroAddComponent, 
+     DetalleAddComponent, 
+     DetalleListComponent,
+     ComprasListComponent, 
+     TablePaginationBuilderComponent, 
+     AutocompleteComponent,
+    DialogNuevaFactura
     ],
   imports: [
     CommonModule,
     BrowserModule,
     HttpClientModule,
+    FormsModule,
+    
     BrowserAnimationsModule,
     MatSliderModule,
     MatTableModule,
@@ -90,7 +101,6 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatSelectModule,
     MatRadioModule,
     MatCardModule,
-    FormsModule,
     ReactiveFormsModule,
     LayoutModule,
     MatToolbarModule,
@@ -105,7 +115,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatTooltipModule,
     AppTableModule,
     CardModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatExpansionModule
   ],
 providers: [DataService,  { provide: DateAdapter, useClass:  MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
  { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT_DATE }, {provide: MatDialogRef, useValue:{}}

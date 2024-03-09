@@ -73,13 +73,19 @@ export class VistaFacturaComponent implements AfterViewInit {
   public product = { id: "1", name: "Angular 2" };
 
   nueva() {
-    //this.router.navigateByUrl('/dynamic', { state: { id:1 , name:'Angular' } });
-    this.router.navigateByUrl("/creacion-factura", { state: this.product });
+    
+    const dialogRef = this.dialog.open(DialogNuevaFactura, {
+      height: '95%',
+      width: '95%',
+      disableClose: true,
+      position: {top: '10px'} ,
+      data: { desde: this.desde, hasta: this.hasta, clienteSelected: this.clienteSelected, estado: this.estado }
+    });
+
+
   }
 
   buscar() {
-    this.verBuscar = true;
-    console.log("Buscar");
     const dialogRef = this.dialog.open(DialogBuscarFactura, {
       height: '500px',
       width: '600px',
@@ -90,8 +96,8 @@ export class VistaFacturaComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // console.log(result.clienteSelected.idCliente, moment(result.desde).format('YYYY-MM-DD HH:MM:SS'), moment(result.hasta).format('YYYY-MM-DD HH:MM:SS'));
-        var desde = moment(result?.desde).startOf('day').format('YYYY-MM-DD HH:mm:ss');
+
+      var desde = moment(result?.desde).startOf('day').format('YYYY-MM-DD HH:mm:ss');
         console.log("desde", desde);
 
         var hasta = moment(result?.hasta).set({
@@ -109,6 +115,16 @@ export class VistaFacturaComponent implements AfterViewInit {
         }
     });
   }
+
+edit(){
+  const dialogRef = this.dialog.open(DialogNuevaFactura, {
+    height: '95%',
+    width: '95%',
+    disableClose: true,
+    position: {top: '10px'} ,
+    data: { desde: this.desde, hasta: this.hasta, clienteSelected: this.clienteSelected, estado: this.estado }
+  });
+}
 
 
       
@@ -145,10 +161,6 @@ export class DialogBuscarFactura implements OnInit {
   clienteSelected?: ClientLite;
   indexClienteSelected?: number;
   currentIndex = -1;
-
-
-
-
   error = "";
   constructor(public dialogRef: MatDialogRef<DialogBuscarFactura>,
     private clienteService: ClienteServiceServer, @Inject(MAT_DIALOG_DATA) public data: DialogData,) {
@@ -202,3 +214,35 @@ export class DialogBuscarFactura implements OnInit {
   }
 
 }
+
+
+
+@Component({
+  selector: 'dialog-nueva-factura',
+  templateUrl: 'dialog-nueva-factura.html',
+})
+export class DialogNuevaFactura implements OnInit {
+  credentials: any;
+  @ViewChild('form', { static: true }) ngForm: NgForm | undefined;
+  @Input() counter: number = 0;
+
+  constructor(public dialogRef: MatDialogRef<DialogNuevaFactura>, @Inject(MAT_DIALOG_DATA) public data: DialogData,) {
+  }
+
+
+  ngOnInit(): void {
+
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
+  }
+
+
+
+}
+
+
+
+
+

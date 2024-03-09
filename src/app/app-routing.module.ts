@@ -15,9 +15,10 @@ import { DetalleListComponent } from './detalle/detalle-list/detalle-list.compon
 import { DetalleAddComponent } from './detalle/detalle-add/detalle-add.component';
 import { ProductsComponent } from './app-table/products/products.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
+import { AppNavComponent } from './app-nav/app-nav.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'vista-factura', component: VistaFacturaComponent },
   { path: 'creacion-factura', component: CreacionFacturaComponent },
   { path: 'clientes', component: ClientListComponent },
@@ -25,18 +26,19 @@ const routes: Routes = [
   { path: 'compras', component: ComprasListComponent },
   { path: 'productos', component: ProductoListComponent },
   { path: 'agregarProductos', component: AddProductoComponent },
-  { path: 'productos/:id', component: AddProductoComponent },
-  { path: 'login', component: LoginComponent },
   { path: 'addClient', component: AddClientComponent },
   { path: 'maestros', component: MaestroListComponent },
   { path: 'agregar-maestro', component: MaestroAddComponent },
-  { path: 'maestro/:id', component: MaestroAddComponent },
-  { path: 'detalles', component: DetalleListComponent },
   { path: 'agregar-detalle', component: DetalleAddComponent },
-  { path: 'detalle/:id', component: DetalleAddComponent },
+  { path: 'productos/:id', component: AddProductoComponent },
+  { path: 'detalles', component: DetalleListComponent },
   { path: 'products', component:ProductsComponent },
+  { path: 'app-nav', component: AppNavComponent },
+  { path: 'maestro/:id', component: MaestroAddComponent },
+  { path: 'detalle/:id', component: DetalleAddComponent },
   { path: 'addClient/:id', component: AddClientComponent },
   { path: 'autocomplete', component: AutocompleteComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({

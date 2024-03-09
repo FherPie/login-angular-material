@@ -3,17 +3,29 @@
       <mat-card-header>
         <mat-card-title>Factura </mat-card-title>
       </mat-card-header>
-
-
-
-
       <mat-card-content>
         <div class="row">
-          <div class="col-6">
+          <div class="col-4">
         <mat-card appearance="outlined" >
           <mat-card-header>
             <mat-card-title>Datos de la Factura </mat-card-title>
           </mat-card-header>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Numero Factura" name="numeroFactura" type="text" ngModel [disabled]="true">
+              </mat-form-field>
+            </div> 
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput [matDatepicker]="picker" placeholder="Fecha Emision" name="date" type="text" [disabled]="true"  [(ngModel)]="fechaFactura"
+                  required>
+                <!-- <mat-hint>YYYY/MM/DD</mat-hint> -->
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
@@ -66,32 +78,7 @@
           </div>
          </div>
         </div>
-        <div class="row">
-          <!-- <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Numero Factura" name="numeroFactura" type="text" ngModel required>
-            </mat-form-field>
-          </div> -->
-          <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput [matDatepicker]="picker" placeholder="Fecha Emision" name="date" type="text"  [(ngModel)]="fechaFactura"
-                required>
-              <mat-hint>YYYY/MM/DD</mat-hint>
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          </div>
-          <!-- <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Direccion Matriz" name="direccionMatriz" type="text" ngModel required>
-            </mat-form-field>
-          </div> -->
-          <!-- <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Telefono" value="16125" name="telefono" type="number" ngModel required>
-            </mat-form-field>
-          </div> -->
-        </div>
+
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
@@ -108,7 +95,7 @@
     </div>
       
 
-    <div class="col-6">
+    <div class="col-8">
         <form #form2="ngForm" (ngSubmit)="agregarDetalle(form2)">
           <mat-card appearance="outlined" >
             <mat-card-header>
@@ -139,7 +126,7 @@
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width">
-                    <input matInput placeholder="numeroItems" name="numeroItems" type="number" ngModel required>
+                    <input matInput placeholder="cantidad" name="numeroItems" type="number" ngModel required>
                   </mat-form-field>
                 </div>
                 <div class="col">
@@ -184,13 +171,13 @@
           <br/>
           <mat-card appearance="outlined" >
           <mat-list>
-            <mat-list-item><h2> Subtotal =  {{subTotalFactura}} </h2></mat-list-item>
+            <mat-list-item style="position: relative;text-align: end;right: 1%; margin-bottom:2px"  ><span> Subtotal =  {{subTotalFactura}} </span></mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item><h2>Total Descuentos= {{totalDescuentosFactura}}</h2> </mat-list-item>
+            <mat-list-item  style="position: relative;text-align: end;right: 1%; margin-bottom:2px" ><span>Total Descuentos= {{totalDescuentosFactura}}</span> </mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item><h2>Total Impuestos  ({{impuestoAlaVenta}}%)= {{totalImpuestosFactura}} </h2></mat-list-item>
+            <mat-list-item  style="position: relative;text-align: end;right: 1%; margin-bottom:2px" ><span>Total Impuestos  ({{impuestoAlaVenta}}%)= {{totalImpuestosFactura}} </span></mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item><h2>Total Factura= {{totalFactura}}</h2></mat-list-item>
+            <mat-list-item  style="position: relative;text-align: end;right: 1%; margin-bottom:2px"><span>Total Factura= {{totalFactura}}</span></mat-list-item>
           </mat-list>
           </mat-card>
         </form>

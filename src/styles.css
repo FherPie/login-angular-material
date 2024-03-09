@@ -2,9 +2,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.cdk-overlay-dark-backdrop {
+/* .cdk-overlay-dark-backdrop {
     background: #3002309e;
-}
+} */
 
 
 mat-sidenav-content{

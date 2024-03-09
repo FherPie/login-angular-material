@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DataService } from './DataService';
 import { Factura } from  './factura';
 import { ActivatedRoute, Router } from "@angular/router";
+import { TokenStorageServiceService } from './login/token-storage-service.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map, shareReplay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -9,62 +14,45 @@ import { ActivatedRoute, Router } from "@angular/router";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  isLoggeIn=false;
+  username?:string | null;
+  opened:boolean=false;
+  showMenuSecurity:boolean=true;
+  showMenuConsultory:boolean=true;
+  showMenuFinance:boolean=true;
 
-  constructor(private router: Router, private  app:  DataService) {
 
-    //  this.app.authenticate(undefined, undefined);
+  @ViewChild('drawer') sidenav: MatSidenav | undefined;
 
+
+  closeSideNav() {
+    this.sidenav?.close();
   }
+  
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
 
-
-  public authenticated(): boolean{
-    return this.app.authenticated;
+  constructor(private breakpointObserver: BreakpointObserver, private  tokenStorageService: TokenStorageServiceService) {
   }
-
-  allFacturas: Factura[] = [];
 
   ngOnInit() {
-    //this.dataService.getDataList().subscribe(res => this.allFacturas = res);
-  }
+    this.isLoggeIn= !! this.tokenStorageService.getToken();
 
-
-  // addFactura(form){
-  //   this.dataService.addData(form.value).subscribe(res=>{
-     
-  //     this.router.navigateByUrl('home');
-  //   },
-  //   err=>{
-  //     this.presentToast(err.error);
-  //   } );
-  // }
-
-
-
-
-  title = 'todo';
-  filter: 'all' | 'active' | 'done' = 'all';
-
-  allItems = [
-    { description: 'eat', done: true },
-    { description: 'sleep', done: false },
-    { description: 'play', done: false },
-    { description: 'laugh', done: false },
-  ];
-
-
-  get items() {
-    if (this.filter === 'all') {
-      return this.allItems;
+    if(this.isLoggeIn){
+      this.username= this.tokenStorageService.getToken();
+    }else{
+      this.closeSideNav();
     }
-    return this.allItems.filter(item => this.filter === 'done' ? item.done : !item.done);
+  }
+
+  logout():void{
+    this.tokenStorageService.signOut();
+     window.location.reload();
   }
 
 
-  addItem(description: string) {
-    this.allItems.unshift({
-      description,
-      done: false
-    });
-  }
 
 }
