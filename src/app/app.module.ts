@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DialogBuscarFactura, DialogNuevaFactura, VistaFacturaComponent } from './vista-factura/vista-factura.component';
+import {VistaFacturaComponent } from './vista-factura/vista-factura.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -50,9 +50,11 @@ import { TablePaginationBuilderComponent } from './dynamic-table-builder/table-p
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AppTableModule } from './app-table/app-table.module';
 import { CardModule } from 'primeng/card';
-import { AutocompleteComponent } from './autocomplete/autocomplete.component';
+import { AutocompleteComponent } from './autocomplete-pacient/autocomplete.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { LoginComponent } from './login/login.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BuscarFacturaComponent } from './buscar-factura/buscar-factura.component';
 
 
 
@@ -74,7 +76,6 @@ import { LoginComponent } from './login/login.component';
     AddProductoComponent,
     ProductoListComponent,
     LoginComponent,
-    DialogBuscarFactura, 
      MaestroListComponent, 
      MaestroAddComponent, 
      DetalleAddComponent, 
@@ -82,14 +83,14 @@ import { LoginComponent } from './login/login.component';
      ComprasListComponent, 
      TablePaginationBuilderComponent, 
      AutocompleteComponent,
-    DialogNuevaFactura
+    BuscarFacturaComponent
     ],
   imports: [
     CommonModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    
+    MatFormFieldModule,
     BrowserAnimationsModule,
     MatSliderModule,
     MatTableModule,
@@ -116,7 +117,9 @@ import { LoginComponent } from './login/login.component';
     AppTableModule,
     CardModule,
     MatAutocompleteModule,
-    MatExpansionModule
+    MatExpansionModule,
+    
+    
   ],
 providers: [DataService,  { provide: DateAdapter, useClass:  MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
  { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT_DATE }, {provide: MatDialogRef, useValue:{}}

@@ -1,23 +1,25 @@
-<!-- <button (click)="nueva()">Nueva</button> -->
 
-
-
-<h1 style="background-color: #69cbb8; text-align:center">{{title}}
-  <button mat-raised-button color="" (click)="buscar()">   <mat-icon>search</mat-icon> Buscar </button>
-  <button mat-raised-button color="" (click)="nueva()">   <mat-icon>create_new_folder</mat-icon> Nueva </button>
+<h1>{{title}}
+  <!-- <button mat-raised-button color="" (click)="buscar()">   <mat-icon>search</mat-icon> Buscar </button> -->
 </h1>
-<!-- <button   color="warn">
-  <mat-icon>search</mat-icon>
-  Buscar
-</button> -->
 
-<div class="mat-elevation-z8" style="background-color: bisque;">
-  <table class="table">
+<div class="table-page-header">
+
+
+<app-buscar-factura (fireDatatoSearch)="search($event)" ></app-buscar-factura>
+   <button matSuffix mat-icon-button aria-label="Nueva" (click)="nueva()">
+  <mat-icon>add</mat-icon>
+</button>
+</div>
+
+
+<div class="mat-elevation-z8">
+  <table class="full-width-table">
     <thead>
       <tr>
-        <th scope="col"><mat-icon>account_balance_wallet</mat-icon> Id Factura</th>
+        <th scope="col"><mat-icon>account_balance_wallet</mat-icon>Nro Presp.</th>
         <th scope="col" sortable="name">Cliente</th>
-        <th scope="col" sortable="name">Numero Factura</th>
+        <th scope="col" sortable="name">Numero Presupuesto</th>
         <th scope="col" sortable="area">Fecha</th>
         <th scope="col" sortable="population">Total</th>
         <th scope="col" sortable="population">Acciones</th>

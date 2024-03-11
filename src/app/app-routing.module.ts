@@ -14,7 +14,7 @@ import { MaestroAddComponent } from './maestro/maestro-add/maestro-add.component
 import { DetalleListComponent } from './detalle/detalle-list/detalle-list.component';
 import { DetalleAddComponent } from './detalle/detalle-add/detalle-add.component';
 import { ProductsComponent } from './app-table/products/products.component';
-import { AutocompleteComponent } from './autocomplete/autocomplete.component';
+import { AutocompleteComponent } from './autocomplete-pacient/autocomplete.component';
 import { AppNavComponent } from './app-nav/app-nav.component';
 
 const routes: Routes = [

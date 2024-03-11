@@ -1,0 +1,70 @@
+
+      <div class="search-bar">
+        <div class="busc1">
+            <form #form="ngForm">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Apellidos Cliente" name="nombreCliente" type="text" ngModel>
+              <div class="mat-elevation-z8"  *ngIf="searchinofClients.length >0 && !clienteSelected">
+                <table class="table">
+                <thead>
+                <tr>
+                  <th >Apellidos y Nombres</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of searchinofClients; let i=index" [class.active]="i == currentIndex"
+                (click)="setActiveClient(item, i); data.clienteSelected=item" >
+                  <td > {{item.nombres }} {{ item.apellidos }}</td>
+                </tr>
+                </tbody>
+              </table>
+              </div>
+            </mat-form-field>
+            </form>
+        </div>
+
+
+        <div class="busc1">
+     
+
+            <mat-form-field class="full-width">
+              <input matInput [matDatepicker]="picker" placeholder="Desde" name="date" type="text"  [(ngModel)]="data.desde"
+                >
+                <mat-hint>DD/MM/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="busc1">
+
+            <mat-form-field class="full-width">
+              <input matInput [matDatepicker]="picker2" placeholder="Hasta" name="date" type="text"  [(ngModel)]="data.hasta"
+                >
+              <mat-hint>DD/MM/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+       
+          <!-- <div class="busc1">
+    
+            <mat-form-field>
+              <mat-label>Estado</mat-label>
+              <select matNativeControl   [(ngModel)]="data.estado" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                <option value="ACTIVO">ACTIVO</option>
+                <option value="INACTIVO">INACTIVO</option>
+              </select>
+            </mat-form-field>
+    
+          </div> -->
+       
+     
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="search()">
+            <mat-icon>search</mat-icon>
+          </button>
+
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    

@@ -1,3 +1,13 @@
 .full-width-table {
   width: 100%;
 }
+
+.table-page-header{
+  display:flex;
+  flex-direction:row;
+  justify-content: flex-start;
+  align-items: baseline;
+  width: 900px;
+  font-size:0.5em;
+  padding-left: 2em;
+}

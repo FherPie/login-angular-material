@@ -1,0 +1,9 @@
+.search-bar{
+    display: flex; /* or inline-flex */
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: space-between;
+    margin-bottom: 25px;
+    column-gap: 15px;
+}
