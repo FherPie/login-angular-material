@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
 import { ClientLite } from '../client/client.model2';
 import * as moment from 'moment';
+import { CreacionFacturaComponent } from '../creacion-factura/creacion-factura.component';
 
 
 @Component({
@@ -58,13 +59,18 @@ export class VistaFacturaComponent implements AfterViewInit {
 
   nueva() {
     
-    // const dialogRef = this.dialog.open(DialogNuevaFactura, {
-    //   height: '95%',
-    //   width: '95%',
-    //   disableClose: true,
-    //   position: {top: '10px'} ,
-    //   data: { desde: this.desde, hasta: this.hasta, clienteSelected: this.clienteSelected, estado: this.estado }
-    // });
+     const dialogRef = this.dialog.open(CreacionFacturaComponent, {
+     height: '100%',
+       width: '100%',
+       disableClose: true,
+      position: {top: '10px'} ,
+       data:null
+     });
+
+
+     dialogRef.afterClosed().subscribe(()=>{
+      this.dataService.getDataListFactura().subscribe(res => this.allFacturas = res);
+    })
 
 
    }

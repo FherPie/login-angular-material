@@ -12,6 +12,7 @@ import { ClientLite } from '../client/client.model2';
 import { ProductoLite } from '../producto/producto.model2';
 import { ProductoServiceServer } from '../producto/producto.service.server';
 import { ClienteServiceServer } from '../client/cliente.service.server';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -50,7 +51,8 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
   dataSource2 = this.itemsFactura;
 
   constructor(private fb: UntypedFormBuilder,  private  dataService:  DataService, private clienteService: ClienteServiceServer
-    , private prodcutoService: ProductoServiceServer) {
+    , private prodcutoService: ProductoServiceServer, public dialog: MatDialog,
+    ) {
   }
 
   ngOnDestroy(): void {
@@ -199,5 +201,16 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
     this.ngForm2?.controls['precioUnitario'].setValue(this.productoSelected.precioUnitario);
     this.ngForm2?.controls['descuentoUnitario'].setValue(this.productoSelected.descuentoUnitario);
     console.log(this.productoSelected);
+  }
+
+  cancelDialog(): void {
+    //console.log(this.wasFormChanged);
+    // if(this.addPacientForm?.dirty) {
+    //    const dialogRef = this.dialog.open(DiscardInfoComponentComponent, {
+    //      width: '50em',
+    //    });
+    //  } else {
+      this.dialog.closeAll();
+    //  }
   }
 }

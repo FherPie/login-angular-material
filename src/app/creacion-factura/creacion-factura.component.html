@@ -1,15 +1,15 @@
 <form #form="ngForm" (ngSubmit)="agregarFactura(form)">
     <mat-card appearance="outlined" >
       <mat-card-header>
-        <mat-card-title>Factura </mat-card-title>
+        <mat-card-title>Nuevo Presupuesto </mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="row">
           <div class="col-4">
         <mat-card appearance="outlined" >
-          <mat-card-header>
+          <!-- <mat-card-header>
             <mat-card-title>Datos de la Factura </mat-card-title>
-          </mat-card-header>
+          </mat-card-header> -->
           <div class="row">
             <div class="col">
               <mat-form-field class="full-width">
@@ -53,30 +53,6 @@
             <p> <strong> Teléfono: </strong> {{clienteSelected.telefono}} <strong> Email: </strong> {{clienteSelected.email}} </p>
           </mat-card>
          </div>  
-         <div *ngIf="!clienteSelected" >
-          <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Identificacion Cliente" name="identificacionCliente" type="text" ngModel
-                required  >
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Dirección Cliente" name="direccionCliente" type="text" ngModel required>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Telefono Cliente" name="telefonoCliente" type="number" ngModel required>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Correo Electronico Cliente" name="correoElectronicoCliente" type="email"
-                ngModel required>
-            </mat-form-field>
-          </div>
-         </div>
         </div>
 
         <div class="row">
@@ -88,8 +64,7 @@
         </div>
         <mat-card-actions>
           <button mat-raised-button color="primary"  [disabled]="form.invalid  || itemsFactura.length == 0" expand="block" type="submit">Guardar Factura</button>
-          <!-- <button mat-raised-button color="primary" [disabled]="form.invalid" expand="block" type="submit">Guardar
-            Factura</button> -->
+          <button mat-raised-button color="primary"  expand="block" (click)="cancelDialog()">Cancelar</button>
         </mat-card-actions>
       </mat-card>
     </div>
