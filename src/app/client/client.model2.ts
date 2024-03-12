@@ -1,6 +1,6 @@
 export class ClientLite {
-    nombres?: string;
-    apellidos?: string;
+    nombres?: string="";
+    apellidos?: String="";
     direccion?: string;
     telefono?: string;
     email?: string;

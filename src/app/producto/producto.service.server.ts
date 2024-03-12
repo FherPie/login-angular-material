@@ -30,7 +30,7 @@ export class ProductoServiceServer {
   }
 
   searchByNombre(nombre: any): Observable<any> {
-    return this.http.get(`/api/productoConNombreContiene?nombre=${nombre}`);
+    return this.http.get(GlobalConstants.host+`/productoConNombreContiene?nombre=${nombre}`);
   }
 
   subirArchivoExcelImportacion(formData: FormData,nameFile: any ): Observable<any> {

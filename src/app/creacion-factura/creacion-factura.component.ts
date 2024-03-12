@@ -62,47 +62,25 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-
-    //INICIO ESCUCHA PARA CLIENTE AUTOCOMPLETAR
-  // this.ngForm?.form.valueChanges.subscribe(x=> {
-  // if(x.nombreCliente.length>=3){
-  //   this.clienteService.searchByNombre(x.nombreCliente).subscribe(
-  //     ( response: any) => {
-  //       console.log(response);
-  //       this.searchinofClients=response;
-  //      },
-  //     (  error: any) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // }
-
-  // if(x.nombreCliente.length==0){
-  //   this.clienteSelected= undefined;
-  // }});
-  //FIN ESCUCHA PARA CLIENTE AUTOCOMPLETAR
-
-
-
   
 //INICIO ESCUCHA PARA PRODCUTO AUTOCOMPLETAR
-    // this.ngForm2?.form.valueChanges.subscribe(x=> {
-    // if(x.productoNombre.length>=3){
-    //   this.prodcutoService.searchByNombre(x.productoNombre).subscribe(
-    //     ( response: any) => {
-    //       console.log(response);
-    //       this.searchofProductos=response;
-    //      },
-    //     (  error: any) => {
-    //       console.log(error);
-    //     }
-    //   );
-    // }
+    this.ngForm2?.form.valueChanges.subscribe(x=> {
+    if(x.productoNombre.length>=3){
+      this.prodcutoService.searchByNombre(x.productoNombre).subscribe(
+        ( response: any) => {
+          console.log(response);
+          this.searchofProductos=response;
+         },
+        (  error: any) => {
+          console.log(error);
+        }
+      );
+    }
   
-    // if(x.productoNombre.length==0){
-    //   this.productoSelected= undefined;
-    // }});
-    //FIN ESCUCHA PARA PRODCUTO AUTOCOMPLETAR
+    if(x.productoNombre.length==0){
+      this.productoSelected= undefined;
+    }});
+   // FIN ESCUCHA PARA PRODCUTO AUTOCOMPLETAR
 
   }
 
@@ -165,9 +143,9 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
      //FIN CALCULO SUBTOTAL
     //CALCULO DESCUENTOS
     for (var item of this.itemsFactura) {
-      if(item.descuentoUnitario>0){
-      this.totalDescuentosFactura+= (item.numeroItems*item.precioUnitario)*(item.descuentoUnitario/100);
-     }
+          if(item.descuentoUnitario>0){
+          this.totalDescuentosFactura+= (item.numeroItems*item.precioUnitario)*(item.descuentoUnitario/100);
+        }
      }
 
      console.log(this.totalDescuento);
@@ -175,19 +153,23 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
      if(this.totalDescuento>0){
        this.totalDescuentosFactura+=((this.subTotalFactura-this.totalDescuentosFactura)*this.totalDescuento/100)
      }
-       this.totalImpuestosFactura= ((this.subTotalFactura-this.totalDescuentosFactura)*this.impuestoAlaVenta/100)
+       this.totalImpuestosFactura= ((this.subTotalFactura-this.totalDescuentosFactura))
 
-       this.totalFactura= (this.subTotalFactura-this.totalDescuentosFactura)+ ((this.subTotalFactura-this.totalDescuentosFactura)*this.impuestoAlaVenta/100)
+      //  this.totalFactura= (this.subTotalFactura-this.totalDescuentosFactura)+ ((this.subTotalFactura-this.totalDescuentosFactura)*this.impuestoAlaVenta/100)
+
+
+      this.totalFactura= (this.subTotalFactura-this.totalDescuentosFactura);
 
      console.log(this.totalDescuento);
      //FIN CALCULO DESCUENTOS
 
   }
 
-   setActiveClient(client: ClientLite, index:number){
+   setActiveClient(client: ClientLite){
+    console.log("Cliente selected", client);
      this.clienteSelected= client;
-     this.indexClienteSelected= index;
-     this.searchinofClients=[];
+     //this.indexClienteSelected= index;
+     ///this.searchinofClients=[];
    }
 
 

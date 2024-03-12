@@ -11,11 +11,11 @@
             <mat-card-title>Datos de la Factura </mat-card-title>
           </mat-card-header> -->
           <div class="row">
-            <div class="col">
+            <!-- <div class="col">
               <mat-form-field class="full-width">
                 <input matInput placeholder="Numero Factura" name="numeroFactura" type="text" ngModel [disabled]="true">
               </mat-form-field>
-            </div> 
+            </div>  -->
             <div class="col">
               <mat-form-field class="full-width">
                 <input matInput [matDatepicker]="picker" placeholder="Fecha Emision" name="date" type="text" [disabled]="true"  [(ngModel)]="fechaFactura"
@@ -28,7 +28,7 @@
           </div>
         <div class="row">
           <div class="col">
-           <app-autocomplete-client   ></app-autocomplete-client>
+           <app-autocomplete-client (fireSelectedClient)="setActiveClient($event)"></app-autocomplete-client>
           </div>
          <div *ngIf="clienteSelected" >
           <mat-card appearance="outlined" class="shipping-card">
@@ -119,8 +119,8 @@
                 <tr *ngFor="let item of itemsFactura; let i = index" [class.active]="i == currentIndex">
                   <th scope="row">{{ item.nombreProducto }}</th>
                   <td>{{ item.numeroItems}}</td>
-                  <td>{{ item.precioUnitario | number }}</td>
-                  <td>{{ item.descuentoUnitario | number }}</td>
+                  <td>{{ item.precioUnitario | number:'1.2-2' }}</td>
+                  <td>{{ item.descuentoUnitario | number:'1.2-2' }}</td>
                   <td (click)="deleteDetalle(i)">x</td>
                 </tr>
               </tbody>
@@ -129,13 +129,13 @@
           <br/>
           <mat-card appearance="outlined" >
           <mat-list>
-            <mat-list-item style="position: relative;text-align: end;right: 1%; margin-bottom:2px"  ><span> Subtotal =  {{subTotalFactura}} </span></mat-list-item>
+            <mat-list-item style="position: relative;text-align: end;right: 1%; margin-bottom:2px"  ><span> Subtotal =  {{subTotalFactura | number:'1.2-2'}} </span></mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item  style="position: relative;text-align: end;right: 1%; margin-bottom:2px" ><span>Total Descuentos= {{totalDescuentosFactura}}</span> </mat-list-item>
+            <mat-list-item  style="position: relative;text-align: end;right: 1%; margin-bottom:2px" ><span>Descuentos= {{totalDescuentosFactura | number:'1.2-2'}}</span> </mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item  style="position: relative;text-align: end;right: 1%; margin-bottom:2px" ><span>Total Impuestos  ({{impuestoAlaVenta}}%)= {{totalImpuestosFactura}} </span></mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item  style="position: relative;text-align: end;right: 1%; margin-bottom:2px"><span>Total Factura= {{totalFactura}}</span></mat-list-item>
+            <!-- <mat-list-item  style="position: relative;text-align: end;right: 1%; margin-bottom:2px" ><span>Total Impuestos  ({{impuestoAlaVenta | number:'1.2-2'}}%)= {{totalImpuestosFactura | number:'1.2-2'}} </span></mat-list-item>
+            <mat-divider></mat-divider> -->
+            <mat-list-item  style="position: relative;text-align: end;right: 1%; margin-bottom:2px"><span>Total= {{totalFactura | number:'1.2-2'}}</span></mat-list-item>
           </mat-list>
           </mat-card>
         </form>
