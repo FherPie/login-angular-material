@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { ClientLite } from '../client/client.model2';
 import { PacientService } from './pacient-service.service';
-import { PacientDto } from './PacientDto';
 
 @Component({
-  selector: 'app-autocomplete',
+  selector: 'app-autocomplete-client',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.css']
 })
@@ -13,7 +13,7 @@ export class AutocompleteComponent implements OnInit {
 
 myControl= new FormControl("");
 
-options:PacientDto[]=[];
+options:ClientLite[]=[];
 
 loading!: boolean;
 
@@ -25,15 +25,14 @@ constructor(public dialog: MatDialog,
 }
 
   ngOnInit(): void {
-    console.log(":Llamar!!!!!!!!!!");
     this.listPacient();
   }
 
 listPacient(){
   this.loading = true;
-   this.pacientService.getListPacient().subscribe({
+   this.pacientService.getAllClient().subscribe({
           next: data => {
-              this.options = data.listadoOb;
+              this.options = data;
           },
           complete: () => {
               this.loading = false;

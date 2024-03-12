@@ -64,44 +64,44 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
 
 
     //INICIO ESCUCHA PARA CLIENTE AUTOCOMPLETAR
-  this.ngForm?.form.valueChanges.subscribe(x=> {
-  if(x.nombreCliente.length>=3){
-    this.clienteService.searchByNombre(x.nombreCliente).subscribe(
-      ( response: any) => {
-        console.log(response);
-        this.searchinofClients=response;
-       },
-      (  error: any) => {
-        console.log(error);
-      }
-    );
-  }
+  // this.ngForm?.form.valueChanges.subscribe(x=> {
+  // if(x.nombreCliente.length>=3){
+  //   this.clienteService.searchByNombre(x.nombreCliente).subscribe(
+  //     ( response: any) => {
+  //       console.log(response);
+  //       this.searchinofClients=response;
+  //      },
+  //     (  error: any) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
 
-  if(x.nombreCliente.length==0){
-    this.clienteSelected= undefined;
-  }});
+  // if(x.nombreCliente.length==0){
+  //   this.clienteSelected= undefined;
+  // }});
   //FIN ESCUCHA PARA CLIENTE AUTOCOMPLETAR
 
 
 
   
 //INICIO ESCUCHA PARA PRODCUTO AUTOCOMPLETAR
-    this.ngForm2?.form.valueChanges.subscribe(x=> {
-    if(x.productoNombre.length>=3){
-      this.prodcutoService.searchByNombre(x.productoNombre).subscribe(
-        ( response: any) => {
-          console.log(response);
-          this.searchofProductos=response;
-         },
-        (  error: any) => {
-          console.log(error);
-        }
-      );
-    }
+    // this.ngForm2?.form.valueChanges.subscribe(x=> {
+    // if(x.productoNombre.length>=3){
+    //   this.prodcutoService.searchByNombre(x.productoNombre).subscribe(
+    //     ( response: any) => {
+    //       console.log(response);
+    //       this.searchofProductos=response;
+    //      },
+    //     (  error: any) => {
+    //       console.log(error);
+    //     }
+    //   );
+    // }
   
-    if(x.productoNombre.length==0){
-      this.productoSelected= undefined;
-    }});
+    // if(x.productoNombre.length==0){
+    //   this.productoSelected= undefined;
+    // }});
     //FIN ESCUCHA PARA PRODCUTO AUTOCOMPLETAR
 
   }

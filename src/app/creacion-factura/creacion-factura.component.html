@@ -28,24 +28,7 @@
           </div>
         <div class="row">
           <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Nombre Cliente" name="nombreCliente" type="text" ngModel required>
-              <div class="mat-elevation-z8"  *ngIf="searchinofClients.length >0 && !clienteSelected">
-                <table class="table">
-                <thead>
-                <tr>
-                  <th >Nombres e Identificación</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let item of searchinofClients; let i=index" [class.active]="i == currentIndex"
-                (click)="setActiveClient(item, i)" >
-                  <td > {{item.nombres }} {{ item.apellidos }} {{ item.identificacion }}</td>
-                </tr>
-                </tbody>
-              </table>
-              </div>
-            </mat-form-field>
+           <app-autocomplete-client   ></app-autocomplete-client>
           </div>
          <div *ngIf="clienteSelected" >
           <mat-card appearance="outlined" class="shipping-card">
