@@ -1,7 +1,8 @@
 export interface ItemFactura {
+    id?:number;
     nombreProducto: string;
-    numeroItems:number;
+    cantidad:number;
     precioUnitario:number;
     descuentoUnitario:number;
-    productoId?:number;
+    productoDto?:number;
   }

@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { DataService } from './DataService';
-import { Factura } from  './factura';
+import { DataService } from './proposal/services/DataService';
+import { Factura } from  './proposal/vista-factura/factura';
 import { ActivatedRoute, Router } from "@angular/router";
 import { TokenStorageServiceService } from './login/token-storage-service.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { DataService } from './DataService';
+import { DataService } from './proposal/services/DataService';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
@@ -8,12 +8,12 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {VistaFacturaComponent } from './vista-factura/vista-factura.component';
+import {VistaFacturaComponent } from './proposal/vista-factura/vista-factura.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { AppRoutingModule } from './app-routing.module';
-import { CreacionFacturaComponent } from './creacion-factura/creacion-factura.component';
+import { CreacionFacturaComponent } from './proposal/creacion-factura/creacion-factura.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -55,6 +55,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { LoginComponent } from './login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BuscarFacturaComponent } from './buscar-factura/buscar-factura.component';
+import { AutocompleteProductoComponent } from './autocomplete-product/autocomplete-product.component';
 
 
 
@@ -83,7 +84,8 @@ import { BuscarFacturaComponent } from './buscar-factura/buscar-factura.componen
      ComprasListComponent, 
      TablePaginationBuilderComponent, 
      AutocompleteComponent,
-    BuscarFacturaComponent
+    BuscarFacturaComponent,
+    AutocompleteProductoComponent
     ],
   imports: [
     CommonModule,

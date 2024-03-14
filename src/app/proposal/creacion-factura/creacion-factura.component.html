@@ -46,7 +46,7 @@
           </div>
         </div>
         <mat-card-actions>
-          <button mat-raised-button color="primary"  [disabled]="form.invalid  || itemsFactura.length == 0" expand="block" type="submit">Guardar Factura</button>
+          <button mat-raised-button color="primary"  [disabled]="form.invalid  || itemsFactura.length == 0 || !clienteSelected || savingProposal" expand="block" type="submit">Guardar</button>
           <button mat-raised-button color="primary"  expand="block" (click)="cancelDialog()">Cancelar</button>
         </mat-card-actions>
       </mat-card>
@@ -61,7 +61,8 @@
             </mat-card-header>
             <mat-card-content>
               <div class="row">
-                <div class="col">
+
+                <!-- <div class="col">
                   <mat-form-field class="full-width">
                     <input matInput placeholder="Nombre del Producto"  name="productoNombre" type="text" ngModel
                       required>   
@@ -81,7 +82,11 @@
                   </table>
                   </div>
                 </mat-form-field>
-                </div>
+                </div> -->
+
+
+                <app-autocomplete-product  (fireSelectedProduct)="setActiveProduct($event)" ></app-autocomplete-product>
+
                 <div class="col">
                   <mat-form-field class="full-width">
                     <input matInput placeholder="cantidad" name="numeroItems" type="number" ngModel required>
@@ -103,7 +108,7 @@
             <mat-card-actions>
               <!-- [disabled]="form.invalid" -->
               <button mat-raised-button color="primary" [disabled]="form2.invalid" expand="block" type="submit">Agregar
-                Item Factura</button>
+                Item </button>
             </mat-card-actions>
             <table class="table">
               <thead>
@@ -118,7 +123,7 @@
               <tbody>
                 <tr *ngFor="let item of itemsFactura; let i = index" [class.active]="i == currentIndex">
                   <th scope="row">{{ item.nombreProducto }}</th>
-                  <td>{{ item.numeroItems}}</td>
+                  <td>{{ item.cantidad}}</td>
                   <td>{{ item.precioUnitario | number:'1.2-2' }}</td>
                   <td>{{ item.descuentoUnitario | number:'1.2-2' }}</td>
                   <td (click)="deleteDetalle(i)">x</td>

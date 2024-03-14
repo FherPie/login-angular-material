@@ -1,0 +1,119 @@
+
+<h1>{{title}}
+  <!-- <button mat-raised-button color="" (click)="buscar()">   <mat-icon>search</mat-icon> Buscar </button> -->
+</h1>
+
+<!-- <div class="table-page-header">
+<app-buscar-factura (fireDatatoSearch)="search($event)" ></app-buscar-factura>
+   <button matSuffix mat-icon-button aria-label="Nueva" (click)="nueva()">
+  <mat-icon>add</mat-icon>
+</button>
+</div> -->
+
+
+<div class="page-header">
+  <mat-form-field class="filter">
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filtro" [(ngModel)]="filterValue">
+
+    <button matSuffix mat-icon-button aria-label="Clear" (click)="clearFilterValue()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <button mat-button  class="primary" aria-label="Example icon button with a home icon" (click)="new()">
+    <mat-icon>add</mat-icon> Nuevo
+  </button>
+  <button mat-button aria-label="Example icon button with a bookmark icon">
+    <mat-icon>search</mat-icon> Buscar
+  </button>
+  <button mat-button [matMenuTriggerFor]="menu"> <mat-icon>add</mat-icon>Mas Acciones</button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="viewOdontograma()" >Odontrograma</button>
+        <button mat-menu-item>Item 2</button>
+    </mat-menu>
+
+</div>
+
+
+<!-- <div class="mat-elevation-z8">
+  <table class="full-width-table">
+    <thead>
+      <tr>
+        <th scope="col"><mat-icon>account_balance_wallet</mat-icon>Nro Presp.</th>
+        <th scope="col" sortable="name">Cliente</th>
+        <th scope="col" sortable="name">Numero Presupuesto</th>
+        <th scope="col" sortable="area">Fecha</th>
+        <th scope="col" sortable="population">Total</th>
+        <th scope="col" sortable="population">Acciones</th>
+      </tr>
+      
+    </thead>
+    <tbody>
+      <mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></mat-row>
+      <tr *ngFor="let item of allFacturas; let index=index">
+        <th scope="row">{{ index+1 }}</th>
+        <td>
+          {{ item.nombreCliente }}
+        </td>
+        <td>{{ item.numeroFactura}}</td>
+        <td>{{ item.fechaFormat}}</td>
+        <td>{{ item.total }}</td>
+        <td> <button mat-raised-button color="" (click)="edit()">   <mat-icon>edit</mat-icon></button></td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->
+
+<div class="example-container">
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row  *matRowDef="let row; columns: displayedColumns; ; let i = index"></mat-row>
+
+    <!-- Numero -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nro. </mat-header-cell>
+      <mat-cell *matCellDef="let i=index" data-label="i"> {{i+1}} </mat-cell>
+    </ng-container>
+
+    <!-- id Column -->
+    <ng-container matColumnDef="numeroFactura">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Presupuesto </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="numeroFactura"> {{row.numeroFactura}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nombreCliente">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Cliente </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="pacientNames"> {{row.nombreCliente}} </mat-cell>
+    </ng-container>
+
+    <!-- CI Column -->
+    <ng-container matColumnDef="fechaFormat">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="fechaFormat"> {{row.fechaFormat}} </mat-cell>
+    </ng-container>
+
+    <!-- Email Column
+    <ng-container matColumnDef="pacientEmail">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="pacientEmail"> {{row.pacientEmail}} </mat-cell>
+    </ng-container> -->
+
+  
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef > Actions </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="openEditProposal(row)"> <mat-icon  >edit</mat-icon></button>
+        <button mat-icon-button (click)="deleteProposal(row)" color="warn" aria-label="Delete">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+  </mat-table>
+</div>
+
+
+
+

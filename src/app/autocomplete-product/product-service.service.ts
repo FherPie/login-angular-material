@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { GlobalConstants } from 'src/global-constants';
 
-const baseUrl = GlobalConstants.baseUrlCliente;
+const baseUrl = GlobalConstants.baseUrlProductos;
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class PacientService {
 
   constructor(private http: HttpClient) {}
 
-  getAllClient(): Observable<any> {
+  getAllProduct(): Observable<any> {
     return this.http.get(baseUrl);
   }
 

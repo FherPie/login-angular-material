@@ -1,4 +1,5 @@
 import * as moment from "moment";
+import { ClientLite } from "../../client/client.model2";
 import { ItemFactura } from  './itemFactura';
 
 export class Factura {
@@ -15,8 +16,8 @@ export class Factura {
     totalDescuento: number = 0;
     telefono?: string;
     identificacionCliente?: string;
-    itemsFactura: ItemFactura[] = [];
-    idCliente?: number;
+    detallesVentaDto: ItemFactura[] = [];
+    idCliente?: ClientLite;
     codigo?: string;
     estado?: string;
     formaPago?: string;

@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-.table-page-header{
+.page-header{
   display:flex;
   flex-direction:row;
   justify-content: flex-start;

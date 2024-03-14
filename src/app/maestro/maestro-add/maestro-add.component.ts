@@ -3,7 +3,7 @@ import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angul
 import { Maestro } from '../maestro.model';
 import { MaestroServiceServer } from '../maestro.service.server';
 import { HttpClient } from '@angular/common/http';
-import { DataService } from 'src/app/DataService';
+import { DataService } from 'src/app/proposal/services/DataService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PreviousRouteService } from 'src/app/previous-route.service';
 

@@ -4,7 +4,7 @@ import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angul
 import { Detalle } from '../detalle.model';
 import { DetalleServiceServer } from '../detalle.service.server';
 import { HttpClient } from '@angular/common/http';
-import { DataService } from 'src/app/DataService';
+import { DataService } from 'src/app/proposal/services/DataService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PreviousRouteService } from 'src/app/previous-route.service';
 import { Maestro } from 'src/app/maestro/maestro.model';

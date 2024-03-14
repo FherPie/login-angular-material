@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import { Factura } from  './factura';
+import { Factura } from  '../vista-factura/factura';
 import { tap } from  'rxjs/operators';
 import { Observable, BehaviorSubject, of } from  'rxjs';
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from  '@angular/common/http';
-import{ GlobalConstants } from '../global-constants';
+import{ GlobalConstants } from '../../../global-constants';
 
 //https://www.c-sharpcorner.com/article/learn-about-asynchronous-service-in-angular/
 const baseUrl = GlobalConstants.baseUrl;
@@ -43,5 +43,9 @@ export class DataService {
      guardarVenta(data: any): Observable<any> {
         return this.httpClient.post(baseUrl+'/guardarVenta', data);
       }
+
+      getById(key:any): Observable<any> {
+        return this.httpClient.get(`${baseUrl}`+'/getByIdVenta/' + key);
+    }
 
 }

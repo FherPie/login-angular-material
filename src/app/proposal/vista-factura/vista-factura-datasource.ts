@@ -3,8 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-import { Factura } from  '../factura';
-import { DataService } from '../DataService';
+import { Factura } from  './factura';
+import { DataService } from '../services/DataService';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 
 // TODO: Replace this with your own data model type

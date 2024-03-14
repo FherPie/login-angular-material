@@ -4,7 +4,7 @@ import { ProductoLite } from '../producto.model2';
 import { ProductoServiceServer } from '../producto.service.server';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { DataService } from 'src/app/DataService';
+import { DataService } from 'src/app/proposal/services/DataService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PreviousRouteService } from 'src/app/previous-route.service';
 

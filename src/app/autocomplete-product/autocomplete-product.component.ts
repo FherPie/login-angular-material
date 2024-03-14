@@ -3,23 +3,23 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { ClientLite } from '../client/client.model2';
-import { PacientService } from './pacient-service.service';
+import { ProductoLite } from '../producto/producto.model2';
+import { PacientService } from './product-service.service';
 
 @Component({
-  selector: 'app-autocomplete-client',
-  templateUrl: './autocomplete.component.html',
-  styleUrls: ['./autocomplete.component.css']
+  selector: 'app-autocomplete-product',
+  templateUrl: './autocomplete-product.component.html',
+  styleUrls: ['./autocomplete-product.component.css']
 })
-export class AutocompleteComponent implements OnInit {
+export class AutocompleteProductoComponent implements OnInit {
 
 myControl= new FormControl("");
 
-options:ClientLite[]=[];
-@Output() fireSelectedClient = new EventEmitter();
+options:ProductoLite[]=[];
+@Output() fireSelectedProduct = new EventEmitter();
 loading!: boolean;
 readonly customerFilterControl=  new FormControl();
-filteredOptions!: Observable<ClientLite[]>;
+filteredOptions!: Observable<ProductoLite[]>;
 
 
 constructor(public dialog: MatDialog,
@@ -36,7 +36,7 @@ constructor(public dialog: MatDialog,
   
 listPacient(){
   this.loading = true;
-   this.pacientService.getAllClient().subscribe({
+   this.pacientService.getAllProduct().subscribe({
           next: data => {
               this.options = data;
               this.filteredOptions = this.customerFilterControl.valueChanges.pipe(                    
@@ -61,22 +61,22 @@ listPacient(){
   );
 }
 
-setActiveClient(client: ClientLite){
+setActiveClient(client: ProductoLite){
   console.log("object", client);
-  this.fireSelectedClient.emit(client);
+  this.fireSelectedProduct.emit(client);
 }
 
-clearActiveClient(client: ClientLite){
+clearActiveClient(client: ProductoLite){
   console.log("object", client);
-  this.fireSelectedClient.emit({});
+  this.fireSelectedProduct.emit({});
   this.customerFilterControl.setValue('')
 }
 
-displayFn(user: ClientLite): string  {
-  return user ? user.apellidos +"" + user.nombres : '';
+displayFn(product: ProductoLite): string  {
+  return product ? product.nombre +""  : '';
 }
 
-  filterx(value:string):ClientLite[] {
+  filterx(value:string):ProductoLite[] {
     console.log("value", value)
     const filterValue = value.toLowerCase();
     if(value==""){
@@ -84,7 +84,7 @@ displayFn(user: ClientLite): string  {
     }
     //console.log("Antes Fitlrado",this.options);
     //console.log("Fitlrado",this.options.filter(option => option.apellidos?.toLowerCase().indexOf(value.toLowerCase()) === 0  ) );
-    return this.options.filter(option => option.apellidos?.toLowerCase().indexOf(filterValue.toLowerCase()) === 0 );
+    return this.options.filter(option => option.nombre?.toLowerCase().indexOf(filterValue.toLowerCase()) === 0 );
   }
   
 

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { VistaFacturaComponent } from './vista-factura/vista-factura.component';
-import { CreacionFacturaComponent } from './creacion-factura/creacion-factura.component';
+import { VistaFacturaComponent } from './proposal/vista-factura/vista-factura.component';
+import { CreacionFacturaComponent } from './proposal/creacion-factura/creacion-factura.component';
 import { ClientListComponent } from './client/client-list/client-list.component';
 import { ProductoListComponent } from './producto/producto-list/producto-list.component';
 import { ComprasListComponent } from './compras/compras-list/compras-list.component';
