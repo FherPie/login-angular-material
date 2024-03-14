@@ -5,7 +5,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { VistaFacturaDataSource } from './vista-factura-datasource';
 import { Router } from "@angular/router";
 import { DataService } from '../services/DataService';
-import { Factura } from './factura';
+import { Factura } from '../models/factura';
 import { MatDialog } from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
 import { ClientLite } from '../../client/client.model2';

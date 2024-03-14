@@ -5,6 +5,6 @@ export class ClientLite {
     telefono?: string;
     email?: string;
     identificacion?: string;
-    idCliente?: number;
+    id?: number=0;
     nombresCompletos?: string;
 }

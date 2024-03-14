@@ -27,9 +27,9 @@
             </div>
           </div>
         <div class="row">
-          <div class="col">
-           <app-autocomplete-client (fireSelectedClient)="setActiveClient($event)"></app-autocomplete-client>
-          </div>
+          <!-- *ngIf="! (clienteSelected?.id==0)" -->
+           <app-autocomplete-client  (fireSelectedClient)="setActiveClient($event)" [inputClient]="clienteSelected" ></app-autocomplete-client>
+             <!-- {{clienteSelected | json}} -->
          <div *ngIf="clienteSelected" >
           <mat-card appearance="outlined" class="shipping-card">
             <p><strong>Nombre:</strong> {{clienteSelected.nombres}} <strong>Apellido:</strong> {{clienteSelected.apellidos}} <strong>Identificacion:</strong> {{clienteSelected.identificacion}} </p>
@@ -61,29 +61,6 @@
             </mat-card-header>
             <mat-card-content>
               <div class="row">
-
-                <!-- <div class="col">
-                  <mat-form-field class="full-width">
-                    <input matInput placeholder="Nombre del Producto"  name="productoNombre" type="text" ngModel
-                      required>   
-                  <div class="mat-elevation-z8"  *ngIf="searchofProductos.length >0 && !productoSelected">
-                    <table class="table">
-                    <thead>
-                    <tr>
-                      <th >Producto / Proveedor</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr *ngFor="let item of searchofProductos; let i=index" [class.active]="i == currentIndex"
-                    (click)="setActiveProduct(item, i)" >
-                      <td > {{item.nombre }} {{ item.precioVenta }}</td>
-                    </tr>
-                    </tbody>
-                  </table>
-                  </div>
-                </mat-form-field>
-                </div> -->
-
 
                 <app-autocomplete-product  (fireSelectedProduct)="setActiveProduct($event)" ></app-autocomplete-product>
 
@@ -122,7 +99,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of itemsFactura; let i = index" [class.active]="i == currentIndex">
-                  <th scope="row">{{ item.nombreProducto }}</th>
+                  <th scope="row">{{ item.productoDto?.nombre}}</th>
                   <td>{{ item.cantidad}}</td>
                   <td>{{ item.precioUnitario | number:'1.2-2' }}</td>
                   <td>{{ item.descuentoUnitario | number:'1.2-2' }}</td>

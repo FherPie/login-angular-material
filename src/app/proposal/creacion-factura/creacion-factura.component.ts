@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, NgForm, FormGroup, FormControl } from '@angular/forms';
-import { Factura } from  '../vista-factura/factura';
-import { ItemFactura } from  '../vista-factura/itemFactura';
+import { Factura } from  '../models/factura';
+import { ItemFactura } from  '../models/itemFactura';
 import { DataService } from '../services/DataService';
 //import * as _moment from 'moment';
 //import {default as _rollupMoment} from 'moment';
@@ -40,7 +40,7 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
   totalDescuentosFactura=0.0;
   
   searchinofClients: ClientLite[]= [];
-  clienteSelected?: ClientLite;
+  clienteSelected?: ClientLite= new ClientLite();
   indexClienteSelected?: number;
 
   searchofProductos: ProductoLite[]= [];
@@ -68,7 +68,7 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
    if(this.factura){
     this.dataService.getById(this.factura.id).subscribe({
       next:data=>{
-        this.factura= data.objetoOb;
+        this.factura= data;
         this.clienteSelected=this.factura.idCliente;
         //this.addPacientForm = this.fb.group(this.pacientDto);
         //this.loading=false;
@@ -141,8 +141,8 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
 
   agregarDetalle(form2: { value: any; }){
     //console.log(form2.value);
-    const data={id:this.productoSelected?.idProducto, 
-       nombreProducto: form2.value.productoNombre, 
+    const data={
+       productoDto: this.productoSelected, 
        cantidad: form2.value.numeroItems,
         precioUnitario: form2.value.precioUnitario, 
         descuentoUnitario: form2.value.descuentoUnitario};

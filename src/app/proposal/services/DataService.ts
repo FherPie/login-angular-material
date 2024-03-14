@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import { Factura } from  '../vista-factura/factura';
+import { Factura } from  '../models/factura';
 import { tap } from  'rxjs/operators';
 import { Observable, BehaviorSubject, of } from  'rxjs';
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from  '@angular/common/http';

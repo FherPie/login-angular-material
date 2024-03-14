@@ -90,7 +90,7 @@
             <label><strong>Status:</strong></label>
             {{ currentClient.estado ? "Published" : "Pending" }}
           </div> -->
-        <a *ngIf="showEditButton" class="m-3 btn btn-sm btn-warning" routerLink="/addClient/{{ currentClient.idCliente }}">
+        <a *ngIf="showEditButton" class="m-3 btn btn-sm btn-warning" routerLink="/addClient/{{ currentClient.id }}">
           Edit
         </a>
       </div>

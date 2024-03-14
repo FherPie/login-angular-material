@@ -1,11 +1,11 @@
 <br />
 
 
-<mat-form-field class="full-width ">
+<mat-form-field class="full-width " *ngIf="!isThereClient">
     <mat-label>Cliente: </mat-label>
     <input type="text" placeholder="Escoger Uno" aria-label="Number" matInput [formControl]="customerFilterControl"
         [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="setActiveClient($event.option.value)" >
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="setActiveClient($event.option.value)"  >
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
             {{option.apellidos +" "+option.nombres}}
         </mat-option>

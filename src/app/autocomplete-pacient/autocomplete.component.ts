@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { interval, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ClientLite } from '../client/client.model2';
 import { PacientService } from './pacient-service.service';
@@ -11,15 +11,16 @@ import { PacientService } from './pacient-service.service';
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.css']
 })
-export class AutocompleteComponent implements OnInit {
+export class AutocompleteComponent implements OnInit, OnChanges  {
 
 myControl= new FormControl("");
-
+@Input() inputClient?: ClientLite;
 options:ClientLite[]=[];
-@Output() fireSelectedClient = new EventEmitter();
+@Output() fireSelectedClient = new EventEmitter<ClientLite>();
 loading!: boolean;
 readonly customerFilterControl=  new FormControl();
 filteredOptions!: Observable<ClientLite[]>;
+isThereClient:boolean=false;
 
 
 constructor(public dialog: MatDialog,
@@ -27,9 +28,18 @@ constructor(public dialog: MatDialog,
   ){
 
 }
+  ngOnChanges(changes: SimpleChanges): void {
+ 
+    if(this.inputClient){
+      this.isThereClient=true;
+      this.customerFilterControl.setValue(this.inputClient);
+    }else{
+      
+    }
+  }
 
   ngOnInit(): void {
-
+    console.log("INIT",this.inputClient);
     this.listPacient();
   }
 
@@ -69,7 +79,8 @@ setActiveClient(client: ClientLite){
 clearActiveClient(client: ClientLite){
   console.log("object", client);
   this.fireSelectedClient.emit({});
-  this.customerFilterControl.setValue('')
+  this.customerFilterControl.setValue('');
+  this.isThereClient=false;
 }
 
 displayFn(user: ClientLite): string  {
