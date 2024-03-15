@@ -98,7 +98,7 @@ export class VistaFacturaDataSource extends DataSource<Factura> {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
         case 'numeroFactura': return compare(a.numeroFactura, b.numeroFactura, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
+        //case 'id': return compare(+a.id, +b.id, isAsc);
         default: return 0;
       }
     });

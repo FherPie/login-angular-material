@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ProductoLite } from '../producto/producto.model2';
-import { PacientService } from './product-service.service';
+import { ProductService } from './product-service.service';
 
 @Component({
   selector: 'app-autocomplete-product',
@@ -23,7 +23,7 @@ filteredOptions!: Observable<ProductoLite[]>;
 
 
 constructor(public dialog: MatDialog,
-  private pacientService: PacientService,
+  private productService: ProductService,
   ){
 
 }
@@ -36,7 +36,7 @@ constructor(public dialog: MatDialog,
   
 listPacient(){
   this.loading = true;
-   this.pacientService.getAllProduct().subscribe({
+   this.productService.getAllProduct().subscribe({
           next: data => {
               this.options = data;
               this.filteredOptions = this.customerFilterControl.valueChanges.pipe(                    

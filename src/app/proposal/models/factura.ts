@@ -3,7 +3,7 @@ import { ClientLite } from "../../client/client.model2";
 import { ItemFactura } from  './itemFactura';
 
 export class Factura {
-    id:number=0;
+    id?:number;
     ruc?: string;
     numeroFactura: string='';
     nombreCliente?: string;

@@ -20,7 +20,6 @@ options:ClientLite[]=[];
 loading!: boolean;
 readonly customerFilterControl=  new FormControl();
 filteredOptions!: Observable<ClientLite[]>;
-isThereClient:boolean=false;
 
 
 constructor(public dialog: MatDialog,
@@ -30,8 +29,8 @@ constructor(public dialog: MatDialog,
 }
   ngOnChanges(changes: SimpleChanges): void {
  
-    if(this.inputClient){
-      this.isThereClient=true;
+    if(this.inputClient!=undefined && this.inputClient.id!=undefined){
+      console.log("NO DEBE INGRESAR");
       this.customerFilterControl.setValue(this.inputClient);
     }else{
       
@@ -79,8 +78,7 @@ setActiveClient(client: ClientLite){
 clearActiveClient(client: ClientLite){
   console.log("object", client);
   this.fireSelectedClient.emit({});
-  this.customerFilterControl.setValue('');
-  this.isThereClient=false;
+  this.customerFilterControl.setValue({nombres:"", apellidos:""});
 }
 
 displayFn(user: ClientLite): string  {

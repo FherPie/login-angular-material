@@ -135,7 +135,7 @@ export class VistaFacturaComponent implements OnInit, AfterViewInit {
   }
 
     new() {
-      this.openDialogProposalForm(null);
+      this.openDialogProposalForm(new Factura());
     }
 
 

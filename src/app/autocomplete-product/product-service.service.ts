@@ -9,7 +9,7 @@ const baseUrl = GlobalConstants.baseUrlProductos;
 @Injectable({
   providedIn: 'root'
 })
-export class PacientService {
+export class ProductService {
 
   endpoint: string = 'private';
 

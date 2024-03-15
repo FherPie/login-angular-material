@@ -12,7 +12,46 @@ import { ProductoLite } from '../../producto/producto.model2';
 import { ProductoServiceServer } from '../../producto/producto.service.server';
 import { ClienteServiceServer } from '../../client/cliente.service.server';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ProductService } from 'src/app/autocomplete-product/product-service.service';
 
+
+const COLUMNS_SCHEMA = [
+  {
+    key: "id",
+    type: "id",
+    label: "ID"
+  },
+  {
+    key: "productoDto",
+    type: "object",
+    label: "Tratamiento"
+  },
+  {
+      key: "cantidad",
+      type: "number",
+      label: "Cantidad"
+  },
+  {
+    key: "precioUnitario",
+    type: "number",
+    label: "Precio Unitario"
+  },
+  {
+    key: "descuentoUnitario",
+    type: "number",
+    label: "Descuento"
+  },
+  {
+      key: "isEdit",
+      type: "isEdit",
+      label: ""
+  }
+];
+
+interface Product {
+  id: number;
+  nombre: string;
+}
 
 @Component({
   selector: 'creacion-factura',
@@ -20,6 +59,14 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./creacion-factura.component.css']
 })
 export class CreacionFacturaComponent implements OnInit, OnDestroy {
+
+  displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col!.key);
+
+ //displayedColumns: string[] = ['cantidad', 'precioUnitario', 'descuentoUnitario', 'productoDto'];
+  dataSourceDetalleVentaDto: any;
+  columnsSchema: any = COLUMNS_SCHEMA;
+
+
   
   factura = new Factura();
   totalDescuento:number=0;
@@ -49,11 +96,12 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
   savingProposal:boolean=false;
 
   dataSource2 = this.itemsFactura;
+  optionsProduct!: ProductoLite[];
 
   constructor(private fb: UntypedFormBuilder,  private  dataService:  DataService, 
     private clienteService: ClienteServiceServer
     , private prodcutoService: ProductoServiceServer, public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
     ) {
   }
 
@@ -65,11 +113,13 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
    this.factura=this.data;
-   if(this.factura){
+   if(this.factura.id){
     this.dataService.getById(this.factura.id).subscribe({
       next:data=>{
         this.factura= data;
         this.clienteSelected=this.factura.idCliente;
+        this.itemsFactura= this.factura.detallesVentaDto;
+        this.dataSourceDetalleVentaDto=this.itemsFactura;
         //this.addPacientForm = this.fb.group(this.pacientDto);
         //this.loading=false;
       },
@@ -78,14 +128,14 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
       }
     })
    }
-    
+    this.listProduct();
 
-    this.ngForm2.form = new FormGroup({
-      productoNombre: new FormControl(''),
-      numeroItems: new FormControl(1),
-      precioUnitario: new FormControl(0),
-      descuentoUnitario: new FormControl(0)
-    });
+    // this.ngForm2.form = new FormGroup({
+    //   productoNombre: new FormControl(''),
+    //   numeroItems: new FormControl(1),
+    //   precioUnitario: new FormControl(0),
+    //   descuentoUnitario: new FormControl(0)
+    // });
 
     // this.ngForm2?.controls['productoNombre'].setValue(this.productoSelected.nombre);
     // this.ngForm2?.controls['numeroItems'].setValue(1);
@@ -114,6 +164,21 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
 
   }
 
+    
+listProduct(){
+   this.prodcutoService.getAll().subscribe({
+          next: data => {
+              this.optionsProduct = data;
+          },
+          complete: () => {
+          },
+          error: error => {
+            //this.toastr.error('Error', error);
+          }
+      }
+  );
+}
+
   onSubmit(): void {
     alert('Thanks!');
   }
@@ -139,20 +204,31 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
       });
   }
 
-  agregarDetalle(form2: { value: any; }){
+  agregarDetalle(){
     //console.log(form2.value);
     const data={
-       productoDto: this.productoSelected, 
-       cantidad: form2.value.numeroItems,
-        precioUnitario: form2.value.precioUnitario, 
-        descuentoUnitario: form2.value.descuentoUnitario};
-    this.itemsFactura.push(data);
-    console.log(this.itemsFactura);
+       productoDto: {nombre:""}, 
+       cantidad: 0,
+        precioUnitario: 0, 
+        descuentoUnitario: 0,
+        isEdit:true};
+    //this.itemsFactura.push(data);
+    this.dataSourceDetalleVentaDto = [data,...this.dataSourceDetalleVentaDto];
+    //console.log(this.itemsFactura);
     //this.dataSource2 = this.itemsFactura;
     this.calculoTotales();
   }
 
   deleteDetalle(index: number): void{
+    this.currentIndex=index;
+    if (index !== -1) {
+        this.itemsFactura.splice(index, 1);
+    } 
+    this.calculoTotales();
+  }
+  
+
+  editDetalle(index: number): void{
     this.currentIndex=index;
     if (index !== -1) {
         this.itemsFactura.splice(index, 1);

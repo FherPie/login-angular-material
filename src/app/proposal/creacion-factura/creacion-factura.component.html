@@ -1,7 +1,8 @@
-<form #form="ngForm" (ngSubmit)="agregarFactura(form)">
+<form #form="ngForm">
     <mat-card appearance="outlined" >
       <mat-card-header>
-        <mat-card-title>Nuevo Presupuesto </mat-card-title>
+        <mat-card-title *ngIf="!(factura.id)" >Nuevo Presupuesto </mat-card-title>
+        <mat-card-title *ngIf="(factura.id)" >Editar Presupuesto </mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="row">
@@ -10,12 +11,12 @@
           <!-- <mat-card-header>
             <mat-card-title>Datos de la Factura </mat-card-title>
           </mat-card-header> -->
+          <div class="numeroFactura" *ngIf="(factura.id)">
+            <h2>#</h2>
+            <h2>{{factura.numeroFactura}}</h2>
+          </div>
+        
           <div class="row">
-            <!-- <div class="col">
-              <mat-form-field class="full-width">
-                <input matInput placeholder="Numero Factura" name="numeroFactura" type="text" ngModel [disabled]="true">
-              </mat-form-field>
-            </div>  -->
             <div class="col">
               <mat-form-field class="full-width">
                 <input matInput [matDatepicker]="picker" placeholder="Fecha Emision" name="date" type="text" [disabled]="true"  [(ngModel)]="fechaFactura"
@@ -26,17 +27,17 @@
               </mat-form-field>
             </div>
           </div>
-        <div class="row">
-          <!-- *ngIf="! (clienteSelected?.id==0)" -->
+          
+          <div class="row" *ngIf="(!factura.id)">
            <app-autocomplete-client  (fireSelectedClient)="setActiveClient($event)" [inputClient]="clienteSelected" ></app-autocomplete-client>
-             <!-- {{clienteSelected | json}} -->
-         <div *ngIf="clienteSelected" >
-          <mat-card appearance="outlined" class="shipping-card">
-            <p><strong>Nombre:</strong> {{clienteSelected.nombres}} <strong>Apellido:</strong> {{clienteSelected.apellidos}} <strong>Identificacion:</strong> {{clienteSelected.identificacion}} </p>
-            <p> <strong> Teléfono: </strong> {{clienteSelected.telefono}} <strong> Email: </strong> {{clienteSelected.email}} </p>
+          </div>
+        
+          <mat-card *ngIf="(clienteSelected?.id)" appearance="outlined" class="shipping-card">
+            <p><strong>Nombre:</strong> {{clienteSelected?.nombres}} <strong>Apellido:</strong> {{clienteSelected?.apellidos}} <strong>Identificacion:</strong> {{clienteSelected?.identificacion}} </p>
+            <p> <strong> Teléfono: </strong> {{clienteSelected?.telefono}} <strong> Email: </strong> {{clienteSelected?.email}} </p>
           </mat-card>
-         </div>  
-        </div>
+        
+    
 
         <div class="row">
           <div class="col">
@@ -46,7 +47,7 @@
           </div>
         </div>
         <mat-card-actions>
-          <button mat-raised-button color="primary"  [disabled]="form.invalid  || itemsFactura.length == 0 || !clienteSelected || savingProposal" expand="block" type="submit">Guardar</button>
+          <button mat-raised-button color="primary" [disabled]="form.invalid  || itemsFactura.length == 0 || !clienteSelected || savingProposal" expand="block" (click)="agregarFactura(form)">Guardar</button>
           <button mat-raised-button color="primary"  expand="block" (click)="cancelDialog()">Cancelar</button>
         </mat-card-actions>
       </mat-card>
@@ -54,60 +55,106 @@
       
 
     <div class="col-8">
-        <form #form2="ngForm" (ngSubmit)="agregarDetalle(form2)">
-          <mat-card appearance="outlined" >
-            <mat-card-header>
-              <mat-card-title>Detalles</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <div class="row">
+    
 
-                <app-autocomplete-product  (fireSelectedProduct)="setActiveProduct($event)" ></app-autocomplete-product>
-
-                <div class="col">
-                  <mat-form-field class="full-width">
-                    <input matInput placeholder="cantidad" name="numeroItems" type="number" ngModel required>
-                  </mat-form-field>
-                </div>
-                <div class="col">
-                  <mat-form-field class="full-width">
-                    <input matInput placeholder="precioUnitario"  name="precioUnitario" type="number" ngModel
-                      required>
-                  </mat-form-field>
-                </div>
-                <div class="col">
-                  <mat-form-field class="full-width">
-                    <input matInput placeholder="descuentoUnitario"  name="descuentoUnitario" type="number" ngModel>
-                  </mat-form-field>
-                </div>
-              </div>
-            </mat-card-content>
             <mat-card-actions>
               <!-- [disabled]="form.invalid" -->
-              <button mat-raised-button color="primary" [disabled]="form2.invalid" expand="block" type="submit">Agregar
+              <button mat-raised-button color="primary" expand="block" type="button" (click)="agregarDetalle()">Agregar
                 Item </button>
             </mat-card-actions>
+        
+            <!-- <table mat-table [dataSource]="dataSourceDetalleVentaDto">
+              <ng-container [matColumnDef]="col" *ngFor="let col of displayedColumns">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{col}}
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{element[col]}}
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table> -->
+            <table mat-table [dataSource]="dataSourceDetalleVentaDto" matSort>
+              <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema" >
+                <th mat-header-cell *matHeaderCellDef   >
+                 <div>{{col.label}}</div> 
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  
+                  <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
+                    <div class="btn-edit" *ngSwitchCase="'isEdit'">
+                      <button mat-button (click)="element.isEdit = !element.isEdit">Edit</button>
+                    </div>
+                    <span *ngSwitchDefault>
+                     <p *ngIf="col.type!='object'">{{element[col.key] }}</p> 
+                     <p *ngIf="col.type=='object'">{{element[col.key].nombre }}</p> 
+
+                    </span>
+                  </div>
+
+                  <div *ngIf="element.isEdit">
+                    <div class="btn-edit" *ngIf="col.key === 'isEdit'; else dataField">
+                      <button mat-button (click)="element.isEdit = !element.isEdit">Done</button>
+                    </div>
+                    <ng-template #dataField>
+                      <mat-form-field  *ngIf="col.type!='id'"  >
+                        <input matInput [type]="col.type" *ngIf="col.type=='object' && element[col.id]" [disabled]="true" [(ngModel)]="element[col.key].nombre" [ngModelOptions]="{standalone: true}">
+                        <!-- <input matInput [type]="col.type" *ngIf="col.type=='object' && !element[col.id]" [disabled]="false" [(ngModel)]="element[col.key].nombre" [ngModelOptions]="{standalone: true}"> -->
+
+                        <!-- <app-autocomplete-product  (fireSelectedProduct)="setActiveProduct($event)" ></app-autocomplete-product> -->
+
+                        <select matNativeControl  matInput  *ngIf="col.type=='object' && !element[col.id]" [(ngModel)]="element[col.key]" [ngModelOptions]="{standalone: true}" >
+                          <option value="" selected></option>
+                          <!-- @for(product of optionsProduct; track product) { -->
+                            <option *ngFor="let product of optionsProduct" [value]="product">{{product.nombre}}</option>
+                          <!-- } -->
+                          
+                        </select>
+
+                        <input matInput [type]="col.type" *ngIf="col.type!='object'" [(ngModel)]="element[col.key]" [ngModelOptions]="{standalone: true}">
+
+
+                      </mat-form-field>
+                    </ng-template>
+                  </div>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+<!-- 
             <table class="table">
               <thead>
                 <tr>
                   <th scope="col" sortable="name">Producto</th>
                   <th scope="col" sortable="name">Numero Items</th>
-                  <th scope="col" sortable="area">Precio Unitario</th>
-                  <th scope="col" sortable="area">Descuento Unitario</th>
+                  <th scope="col" sortable="area">Valor</th>
+                  <th scope="col" sortable="area">Descuento</th>
+                  <th scope="col" sortable="area">Valor Final</th>
                   <th scope="col" sortable="area">Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let item of itemsFactura; let i = index" [class.active]="i == currentIndex">
                   <th scope="row">{{ item.productoDto?.nombre}}</th>
-                  <td>{{ item.cantidad}}</td>
+                  <td>
+                    <input matInput placeholder="precioUnitario"  name="precioUnitario" type="number" (ngModel)="item.cantidad" required>
+                  </td>
                   <td>{{ item.precioUnitario | number:'1.2-2' }}</td>
                   <td>{{ item.descuentoUnitario | number:'1.2-2' }}</td>
-                  <td (click)="deleteDetalle(i)">x</td>
-                </tr>
-              </tbody>
-            </table>
-          </mat-card>
+                  <td>
+                  
+                     <button mat-icon-button (click)="editDetalle(i)"> <mat-icon  >edit</mat-icon></button>
+                    <button mat-icon-button (click)="deleteDetalle(i)" color="warn" aria-label="Delete"><mat-icon>delete</mat-icon>
+                    </button>
+            -->
+     
+
+
+
           <br/>
           <mat-card appearance="outlined" >
           <mat-list>
@@ -120,7 +167,7 @@
             <mat-list-item  style="position: relative;text-align: end;right: 1%; margin-bottom:2px"><span>Total= {{totalFactura | number:'1.2-2'}}</span></mat-list-item>
           </mat-list>
           </mat-card>
-        </form>
+       
     </div>
 
       </div>

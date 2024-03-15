@@ -1,7 +1,7 @@
 <br />
 
 
-<mat-form-field class="full-width " *ngIf="!isThereClient">
+<mat-form-field class="full-width " >
     <mat-label>Cliente: </mat-label>
     <input type="text" placeholder="Escoger Uno" aria-label="Number" matInput [formControl]="customerFilterControl"
         [matAutocomplete]="auto">
@@ -10,7 +10,7 @@
             {{option.apellidos +" "+option.nombres}}
         </mat-option>
     </mat-autocomplete>
-    <mat-icon matSuffix
+    <mat-icon matSuffix 
     *ngIf="customerFilterControl.value"
     (click)="clearActiveClient({})">
 close
