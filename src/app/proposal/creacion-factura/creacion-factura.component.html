@@ -39,15 +39,15 @@
         
     
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
               <input matInput placeholder="Descuento" name="totalDescuento" type="number" [(ngModel)]="totalDescuento" required>
             </mat-form-field>
           </div>
-        </div>
+        </div> -->
         <mat-card-actions>
-          <button mat-raised-button color="primary" [disabled]="form.invalid  || itemsFactura.length == 0 || !clienteSelected || savingProposal" expand="block" (click)="agregarFactura(form)">Guardar</button>
+          <button mat-raised-button color="primary" [disabled]="form.invalid  || itemsFactura.length == 0 || !clienteSelected || savingProposal" expand="block" (click)="factura.id ?  actualizarVenta():agregarFactura(form)"> {{factura.id ?  'Actualizar':'Guardar'}}</button>          
           <button mat-raised-button color="primary"  expand="block" (click)="cancelDialog()">Cancelar</button>
         </mat-card-actions>
       </mat-card>
@@ -82,9 +82,15 @@
                 </th>
                 <td mat-cell *matCellDef="let element">
                   
-                  <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
-                    <div class="btn-edit" *ngSwitchCase="'isEdit'">
-                      <button mat-button (click)="element.isEdit = !element.isEdit">Edit</button>
+                  <div [ngSwitch]="col.type" *ngIf="!element.edit">
+                    <div class="btn-edit" *ngSwitchCase="'edit'">
+                      <button mat-button (click)="element.edit = !element.edit">Edit</button>
+                      <button
+                      mat-button
+                      class="button-remove"
+                      (click)="removeRow(element)">
+                      Delete
+                    </button>
                     </div>
                     <span *ngSwitchDefault>
                      <p *ngIf="col.type!='object'">{{element[col.key] }}</p> 
@@ -93,9 +99,9 @@
                     </span>
                   </div>
 
-                  <div *ngIf="element.isEdit">
-                    <div class="btn-edit" *ngIf="col.key === 'isEdit'; else dataField">
-                      <button mat-button (click)="element.isEdit = !element.isEdit">Done</button>
+                  <div *ngIf="element.edit">
+                    <div class="btn-edit" *ngIf="col.key === 'edit'; else dataField">
+                      <button mat-button (click)="element.edit = !element.edit">Done</button>
                     </div>
                     <ng-template #dataField>
                       <mat-form-field  *ngIf="col.type!='id'"  >
@@ -104,13 +110,21 @@
 
                         <!-- <app-autocomplete-product  (fireSelectedProduct)="setActiveProduct($event)" ></app-autocomplete-product> -->
 
-                        <select matNativeControl  matInput  *ngIf="col.type=='object' && !element[col.id]" [(ngModel)]="element[col.key]" [ngModelOptions]="{standalone: true}" >
+                        <!-- <select matNativeControl  matInput  *ngIf="col.type=='object' && !element[col.id]" [(ngModel)]="element[col.key]" (change)="changed(element[col.key].nombre, element)" [ngModelOptions]="{standalone: true}" >
                           <option value="" selected></option>
-                          <!-- @for(product of optionsProduct; track product) { -->
-                            <option *ngFor="let product of optionsProduct" [value]="product">{{product.nombre}}</option>
-                          <!-- } -->
-                          
-                        </select>
+                          <option *ngFor="let product of optionsProduct" [value]="product">{{product.nombre}}</option>
+                        </select> -->
+
+                        <!-- <mat-selection-list  matInput [multiple]="false" *ngIf="col.type=='object' && !element[col.id]" [(ngModel)]="element[col.key]" (change)="changed(element[col.key].nombre, element)" [ngModelOptions]="{standalone: true}"  >
+                          <mat-list-option   *ngFor="let product of optionsProduct" [value]="product">
+                            {{product.nombre}}
+                          </mat-list-option>
+                        </mat-selection-list> -->
+
+
+                        <mat-select placeholder="Select" [multiple]="false" *ngIf="col.type=='object' && !element[col.id]" [(ngModel)]="element[col.key]" (change)="changed(element[col.key].nombre, element)" [ngModelOptions]="{standalone: true}">
+                          <mat-option  *ngFor="let product of optionsProduct" [value]="product"> {{product.nombre}}</mat-option>
+                         </mat-select>
 
                         <input matInput [type]="col.type" *ngIf="col.type!='object'" [(ngModel)]="element[col.key]" [ngModelOptions]="{standalone: true}">
 

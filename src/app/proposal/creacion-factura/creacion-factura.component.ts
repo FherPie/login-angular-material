@@ -42,8 +42,8 @@ const COLUMNS_SCHEMA = [
     label: "Descuento"
   },
   {
-      key: "isEdit",
-      type: "isEdit",
+      key: "edit",
+      type: "edit",
       label: ""
   }
 ];
@@ -59,6 +59,11 @@ interface Product {
   styleUrls: ['./creacion-factura.component.css']
 })
 export class CreacionFacturaComponent implements OnInit, OnDestroy {
+
+  removeRow(dto: any) {
+    console.log("Element", dto);
+    this.dataSourceDetalleVentaDto = this.dataSourceDetalleVentaDto.filter((u: any) => u !== dto);
+  }
 
   displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col!.key);
 
@@ -204,16 +209,50 @@ listProduct(){
       });
   }
 
+
+  actualizarVenta(){
+    this.savingProposal=true;
+    this.dataService.actualizarVenta(this.factura)
+    .subscribe(
+      response => {
+        console.log(response);
+        this.dialog.closeAll();
+        this.savingProposal=false;
+      },
+      error => {
+        console.log(error);
+        this.savingProposal=false;
+      });
+  }
+
   agregarDetalle(){
+    this.savingProposal=true;
+    this.dataService.addDetalleVenta(this.factura)
+    .subscribe({
+      next: data => {
+          this.factura= data;
+          this.clienteSelected=this.factura.idCliente;
+          this.itemsFactura= this.factura.detallesVentaDto;
+          this.dataSourceDetalleVentaDto=this.itemsFactura;
+          this.savingProposal=false;
+      },
+      complete: () => {
+      },
+      error: error => {
+        this.savingProposal=false;
+        //this.toastr.error('Error', error);
+      }
+  });
+
     //console.log(form2.value);
-    const data={
-       productoDto: {nombre:""}, 
-       cantidad: 0,
-        precioUnitario: 0, 
-        descuentoUnitario: 0,
-        isEdit:true};
+    // const data={
+    //    productoDto: {nombre:""}, 
+    //    cantidad: 0,
+    //     precioUnitario: 0, 
+    //     descuentoUnitario: 0,
+    //     isEdit:true};
     //this.itemsFactura.push(data);
-    this.dataSourceDetalleVentaDto = [data,...this.dataSourceDetalleVentaDto];
+    // this.dataSourceDetalleVentaDto = [data,...this.dataSourceDetalleVentaDto];
     //console.log(this.itemsFactura);
     //this.dataSource2 = this.itemsFactura;
     this.calculoTotales();
@@ -300,5 +339,10 @@ listProduct(){
     //  } else {
       this.dialog.closeAll();
     //  }
+  }
+
+  changed(product:string, row:any){
+    console.log("Producto", product);
+    console.log("Producto", row);
   }
 }

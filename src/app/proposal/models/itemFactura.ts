@@ -7,5 +7,5 @@ export interface ItemFactura {
     precioUnitario:number;
     descuentoUnitario:number;
     productoDto?:ProductoLite;
-    isEdit: false;
+    edit: false;
   }

@@ -48,4 +48,12 @@ export class DataService {
         return this.httpClient.get(`${baseUrl}`+'/getByIdVenta/' + key);
     }
 
+      addDetalleVenta(data: any): Observable<any> {
+        return this.httpClient.post(baseUrl+'/addDetalle', data);
+      }
+
+      actualizarVenta(data: any): Observable<any> {
+        return this.httpClient.put(baseUrl+'/actualizarVenta', data);
+      }
+
 }
