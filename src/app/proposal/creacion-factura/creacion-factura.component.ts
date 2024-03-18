@@ -62,13 +62,12 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
 
   removeRow(dto: any) {
     console.log("Element", dto);
-    this.dataSourceDetalleVentaDto = this.dataSourceDetalleVentaDto.filter((u: any) => u !== dto);
+    this.factura.detallesVentaDto = this.factura.detallesVentaDto.filter((u: any) => u !== dto);
   }
 
   displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col!.key);
 
  //displayedColumns: string[] = ['cantidad', 'precioUnitario', 'descuentoUnitario', 'productoDto'];
-  dataSourceDetalleVentaDto: any;
   columnsSchema: any = COLUMNS_SCHEMA;
 
 
@@ -76,8 +75,6 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
   factura = new Factura();
   totalDescuento:number=0;
   impuestoAlaVenta:number=12;
-
-  itemsFactura: ItemFactura[] = [];
   currentIndex = -1;
   fechaFactura = moment();
 
@@ -92,15 +89,12 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
   totalDescuentosFactura=0.0;
   
   searchinofClients: ClientLite[]= [];
-  clienteSelected?: ClientLite= new ClientLite();
   indexClienteSelected?: number;
 
   searchofProductos: ProductoLite[]= [];
   productoSelected?: ProductoLite;
   indexProductoSelected?: number;
   savingProposal:boolean=false;
-
-  dataSource2 = this.itemsFactura;
   optionsProduct!: ProductoLite[];
 
   constructor(private fb: UntypedFormBuilder,  private  dataService:  DataService, 
@@ -122,11 +116,6 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
     this.dataService.getById(this.factura.id).subscribe({
       next:data=>{
         this.factura= data;
-        this.clienteSelected=this.factura.idCliente;
-        this.itemsFactura= this.factura.detallesVentaDto;
-        this.dataSourceDetalleVentaDto=this.itemsFactura;
-        //this.addPacientForm = this.fb.group(this.pacientDto);
-        //this.loading=false;
       },
       error:error=>{
 
@@ -190,11 +179,8 @@ listProduct(){
 
   agregarFactura(form: { value: any; }){
     this.savingProposal=true;
-    this.factura=form.value;
+    //this.factura=form.value;
     this.factura.totalDescuento=this.totalDescuento; 
-     this.factura.idCliente=this.clienteSelected;
-    this.factura.detallesVentaDto=[];
-    this.factura.detallesVentaDto=this.itemsFactura;
     console.log(this.factura);
     this.dataService.guardarVenta(this.factura)
     .subscribe(
@@ -231,9 +217,6 @@ listProduct(){
     .subscribe({
       next: data => {
           this.factura= data;
-          this.clienteSelected=this.factura.idCliente;
-          this.itemsFactura= this.factura.detallesVentaDto;
-          this.dataSourceDetalleVentaDto=this.itemsFactura;
           this.savingProposal=false;
       },
       complete: () => {
@@ -261,7 +244,7 @@ listProduct(){
   deleteDetalle(index: number): void{
     this.currentIndex=index;
     if (index !== -1) {
-        this.itemsFactura.splice(index, 1);
+        this.factura.detallesVentaDto.splice(index, 1);
     } 
     this.calculoTotales();
   }
@@ -270,7 +253,7 @@ listProduct(){
   editDetalle(index: number): void{
     this.currentIndex=index;
     if (index !== -1) {
-        this.itemsFactura.splice(index, 1);
+      this.factura.detallesVentaDto.splice(index, 1);
     } 
     this.calculoTotales();
   }
@@ -285,12 +268,12 @@ listProduct(){
   calculoTotales(): void{
     this.encerarTotales();
     //CALCULO SUBTOTAL
-    for (var item of this.itemsFactura) {
+    for (var item of  this.factura.detallesVentaDto) {
      this.subTotalFactura+= (item.cantidad*item.precioUnitario);
     }
      //FIN CALCULO SUBTOTAL
     //CALCULO DESCUENTOS
-    for (var item of this.itemsFactura) {
+    for (var item of  this.factura.detallesVentaDto) {
           if(item.descuentoUnitario>0){
           this.totalDescuentosFactura+= (item.cantidad*item.precioUnitario)*(item.descuentoUnitario/100);
         }
@@ -315,7 +298,7 @@ listProduct(){
 
    setActiveClient(client: ClientLite){
     console.log("Cliente selected", client);
-     this.clienteSelected= client;
+    this.factura.idCliente= client;
      //this.indexClienteSelected= index;
      ///this.searchinofClients=[];
    }

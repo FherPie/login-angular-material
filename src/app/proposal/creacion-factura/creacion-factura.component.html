@@ -29,12 +29,12 @@
           </div>
           
           <div class="row" *ngIf="(!factura.id)">
-           <app-autocomplete-client  (fireSelectedClient)="setActiveClient($event)" [inputClient]="clienteSelected" ></app-autocomplete-client>
+           <app-autocomplete-client  (fireSelectedClient)="setActiveClient($event)" [inputClient]="this.factura.idCliente" ></app-autocomplete-client>
           </div>
         
-          <mat-card *ngIf="(clienteSelected?.id)" appearance="outlined" class="shipping-card">
-            <p><strong>Nombre:</strong> {{clienteSelected?.nombres}} <strong>Apellido:</strong> {{clienteSelected?.apellidos}} <strong>Identificacion:</strong> {{clienteSelected?.identificacion}} </p>
-            <p> <strong> Teléfono: </strong> {{clienteSelected?.telefono}} <strong> Email: </strong> {{clienteSelected?.email}} </p>
+          <mat-card *ngIf="(this.factura.idCliente?.id)" appearance="outlined" class="shipping-card">
+            <p><strong>Nombre:</strong> {{this.factura.idCliente?.nombres}} <strong>Apellido:</strong> {{this.factura.idCliente?.apellidos}} <strong>Identificacion:</strong> {{this.factura.idCliente?.identificacion}} </p>
+            <p> <strong> Teléfono: </strong> {{this.factura.idCliente?.telefono}} <strong> Email: </strong> {{this.factura.idCliente?.email}} </p>
           </mat-card>
         
     
@@ -47,7 +47,7 @@
           </div>
         </div> -->
         <mat-card-actions>
-          <button mat-raised-button color="primary" [disabled]="form.invalid  || itemsFactura.length == 0 || !clienteSelected || savingProposal" expand="block" (click)="factura.id ?  actualizarVenta():agregarFactura(form)"> {{factura.id ?  'Actualizar':'Guardar'}}</button>          
+          <button mat-raised-button color="primary" [disabled]="form.invalid  ||  this.factura.detallesVentaDto.length == 0 || !this.factura.idCliente || savingProposal" expand="block" (click)="factura.id ?  actualizarVenta():agregarFactura(form)"> {{factura.id ?  'Actualizar':'Guardar'}}</button>          
           <button mat-raised-button color="primary"  expand="block" (click)="cancelDialog()">Cancelar</button>
         </mat-card-actions>
       </mat-card>
@@ -75,7 +75,7 @@
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table> -->
-            <table mat-table [dataSource]="dataSourceDetalleVentaDto" matSort>
+            <table mat-table [dataSource]="factura.detallesVentaDto" matSort>
               <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema" >
                 <th mat-header-cell *matHeaderCellDef   >
                  <div>{{col.label}}</div> 

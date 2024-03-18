@@ -11,6 +11,7 @@ import { NgForm } from '@angular/forms';
 import { ClientLite } from '../../client/client.model2';
 import * as moment from 'moment';
 import { CreacionFacturaComponent } from '../creacion-factura/creacion-factura.component';
+import { DeleteConfirmDialogComponent } from '../util-components/delete-confirm-dialog/delete-confirm-dialog.component';
 
 
 @Component({
@@ -180,18 +181,28 @@ export class VistaFacturaComponent implements OnInit, AfterViewInit {
 
   }
   
-  deleteProposal(pacientDtoToDelete: any) {
-          // const dialogRef = this.dialog.open(DeleteRequestComponentComponent, {
-          //   width: '50em',
-          //   data: pacientDtoToDelete
-          // });  
-  
-          // dialogRef.afterClosed().subscribe(result => {
-          //   if(result.data){
-          //     this.listPacient();
-          //   }
-  
-          // });
+  deleteProposal(factura: any) {
+            this.dialog
+              .open(DeleteConfirmDialogComponent)
+              .afterClosed()
+              .subscribe((confirm) => {
+                if (confirm) {
+                 
+                  this.dataService.borrarVenta(factura.id).subscribe({
+                    next: data => {
+                         //this.toastr.error('Eliminado con Exito');
+                        //this.dialogRef.close({ data: true });
+                    },
+                    complete: () => {
+                      this.listProposals();
+                    },
+                    error: error => {
+                      //this.toastr.error('Error', error);
+                    }
+                }
+            );}
+              });
+          
       }
   
 

@@ -56,4 +56,8 @@ export class DataService {
         return this.httpClient.put(baseUrl+'/actualizarVenta', data);
       }
 
+      borrarVenta(key:any): Observable<any> {
+        return this.httpClient.delete(baseUrl+ '/borrarVenta/' + key);
+    }
+
 }

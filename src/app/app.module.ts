@@ -56,6 +56,7 @@ import { LoginComponent } from './login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BuscarFacturaComponent } from './buscar-factura/buscar-factura.component';
 import { AutocompleteProductoComponent } from './autocomplete-product/autocomplete-product.component';
+import { DeleteConfirmDialogComponent } from './proposal/util-components/delete-confirm-dialog/delete-confirm-dialog.component';
 
 
 
@@ -85,7 +86,8 @@ import { AutocompleteProductoComponent } from './autocomplete-product/autocomple
      TablePaginationBuilderComponent, 
      AutocompleteComponent,
     BuscarFacturaComponent,
-    AutocompleteProductoComponent
+    AutocompleteProductoComponent,
+    DeleteConfirmDialogComponent
     ],
   imports: [
     CommonModule,
