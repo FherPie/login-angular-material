@@ -92,6 +92,9 @@ export class AddClientComponent implements OnInit {
     console.log("Pacient Info",this.addClientForm.value);
     if(this.addClientForm.invalid){
        this.markAsDirty(this.addClientForm);
+       this._snackBar.open("Campos Obligatorios", 'X', {
+        panelClass: ['snackbar-error']
+      }) 
        return;
      }
     this.cliente = this.addClientForm.value;
@@ -104,8 +107,10 @@ export class AddClientComponent implements OnInit {
       },
       complete: () => {},
       error: error => {
-        console.log("MY EXPE", error);
-          this._snackBar.open(error, 'X') 
+        console.log(error);
+          this._snackBar.open(error.error.mensaje, 'X', {
+            panelClass: ['snackbar-error']
+          }) 
       }
   })
   }
@@ -157,7 +162,8 @@ export class AddClientComponent implements OnInit {
       telefono2: ['', [Validators.required]],
       referido: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      identificacion: ['', [Validators.required]]
+      identificacion: ['', [Validators.required]],
+      motivoConsulta: ['', [Validators.required]]
       });
   }
 

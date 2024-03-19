@@ -58,6 +58,7 @@ import { BuscarFacturaComponent } from './buscar-factura/buscar-factura.componen
 import { AutocompleteProductoComponent } from './autocomplete-product/autocomplete-product.component';
 import { DeleteConfirmDialogComponent } from './proposal/util-components/delete-confirm-dialog/delete-confirm-dialog.component';
 import { DiscardInfoComponent } from './client/utils-components/discard-info-component-component/discard-info-component-component.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -123,9 +124,8 @@ import { DiscardInfoComponent } from './client/utils-components/discard-info-com
     AppTableModule,
     CardModule,
     MatAutocompleteModule,
-    MatExpansionModule
-    
-    
+    MatExpansionModule,
+    MatSnackBarModule
   ],
 providers: [DataService,  { provide: DateAdapter, useClass:  MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
  { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT_DATE }, {provide: MatDialogRef, useValue:{}}
