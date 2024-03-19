@@ -123,7 +123,7 @@ import { DiscardInfoComponent } from './client/utils-components/discard-info-com
     AppTableModule,
     CardModule,
     MatAutocompleteModule,
-    MatExpansionModule,
+    MatExpansionModule
     
     
   ],

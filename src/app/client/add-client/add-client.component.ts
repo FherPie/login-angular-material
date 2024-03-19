@@ -6,9 +6,8 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ClientLite } from '../client.model2';
 import { ResponseGenerico } from '../models/ResponseGenerico';
 import { DiscardInfoComponent } from '../utils-components/discard-info-component-component/discard-info-component-component.component';
-import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -32,8 +31,7 @@ export class AddClientComponent implements OnInit {
     private clienteSrv: ClienteService, 
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder,
-    private toastr: ToastrService) { }
+    private fb: FormBuilder, private _snackBar: MatSnackBar ) { }
 
   ngOnInit(): void {
     console.log("EStuiante", this.clienteLite);
@@ -63,17 +61,17 @@ export class AddClientComponent implements OnInit {
     // }
   }
 
-  agregarCliente(form: { value: any; }) {
-    this.cliente = form.value;
-    console.log(this.cliente);
-    this.clienteSrv.create(this.cliente).subscribe(
-      response => {
-        console.log(response);
-        this.submitted = true;
-      }, error => {
-        this.showToastByResponseError(error);
-      });
-  }
+  // agregarCliente(form: { value: any; }) {
+  //   this.cliente = form.value;
+  //   console.log(this.cliente);
+  //   this.clienteSrv.create(this.cliente).subscribe(
+  //     response => {
+  //       console.log(response);
+  //       this.submitted = true;
+  //     }, error => {
+  //       this.showToastByResponseError(error);
+  //     });
+  // }
 
 
 
@@ -106,7 +104,8 @@ export class AddClientComponent implements OnInit {
       },
       complete: () => {},
       error: error => {
-          //this.showToastByResponseError(error);
+        console.log("MY EXPE", error);
+          this._snackBar.open(error, 'X') 
       }
   })
   }
@@ -162,8 +161,4 @@ export class AddClientComponent implements OnInit {
       });
   }
 
-  private showToastByResponseError(error: Error){
-    this.saving = false;
-    this.toastr.error('Error', error.toString() );
-}
 }
