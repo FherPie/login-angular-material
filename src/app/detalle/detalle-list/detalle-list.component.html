@@ -7,7 +7,6 @@
 
         <mat-card-actions align="start">
           <div class="row">
-            <div class="col-md-3">
               <button
                 class="btn btn-info text-white btn-block btn-sm"
                 style="width: 100%"
@@ -15,7 +14,6 @@
               >
                 Nuevo
               </button>
-            </div>
           </div>
         </mat-card-actions>
       </mat-card>
@@ -53,7 +51,9 @@
                     {{ detalle.maestro?.nombre }}
                     <br />
                     <b>Descripcion: </b>
-                    {{ detalle.maestro?.descripcion }}
+                    {{ detalle.maestro?.descripcion }}    <br />
+                    <b>Codigo: </b>
+                    {{ detalle.maestro?.codigo }}
                   </td>
                 </tr>
               </tbody>

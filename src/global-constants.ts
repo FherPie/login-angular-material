@@ -5,8 +5,8 @@ export class GlobalConstants {
   public static baseUrlCuentas = '/api/producto';
   public static baseUrlMovimientos = GlobalConstants.host + 'api/movimiento';
   public static baseUrl = GlobalConstants.host;
-  public static baseUrlMaestro = GlobalConstants.host + '/api/maestro';
-  public static baseUrlDetalle = GlobalConstants.host + '/api/detalle';
+  public static baseUrlMaestro = GlobalConstants.host + '/maestro';
+  public static baseUrlDetalle = GlobalConstants.host + '/detalle';
 }
 
 //Expandable menu

@@ -48,6 +48,7 @@ export class MaestroAddComponent implements OnInit {
       id: [''],
       nombre: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
+      codigo: ['', [Validators.required]],
     });
   }
 
@@ -69,7 +70,7 @@ export class MaestroAddComponent implements OnInit {
 
   agregarMaestro(form: { value: any }) {
     this.maestro = form.value;
-
+    console.log("maestros",  this.maestro);
     this.maestroService.create(this.maestro).subscribe(
       (response) => {
         console.log(response);

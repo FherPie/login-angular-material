@@ -1,15 +1,16 @@
 export class ClientDto {
-    clienteId?: number;
-    persona!: {
-        edad?: number;
-        email?: string;
-        direccion?: string;
-        genero?: string;
-        identificacion?: string;
-        nombre?: string;
-        apellido?: string;
-        telefono?: string;
-    };
-    estado?: string;
-    password?: string;
+
+    nombres?: string;
+    apellidos?: string;
+    id?: number;
+    direccion?: string;
+    telefono?: string;
+    telefono2?: string;
+    referido?: string;
+    email?: string;
+    fechaNacimiento?:Date;
+    identificacion?: string;
+    //     genero?: string;
+    // estado?: string;
+    // password?: string;
 }

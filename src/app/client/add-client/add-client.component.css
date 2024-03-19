@@ -1,0 +1,27 @@
+.form-datos {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: repeat(2, 1fr) auto 1fr 1fr;
+    column-gap: 0.5em;
+    row-gap: 0.1em;
+
+  }
+  
+  .input-data {
+    width: 100%;
+    font-size:small;
+    
+    padding-left: 0.5em;
+    padding-top:  0.5em;
+  }
+
+  .press-data {
+    font-size:small;
+    margin-left: 0.55em;
+    padding-top:  0.5em;
+    grid-column-start: 1.5;
+  }
+  
