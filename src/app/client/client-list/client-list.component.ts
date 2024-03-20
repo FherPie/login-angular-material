@@ -8,6 +8,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DeleteConfirmDialogComponent } from 'src/app/proposal/util-components/delete-confirm-dialog/delete-confirm-dialog.component';
 import { AddClientComponent } from '../add-client/add-client.component';
 import { Router } from '@angular/router';
+import { MessageService } from 'src/app/utils-services/message-service.service';
 
 @Component({
   selector: 'app-client-list',
@@ -18,7 +19,7 @@ export class ClientListComponent implements OnInit, AfterViewInit {
   constructor(
     private clienteService: ClienteServiceServer,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog, private msgs:MessageService
   ) { }
 
 
@@ -121,18 +122,32 @@ export class ClientListComponent implements OnInit, AfterViewInit {
 
 
   deleteClient(pacientDtoToDelete: any) {
-    const dialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
-      width: '50em',
-      data: pacientDtoToDelete
-    });
+    this.dialog
+      .open(DeleteConfirmDialogComponent)
+      .afterClosed()
+      .subscribe((confirm) => {
+        if (confirm) {
+         
+          this.clienteService.delete(pacientDtoToDelete.id).subscribe({
+            next: data => {
+                 //this.toastr.error('Eliminado con Exito');
+                //this.dialogRef.close({ data: true });
+            },
+            complete: () => {
+              alert('Registro Eliminado');
+              this.retrieveClients();
+            },
+            error: error => {
+              this.msgs.showError(error.error.mensaje)
+            }
+        }
+    );}
+      });
+  
+}
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result.data) {
-          this.retrieveClients();
-      }
 
-    });
-  }
+
 
 
   openDialogClientForm(data: ClientLite | null) {

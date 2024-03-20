@@ -88,6 +88,10 @@ export class AddClientComponent implements OnInit {
   }
 
 
+    // public close(): void { // To cancel the dialog window
+    //    this.dialog.closeAll();
+    // }
+
   
   public onAddClient(): void {
     console.log("Pacient Info",this.addClientForm.value);
@@ -159,14 +163,14 @@ export class AddClientComponent implements OnInit {
       fechaNacimiento: ['', [Validators.required]],
       nombres: ['', [Validators.required]],
       apellidos: ['', [Validators.required]],
-      direccion: ['', [Validators.required]],
-      ocupacion: ['', [Validators.required]],
-      telefono: ['', [Validators.required]],
-      telefono2: ['', [Validators.required]],
-      referidoPor: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
+      direccion: [''],
+      ocupacion: [''],
+      telefono: [''],
+      telefono2: [''],
+      referidoPor: [''],
+      email: ['', [Validators.email]],
       identificacion: ['', [Validators.required]],
-      motivoConsulta: ['', [Validators.required]]
+      motivoConsulta: ['']
       });
   }
 
