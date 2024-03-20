@@ -7,6 +7,9 @@ export class ClientLite {
     identificacion?: string;
     id?: number;
     nombresCompletos?: string;
+    motivoConsulta?: string;
+    referidoPor?: string;
+    idPersona?: number;
 }
 
 

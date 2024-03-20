@@ -46,3 +46,13 @@ mat-sidenav-content{
       color: white !important;
     }
   }
+
+  .snackbar-warn {
+    .mdc-snackbar__surface {
+      background-color: var(--color-seconday) !important;
+    }
+  
+    .mdc-snackbar__label {
+      color: white !important;
+    }
+  }

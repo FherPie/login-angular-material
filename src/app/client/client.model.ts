@@ -10,6 +10,9 @@ export class ClientDto {
     email?: string;
     fechaNacimiento?:Date;
     identificacion?: string;
+    motivoConsulta?: string;
+    referidoPor?: string;
+    idPersona?: number;
     //     genero?: string;
     // estado?: string;
     // password?: string;

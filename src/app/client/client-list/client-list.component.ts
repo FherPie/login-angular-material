@@ -139,7 +139,8 @@ export class ClientListComponent implements OnInit, AfterViewInit {
 
     const dialogRef = this.dialog.open(AddClientComponent, {
       width: '640px', disableClose: true,
-      data: data
+      data: data,
+      maxHeight: '120vh'
     });
 
     dialogRef.afterClosed().subscribe(() => {

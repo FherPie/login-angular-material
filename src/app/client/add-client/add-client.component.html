@@ -1,7 +1,8 @@
-<mat-card appearance="outlined">
-    <mat-card-header>
-        <mat-card-title>Cliente</mat-card-title>
-    </mat-card-header>
+
+<h1 mat-dialog-title>Cliente</h1>
+<mat-dialog-content> <!-- instead of your <div>  or use <div mat-dialog-content> -->
+
+
     <form #form="ngForm" class="form-datos" [formGroup]="addClientForm">
         <mat-form-field class="input-data">
             <input matInput placeholder="Nombres" formControlName="nombres" required="true">
@@ -12,7 +13,7 @@
         </mat-form-field>
 
         <mat-form-field class="input-data">
-            <input type="number" matInput placeholder="Cedula De Identidad" formControlName="identificacion"
+            <input type="text" matInput placeholder="Cedula De Identidad" formControlName="identificacion"
                 required="true">
         </mat-form-field>
 
@@ -27,13 +28,20 @@
         </mat-form-field>
 
    
+        <mat-form-field class="input-data">
+            <input matInput [matDatepicker]="picker" placeholder="Fecha Nacimiento" formControlName="fechaNacimiento" type="text"
+              required>
+            <mat-hint>dd/mm/yyyy</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
 
         <mat-form-field class="input-data">
             <input matInput placeholder="Ocupación" formControlName="ocupacion" required="true">
         </mat-form-field>
 
         <mat-form-field class="input-data">
-            <input matInput placeholder="Referido por" formControlName="referido" required="true">
+            <input matInput placeholder="Referido por" formControlName="referidoPor" required="true">
         </mat-form-field>
 
 
@@ -62,5 +70,4 @@
 
     </form>
 
-
-</mat-card>
+</mat-dialog-content> <!-- instead of your </div> -->

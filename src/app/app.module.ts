@@ -49,7 +49,6 @@ import { ComprasListComponent } from './compras/compras-list/compras-list.compon
 import { TablePaginationBuilderComponent } from './dynamic-table-builder/table-pagination-builder';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AppTableModule } from './app-table/app-table.module';
-import { CardModule } from 'primeng/card';
 import { AutocompleteComponent } from './autocomplete-pacient/autocomplete.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { LoginComponent } from './login/login.component';
@@ -122,7 +121,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatMenuModule,
     MatTooltipModule,
     AppTableModule,
-    CardModule,
     MatAutocompleteModule,
     MatExpansionModule,
     MatSnackBarModule

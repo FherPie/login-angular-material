@@ -8,6 +8,7 @@ import { ResponseGenerico } from '../models/ResponseGenerico';
 import { DiscardInfoComponent } from '../utils-components/discard-info-component-component/discard-info-component-component.component';
 import { ActivatedRoute } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { MessageService } from 'src/app/utils-services/message-service.service';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class AddClientComponent implements OnInit {
     private clienteSrv: ClienteService, 
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder, private _snackBar: MatSnackBar ) { }
+    private fb: FormBuilder, private _snackBar: MatSnackBar, private msgs:MessageService ) { }
 
   ngOnInit(): void {
     console.log("EStuiante", this.clienteLite);
@@ -103,7 +104,7 @@ export class AddClientComponent implements OnInit {
           this.saving = false;
           this.response = data;
           this.cliente= data.objetoOb;
-          //this.showToastByResponseSucess(this.response);
+          this.msgs.showInfo("Registro Ingresado...")
       },
       complete: () => {},
       error: error => {
@@ -127,11 +128,12 @@ export class AddClientComponent implements OnInit {
           this.saving = false;
           this.response = data;
           this.cliente= data.objetoOb;
+          this.msgs.showInfo("Registro Actualizado...")
           //this.showToastByResponseSucess(this.response);
       },
       complete: () => {},
       error: error => {
-          //this.showToastByResponseError(error);
+        this.msgs.showError(error.error.mensaje)
       }
   })
   }
@@ -154,13 +156,14 @@ export class AddClientComponent implements OnInit {
   iniciarForms() {
     this.addClientForm = this.fb.group({
       id: null,
+      fechaNacimiento: ['', [Validators.required]],
       nombres: ['', [Validators.required]],
       apellidos: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
       ocupacion: ['', [Validators.required]],
       telefono: ['', [Validators.required]],
       telefono2: ['', [Validators.required]],
-      referido: ['', [Validators.required]],
+      referidoPor: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       identificacion: ['', [Validators.required]],
       motivoConsulta: ['', [Validators.required]]
