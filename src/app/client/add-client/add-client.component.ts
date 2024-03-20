@@ -35,7 +35,6 @@ export class AddClientComponent implements OnInit {
     private fb: FormBuilder, private _snackBar: MatSnackBar, private msgs:MessageService ) { }
 
   ngOnInit(): void {
-    console.log("EStuiante", this.clienteLite);
     this.clienteLite = this.data;
     if(this.clienteLite.id){
       this.clienteSrv.getClient(this.clienteLite.id).subscribe(
@@ -48,36 +47,13 @@ export class AddClientComponent implements OnInit {
         }
       );
     }
-
-
-
-
-
-
     this.iniciarForms();
-    
-    // if (this.route.snapshot.paramMap.get('id')) {
-    //   console.log('viene el id', this.route.snapshot.paramMap.get('id'));
-    //   this.getCliente(this.route.snapshot.paramMap.get('id'));
-    // }
   }
 
-  // agregarCliente(form: { value: any; }) {
-  //   this.cliente = form.value;
-  //   console.log(this.cliente);
-  //   this.clienteSrv.create(this.cliente).subscribe(
-  //     response => {
-  //       console.log(response);
-  //       this.submitted = true;
-  //     }, error => {
-  //       this.showToastByResponseError(error);
-  //     });
-  // }
 
 
 
   openDialog(): void {
-    //console.log(this.wasFormChanged);
     if(this.addClientForm?.dirty) {
        const dialogRef = this.dialog.open(DiscardInfoComponent, {
          width: '50em',
@@ -87,12 +63,6 @@ export class AddClientComponent implements OnInit {
      }
   }
 
-
-    // public close(): void { // To cancel the dialog window
-    //    this.dialog.closeAll();
-    // }
-
-  
   public onAddClient(): void {
     console.log("Pacient Info",this.addClientForm.value);
     if(this.addClientForm.invalid){
@@ -133,7 +103,6 @@ export class AddClientComponent implements OnInit {
           this.response = data;
           this.cliente= data.objetoOb;
           this.msgs.showInfo("Registro Actualizado...")
-          //this.showToastByResponseSucess(this.response);
       },
       complete: () => {},
       error: error => {
@@ -145,17 +114,11 @@ export class AddClientComponent implements OnInit {
 
   private markAsDirty(group: FormGroup | undefined): void {
     group?.markAsDirty();
-    // tslint:disable-next-line:forin
     for (const i in group?.controls) {
       group?.controls[i].markAsDirty();
     }
   }
 
-
-  setearForm() {
-    this.addClientForm.reset();
-    this.iniciarForms();
- }
 
   iniciarForms() {
     this.addClientForm = this.fb.group({

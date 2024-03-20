@@ -1,115 +1,32 @@
-<div class="container">
-  <mat-card appearance="outlined">
-    <div class="col-md-6">
-      <button
-        class="btn btn-info text-white btn-block"
-        style="width: 100%"
-        (click)="navegarAtras()"
-      >
-        Atras
+
+<h1 mat-dialog-title>Productos</h1>
+<mat-dialog-content> <!-- instead of your <div>  or use <div mat-dialog-content> -->
+
+
+
+    <form #form="ngForm" class="form-datos" [formGroup]="addProductForm" >
+      <mat-form-field class="input-data">
+        <input  type="text" matInput placeholder="Nombre" formControlName="nombre" required="true">
+    </mat-form-field>
+
+    <mat-form-field class="input-data">
+        <input type="number" matInput placeholder="Valor" formControlName="precioUnitario" required="true">
+    </mat-form-field>
+
+    <mat-form-field class="input-data">
+        <input type="number" matInput placeholder="Valor Compra" formControlName="precioCompra"
+            required="false">
+    </mat-form-field>
+
+    <mat-card-actions style="text-align: center;">
+
+      <button mat-raised-button type="submit" color="primary" class="Update-btn"
+          (click)="producto.idProducto ?  onUpdateClient():onAddClient()"> {{producto.idProducto ? 'Actualizar':'Guardar'}}
       </button>
-    </div>
-  </mat-card>
-  {{ currentProducto | json }}
-  <div *ngIf="!submitted" class="row">
-    <form [formGroup]="form" (ngSubmit)="agregarProducto(form)">
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>Productos </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <mat-card appearance="outlined">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-12">
-                  <mat-form-field class="full-width">
-                    <input
-                      matInput
-                      placeholder="Nombre Producto"
-                      formControlName="nombre"
-                      name="nombre"
-                      type="text"
-                      required
-                    />
-                  </mat-form-field>
-                </div>
-                <div class="col-md-12">
-                  <mat-form-field class="full-width">
-                    <input
-                      matInput
-                      placeholder="Precio de Venta"
-                      formControlName="precioUnitario"
-                      name="precioUnitario"
-                      type="number"
-                      required
-                    />
-                  </mat-form-field>
-                </div>
-                <div class="col-lg-12">
-                  <mat-form-field class="full-width">
-                    <input
-                      matInput
-                      placeholder="Stock del Producto"
-                      formControlName="stock"
-                      name="stock"
-                      type="text"
-                      required
-                    />
-                  </mat-form-field>
-                </div>
-                <div class="col-lg-12">
-                  <mat-form-field class="full-width">
-                    <input
-                      matInput
-                      placeholder="Precio Compra Producto"
-                      formControlName="precioCompra"
-                      name="precioCompra"
-                      type="number"
-                      required
-                    />
-                  </mat-form-field>
-                </div>
-              </div>
-            </div>
-          </mat-card>
-        </mat-card-content>
-        <mat-card-actions style="text-align: center">
-          <button
-            class="btn btn-success"
-            style="width: 20%"
-            [disabled]="form.invalid"
-          >
-            Guardar
-          </button>
-        </mat-card-actions>
-      </mat-card>
+
+      <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancelar</button>
+  </mat-card-actions>
     </form>
-  </div>
-  <div *ngIf="submitted" class="row">
-    <mat-card appearance="outlined">
-      <h4>Producto registrado</h4>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <button
-              class="btn btn-success btn-block"
-              style="width: 100%"
-              (click)="newProducto()"
-            >
-              Agregar
-            </button>
-          </div>
-          <div class="col-md-6">
-            <button
-              class="btn btn-info text-white btn-block"
-              style="width: 100%"
-              (click)="irProductos()"
-            >
-              Ir a Productos
-            </button>
-          </div>
-        </div>
-      </div>
-    </mat-card>
-  </div>
-</div>
+
+
+  </mat-dialog-content> <!-- instead of your </div> -->

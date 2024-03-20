@@ -22,8 +22,6 @@ export class ClientListComponent implements OnInit, AfterViewInit {
     public dialog: MatDialog, private msgs:MessageService
   ) { }
 
-
-
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   @Output() eventNew = new EventEmitter();
@@ -65,15 +63,9 @@ export class ClientListComponent implements OnInit, AfterViewInit {
       .subscribe((resp) => {
         alert('Uploaded');
       });
-    // return this.httpClient.post(YOUR_API_URL, formData);
   }
 
   ngOnInit(): void {
-
-
-
-
-
     this.retrieveClients();
   }
 
@@ -102,7 +94,6 @@ export class ClientListComponent implements OnInit, AfterViewInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
-    // this.toastr.success('Hello world!', filterValue);
   }
 
   clearFilterValue() {
@@ -111,7 +102,6 @@ export class ClientListComponent implements OnInit, AfterViewInit {
   }
 
   new() {
-    //this.eventNew.emit(new Map().set("app" ,"0"));
     this.openDialogClientForm(new ClientLite());
   }
 
@@ -130,8 +120,6 @@ export class ClientListComponent implements OnInit, AfterViewInit {
          
           this.clienteService.delete(pacientDtoToDelete.id).subscribe({
             next: data => {
-                 //this.toastr.error('Eliminado con Exito');
-                //this.dialogRef.close({ data: true });
             },
             complete: () => {
               alert('Registro Eliminado');
@@ -179,15 +167,6 @@ export class ClientListComponent implements OnInit, AfterViewInit {
   //     }
   //   );
   // }
-
-  setActiveClient(client: ClientLite, index: number): void {
-    this.currentClient = client;
-    this.currentIndex = index;
-  }
-
-  agregarClientes(): void {
-    this.router.navigateByUrl('/addClient');
-  }
 
 
 
