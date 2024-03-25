@@ -14,15 +14,15 @@
             <input type="text" matInput placeholder="Nombre de Usuario" formControlName="username" required="true">
         </mat-form-field>
 
-        <mat-form-field class="input-data">
+        <!-- <mat-form-field class="input-data">
             <input type="text" matInput placeholder="Role" formControlName="role" required="true">
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field class="input-data">
+        <!-- <mat-form-field class="input-data">
             <input type="text" matInput placeholder="Nombre de Usuario" formControlName="username" required="true">
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field class="input-data">
+        <mat-form-field class="input-data {{empleado.id? 'invisible':''}}">
             <input type="password" matInput placeholder="Password" formControlName="password" required="true">
         </mat-form-field>
 
@@ -30,7 +30,7 @@
 
     <mat-card-actions style="text-align: center;">
         <button mat-raised-button type="submit" color="primary" class="Update-btn"
-            (click)="empleado.id ?  onUpdateProducto():onAddProducto()" [disabled]="saving"> {{empleado.id ?
+            (click)="empleado.username ?  onUpdateProducto():onAddProducto()" [disabled]="saving"> {{empleado.username ?
             'Actualizar':'Guardar'}}
         </button>
         <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancelar</button>

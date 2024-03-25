@@ -38,10 +38,10 @@ export class AddEmpleadoComponent implements OnInit {
   ngOnInit(): void {
   
     this.empleado = this.data;
-    if(this.empleado.id){
-      this.empleadosService.get(this.empleado.id).subscribe(
+    if(this.empleado.username){
+      this.empleadosService.get(this.empleado.username).subscribe(
         (data) => {
-          this.empleado = data;
+          this.empleado = data.objetoOb;
           this.addEmpleadoForm = this.fb.group(this.empleado);
         },
         (error) => {
@@ -51,8 +51,6 @@ export class AddEmpleadoComponent implements OnInit {
     }
     this.iniciarForms();
     }
-
-
 
     
   openDialog(): void {
@@ -145,10 +143,11 @@ export class AddEmpleadoComponent implements OnInit {
   iniciarForms() {
     //this.addEmpleadoForm.reset;
     this.addEmpleadoForm = this.fb.group({
-      idProducto: null,
+      id: null,
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       username: ['', [Validators.required]],
-      precioUnitario: [null, [Validators.required]],
-      precioCompra: [null],
+      password: ['', [Validators.required]]
     });
   }
 }

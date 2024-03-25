@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import{ GlobalConstants } from '../../global-constants';
-const baseUrl = GlobalConstants.baseUrlUsers;
+const baseUrl = GlobalConstants.secure;
 @Injectable({
   providedIn: 'root'
 })
@@ -11,16 +11,18 @@ export class EmpleadosService {
   constructor(private http: HttpClient) { }
   
   getAll(): Observable<any> {
-    return this.http.get(baseUrl);
+    return this.http.get(baseUrl+"/empleados");
   }
+
   get(id: any): Observable<any> {
-    return this.http.get(`${baseUrl}/${id}`);
+    return this.http.get(`${baseUrl}/empleados/${id}`);
   }
+
   create(data: any): Observable<any> {
-    return this.http.post(baseUrl, data);
+    return this.http.post(baseUrl+"/registrations", data);
   }
   update(data: any): Observable<any> {
-    return this.http.put(`${baseUrl}`, data);
+    return this.http.put(`${baseUrl}/empleados/`, data);
   }
   delete(id: any): Observable<any> {
     return this.http.delete(`${baseUrl}/${id}`);

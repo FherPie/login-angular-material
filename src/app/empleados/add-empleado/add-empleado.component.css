@@ -25,3 +25,9 @@
     grid-column-start: 1.5;
   }
   
+  .invisible{
+    display: block;
+    visibility: hidden;
+    height: 0;
+    width: 0;
+}
