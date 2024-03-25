@@ -6,7 +6,7 @@ import{ GlobalConstants } from '../global-constants';
 import { AuthenticationRequest } from './login/AuthenticationRequest';
 
 //https://www.c-sharpcorner.com/article/learn-about-asynchronous-service-in-angular/
-const baseUrl = GlobalConstants.baseUrl;
+const baseUrl = GlobalConstants.secure;
 
 
 const httpOptions = {
@@ -27,6 +27,8 @@ export class AuthService {
    public authenticate(credentials: AuthenticationRequest): Observable<any>{
      return this.httpClient.post<HttpResponse<any>>(baseUrl+'/authenticate', credentials, httpOptions);
    }
-
+   public logout(): Observable<any>{
+    return this.httpClient.post(baseUrl+'/logout', {});
+  }
 
 }

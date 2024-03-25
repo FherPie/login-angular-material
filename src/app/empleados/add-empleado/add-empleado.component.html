@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Empleado</h1>
+<mat-dialog-content> <!-- instead of your <div>  or use <div mat-dialog-content> -->
+    <form #form="ngForm" class="form-datos" [formGroup]="addEmpleadoForm">
+
+        <mat-form-field class="input-data">
+            <input type="text" matInput placeholder="Nombre" formControlName="firstName" required="true">
+        </mat-form-field>
+
+        <mat-form-field class="input-data">
+            <input type="text" matInput placeholder="Apellido" formControlName="lastName" required="true">
+        </mat-form-field>
+
+        <mat-form-field class="input-data">
+            <input type="text" matInput placeholder="Nombre de Usuario" formControlName="username" required="true">
+        </mat-form-field>
+
+        <mat-form-field class="input-data">
+            <input type="text" matInput placeholder="Role" formControlName="role" required="true">
+        </mat-form-field>
+
+        <mat-form-field class="input-data">
+            <input type="text" matInput placeholder="Nombre de Usuario" formControlName="username" required="true">
+        </mat-form-field>
+
+        <mat-form-field class="input-data">
+            <input type="password" matInput placeholder="Password" formControlName="password" required="true">
+        </mat-form-field>
+
+    </form>
+
+    <mat-card-actions style="text-align: center;">
+        <button mat-raised-button type="submit" color="primary" class="Update-btn"
+            (click)="empleado.id ?  onUpdateProducto():onAddProducto()" [disabled]="saving"> {{empleado.id ?
+            'Actualizar':'Guardar'}}
+        </button>
+        <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancelar</button>
+    </mat-card-actions>
+
+</mat-dialog-content> <!-- instead of your </div> -->

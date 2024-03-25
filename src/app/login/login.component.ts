@@ -49,10 +49,11 @@ export class LoginComponent implements OnInit {
       next: (data)=>{
       this.tokenStorage.saveToken(data.token);
         this.isLoggedIn=true;
-        //this.reloadPage();
+        this.reloadPage();
       },
        error: (error)=>{
-        this.errorMessage= error.error.message;
+        this.errorMessage= error.error;
+        console.log(error);
         this.isLoginFailed=true;
       }
     })

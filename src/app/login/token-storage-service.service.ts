@@ -11,8 +11,11 @@ export class TokenStorageServiceService {
 
   constructor() { }
 
-  signOut():void{
+  signOut(): Promise<boolean>{
     window.sessionStorage.clear();
+    return  new Promise(resolve =>{
+      resolve(true)
+    })
   }
 
 public saveToken(token:string):void{

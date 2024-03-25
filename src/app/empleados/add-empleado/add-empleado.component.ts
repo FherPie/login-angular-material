@@ -1,24 +1,24 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { ProductoLite } from '../producto.model2';
-import { ProductoServiceServer } from '../producto.service.server';
+import { EmpleadosService } from '../empleados.service';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from 'src/app/proposal/services/DataService';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessageService } from 'src/app/utils-services/message-service.service';
 import { DiscardInfoComponent } from 'src/app/client/utils-components/discard-info-component-component/discard-info-component-component.component';
 import { ResponseGenerico } from 'src/app/client/models/ResponseGenerico';
+import { EmpleadoDto } from '../empleado.model2';
 
 @Component({
-  selector: 'app-add-producto',
-  templateUrl: './add-producto.component.html',
-  styleUrls: ['./add-producto.component.css'],
+  selector: 'app-add-empleado',
+  templateUrl: './add-empleado.component.html',
+  styleUrls: ['./add-empleado.component.css'],
 })
-export class AddProductoComponent implements OnInit {
+export class AddEmpleadoComponent implements OnInit {
   @ViewChild('form') Form!: NgForm;
 
-  producto = new ProductoLite();
-  public addProductForm!: FormGroup;
+  empleado = new EmpleadoDto();
+  public addEmpleadoForm!: FormGroup;
   submitted = false;
   currentProducto: any;
   response!: ResponseGenerico;
@@ -27,7 +27,7 @@ export class AddProductoComponent implements OnInit {
 
 
   constructor(
-    private productoService: ProductoServiceServer,
+    private empleadosService: EmpleadosService,
     private http: HttpClient,
     private app: DataService,
     public dialog: MatDialog,
@@ -37,12 +37,12 @@ export class AddProductoComponent implements OnInit {
 
   ngOnInit(): void {
   
-    this.producto = this.data;
-    if(this.producto.idProducto){
-      this.productoService.get(this.producto.idProducto).subscribe(
+    this.empleado = this.data;
+    if(this.empleado.id){
+      this.empleadosService.get(this.empleado.id).subscribe(
         (data) => {
-          this.producto = data;
-          this.addProductForm = this.fb.group(this.producto);
+          this.empleado = data;
+          this.addEmpleadoForm = this.fb.group(this.empleado);
         },
         (error) => {
           console.error(error);
@@ -56,7 +56,7 @@ export class AddProductoComponent implements OnInit {
 
     
   openDialog(): void {
-    if(this.addProductForm?.dirty) {
+    if(this.addEmpleadoForm?.dirty) {
        const dialogRef = this.dialog.open(DiscardInfoComponent, {
          width: '50em',
        });
@@ -67,20 +67,20 @@ export class AddProductoComponent implements OnInit {
 
   public onAddProducto(): void {
     this.saving = true;
-    console.log("Product Info",this.addProductForm.value);
-    if(this.addProductForm.invalid){
-       this.markAsDirty(this.addProductForm);
+    console.log("Product Info",this.addEmpleadoForm.value);
+    if(this.addEmpleadoForm.invalid){
+       this.markAsDirty(this.addEmpleadoForm);
        this.msgs.showError("Campos Obligatorios")
        this.saving = false;
 
        return;
      }
-    this.producto = this.addProductForm.value;
-    this.productoService.create(this.producto).subscribe({
+    this.empleado = this.addEmpleadoForm.value;
+    this.empleadosService.create(this.empleado).subscribe({
       next: (data) => {
           this.saving = false;
           this.response = data;
-          this.producto= data.objetoOb;
+          this.empleado= data.objetoOb;
           this.msgs.showInfo("Registro Ingresado...")
           this.dialog.closeAll();
       },
@@ -95,18 +95,18 @@ export class AddProductoComponent implements OnInit {
 
   public onUpdateProducto(): void {
     this.saving = true;
-    console.log("Client Info",this.addProductForm.value);
-    if(this.addProductForm.invalid){
-      this.markAsDirty(this.addProductForm);
+    console.log("Client Info",this.addEmpleadoForm.value);
+    if(this.addEmpleadoForm.invalid){
+      this.markAsDirty(this.addEmpleadoForm);
       this.saving = false;
       return;
     }
-    this.producto = this.addProductForm.value;
-    this.productoService.update(this.producto).subscribe({
+    this.empleado = this.addEmpleadoForm.value;
+    this.empleadosService.update(this.empleado).subscribe({
       next: (data) => {
           this.saving = false;
           this.response = data;
-          this.producto= data.objetoOb;
+          this.empleado= data.objetoOb;
           this.msgs.showInfo("Registro Actualizado...")
           this.dialog.closeAll();
       },
@@ -127,9 +127,9 @@ export class AddProductoComponent implements OnInit {
   }
 
   // agregarProducto(form: { value: any }) {
-  //   this.producto = form.value;
-  //   console.log(this.producto);
-  //   this.productoService.create(this.producto).subscribe(
+  //   this.empleado = form.value;
+  //   console.log(this.empleado);
+  //   this.empleadosService.create(this.empleado).subscribe(
   //     (response) => {
   //       console.log(response);
   //       this.submitted = true;
@@ -143,10 +143,10 @@ export class AddProductoComponent implements OnInit {
 
 
   iniciarForms() {
-    //this.addProductForm.reset;
-    this.addProductForm = this.fb.group({
+    //this.addEmpleadoForm.reset;
+    this.addEmpleadoForm = this.fb.group({
       idProducto: null,
-      nombre: ['', [Validators.required]],
+      username: ['', [Validators.required]],
       precioUnitario: [null, [Validators.required]],
       precioCompra: [null],
     });

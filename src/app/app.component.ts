@@ -4,9 +4,10 @@ import { Factura } from  './proposal/models/factura';
 import { ActivatedRoute, Router } from "@angular/router";
 import { TokenStorageServiceService } from './login/token-storage-service.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { map, shareReplay } from 'rxjs/operators';
+import { finalize, map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MatSidenav } from '@angular/material/sidenav';
+import { AuthService } from './AuthService';
 
 @Component({
   selector: 'app-root',
@@ -35,7 +36,9 @@ export class AppComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private  tokenStorageService: TokenStorageServiceService) {
+  constructor(private breakpointObserver: BreakpointObserver, 
+    private  tokenStorageService: TokenStorageServiceService,private authService: AuthService,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -49,8 +52,16 @@ export class AppComponent {
   }
 
   logout():void{
-    this.tokenStorageService.signOut();
-     window.location.reload();
+     this.authService.logout().pipe(
+      finalize(() => {
+        this.tokenStorageService.signOut().then(()=>{
+          this.router.navigateByUrl('/login').then(()=> {window.location.reload();});
+        });
+      })).subscribe({
+        next: data=>{
+    
+        }
+      });
   }
 
 

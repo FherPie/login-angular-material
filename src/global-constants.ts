@@ -1,5 +1,7 @@
 export class GlobalConstants {
   public static host = 'http://localhost:8080/api';
+  public static secure = 'http://localhost:8092';
+  public static baseUrlUsers = 'http://localhost:8092/' + 'empleados';
   public static baseUrlProductos = GlobalConstants.host + '/producto';
   public static baseUrlCliente = 'http://localhost:8080/api/cliente';
   public static baseUrlCuentas = '/api/producto';

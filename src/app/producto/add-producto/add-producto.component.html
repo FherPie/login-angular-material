@@ -1,9 +1,6 @@
 
 <h1 mat-dialog-title>Productos</h1>
 <mat-dialog-content> <!-- instead of your <div>  or use <div mat-dialog-content> -->
-
-
-
     <form #form="ngForm" class="form-datos" [formGroup]="addProductForm" >
       <mat-form-field class="input-data">
         <input  type="text" matInput placeholder="Nombre" formControlName="nombre" required="true">
@@ -18,15 +15,14 @@
             required="false">
     </mat-form-field>
 
-    <mat-card-actions style="text-align: center;">
-
-      <button mat-raised-button type="submit" color="primary" class="Update-btn"
-          (click)="producto.idProducto ?  onUpdateClient():onAddClient()"> {{producto.idProducto ? 'Actualizar':'Guardar'}}
-      </button>
-
-      <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancelar</button>
-  </mat-card-actions>
     </form>
 
+    <mat-card-actions style="text-align: center;">
+      <button mat-raised-button type="submit" color="primary" class="Update-btn"
+          (click)="producto.idProducto ?  onUpdateProducto():onAddProducto()"  
+          [disabled]="saving" > {{producto.idProducto ? 'Actualizar':'Guardar'}}
+      </button>
+      <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancelar</button>
+  </mat-card-actions>
 
   </mat-dialog-content> <!-- instead of your </div> -->

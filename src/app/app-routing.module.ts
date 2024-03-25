@@ -16,6 +16,7 @@ import { DetalleAddComponent } from './detalle/detalle-add/detalle-add.component
 import { ProductsComponent } from './app-table/products/products.component';
 import { AutocompleteComponent } from './autocomplete-pacient/autocomplete.component';
 import { AppNavComponent } from './app-nav/app-nav.component';
+import { EmpleadoListComponent } from './empleados/empleado-list/empleado-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -36,8 +37,8 @@ const routes: Routes = [
   { path: 'app-nav', component: AppNavComponent },
   { path: 'maestro/:id', component: MaestroAddComponent },
   { path: 'detalle/:id', component: DetalleAddComponent },
-  { path: 'addClient/:id', component: AddClientComponent },
   { path: 'autocomplete', component: AutocompleteComponent },
+  { path: 'empleados', component: EmpleadoListComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 

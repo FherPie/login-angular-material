@@ -58,9 +58,9 @@ import { AutocompleteProductoComponent } from './autocomplete-product/autocomple
 import { DeleteConfirmDialogComponent } from './proposal/util-components/delete-confirm-dialog/delete-confirm-dialog.component';
 import { DiscardInfoComponent } from './client/utils-components/discard-info-component-component/discard-info-component-component.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
-
-
+import { EmpleadoListComponent } from './empleados/empleado-list/empleado-list.component';
+import { AddEmpleadoComponent } from './empleados/add-empleado/add-empleado.component';
+import { authInterceptoProviders } from './login/AuthInterceptor';
 
 
 
@@ -89,8 +89,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     BuscarFacturaComponent,
     AutocompleteProductoComponent,
     DeleteConfirmDialogComponent,
-    DiscardInfoComponent
-    ],
+    DiscardInfoComponent,
+    EmpleadoListComponent,
+    AddEmpleadoComponent   ],
   imports: [
     CommonModule,
     BrowserModule,
@@ -126,7 +127,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSnackBarModule
   ],
 providers: [DataService,  { provide: DateAdapter, useClass:  MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
- { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT_DATE }, {provide: MatDialogRef, useValue:{}}
+ { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT_DATE }, {provide: MatDialogRef, useValue:{}}, authInterceptoProviders 
  ], 
   // providers: [DataService
   // ],

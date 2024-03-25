@@ -41,14 +41,12 @@ export class AppNavComponent implements OnInit {
 
 
 
-  logout() {
-
-  
-    this.http.post('logout', {}).pipe(
-      finalize(() => {
-        this.app.authenticated = false;
-        this.router.navigateByUrl('/login');
-      })).subscribe();
-  }
+  // logout() {
+  //   this.http.post('logout', {}).pipe(
+  //     finalize(() => {
+  //       this.app.authenticated = false;
+  //       this.router.navigateByUrl('/login');
+  //     })).subscribe();
+  // }
 
 }
