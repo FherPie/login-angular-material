@@ -61,6 +61,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EmpleadoListComponent } from './empleados/empleado-list/empleado-list.component';
 import { AddEmpleadoComponent } from './empleados/add-empleado/add-empleado.component';
 import { authInterceptoProviders } from './login/AuthInterceptor';
+import { UnActiveConfirmDialogComponent } from './empleados/util-components/unactive-confirm-dialog/unactive-confirm-dialog.component';
 
 
 
@@ -91,7 +92,8 @@ import { authInterceptoProviders } from './login/AuthInterceptor';
     DeleteConfirmDialogComponent,
     DiscardInfoComponent,
     EmpleadoListComponent,
-    AddEmpleadoComponent   ],
+    AddEmpleadoComponent,
+    UnActiveConfirmDialogComponent  ],
   imports: [
     CommonModule,
     BrowserModule,

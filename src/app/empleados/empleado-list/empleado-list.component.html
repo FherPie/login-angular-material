@@ -43,8 +43,14 @@
         <div [ngSwitch]="col.type">
           <div class="btn-edit" *ngSwitchCase="'none'">
             <!-- <button mat-icon-button (click)="openEditEmpleado(element)"> <mat-icon>edit</mat-icon></button> -->
-            <button mat-icon-button (click)="deleteEmpleado(element)" color="warn" aria-label="Delete">
-              <mat-icon>delete</mat-icon>
+            <button mat-icon-button (click)="activeEmpleado(element)" color="info" aria-label="Habilitar" [disabled]="element.status=='ACTIVE'"> <mat-icon><span class="material-symbols-outlined">
+              switches
+              </span></mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteEmpleado(element)" color="warn" aria-label="Deshabilitar" [disabled]="element.status=='INACTIVE'">
+              <mat-icon><span class="material-symbols-outlined">
+                switches
+                </span></mat-icon>
             </button>
           </div>
           <span *ngSwitchDefault>

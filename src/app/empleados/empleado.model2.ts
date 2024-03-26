@@ -29,6 +29,11 @@ export const  COLUMNS_SCHEMA = [
     label: "Nombre Usuario"
   },
   {
+    key: "status",
+    type: "text",
+    label: "Estado"
+  },
+  {
     key: "actions",
     type: "none",
     label: "Acciones"

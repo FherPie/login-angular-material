@@ -8,6 +8,7 @@ import { finalize, map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AuthService } from './AuthService';
+import { UserStorageService } from './login/user.storage-service.service';
 
 @Component({
   selector: 'app-root',
@@ -38,14 +39,14 @@ export class AppComponent {
 
   constructor(private breakpointObserver: BreakpointObserver, 
     private  tokenStorageService: TokenStorageServiceService,private authService: AuthService,
-    private router: Router) {
+    private router: Router, private userStorageService: UserStorageService) {
   }
 
   ngOnInit() {
     this.isLoggeIn= !! this.tokenStorageService.getToken();
 
     if(this.isLoggeIn){
-      this.username= this.tokenStorageService.getToken();
+      this.username= this.userStorageService.getUser()?.username;
     }else{
       this.closeSideNav();
     }

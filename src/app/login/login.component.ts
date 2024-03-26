@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { AuthService } from '../AuthService';
 import { AuthenticationRequest } from './AuthenticationRequest';
 import { TokenStorageServiceService } from './token-storage-service.service';
+import { UserStorageService } from './user.storage-service.service';
 
 
 export interface DialogData {
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
   roles: string[]=[];
 
   constructor(private authService: AuthService,
-    private tokenStorage: TokenStorageServiceService
+    private tokenStorage: TokenStorageServiceService, private userStorageService:UserStorageService
     ) {
     
    }
@@ -48,6 +49,7 @@ export class LoginComponent implements OnInit {
     this.authService.authenticate(this.credentials).subscribe({
       next: (data)=>{
       this.tokenStorage.saveToken(data.token);
+      this.userStorageService.saveUser(data.user);
         this.isLoggedIn=true;
         this.reloadPage();
       },

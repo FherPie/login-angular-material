@@ -24,9 +24,15 @@ export class EmpleadosService {
   update(data: any): Observable<any> {
     return this.http.put(`${baseUrl}/empleados/`, data);
   }
+
   delete(id: any): Observable<any> {
-    return this.http.delete(`${baseUrl}/${id}`);
+    return this.http.delete(`${baseUrl}/empleados/${id}`);
   }
+
+  activeempleados(id: any): Observable<any> {
+    return this.http.put(`${baseUrl}/activeempleados/${id}`, {});
+  }
+  
   deleteAll(): Observable<any> {
     return this.http.delete(baseUrl);
   }

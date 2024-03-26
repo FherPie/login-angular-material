@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { COLUMNS_SCHEMA, EmpleadoDto } from '../empleado.model2';
 import { EmpleadosService } from '../empleados.service';
-import { DataSource } from '@angular/cdk/table';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
@@ -10,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddEmpleadoComponent } from '../add-empleado/add-empleado.component';
 import { MessageService } from 'src/app/utils-services/message-service.service';
 import { DeleteConfirmDialogComponent } from 'src/app/proposal/util-components/delete-confirm-dialog/delete-confirm-dialog.component';
+import { UnActiveConfirmDialogComponent } from '../util-components/unactive-confirm-dialog/unactive-confirm-dialog.component';
 
 @Component({
   selector: 'app-empleado-list',
@@ -17,6 +17,7 @@ import { DeleteConfirmDialogComponent } from 'src/app/proposal/util-components/d
   styleUrls: ['./empleado-list.component.css'],
 })
 export class EmpleadoListComponent implements OnInit, AfterViewInit {
+
   @Input() showEditButton: boolean = true;
 
   productsList: EmpleadoDto[] = [];
@@ -128,18 +129,18 @@ export class EmpleadoListComponent implements OnInit, AfterViewInit {
 
   }
 
-  deleteEmpleado(productoLite: any) {
+  deleteEmpleado(empleado: any) {
     this.dialog
-      .open(DeleteConfirmDialogComponent)
+      .open(UnActiveConfirmDialogComponent)
       .afterClosed()
       .subscribe((confirm) => {
         if (confirm) {
          
-          this.empleadosService.delete(productoLite.idProducto).subscribe({
+          this.empleadosService.delete(empleado.id).subscribe({
             next: data => {
             },
             complete: () => {
-              alert('Registro Eliminado');
+              alert('Usuario Inactivado!');
               this.retrieveEmpleados();
             },
             error: error => {
@@ -150,6 +151,31 @@ export class EmpleadoListComponent implements OnInit, AfterViewInit {
       });
   
 }
+
+activeEmpleado(empleado: any) {
+  this.dialog
+  .open(UnActiveConfirmDialogComponent)
+  .afterClosed()
+  .subscribe((confirm) => {
+    if (confirm) {
+     
+      this.empleadosService.activeempleados(empleado.id).subscribe({
+        next: data => {
+        },
+        complete: () => {
+          alert('Usuario Activado!');
+          this.retrieveEmpleados();
+        },
+        error: error => {
+          this.msgs.showError(error.error.mensaje)
+        }
+    }
+);}
+  });
+
+
+
+  }
 
 
 }
