@@ -2,7 +2,9 @@
 <mat-toolbar color="primary" style="justify-content: end"  *ngIf="isLoggeIn">
         
     <small  style="align-items: right">
-      <mat-icon style="vertical-align: middle">photo_camera</mat-icon>&nbsp;
+      <mat-icon style="vertical-align: middle">photo_camera</mat-icon>
+      
+      &nbsp;
       {{ username }}
       <button
         mat-icon-button
@@ -13,17 +15,21 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
-          <mat-icon>dialpad</mat-icon>
-          <span>Redial</span>
-        </button>
-        <button mat-menu-item disabled>
-          <mat-icon>voicemail</mat-icon>
-          <span>Check voice mail</span>
+          <mat-icon><span class="material-symbols-outlined">
+            manage_accounts
+            </span></mat-icon>
+          <span>Perfil</span>
         </button>
         <button mat-menu-item>
+          <mat-icon><span class="material-symbols-outlined">
+            lock
+            </span></mat-icon>
+          <span>Cambiar Password</span>
+        </button>
+        <!-- <button mat-menu-item>
           <mat-icon>notifications_off</mat-icon>
           <span>Disable alerts</span>
-        </button>
+        </button> -->
       </mat-menu>
       </small>
     <button
@@ -47,7 +53,7 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false"
       style=" min-height: 100vh;">
-      <mat-toolbar  *ngIf="isLoggeIn" > <mat-icon>home</mat-icon> Menu</mat-toolbar>
+      <mat-toolbar  *ngIf="isLoggeIn" > <mat-icon>home</mat-icon>&nbsp;Menu</mat-toolbar>
       <mat-nav-list   *ngIf="isLoggeIn" >
 
         <mat-expansion-panel [class.mat-elevation-z0]="true"  *ngIf="showMenuSecurity">
@@ -56,16 +62,24 @@
             </mat-expansion-panel-header>
             <mat-nav-list>
              <a mat-list-item routerLink="/maestros"
-                ><mat-icon>account_box</mat-icon>&nbsp; Categorias</a
+                ><mat-icon><span class="material-symbols-outlined">
+                  category
+                  </span></mat-icon>&nbsp; Categorias</a
               >
               <a mat-list-item routerLink="/detalles"
-                ><mat-icon>description</mat-icon>&nbsp; Etiquetas</a
+                ><mat-icon><span class="material-symbols-outlined">
+                  sell
+                  </span></mat-icon>&nbsp; Etiquetas</a
               >
               <a mat-list-item routerLink="/productos">
-                <mat-icon>add_shopping_cart</mat-icon>&nbsp;Establecimiento</a
+                <mat-icon><span class="material-symbols-outlined">
+                  storefront
+                  </span></mat-icon>&nbsp;Establecimiento</a
               >
-              <a mat-list-item routerLink="/productos">
-                <mat-icon>account_box</mat-icon>&nbsp;Usuarios</a
+              <a mat-list-item routerLink="/clientes">
+                <mat-icon><span class="material-symbols-outlined">
+                  group
+                  </span></mat-icon>&nbsp;Usuarios</a
               >
             </mat-nav-list>
         </mat-expansion-panel>
@@ -80,7 +94,9 @@
                     <mat-icon>account_box</mat-icon> &nbsp;Paciente</a
                   >
                   <a mat-list-item routerLink="/productos">
-                    <mat-icon>add_shopping_cart</mat-icon>&nbsp;Servicios</a
+                    <mat-icon><span class="material-symbols-outlined">
+                      inventory_2
+                      </span></mat-icon>&nbsp;Servicios</a
                   >
             </mat-nav-list>
         </mat-expansion-panel>
@@ -94,10 +110,14 @@
             </mat-expansion-panel-header>
             <mat-nav-list>
                 <a mat-list-item routerLink="/vista-factura">
-                    <mat-icon>account_balance_wallet</mat-icon> &nbsp; Presupuestos</a
+                    <mat-icon><span class="material-symbols-outlined">
+                      calculate
+                      </span></mat-icon> &nbsp; Presupuestos</a
                   >
                   <a mat-list-item routerLink="/creacion-factura">
-                    <mat-icon>account_box</mat-icon>&nbsp; Pagos</a
+                    <mat-icon><span class="material-symbols-outlined">
+                      payments
+                      </span></mat-icon>&nbsp; Pagos</a
                   >
             </mat-nav-list>
         </mat-expansion-panel>
