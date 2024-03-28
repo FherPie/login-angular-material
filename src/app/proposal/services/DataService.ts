@@ -5,7 +5,6 @@ import { Observable, BehaviorSubject, of } from  'rxjs';
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from  '@angular/common/http';
 import{ GlobalConstants } from '../../../global-constants';
 
-//https://www.c-sharpcorner.com/article/learn-about-asynchronous-service-in-angular/
 const baseUrl = GlobalConstants.baseUrl;
 
 @Injectable()
@@ -18,7 +17,7 @@ export class DataService {
         console.log("Pasa por Constructor Servicio")
     }
 
-    getDataListFactura(): Observable < Factura[] > {
+    getDataListFactura(): Observable < any > {
         console.log("Pasa por Get data List Servicio")
         return this.httpClient.get<Factura []>(`${baseUrl}`+'/listarVenta').pipe(
             tap(async (res:  Factura[] ) => {
@@ -48,16 +47,18 @@ export class DataService {
         return this.httpClient.get(`${baseUrl}`+'/getByIdVenta/' + key);
     }
 
+    actualizarVenta(data: any): Observable<any> {
+      return this.httpClient.put(baseUrl+'/actualizarVenta', data);
+    }
+
+    borrarVenta(key:any): Observable<any> {
+      return this.httpClient.delete(baseUrl+ '/borrarVenta/' + key);
+  }
+
       addDetalleVenta(data: any): Observable<any> {
         return this.httpClient.post(baseUrl+'/addDetalle', data);
       }
 
-      actualizarVenta(data: any): Observable<any> {
-        return this.httpClient.put(baseUrl+'/actualizarVenta', data);
-      }
 
-      borrarVenta(key:any): Observable<any> {
-        return this.httpClient.delete(baseUrl+ '/borrarVenta/' + key);
-    }
 
 }

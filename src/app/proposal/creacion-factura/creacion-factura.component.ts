@@ -216,7 +216,7 @@ listProduct(){
     this.dataService.addDetalleVenta(this.factura)
     .subscribe({
       next: data => {
-          this.factura= data;
+          this.factura= data.objetoOb;
           this.savingProposal=false;
       },
       complete: () => {

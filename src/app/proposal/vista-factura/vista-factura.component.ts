@@ -60,10 +60,10 @@ export class VistaFacturaComponent implements OnInit, AfterViewInit {
   
   listProposals(){
      this.dataService.getDataListFactura().subscribe({
-            next: data => {
-                let pacients: Factura[] = [];
-                pacients = data;
-                this.dataSource= new MatTableDataSource(pacients);
+            next: (data) => {
+                let proposals: Factura[] = [];
+                proposals = data.listadoOb;
+                this.dataSource= new MatTableDataSource(proposals);
                 this.dataSource.paginator= this.paginator;
                 this.dataSource.sort= this.sort;
             },
