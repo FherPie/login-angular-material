@@ -10,9 +10,9 @@ import * as moment from 'moment';
 import { ClientLite } from '../../client/client.model2';
 import { ProductoLite } from '../../producto/producto.model2';
 import { ProductoServiceServer } from '../../producto/producto.service.server';
-import { ClienteServiceServer } from '../../client/cliente.service.server';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProductService } from 'src/app/autocomplete-product/product-service.service';
+import { ClienteService } from 'src/app/client/cliente.service';
 
 
 const COLUMNS_SCHEMA = [
@@ -98,7 +98,7 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
   optionsProduct!: ProductoLite[];
 
   constructor(private fb: UntypedFormBuilder,  private  dataService:  DataService, 
-    private clienteService: ClienteServiceServer
+    private clienteService: ClienteService
     , private prodcutoService: ProductoServiceServer, public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     ) {

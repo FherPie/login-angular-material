@@ -1,4 +1,3 @@
-import { DetalleService } from './../detalle.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { Detalle } from '../detalle.model';

@@ -58,6 +58,7 @@ export class MaestroAddComponent implements OnInit {
         this.currentMaestro = data;
         this.form.controls.id.setValue(this.currentMaestro.id);
         this.form.controls.nombre.setValue(this.currentMaestro.nombre);
+        this.form.controls.codigo.setValue(this.currentMaestro.codigo);
         this.form.controls.descripcion.setValue(
           this.currentMaestro.descripcion
         );

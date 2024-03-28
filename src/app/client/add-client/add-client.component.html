@@ -30,7 +30,7 @@
    
         <mat-form-field class="input-data">
             <input matInput [matDatepicker]="picker" placeholder="Fecha Nacimiento" formControlName="fechaNacimiento" type="text"
-              required>
+              required="true">
             <mat-hint>dd/mm/yyyy</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>

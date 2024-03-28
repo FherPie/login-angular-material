@@ -94,14 +94,17 @@ export class AddClientComponent implements OnInit {
     console.log("Client Info",this.addClientForm.value);
     if(this.addClientForm.invalid){
       this.markAsDirty(this.addClientForm);
+      this.msgs.showError("Llene todos los campos obligatorios...")
+
       return;
     }
     this.cliente = this.addClientForm.value;
-    this.clienteSrv.updateClient( this.cliente).subscribe({
+    this.clienteSrv.updateClient(this.cliente).subscribe({
       next: (data) => {
           this.saving = false;
           this.response = data;
           this.cliente= data.objetoOb;
+          console.log(this.cliente);
           this.msgs.showInfo("Registro Actualizado...")
       },
       complete: () => {},

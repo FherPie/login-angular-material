@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ClientLite, COLUMNS_SCHEMA } from '../client.model2';
-import { ClienteServiceServer } from '../cliente.service.server';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -9,6 +8,7 @@ import { DeleteConfirmDialogComponent } from 'src/app/proposal/util-components/d
 import { AddClientComponent } from '../add-client/add-client.component';
 import { Router } from '@angular/router';
 import { MessageService } from 'src/app/utils-services/message-service.service';
+import { ClienteService } from '../cliente.service';
 
 @Component({
   selector: 'app-client-list',
@@ -17,7 +17,7 @@ import { MessageService } from 'src/app/utils-services/message-service.service';
 })
 export class ClientListComponent implements OnInit, AfterViewInit {
   constructor(
-    private clienteService: ClienteServiceServer,
+    private clienteService: ClienteService,
     private router: Router,
     public dialog: MatDialog, private msgs:MessageService
   ) { }
@@ -60,7 +60,7 @@ export class ClientListComponent implements OnInit, AfterViewInit {
     console.log(formData);
     this.clienteService
       .subirArchivoExcelImportacion(formData, 'archivoExcelProdcutos')
-      .subscribe((resp) => {
+      .subscribe(() => {
         alert('Uploaded');
       });
   }
@@ -119,9 +119,10 @@ export class ClientListComponent implements OnInit, AfterViewInit {
         if (confirm) {
          
           this.clienteService.delete(pacientDtoToDelete.id).subscribe({
-            next: data => {
+            next: () => {
             },
-            complete: () => {
+            complete:  () => {
+            
               alert('Registro Eliminado');
               this.retrieveClients();
             },

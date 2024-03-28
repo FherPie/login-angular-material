@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Inject, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ClientLite } from '../client/client.model2';
-import { ClienteServiceServer } from '../client/cliente.service.server';
+import { ClienteService } from '../client/cliente.service';
 import { DialogData } from './DialogData';
 
 @Component({
@@ -21,7 +21,7 @@ export class BuscarFacturaComponent {
 
   error = "";
   constructor(
-    private clienteService: ClienteServiceServer) {
+    private clienteService: ClienteService) {
   }
 
 

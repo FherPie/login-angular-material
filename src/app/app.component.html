@@ -52,14 +52,20 @@
 
         <mat-expansion-panel [class.mat-elevation-z0]="true"  *ngIf="showMenuSecurity">
             <mat-expansion-panel-header>
-                Modulo Seguridad
+                 Configuraciones
             </mat-expansion-panel-header>
             <mat-nav-list>
              <a mat-list-item routerLink="/maestros"
-                ><mat-icon>account_box</mat-icon>&nbsp; Maestro</a
+                ><mat-icon>account_box</mat-icon>&nbsp; Categorias</a
               >
               <a mat-list-item routerLink="/detalles"
-                ><mat-icon>description</mat-icon>&nbsp; Detalle</a
+                ><mat-icon>description</mat-icon>&nbsp; Etiquetas</a
+              >
+              <a mat-list-item routerLink="/productos">
+                <mat-icon>add_shopping_cart</mat-icon>&nbsp;Establecimiento</a
+              >
+              <a mat-list-item routerLink="/productos">
+                <mat-icon>account_box</mat-icon>&nbsp;Usuarios</a
               >
             </mat-nav-list>
         </mat-expansion-panel>
@@ -67,7 +73,7 @@
 
         <mat-expansion-panel [class.mat-elevation-z0]="true" *ngIf="showMenuConsultory">
             <mat-expansion-panel-header>
-                Modulo Consultorio
+                 Trabajo
             </mat-expansion-panel-header>
             <mat-nav-list>
                 <a mat-list-item routerLink="/clientes">
@@ -84,14 +90,14 @@
         
         <mat-expansion-panel [class.mat-elevation-z0]="true" *ngIf="showMenuFinance">
             <mat-expansion-panel-header>
-                Modulo Finanzas
+                Financiero
             </mat-expansion-panel-header>
             <mat-nav-list>
                 <a mat-list-item routerLink="/vista-factura">
-                    <mat-icon>account_balance_wallet</mat-icon> &nbsp; Facturas</a
+                    <mat-icon>account_balance_wallet</mat-icon> &nbsp; Presupuestos</a
                   >
                   <a mat-list-item routerLink="/creacion-factura">
-                    <mat-icon>account_box</mat-icon>&nbsp; Creación Facturas</a
+                    <mat-icon>account_box</mat-icon>&nbsp; Pagos</a
                   >
             </mat-nav-list>
         </mat-expansion-panel>
