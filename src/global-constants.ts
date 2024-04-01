@@ -10,6 +10,7 @@ export class GlobalConstants {
   public static baseUrlMaestro = GlobalConstants.host + '/maestro';
   public static baseUrlDetalle = GlobalConstants.host + '/detalle';
   public static baseUrlCliente = GlobalConstants.host + '/cliente';
+  public static baseUrlEstablishment = GlobalConstants.host + '/establishment'; 
 }
 
 //Expandable menu

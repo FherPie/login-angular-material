@@ -17,6 +17,7 @@ import { ProductsComponent } from './app-table/products/products.component';
 import { AutocompleteComponent } from './autocomplete-pacient/autocomplete.component';
 import { AppNavComponent } from './app-nav/app-nav.component';
 import { EmpleadoListComponent } from './empleados/empleado-list/empleado-list.component';
+import { AddEstablismentComponent } from './establecimiento/add-establecimiento/add-establecimiento.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -38,7 +39,8 @@ const routes: Routes = [
   { path: 'maestro/:id', component: MaestroAddComponent },
   { path: 'detalle/:id', component: DetalleAddComponent },
   { path: 'autocomplete', component: AutocompleteComponent },
-  { path: 'empleados', component: EmpleadoListComponent },
+  { path: 'usuarios', component: EmpleadoListComponent },
+  { path: 'establecimiento', component: AddEstablismentComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 

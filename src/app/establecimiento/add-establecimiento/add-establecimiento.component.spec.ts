@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AddEstablismentComponent } from './add-establecimiento.component';
 
-import { AddEstablecimientoComponent } from './add-establecimiento.component';
 
 describe('AddEstablecimientoComponent', () => {
-  let component: AddEstablecimientoComponent;
-  let fixture: ComponentFixture<AddEstablecimientoComponent>;
+  let component: AddEstablismentComponent;
+  let fixture: ComponentFixture<AddEstablismentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddEstablecimientoComponent ]
+      declarations: [ AddEstablismentComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddEstablecimientoComponent);
+    fixture = TestBed.createComponent(AddEstablismentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -62,9 +62,8 @@ import { EmpleadoListComponent } from './empleados/empleado-list/empleado-list.c
 import { AddEmpleadoComponent } from './empleados/add-empleado/add-empleado.component';
 import { authInterceptoProviders } from './login/AuthInterceptor';
 import { UnActiveConfirmDialogComponent } from './empleados/util-components/unactive-confirm-dialog/unactive-confirm-dialog.component';
-import { AddEstablecimientoComponent } from './establecimiento/add-establecimiento/add-establecimiento.component';
 import { ListEstablecimientoComponent } from './establecimiento/list-establecimiento/list-establecimiento.component';
-
+import { AddEstablismentComponent } from './establecimiento/add-establecimiento/add-establecimiento.component';
 
 
 @NgModule({
@@ -96,8 +95,9 @@ import { ListEstablecimientoComponent } from './establecimiento/list-establecimi
     EmpleadoListComponent,
     AddEmpleadoComponent,
     UnActiveConfirmDialogComponent,
-    AddEstablecimientoComponent,
-    ListEstablecimientoComponent  ],
+    AddEstablismentComponent,
+    ListEstablecimientoComponent,
+      ],
   imports: [
     CommonModule,
     BrowserModule,

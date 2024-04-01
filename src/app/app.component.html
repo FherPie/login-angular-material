@@ -6,6 +6,10 @@
       
       &nbsp;
       {{ username }}
+
+      <!-- <a 
+      ><mat-icon>exit_to_app</mat-icon></a
+    > -->
       <button
         mat-icon-button
         [matMenuTriggerFor]="menu"
@@ -25,6 +29,12 @@
             lock
             </span></mat-icon>
           <span>Cambiar Password</span>
+        </button>
+        <button mat-menu-item  (click)="logout()">
+          <mat-icon><span class="material-symbols-outlined">
+            exit_to_app
+            </span></mat-icon>
+          <span>LogOut</span>
         </button>
         <!-- <button mat-menu-item>
           <mat-icon>notifications_off</mat-icon>
@@ -53,30 +63,31 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false"
       style=" min-height: 100vh;">
-      <mat-toolbar  *ngIf="isLoggeIn" > <mat-icon>home</mat-icon>&nbsp;Menu</mat-toolbar>
+      <mat-toolbar  *ngIf="isLoggeIn" > <mat-icon>    <span class="material-symbols-outlined">
+        streetview
+        </span></mat-icon>&nbsp; SofS</mat-toolbar>
       <mat-nav-list   *ngIf="isLoggeIn" >
 
         <mat-expansion-panel [class.mat-elevation-z0]="true"  *ngIf="showMenuSecurity">
             <mat-expansion-panel-header>
                  Configuraciones
             </mat-expansion-panel-header>
-            <mat-nav-list>
-             <a mat-list-item routerLink="/maestros"
+            <mat-nav-list class="listaop">
+             <a  routerLink="/maestros"  class="list-item-bar"
                 ><mat-icon><span class="material-symbols-outlined">
                   category
-                  </span></mat-icon>&nbsp; Categorias</a
-              >
-              <a mat-list-item routerLink="/detalles"
+                  </span></mat-icon>&nbsp; Categorias</a>
+              <a class="list-item-bar" routerLink="/detalles"
                 ><mat-icon><span class="material-symbols-outlined">
                   sell
                   </span></mat-icon>&nbsp; Etiquetas</a
               >
-              <a mat-list-item routerLink="/productos">
+              <a class="list-item-bar" routerLink="/establecimiento">
                 <mat-icon><span class="material-symbols-outlined">
                   storefront
                   </span></mat-icon>&nbsp;Establecimiento</a
               >
-              <a mat-list-item routerLink="/clientes">
+              <a class="list-item-bar" routerLink="/usuarios">
                 <mat-icon><span class="material-symbols-outlined">
                   group
                   </span></mat-icon>&nbsp;Usuarios</a
@@ -84,16 +95,16 @@
             </mat-nav-list>
         </mat-expansion-panel>
 
-
+<!-- mat-list-item -->
         <mat-expansion-panel [class.mat-elevation-z0]="true" *ngIf="showMenuConsultory">
             <mat-expansion-panel-header>
                  Trabajo
             </mat-expansion-panel-header>
-            <mat-nav-list>
-                <a mat-list-item routerLink="/clientes">
-                    <mat-icon>account_box</mat-icon> &nbsp;Paciente</a
+            <mat-nav-list class="listaop">
+                <a  class="list-item-bar" routerLink="/clientes">
+                    <mat-icon>account_box</mat-icon> &nbsp;Clientes</a
                   >
-                  <a mat-list-item routerLink="/productos">
+                  <a class="list-item-bar" routerLink="/productos">
                     <mat-icon><span class="material-symbols-outlined">
                       inventory_2
                       </span></mat-icon>&nbsp;Servicios</a
@@ -108,25 +119,20 @@
             <mat-expansion-panel-header>
                 Financiero
             </mat-expansion-panel-header>
-            <mat-nav-list>
-                <a mat-list-item routerLink="/vista-factura">
+            <mat-nav-list class="listaop">
+                <a  class="list-item-bar" routerLink="/vista-factura">
                     <mat-icon><span class="material-symbols-outlined">
                       calculate
                       </span></mat-icon> &nbsp; Presupuestos</a
                   >
-                  <a mat-list-item routerLink="/creacion-factura">
+                  <a  class="list-item-bar" routerLink="/creacion-factura">
                     <mat-icon><span class="material-symbols-outlined">
                       payments
                       </span></mat-icon>&nbsp; Pagos</a
                   >
             </mat-nav-list>
         </mat-expansion-panel>
-   
-   
- 
-        <a mat-list-item (click)="logout()"
-          ><mat-icon>exit_to_app</mat-icon>&nbsp;Logout</a
-        >
+  
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content  class="sidenav-content">

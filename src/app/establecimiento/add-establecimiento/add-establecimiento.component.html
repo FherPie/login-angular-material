@@ -1,1 +1,58 @@
-<p>add-establecimiento works!</p>
+<h1 mat-dialog-title>Establecimiento</h1>
+<mat-dialog-content> <!-- instead of your <div>  or use <div mat-dialog-content> -->
+
+
+    <form #form="ngForm" class="form-datos" [formGroup]="addEstablishmentForm">
+        <mat-form-field class="input-data">
+            <input matInput placeholder="Nombre" formControlName="nombre" required="true">
+        </mat-form-field>
+
+        <mat-form-field class="input-data">
+            <input matInput placeholder="Identificacion" formControlName="identificacion" required="true">
+        </mat-form-field>
+
+        <mat-form-field class="input-data">
+            <input type="text" matInput placeholder="Ciudad" formControlName="ciudad"
+                required="true">
+        </mat-form-field>
+
+        <mat-form-field class="input-data">
+            <input type="text" matInput placeholder="Teléfono" formControlName="telefono" required="false">
+        </mat-form-field>
+
+
+        <mat-form-field class="input-data">
+            <input type="text" matInput placeholder="Teléfono Adicional" formControlName="telefono2"
+                required="false">
+        </mat-form-field>
+
+        <mat-form-field class="input-data">
+            <input matInput placeholder="Código Postal" formControlName="codPostal" required="false">
+        </mat-form-field>
+
+        <mat-form-field class="input-data">
+            <input matInput placeholder="Web Site" formControlName="webSite" required="false">
+        </mat-form-field>
+
+
+        <mat-form-field class="input-data">
+            <input matInput placeholder="Email" formControlName="email" required="false" type="email">
+        </mat-form-field>
+
+
+        <div class="input-data">
+        </div>
+
+        <mat-form-field class="input-data">
+            <textarea matInput placeholder="Dirección" formControlName="direccion" required="false"></textarea>
+        </mat-form-field>
+    </form>
+    <mat-card-actions style="text-align: center;">
+
+        <button mat-raised-button type="submit" color="primary" class="Update-btn"
+            (click)="establishment.id ?  onUpdateClient():onAddClient()"> {{establishment.id ? 'Actualizar':'Guardar'}}
+        </button>
+
+        <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancelar</button>
+    </mat-card-actions>
+</mat-dialog-content> <!-- instead of your </div> -->

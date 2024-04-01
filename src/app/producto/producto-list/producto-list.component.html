@@ -18,8 +18,7 @@
 
  
 
-
-
+<h1 mat-dialog-title>Servicios</h1>
 <div class="header-screen">
   <mat-form-field class="filter">
     <input matInput (keyup)="applyFilter($event)" placeholder="Filtro" [(ngModel)]="filterValue">
@@ -33,7 +32,6 @@
   </button>
 </div>
 <div class="example-container">
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -56,5 +54,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
 </div>
 
