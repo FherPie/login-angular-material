@@ -61,12 +61,13 @@
       fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false"
-      style=" min-height: 100vh;">
-      <mat-toolbar  *ngIf="isLoggeIn" > <mat-icon>    <span class="material-symbols-outlined">
+      [opened]="(isHandset$ | async) === false && isLoggeIn"
+      style=" min-height: 100vh;"  >
+      
+      <mat-toolbar  > <mat-icon>    <span class="material-symbols-outlined">
         streetview
         </span></mat-icon>&nbsp; SofS</mat-toolbar>
-      <mat-nav-list   *ngIf="isLoggeIn" >
+      <mat-nav-list  >
 
         <mat-expansion-panel [class.mat-elevation-z0]="true"  *ngIf="showMenuSecurity">
             <mat-expansion-panel-header>

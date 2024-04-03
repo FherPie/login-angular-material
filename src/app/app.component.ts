@@ -27,9 +27,13 @@ export class AppComponent {
   @ViewChild('drawer') sidenav: MatSidenav | undefined;
 
 
-  closeSideNav() {
-    this.sidenav?.close();
+  closeSideNav(): Promise<boolean>{{
+    this.sidenav?.close(); 
+    return  new Promise(resolve =>{
+      resolve(true)
+    })
   }
+}
   
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -53,16 +57,18 @@ export class AppComponent {
   }
 
   logout():void{
-     this.authService.logout().pipe(
-      finalize(() => {
-        this.tokenStorageService.signOut().then(()=>{
-          this.router.navigateByUrl('/login').then(()=> {window.location.reload();});
+    this.closeSideNav().then(()=>{
+      this.authService.logout().pipe(
+        finalize(() => {
+          this.tokenStorageService.signOut().then(()=>{
+            this.router.navigateByUrl('/login').then(()=> {window.location.reload();});
+          });
+        })).subscribe({
+          next: data=>{
+      
+          }
         });
-      })).subscribe({
-        next: data=>{
-    
-        }
-      });
+    });
   }
 
 
