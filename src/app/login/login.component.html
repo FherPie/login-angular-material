@@ -1,7 +1,7 @@
 <!-- <div class="alert alert-danger" [hidden]="!error">
 	There was a problem logging in. Please try again.
 </div> -->
-<form role="form" (ngSubmit)="login()" #loginForm="ngForm"  *ngIf="!isLoggedIn">
+<form role="form" (ngSubmit)="login()" #loginForm="ngForm"  *ngIf="!isLoggedIn" class="login">
 	<div class="form-group">
 		<label for="username">Usuario:</label> 
 		<input type="text"
@@ -30,11 +30,11 @@
             * Campo requerido
 	</div>
 	</div>
-	<button 
+	<button  
 	type="submit" 
-	class="btn btn-primary"
+	class="btn btn-primary button"
 	[disabled]="!loginForm.form.valid"
-	>Submit</button>
+	>Login</button>
 	<div class="form-group" class="alert alert-danger"
 	 role="alert"
 	 *ngIf="loginForm.submitted && isLoginFailed">

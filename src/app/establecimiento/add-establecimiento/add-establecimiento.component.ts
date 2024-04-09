@@ -9,6 +9,8 @@ import { EstablishmentService } from '../services/establishment.service';
 import { ResponseGenerico } from 'src/app/client/models/ResponseGenerico';
 import { DiscardInfoComponent } from 'src/app/client/utils-components/discard-info-component-component/discard-info-component-component.component';
 import { UserStorageService } from 'src/app/login/user.storage-service.service';
+import { FileHandle } from '../models/FileHandle';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -17,13 +19,14 @@ import { UserStorageService } from 'src/app/login/user.storage-service.service';
   styleUrls: ['./add-establecimiento.component.css']
 })
 export class AddEstablismentComponent implements OnInit {
+
   establishment: EstablishmentDto= new EstablishmentDto();
   submitted: boolean=false;
   public addEstablishmentForm!: FormGroup;
   saving!: boolean;
   response!: ResponseGenerico;
   userId!: number;
-
+  selectedFile: any=null;
   
 
   constructor(
@@ -31,7 +34,7 @@ export class AddEstablismentComponent implements OnInit {
     private establishmentService: EstablishmentService, 
     public dialog: MatDialog,
     private fb: FormBuilder, private _snackBar: MatSnackBar, private msgs:MessageService,
-     private userStorageService: UserStorageService ) {
+     private userStorageService: UserStorageService, private sanitaizer: DomSanitizer ) {
 
 
      }
@@ -54,9 +57,6 @@ export class AddEstablismentComponent implements OnInit {
     this.iniciarForms();
   }
 
-
-
-
   openDialog(): void {
     if(this.addEstablishmentForm?.dirty) {
        const dialogRef = this.dialog.open(DiscardInfoComponent, {
@@ -68,6 +68,8 @@ export class AddEstablismentComponent implements OnInit {
   }
 
   public onAddClient(): void {
+  
+
     console.log("Pacient Info",this.addEstablishmentForm.value);
     if(this.addEstablishmentForm.invalid){
        this.markAsDirty(this.addEstablishmentForm);
@@ -77,7 +79,8 @@ export class AddEstablismentComponent implements OnInit {
        return;
      }
     this.establishment = this.addEstablishmentForm.value;
-    this.establishmentService.create(this.establishment).subscribe({
+    const formData= this.prepareFormData(this.establishment);
+    this.establishmentService.createEstablishment(formData).subscribe({
       next: (data) => {
           this.saving = false;
           this.response = data;
@@ -93,6 +96,16 @@ export class AddEstablismentComponent implements OnInit {
       }
   })
   }
+
+    prepareFormData(establishment: EstablishmentDto): FormData{
+     const formaData= new FormData();
+     formaData.append('establecimientoDto', new Blob([JSON.stringify(establishment)], {type: 'application/json'}) );
+     for (var i=0; i< establishment.imageEstablishment.length; i++){
+      formaData.append('imageFile', establishment.imageEstablishment[i].file, establishment.imageEstablishment[i].file.name)
+     }
+      return formaData;
+    }
+
 
   public onUpdateClient(): void {
     console.log("Client Info",this.addEstablishmentForm.value);
@@ -126,6 +139,20 @@ export class AddEstablismentComponent implements OnInit {
     }
   }
 
+  onFileSelected(event: any) {
+    if(event.target?.files){
+      this.selectedFile=event.target?.files[0];
+      const fileHandle: FileHandle={
+          file: this.selectedFile,
+          url: this.sanitaizer.bypassSecurityTrustUrl(window.URL.createObjectURL(this.selectedFile))
+      }
+    let imageList:any[]=[];
+    imageList.push(fileHandle);
+    this.addEstablishmentForm.patchValue({imageEstablishment:imageList});
+    }
+     ///console.log(event.target?.files[0]);
+  }
+
 
 
   iniciarForms() {
@@ -139,7 +166,8 @@ export class AddEstablismentComponent implements OnInit {
       telefono: [''],
       codPostal: [''],
       email: ['', [Validators.email]],
-      webSite: ['']
+      webSite: [''],
+      imageEstablishment: [null],
       });
   }
 

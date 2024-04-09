@@ -28,3 +28,14 @@ export class GlobalConstants {
 
 
 //https://stackblitz.com/edit/angular-web-apps?file=src%2Fapp%2Fapp.component.html
+
+//Pagina para colocar
+
+//https://themeforest.net/item/appbeats-app-landing-page/25322924
+
+
+//Responsive tips 
+
+//https://www.social11.es/blog/tipografia-web-efectiva.html
+//https://elliotjaystocks.com/blog/responsive-web-typography/
+//https://designmodo.com/flat-free/

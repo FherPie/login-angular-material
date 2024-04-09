@@ -1,8 +1,19 @@
 <h1 mat-dialog-title>Establecimiento</h1>
-<mat-dialog-content> <!-- instead of your <div>  or use <div mat-dialog-content> -->
-
-
+<mat-dialog-content class="content"> <!-- instead of your <div>  or use <div mat-dialog-content> -->
     <form #form="ngForm" class="form-datos" [formGroup]="addEstablishmentForm">
+       
+        <!-- <mat-form-field class="input-data"> -->
+            <div class="input-data">
+            <input hidden  #selectFile type="file" value="select"
+             (change)="onFileSelected($event)">
+
+             <button mat-raised-button type="button" 
+             class="Discard-btn" 
+             (click)="selectFile.click()">Escoger la imagen</button>
+             <span class="file-name">{{selectFile.name}}</span>
+            </div>
+        <!-- </mat-form-field> -->
+       
         <mat-form-field class="input-data">
             <input matInput placeholder="Nombre" formControlName="nombre" required="true">
         </mat-form-field>
@@ -47,12 +58,12 @@
             <textarea matInput placeholder="Dirección" formControlName="direccion" required="false"></textarea>
         </mat-form-field>
     </form>
-    <mat-card-actions style="text-align: center;">
+    <mat-card-actions class="botones">
 
         <button mat-raised-button type="submit" color="primary" class="Update-btn"
             (click)="establishment.id ?  onUpdateClient():onAddClient()"> {{establishment.id ? 'Actualizar':'Guardar'}}
         </button>
-
+    
         <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancelar</button>
     </mat-card-actions>
 </mat-dialog-content> <!-- instead of your </div> -->

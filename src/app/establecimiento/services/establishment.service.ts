@@ -14,12 +14,19 @@ export class EstablishmentService {
   getAll(): Observable<any> {
     return this.http.get(baseUrlEstablishment);
   }
+
   getEstablishment(): Observable<any> {
     return this.http.get(`${baseUrlEstablishment}`+"user");
   }
+
   create(data: any): Observable<any> {
     return this.http.post(baseUrlEstablishment, data);
   }
+
+  createEstablishment(data: FormData): Observable<any> {
+    return this.http.post(baseUrlEstablishment+"user", data);
+  }
+
   updateEstablishment(data: any): Observable<any> {
     return this.http.put(`${baseUrlEstablishment}`, data);
   }
