@@ -12,7 +12,6 @@ export class EstablishmentDto {
     email?: string;
     webSite?: string;
     imageEstablishment: FileHandle[]=[];
-
      EsblecimientoDto(id:number){
       this.id=id;
     }
