@@ -42,8 +42,9 @@ export class AddEstablismentComponent implements OnInit {
   ngOnInit(): void {
     this.establishmentService.getEstablishment().subscribe(
         (data) => {
-          this.establishment = data.objectooOb;
-          if(data.objectooOb!=null){
+          this.establishment = data.objetoOb;
+          console.log("HOla");
+          if(data.objetoOb!=null){
             this.addEstablishmentForm = this.fb.group(this.establishment);
           }else{
             this.establishment= new EstablishmentDto(); 
