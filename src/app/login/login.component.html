@@ -1,43 +1,48 @@
 <!-- <div class="alert alert-danger" [hidden]="!error">
 	There was a problem logging in. Please try again.
 </div> -->
-<form role="form" (ngSubmit)="login()" #loginForm="ngForm"  *ngIf="!isLoggedIn" class="login">
-	<div class="form-group">
-		<label for="username">Usuario:</label> 
-		<input type="text"
-			class="form-control"
-			id="username" 
-			name="username" 
-			[(ngModel)]="credentials.username"
-			required
-			#username="ngModel"/>
-			<div [hidden]="username.valid || username.pristine"
-             class="alert alert-danger">
-            * Campo requerido
-	</div>
-	</div>
-	<div class="form-group">
-		<label for="password">Contraseña:</label> 
-		<input type="password"
-			class="form-control" 
-			id="password"
-			name="password"
-			[(ngModel)]="credentials.password"
-			required
-			#password="ngModel"/>
-			<div [hidden]="password.valid || password.pristine"
-             class="alert alert-danger">
-            * Campo requerido
-	</div>
-	</div>
-	<button  
-	type="submit" 
-	class="btn btn-primary button"
-	[disabled]="!loginForm.form.valid"
-	>Login</button>
-	<div class="form-group" class="alert alert-danger"
-	 role="alert"
-	 *ngIf="loginForm.submitted && isLoginFailed">
-	 Login faile: {{errorMessage}}
-	</div>
-</form>
+
+<mat-tab-group *ngIf="!isLoggedIn" >
+    <mat-tab label="Login">
+	<form role="form" (ngSubmit)="login()" #loginForm="ngForm"  *ngIf="!isLoggedIn" class="login">
+		<div class="form-group">
+			<label for="username">Usuario:</label> 
+			<input type="text"
+				class="form-control"
+				id="username" 
+				name="username" 
+				[(ngModel)]="credentials.username"
+				required
+				#username="ngModel"/>
+				<div [hidden]="username.valid || username.pristine"
+				class="alert alert-danger">
+				* Campo requerido
+		</div>
+		</div>
+		<div class="form-group">
+			<label for="password">Contraseña:</label> 
+			<input type="password"
+				class="form-control" 
+				id="password"
+				name="password"
+				[(ngModel)]="credentials.password"
+				required
+				#password="ngModel"/>
+				<div [hidden]="password.valid || password.pristine"
+				class="alert alert-danger">
+				* Campo requerido
+		</div>
+		</div>
+		<button  
+		type="submit" 
+		class="btn btn-primary button"
+		[disabled]="!loginForm.form.valid"
+		>Login</button>
+		<div class="form-group" class="alert alert-danger"
+		role="alert"
+		*ngIf="loginForm.submitted && isLoginFailed">
+		Login faile: {{errorMessage}}
+		</div>
+	</form>
+   </mat-tab>
+</mat-tab-group>

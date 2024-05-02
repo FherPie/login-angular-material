@@ -6,7 +6,6 @@ import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
 
 
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {VistaFacturaComponent } from './proposal/vista-factura/vista-factura.component';
 import { MatTableModule } from '@angular/material/table';
@@ -27,20 +26,22 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTabsModule} from '@angular/material/tabs';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
 
+import { AppComponent } from './app.component';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS as MY_FORMAT_DATE } from './myDateFormats';
-import { MatNativeDateModule } from '@angular/material/core';
-
-import {MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MatMenuModule } from '@angular/material/menu';
 import { ClientListComponent } from './client/client-list/client-list.component';
 import { AddClientComponent } from './client/add-client/add-client.component';
 import { AddProductoComponent } from './producto/add-producto/add-producto.component';
 import { ProductoListComponent } from './producto/producto-list/producto-list.component';
-import { CommonModule } from '@angular/common';
 import { MaestroListComponent } from './maestro/maestro-list/maestro-list.component';
 import { MaestroAddComponent } from './maestro/maestro-add/maestro-add.component';
 import { DetalleAddComponent } from './detalle/detalle-add/detalle-add.component';
@@ -57,7 +58,6 @@ import { BuscarFacturaComponent } from './buscar-factura/buscar-factura.componen
 import { AutocompleteProductoComponent } from './autocomplete-product/autocomplete-product.component';
 import { DeleteConfirmDialogComponent } from './proposal/util-components/delete-confirm-dialog/delete-confirm-dialog.component';
 import { DiscardInfoComponent } from './client/utils-components/discard-info-component-component/discard-info-component-component.component';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EmpleadoListComponent } from './empleados/empleado-list/empleado-list.component';
 import { AddEmpleadoComponent } from './empleados/add-empleado/add-empleado.component';
 import { authInterceptoProviders } from './login/AuthInterceptor';
@@ -130,7 +130,8 @@ import { AddEstablismentComponent } from './establecimiento/add-establecimiento/
     AppTableModule,
     MatAutocompleteModule,
     MatExpansionModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule
   ],
 providers: [DataService,  { provide: DateAdapter, useClass:  MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
  { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT_DATE }, {provide: MatDialogRef, useValue:{}}, authInterceptoProviders 
