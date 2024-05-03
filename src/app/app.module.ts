@@ -64,6 +64,9 @@ import { authInterceptoProviders } from './login/AuthInterceptor';
 import { UnActiveConfirmDialogComponent } from './empleados/util-components/unactive-confirm-dialog/unactive-confirm-dialog.component';
 import { ListEstablecimientoComponent } from './establecimiento/list-establecimiento/list-establecimiento.component';
 import { AddEstablismentComponent } from './establecimiento/add-establecimiento/add-establecimiento.component';
+import { IngresosComponent } from './resultados/ingresos/ingresos.component';
+import { EgresosComponent } from './resultados/egresos/egresos.component';
+import { ResultadosComponent } from './resultados/resultados/resultados.component';
 
 
 @NgModule({
@@ -97,6 +100,9 @@ import { AddEstablismentComponent } from './establecimiento/add-establecimiento/
     UnActiveConfirmDialogComponent,
     AddEstablismentComponent,
     ListEstablecimientoComponent,
+    IngresosComponent,
+    EgresosComponent,
+    ResultadosComponent,
       ],
   imports: [
     CommonModule,
