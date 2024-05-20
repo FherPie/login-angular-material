@@ -24,6 +24,7 @@ export class AddIngresoComponent implements OnInit{
 
      iniciarForma () {
           this.addIngresoForm= this.fb.group({
+               tipo: [0],
                precio: [0, [Validators.required]],
                concepto:["", [Validators.required]]
           })
@@ -42,15 +43,31 @@ export class AddIngresoComponent implements OnInit{
          }
 
          this.ingreso= this.addIngresoForm.value;
-           this.finanzasService.saveIngreso(this.ingreso).subscribe({
-               next:(data)=>{
-                    this.ingreso=data;
-                    alert("Informacion Ingresada con Exito");
-                    this.closeDialog();
-               }, error: error=>{
-                    alert(error);
-               }
-           })
+
+
+   if(this.ingreso.tipo==1){
+     this.finanzasService.saveIngreso(this.ingreso).subscribe({
+          next:(data)=>{
+               this.ingreso=data;
+               alert("Informacion Ingresada con Exito");
+               this.closeDialog();
+          }, error: error=>{
+               alert(error);
+          }
+      })
+   }else{
+     this.finanzasService.saveSalida(this.ingreso).subscribe({
+          next:(data)=>{
+               this.ingreso=data;
+               alert("Informacion Ingresada con Exito");
+               this.closeDialog();
+          }, error: error=>{
+               alert(error);
+          }
+      })
+   }
+
+   
 
 
 

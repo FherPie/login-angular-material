@@ -17,6 +17,10 @@ export class FinanzasService {
      return this.httpClient.get(`${baseUrl}`+'/entradas');
   }
 
+  getListEgresos(): Observable <any>{
+    return this.httpClient.get(`${baseUrl}`+'/salidas');
+ }
+
   saveIngreso(data:any):Observable<any> {
     return this.httpClient.post(`${baseUrl}`+'/entrada',data );
   }

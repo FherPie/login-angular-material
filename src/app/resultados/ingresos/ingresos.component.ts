@@ -23,12 +23,13 @@ export class IngresosComponent implements OnInit {
   }
 
 
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort!: MatSort;
   @Output() eventNew = new EventEmitter();
   filterValue: string = "";
   ELEMENT_DATA!: Ingreso[];
   dataSource = new MatTableDataSource<Ingreso>(this.ELEMENT_DATA);
+  dataSourceSalidas = new MatTableDataSource<Ingreso>(this.ELEMENT_DATA);
+  sumaEntradas:number=0;
+  sumaSalidas:number=0;
   selectedProposal!: Ingreso;
 
 
@@ -36,18 +37,34 @@ export class IngresosComponent implements OnInit {
 
   ngOnInit(): void {
     this.listIngreso();
+    this.listEgresos();
   }
 
 
   listIngreso() {
+    this.sumaEntradas=0;
     this.finanzasService.getListIngresos().subscribe({
       next: (data) => {
         this.dataSource = new MatTableDataSource(data);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        this.dataSource.data.forEach((data)=>{
+          this.sumaEntradas= this.sumaEntradas + Number(data.precio) | 0;
+        });
       }
     })
   }
+
+  listEgresos() {
+    this.sumaSalidas=0;
+    this.finanzasService.getListEgresos().subscribe({
+      next: (data) => {
+        this.dataSourceSalidas = new MatTableDataSource(data);
+        this.dataSourceSalidas.data.forEach((data)=>{
+          this.sumaSalidas= this.sumaSalidas + Number(data.precio) | 0;
+        });
+      }
+    })
+  }
+
 
   new() {
     this.openDialogProductForm(new Ingreso());
@@ -65,6 +82,7 @@ export class IngresosComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(() => {
       this.listIngreso();
+      this.listEgresos();
     })
 
 
