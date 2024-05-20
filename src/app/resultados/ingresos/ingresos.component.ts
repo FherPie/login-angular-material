@@ -5,7 +5,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ResponseGenerico } from 'src/app/client/models/ResponseGenerico';
+import { DeleteConfirmDialogComponent } from 'src/app/proposal/util-components/delete-confirm-dialog/delete-confirm-dialog.component';
 import { FinanzasService } from '../service/finanzas-service.service';
+import { AddIngresoComponent } from './addIngresos.component';
 
 @Component({
   selector: 'app-ingresos',
@@ -55,7 +57,7 @@ export class IngresosComponent implements OnInit {
   
   openDialogProductForm(data: Ingreso | null) {
 
-    const dialogRef = this.dialog.open(RegistroIngresoComponent, {
+    const dialogRef = this.dialog.open(AddIngresoComponent, {
       width: '640px', disableClose: true,
       data: data,
       maxHeight: '120vh'
@@ -68,9 +70,23 @@ export class IngresosComponent implements OnInit {
 
   }
 
-  deleteItem(_t52: any) {
-    throw new Error('Method not implemented.');
+  deleteItem(ingreso: any) {
+    console.log("Ingreso", ingreso);
+    this.dialog.open(DeleteConfirmDialogComponent)
+    .afterClosed().subscribe((confirm)=>{
+       if(confirm){
+        this.finanzasService.deleteIngreso(ingreso).subscribe({
+          complete:()=>{
+            alert("Registro Eliminado");
+            this.listIngreso();
+          }
+        })
+       }
+    })
+
   }
+
+
   openEditItem(_t52: any) {
     throw new Error('Method not implemented.');
   }
@@ -85,39 +101,38 @@ class Ingreso {
 }
 
 
-@Component({
-  template: `<h1 mat-dialog-title>Registro de Ingreso</h1>`,
-  styleUrls: ['./ingresos.component.css']
-})
-export class RegistroIngresoComponent implements OnInit {
+// @Component({
+//   templateUrl: './addIngreso.component.html',
+//   styleUrls: ['./ingresos.component.css']
+// })
+// export class RegistroIngresoComponent implements OnInit {
 
-  @ViewChild('form') Form!: NgForm;
-  ingreso = new Ingreso();
-  public addIngresoForm!: FormGroup;
-  submitted = false;
-  currentIngreso: any;
-  saving: boolean = false;
+//   ingreso = new Ingreso();
+//   public addIngresoForm!: FormGroup;
+//   submitted = false;
+//   currentIngreso: any;
+//   saving: boolean = false;
 
-  constructor(private finanzasService: FinanzasService,
-    public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder
-  ) {
-
-
-  }
-  ngOnInit(): void {
-    this.ingreso = this.data;
-    this.finanzasService.getIngreso(this.ingreso.id).subscribe({
-      next: (data) => {
-        this.ingreso = data;
-        this.addIngresoForm = this.fb.group(data);
-      }
-    })
-    this.iniciarForms();
-  }
-
-  iniciarForms() {
-
-  }
+//   constructor(private finanzasService: FinanzasService,
+//     public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder
+//   ) {
 
 
-}
+//   }
+//   ngOnInit(): void {
+//     this.ingreso = this.data;
+//     this.finanzasService.getIngreso(this.ingreso.id).subscribe({
+//       next: (data) => {
+//         this.ingreso = data;
+//         this.addIngresoForm = this.fb.group(data);
+//       }
+//     })
+//     this.iniciarForms();
+//   }
+
+//   iniciarForms() {
+
+//   }
+
+
+// }

@@ -67,6 +67,7 @@ import { AddEstablismentComponent } from './establecimiento/add-establecimiento/
 import { IngresosComponent } from './resultados/ingresos/ingresos.component';
 import { EgresosComponent } from './resultados/egresos/egresos.component';
 import { ResultadosComponent } from './resultados/resultados/resultados.component';
+import { AddIngresoComponent } from './resultados/ingresos/addIngresos.component'
 
 
 @NgModule({
@@ -103,6 +104,8 @@ import { ResultadosComponent } from './resultados/resultados/resultados.componen
     IngresosComponent,
     EgresosComponent,
     ResultadosComponent,
+    IngresosComponent,
+    AddIngresoComponent
       ],
   imports: [
     CommonModule,

@@ -126,7 +126,7 @@ export class AddClientComponent implements OnInit {
   iniciarForms() {
     this.addClientForm = this.fb.group({
       id: null,
-      fechaNacimiento: ['', [Validators.required]],
+      fechaNacimiento: [''],
       nombres: ['', [Validators.required]],
       apellidos: ['', [Validators.required]],
       direccion: [''],
@@ -135,7 +135,7 @@ export class AddClientComponent implements OnInit {
       telefono2: [''],
       referidoPor: [''],
       email: ['', [Validators.email]],
-      identificacion: ['', [Validators.required]],
+      identificacion: [''],
       motivoConsulta: ['']
       });
   }

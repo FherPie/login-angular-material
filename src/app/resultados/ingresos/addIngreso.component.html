@@ -1,0 +1,27 @@
+
+<!-- <div class="modal"> -->
+    <h3 >Registro de Ingreso</h3>
+<form #form="ngForm" class="form-datos" [formGroup]="addIngresoForm">
+
+   <div class="group-form">
+        <label for="selectTipo">Movimiento:</label>
+        <select name="selectTipo" formControlName="tipo">
+            <option [value]="1">Ingreso</option>
+            <option [value]="2">Egreso</option>
+        </select>
+    </div>
+
+     <div class="group-form">
+        <label for="precio">Precio:</label>
+        <input type="numbre" placeholder="Precio" name="precio" formControlName="precio" required="true"/>
+    </div>
+    <div class="group-form">
+    <label for="concepto">Concepto:</label>
+    <input type="text" placeholder="Concepto" name="concepto" formControlName="concepto" required="true"/>
+    </div>
+    <div class="actions-container">
+        <button type="button" name="Guardar" (click)="save()">Guardar</button>
+        <button type="button" name="Cancelar" (click)="closeDialog()">Cancelar</button>
+    </div>
+</form>
+<!-- </div> -->
