@@ -1,15 +1,13 @@
-
-<!-- <div class="modal"> -->
-    <h3 >Registro de Ingreso</h3>
+<h3 >Registro de Egreso</h3>
 <form #form="ngForm" class="form-datos" [formGroup]="addIngresoForm">
 
-   <div class="group-form">
+   <!-- <div class="group-form">
         <label for="selectTipo">Movimiento:</label>
         <select name="selectTipo" formControlName="tipo">
             <option [value]="1">Ingreso</option>
             <option [value]="2">Egreso</option>
         </select>
-    </div>
+    </div> -->
     <div class="group-form">
         <label for="concepto">Concepto:</label>
         <input type="text" placeholder="Concepto" name="concepto" formControlName="concepto" required="true"/>
@@ -24,4 +22,3 @@
         <button type="button" name="Cancelar" (click)="closeDialog()">Cancelar</button>
     </div>
 </form>
-<!-- </div> -->

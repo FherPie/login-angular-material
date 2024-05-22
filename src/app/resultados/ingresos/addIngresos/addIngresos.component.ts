@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { FinanzasService } from '../service/finanzas-service.service';
-import { Ingreso } from './ingresoModel';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FinanzasService } from '../../service/finanzas-service.service';
+import { Ingreso } from '../ingresoModel';
 
 @Component({
      templateUrl: './addIngreso.component.html',
@@ -16,10 +16,24 @@ export class AddIngresoComponent implements OnInit{
      currentIngreso: any;
      saving: boolean = false;
      mostrarErrores: boolean = false;
-     constructor(private fb: FormBuilder, public dialog:MatDialog,private finanzasService: FinanzasService,){}
+     constructor(private fb: FormBuilder, 
+          public dialog:MatDialog,
+          @Inject(MAT_DIALOG_DATA) public data: any,
+          private finanzasService: FinanzasService,){}
 
      ngOnInit():void{
        this.iniciarForma();
+
+       this.ingreso=this.data;
+       if(this.ingreso.id){
+            this.finanzasService.getIngreso(this.ingreso.id).subscribe({
+                 next: data =>{
+                      this.ingreso=data;
+                      this.addIngresoForm=this.fb.group(this.ingreso);
+                 }
+            })
+       }
+
      }
 
      iniciarForma () {
@@ -42,10 +56,7 @@ export class AddIngresoComponent implements OnInit{
               return;
          }
 
-         this.ingreso= this.addIngresoForm.value;
-
-
-   if(this.ingreso.tipo==1){
+     this.ingreso= this.addIngresoForm.value;
      this.finanzasService.saveIngreso(this.ingreso).subscribe({
           next:(data)=>{
                this.ingreso=data;
@@ -55,22 +66,6 @@ export class AddIngresoComponent implements OnInit{
                alert(error);
           }
       })
-   }else{
-     this.finanzasService.saveSalida(this.ingreso).subscribe({
-          next:(data)=>{
-               this.ingreso=data;
-               alert("Informacion Ingresada con Exito");
-               this.closeDialog();
-          }, error: error=>{
-               alert(error);
-          }
-      })
-   }
-
-   
-
-
-
      }
 
 }

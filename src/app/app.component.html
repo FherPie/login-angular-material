@@ -1,15 +1,12 @@
 
-<mat-toolbar color="primary" style="justify-content: end"  *ngIf="isLoggeIn">
-        
+<mat-toolbar class="toolBar" color="primary" style="justify-content: end"  *ngIf="isLoggeIn">
     <small  style="align-items: right">
-      <mat-icon style="vertical-align: middle">photo_camera</mat-icon>
-      
+      <button class="buttonToggle" (click)="drawer.toggle()">
+        <mat-icon style="vertical-align: middle">menu</mat-icon></button>
+      <mat-icon style="vertical-align: middle">photo_camera</mat-icon>    
       &nbsp;
       {{ username }}
 
-      <!-- <a 
-      ><mat-icon>exit_to_app</mat-icon></a
-    > -->
       <button
         mat-icon-button
         [matMenuTriggerFor]="menu"
@@ -42,17 +39,17 @@
         </button> -->
       </mat-menu>
       </small>
-    <button
+    <!-- <button
       type="button"
       aria-label="Toggle sidenav"
       mat-icon-button
       (click)="drawer.toggle()"
       *ngIf="(isHandset$ | async)"
-    >
+>
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-    </button>
-  </mat-toolbar>
+    </button> -->
 
+  </mat-toolbar>
 
 <mat-sidenav-container class="app-container">
     <mat-sidenav
@@ -64,9 +61,15 @@
       [opened]="(isHandset$ | async) === false && isLoggeIn"
       style=" min-height: 100vh;"  >
       
-      <mat-toolbar  > <mat-icon>    <span class="material-symbols-outlined">
+      <mat-toolbar> 
+        <div>
+        <mat-icon>    
+        <span class="material-symbols-outlined">
         streetview
-        </span></mat-icon>&nbsp; SofS</mat-toolbar>
+        </span></mat-icon>&nbsp; SofS
+      </div>
+      </mat-toolbar>
+
       <mat-nav-list  >
 
         <mat-expansion-panel [class.mat-elevation-z0]="true"  *ngIf="showMenuSecurity">
@@ -130,10 +133,9 @@
                     <mat-icon><span class="material-symbols-outlined">
                       payments
                       </span></mat-icon>&nbsp; Ingresos</a>
-
                       <a  class="list-item-bar" routerLink="/egresos">
                         <mat-icon><span class="material-symbols-outlined">
-                          money_off
+                          paid
                           </span></mat-icon>&nbsp; Egresos</a>
 
                           <a  class="list-item-bar" routerLink="/resultados">

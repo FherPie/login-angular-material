@@ -4,6 +4,4 @@ export class Ingreso {
     precio:number=0;
     concepto?:string;
     createdDate?:string;
-
-
 }

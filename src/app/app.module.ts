@@ -64,10 +64,12 @@ import { authInterceptoProviders } from './login/AuthInterceptor';
 import { UnActiveConfirmDialogComponent } from './empleados/util-components/unactive-confirm-dialog/unactive-confirm-dialog.component';
 import { ListEstablecimientoComponent } from './establecimiento/list-establecimiento/list-establecimiento.component';
 import { AddEstablismentComponent } from './establecimiento/add-establecimiento/add-establecimiento.component';
-import { IngresosComponent } from './resultados/ingresos/ingresos.component';
-import { EgresosComponent } from './resultados/egresos/egresos.component';
+import { IngresosComponent } from './resultados/ingresos/tableIngresos/ingresos.component';
+import { EgresosComponent } from './resultados/egresos/tableEgresos/egresos.component';
 import { ResultadosComponent } from './resultados/resultados/resultados.component';
-import { AddIngresoComponent } from './resultados/ingresos/addIngresos.component'
+import { AddIngresoComponent } from './resultados/ingresos/addIngresos/addIngresos.component';
+import { PanelContenedorTodoComponent } from './resultados/panel-contenedor-todo/panel-contenedor-todo.component';
+import { AddEgresosComponent } from './resultados/egresos/add-egresos/add-egresos.component'
 
 
 @NgModule({
@@ -105,7 +107,9 @@ import { AddIngresoComponent } from './resultados/ingresos/addIngresos.component
     EgresosComponent,
     ResultadosComponent,
     IngresosComponent,
-    AddIngresoComponent
+    AddIngresoComponent,
+    PanelContenedorTodoComponent,
+    AddEgresosComponent
       ],
   imports: [
     CommonModule,

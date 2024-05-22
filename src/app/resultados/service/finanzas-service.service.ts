@@ -34,13 +34,18 @@ export class FinanzasService {
     return this.httpClient.post(`${baseUrl}`+'/salida',data );
   }
 
-  deleteSalida(data:any):Observable<any> {
-    return this.httpClient.delete(`${baseUrl}`+'/salida',data );
+  deleteSalida(egreso:any):Observable<any> {
+    return this.httpClient.delete(`${baseUrl}`+'/salida/'+egreso.id );
   }
 
 
  getIngreso(id: any): Observable<any> {
-  return this.httpClient.get(`${baseUrl}/entradas/${id}`);
+  return this.httpClient.get(`${baseUrl}/entrada/${id}`);
  }
+
+ getEgreso(id: any): Observable<any> {
+  return this.httpClient.get(`${baseUrl}/salida/${id}`);
+ }
+
 
 }

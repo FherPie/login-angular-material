@@ -1,0 +1,27 @@
+
+.salidaTitle{
+    display: flex;
+    justify-content: space-between;
+}
+
+h3{
+    font-weight: 900;
+}
+
+.resultadosGenerales{
+    display: flex;
+}
+
+.resultadoPositivo{
+  color: green;
+}
+
+.resultadoNegativo{
+    color:red;
+}
+
+.newButton{
+    margin: 15px 0px 15px 0px;
+    background-color: green;
+    color:white !important;
+}

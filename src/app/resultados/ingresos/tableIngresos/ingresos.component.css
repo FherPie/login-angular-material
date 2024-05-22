@@ -1,0 +1,41 @@
+.splitingresosegresos{
+    display: flex;
+    column-gap: 2rem;
+}
+
+.entradaTitle{
+    display: flex;
+    justify-content: space-between;
+}
+
+.salidaTitle{
+    display: flex;
+    justify-content: space-between;
+}
+
+h3{
+    font-weight: 900;
+}
+
+.resultadosGenerales{
+    display: flex;
+}
+
+.resultadoPositivo{
+  color: green;
+}
+
+.resultadoNegativo{
+    color:red;
+}
+
+.newButton{
+    margin: 15px 0px 15px 0px;
+    background-color: green;
+    color:white !important;
+}
+
+.page-header{
+    display:flex;   
+    justify-content:space-between;
+}

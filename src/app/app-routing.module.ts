@@ -18,9 +18,10 @@ import { AutocompleteComponent } from './autocomplete-pacient/autocomplete.compo
 import { AppNavComponent } from './app-nav/app-nav.component';
 import { EmpleadoListComponent } from './empleados/empleado-list/empleado-list.component';
 import { AddEstablismentComponent } from './establecimiento/add-establecimiento/add-establecimiento.component';
-import { IngresosComponent } from './resultados/ingresos/ingresos.component';
-import { EgresosComponent } from './resultados/egresos/egresos.component';
+import { IngresosComponent } from './resultados/ingresos/tableIngresos/ingresos.component';
+import { EgresosComponent } from './resultados/egresos/tableEgresos/egresos.component';
 import { ResultadosComponent } from './resultados/resultados/resultados.component';
+import { PanelContenedorTodoComponent } from './resultados/panel-contenedor-todo/panel-contenedor-todo.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: 'ingresos', component: IngresosComponent },
   { path: 'egresos', component: EgresosComponent },
   { path: 'resultados', component: ResultadosComponent },
+  { path: 'panelContenedorTodo', component: PanelContenedorTodoComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 

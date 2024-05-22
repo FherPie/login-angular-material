@@ -40,3 +40,18 @@
 .list-item-bar:hover {
 background-color: rgba(116, 114, 114, 0.268);
   }
+
+  .toolBar{
+     display: flex;
+     align-items: center;
+     justify-content: flex-start;
+  }
+
+  .buttonToggle{
+    border-radius: 0.5rem;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    font-size: 0.75rem;
+    margin-right: 0.5rem;
+  }
