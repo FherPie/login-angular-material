@@ -70,7 +70,8 @@ import { ResultadosComponent } from './resultados/resultados/resultados.componen
 import { AddIngresoComponent } from './resultados/ingresos/addIngresos/addIngresos.component';
 import { PanelContenedorTodoComponent } from './resultados/panel-contenedor-todo/panel-contenedor-todo.component';
 import { AddEgresosComponent } from './resultados/egresos/add-egresos/add-egresos.component'
-
+import {AddPagosComponent} from 'src/app/client/pagos/addPagos/addPago.component';
+import{PagosComponent} from 'src/app/client/pagos/tablePagos/pagos.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,9 @@ import { AddEgresosComponent } from './resultados/egresos/add-egresos/add-egreso
     IngresosComponent,
     AddIngresoComponent,
     PanelContenedorTodoComponent,
-    AddEgresosComponent
+    AddEgresosComponent,
+    AddPagosComponent,
+    PagosComponent
       ],
   imports: [
     CommonModule,

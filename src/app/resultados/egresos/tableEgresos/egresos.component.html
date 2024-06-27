@@ -6,6 +6,18 @@
     <button mat-button class="primary newButton" (click)="new()">
         <mat-icon>add</mat-icon> Nuevo
     </button>
+
+    <mat-form-field>
+      <mat-label>Rango de Tiempo</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Start date"  [(ngModel)]="startDate" (dateChange)="focusOutFunction()"  >
+        <input matEndDate placeholder="End date" [(ngModel)]="endDate" (dateChange)="focusOutFunction()" >
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"  ></mat-datepicker-toggle>
+      <mat-date-range-picker #picker ></mat-date-range-picker>
+    </mat-form-field>
+    <!-- <button (click)="" -->
     </div>
     <div class="salidaTitle"><h3>Salidas</h3> <h3>Total: {{sumaSalidas | currency:'USD':true:'1.2-2'}}</h3></div>
     <mat-table [dataSource]="dataSourceSalidas" matSort>

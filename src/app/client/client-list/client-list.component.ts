@@ -9,6 +9,10 @@ import { AddClientComponent } from '../add-client/add-client.component';
 import { Router } from '@angular/router';
 import { MessageService } from 'src/app/utils-services/message-service.service';
 import { ClienteService } from '../cliente.service';
+import {PagosComponent} from "../pagos/tablePagos/pagos.component";
+
+import { VistaFacturaComponent } from 'src/app/proposal/vista-factura/vista-factura.component';
+
 
 @Component({
   selector: 'app-client-list',
@@ -16,6 +20,7 @@ import { ClienteService } from '../cliente.service';
   styleUrls: ['./client-list.component.css'],
 })
 export class ClientListComponent implements OnInit, AfterViewInit {
+
   constructor(
     private clienteService: ClienteService,
     private router: Router,
@@ -111,6 +116,13 @@ export class ClientListComponent implements OnInit, AfterViewInit {
   }
 
 
+
+  openRegistroPago(client: ClientLite) {
+    this.selectedClient = client;
+    this.openDialogClientForm(this.selectedClient);
+  }
+
+
   deleteClient(pacientDtoToDelete: any) {
     this.dialog
       .open(DeleteConfirmDialogComponent)
@@ -153,6 +165,36 @@ export class ClientListComponent implements OnInit, AfterViewInit {
 
 
   }
+
+  openDialogPagosdelCliente(data: ClientLite | null) {
+
+    const dialogRef = this.dialog.open(PagosComponent, {
+      width: '930px', disableClose: true,
+      data: data,
+      maxHeight: '120vh'
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.retrieveClients();
+    })
+
+
+  }
+
+  openDialogPresupuestodelCliente(data: ClientLite | null) {
+ 
+    const dialogRef = this.dialog.open(VistaFacturaComponent, {
+      width: '930px', disableClose: true,
+      data: data,
+      maxHeight: '120vh'
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.retrieveClients();
+    })
+
+
+    }
 
   // searchIdentification(): void {
   //   if (this.identification == null) {

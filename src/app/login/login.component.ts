@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log("LISTO LISTO SE EJEcuta lingn");
     console.log(this.credentials);
     this.authService.authenticate(this.credentials).subscribe({
       next: (data)=>{

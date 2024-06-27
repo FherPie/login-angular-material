@@ -1,0 +1,53 @@
+.splitingresosegresos{
+    display: flex;
+    column-gap: 2rem;
+}
+
+.entradaTitle{
+    display: flex;
+    justify-content: space-between;
+}
+
+.salidaTitle{
+    display: flex;
+    justify-content: space-between;
+}
+
+h3{
+    font-weight: 900;
+}
+
+.resultadosGenerales{
+    display: flex;
+}
+
+
+
+.page-header{
+    display:flex;   
+    justify-content:space-between;
+}
+
+
+
+button{
+    border-radius: 5px;
+}
+
+
+.container-page{
+ margin: 2rem;
+}
+
+.title-page{
+    display:flex;   
+    justify-content:space-between;
+    align-items: flex-start;
+}
+
+.title-page > button{
+    background-color: transparent;
+    border: none;
+    color: rgb(80, 80, 80);
+    font-size: 1.5rem;
+}

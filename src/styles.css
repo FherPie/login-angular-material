@@ -1,10 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root{
+  --theme-color: white;
+  /* --primary-color: rgb(0, 107, 200); */
+  --primary-color: #124f88;
+  --secondary-color: #f7c331;
+  --text-color-inverse: white;
+  --text-color: black;
+  --navbar-shallow-color: #e5e5e5;
+  --menu-mobile-background-color: #3A4460;
+}
+
+.newButton{
+  margin: 15px 0px 15px 0px;
+  background-color: var(--primary-color);
+  color:var(--text-color-inverse) !important;
+}
+
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; font-size: 32px; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; font-size: 12px; }
 /* .cdk-overlay-dark-backdrop {
     background: #3002309e;
 } */
+
+
+
 
 
 mat-sidenav-content{

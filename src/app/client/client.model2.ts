@@ -14,11 +14,7 @@ export class ClientLite {
 
 
 export const  COLUMNS_SCHEMA = [
-    {
-      key: "id",
-      type: "number",
-      label: "ID"
-    },
+
     {
       key: "identificacion",
       type: "text",

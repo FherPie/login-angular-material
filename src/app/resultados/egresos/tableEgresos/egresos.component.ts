@@ -16,7 +16,17 @@ import { AddEgresosComponent } from '../add-egresos/add-egresos.component';
 })
 export class EgresosComponent {
 
-  
+
+
+  startDate: any;
+  endDate: any;
+
+  focusOutFunction() {
+    alert(this.startDate.toDate()+" "+this.endDate.toDate());
+    this.listEgresos();
+  }
+
+
   constructor(private finanzasService: FinanzasService,
     public dialog: MatDialog) {
 
@@ -28,7 +38,7 @@ export class EgresosComponent {
   filterValue: string = "";
   ELEMENT_DATA!: Ingreso[];
   dataSourceSalidas = new MatTableDataSource<Ingreso>(this.ELEMENT_DATA);
-  sumaSalidas:number=0;
+  sumaSalidas: number = 0;
   selectedProposal!: Ingreso;
   displayedColumns = ['precio', 'concepto', 'createdDate', 'actions'];
 
@@ -38,14 +48,23 @@ export class EgresosComponent {
 
 
   listEgresos() {
-    this.sumaSalidas=0;
+    this.sumaSalidas = 0;
     this.finanzasService.getListEgresos().subscribe({
       next: (data) => {
         this.dataSourceSalidas = new MatTableDataSource(data);
         this.dataSourceSalidas.paginator = this.paginator;
         this.dataSourceSalidas.sort = this.sort;
-        this.dataSourceSalidas.data.forEach((data)=>{
-          this.sumaSalidas= this.sumaSalidas + Number(data.precio) ;
+        this.dataSourceSalidas.data.filter(x=> {
+          if(!this.startDate || !this.endDate){
+               return true;
+          } 
+          let endEndDate=new Date(this.endDate+1);
+           if( (this.startDate && this.endDate) 
+            && (new Date(x.createdDate) >= this.startDate && new Date(x.createdDate) <= endEndDate )){
+               return true
+           } else { return false}
+        }).forEach((data) => {
+          this.sumaSalidas = this.sumaSalidas + Number(data.precio);
         });
       }
     })
@@ -60,16 +79,16 @@ export class EgresosComponent {
   deleteItem(egreso: any) {
     console.log("Ingreso", egreso);
     this.dialog.open(DeleteConfirmDialogComponent)
-    .afterClosed().subscribe((confirm)=>{
-       if(confirm){
-        this.finanzasService.deleteSalida(egreso).subscribe({
-          complete:()=>{
-            alert("Registro Eliminado");
-            this.listEgresos();
-          }
-        })
-       }
-    })
+      .afterClosed().subscribe((confirm) => {
+        if (confirm) {
+          this.finanzasService.deleteSalida(egreso).subscribe({
+            complete: () => {
+              alert("Registro Eliminado");
+              this.listEgresos();
+            }
+          })
+        }
+      })
   }
 
   openEditItem(egreso: any) {

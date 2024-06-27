@@ -1,27 +1,31 @@
-/* 
-::ng-deep  .cdk-overlay-dark-backdrop {
-    background: #00ffd9 !important;
-} */
 
 .container-login{
-    display: flex;
-    flex-direction: column;
     margin: 0 auto;
-    max-width: 25em;
-    row-gap: 0.3em;
-    margin-top: 5em; 
 }
 
-.login{
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    max-width: 25em;
-    row-gap: 0.3em;
-    margin-top: 5em;
+.form-login {
+    display: grid;
+    padding: 1.7rem;
 }
 
-.login>.button{
-margin-top: 1em;
+.login-title{
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.button-submit-login {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+@media(min-width:950px) {
+    
+.container-login{
+   max-width: 450px;
+}
+
 
 }

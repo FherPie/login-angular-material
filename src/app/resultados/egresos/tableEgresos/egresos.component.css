@@ -25,3 +25,8 @@ h3{
     background-color: green;
     color:white !important;
 }
+
+.page-header{
+    display:flex;   
+    justify-content:space-between;
+}

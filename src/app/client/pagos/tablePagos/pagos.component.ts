@@ -4,23 +4,23 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ResponseGenerico } from 'src/app/client/models/ResponseGenerico';
-import { DeleteConfirmDialogComponent } from 'src/app/proposal/util-components/delete-confirm-dialog/delete-confirm-dialog.component';
-import { FinanzasService } from '../../service/finanzas-service.service';
-import { AddIngresoComponent } from '../addIngresos/addIngresos.component';
 import { Ingreso } from '../ingresoModel';
+import { FinanzasService } from '../../../resultados/service/finanzas-service.service';
+import { DeleteConfirmDialogComponent } from 'src/app/proposal/util-components/delete-confirm-dialog/delete-confirm-dialog.component';
+import { AddPagosComponent } from 'src/app/client/pagos/addPagos/addPago.component';
+
 
 @Component({
   selector: 'app-ingresos',
-  templateUrl: './ingresos.component.html',
-  styleUrls: ['./ingresos.component.css']
+  templateUrl: './pagos.component.html',
+  styleUrls: ['./pagos.component.css']
 })
-export class IngresosComponent implements OnInit {
+export class PagosComponent implements OnInit {
 
 
 
 
-  constructor(private finanzasService: FinanzasService,public dialog: MatDialog) {
+  constructor(private finanzasService: FinanzasService, public dialog: MatDialog) {
 
   }
 
@@ -30,7 +30,7 @@ export class IngresosComponent implements OnInit {
   filterValue: string = "";
   ELEMENT_DATA!: Ingreso[];
   dataSource = new MatTableDataSource<Ingreso>(this.ELEMENT_DATA);
-  sumaEntradas:number=0;
+  sumaEntradas: number = 0;
   selectedProposal!: Ingreso;
   startDate: any;
 
@@ -47,14 +47,14 @@ export class IngresosComponent implements OnInit {
 
 
   listIngreso() {
-    this.sumaEntradas=0;
+    this.sumaEntradas = 0;
     this.finanzasService.getListIngresos().subscribe({
       next: (data) => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        this.dataSource.data.forEach((data)=>{
-          this.sumaEntradas= this.sumaEntradas + Number(data.precio) | 0;
+        this.dataSource.data.forEach((data) => {
+          this.sumaEntradas = this.sumaEntradas + Number(data.precio) | 0;
         });
       }
     })
@@ -67,16 +67,16 @@ export class IngresosComponent implements OnInit {
   deleteItem(ingreso: any) {
     console.log("Ingreso", ingreso);
     this.dialog.open(DeleteConfirmDialogComponent)
-    .afterClosed().subscribe((confirm)=>{
-       if(confirm){
-        this.finanzasService.deleteIngreso(ingreso).subscribe({
-          complete:()=>{
-            alert("Registro Eliminado");
-            this.listIngreso();
-          }
-        })
-       }
-    })
+      .afterClosed().subscribe((confirm) => {
+        if (confirm) {
+          this.finanzasService.deleteIngreso(ingreso).subscribe({
+            complete: () => {
+              alert("Registro Eliminado");
+              this.listIngreso();
+            }
+          })
+        }
+      })
 
   }
 
@@ -85,7 +85,7 @@ export class IngresosComponent implements OnInit {
   }
 
   openEditIngresoForm(data: Ingreso | null) {
-    const dialogRef = this.dialog.open(AddIngresoComponent, {
+    const dialogRef = this.dialog.open(AddPagosComponent, {
       width: '640px', disableClose: true,
       data: data,
       maxHeight: '120vh'
@@ -96,6 +96,11 @@ export class IngresosComponent implements OnInit {
     })
   }
 
+
+
+  public close() {
+    this.dialog.closeAll();
+  }
 
 
 
