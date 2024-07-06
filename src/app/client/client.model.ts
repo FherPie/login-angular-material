@@ -1,3 +1,5 @@
+import { ClienteRespuestasDto } from "./models/ClienteRespuestasDto";
+
 export class ClientDto {
 
     nombres?: string;
@@ -13,6 +15,7 @@ export class ClientDto {
     motivoConsulta?: string;
     referidoPor?: string;
     idPersona?: number;
+    listaClienteRespuestasDto?:ClienteRespuestasDto[];
     //     genero?: string;
     // estado?: string;
     // password?: string;

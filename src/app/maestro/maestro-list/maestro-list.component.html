@@ -28,6 +28,7 @@
             <table class="table">
               <thead>
                 <tr>
+                  <td>Código</td>
                   <td>Nombre</td>
                   <td>Descripcion</td>
                 </tr>
@@ -39,6 +40,7 @@
                   [class.active]="i == currentIndex"
                   (click)="setMaestroActive(maestro, i)"
                 >
+                  <td>{{ maestro.codigo}}</td>
                   <td>{{ maestro.nombre }}</td>
                   <td>{{ maestro.descripcion }}</td>
                 </tr>

@@ -9,6 +9,7 @@ import { DiscardInfoComponent } from '../utils-components/discard-info-component
 import { ActivatedRoute } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MessageService } from 'src/app/utils-services/message-service.service';
+import { ClienteRespuestasDto } from '../models/ClienteRespuestasDto';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class AddClientComponent implements OnInit {
   cliente: ClientDto= new ClientDto();
   clienteLite: ClientLite= new ClientLite();
   submitted: boolean=false;
+  listRespuestasClientesDto:ClienteRespuestasDto[] | undefined;
 
   public addClientForm!: FormGroup;
   saving!: boolean;
@@ -78,6 +80,7 @@ export class AddClientComponent implements OnInit {
           this.saving = false;
           this.response = data;
           this.cliente= data.objetoOb;
+          this.listRespuestasClientesDto= this.cliente.listaClienteRespuestasDto;
           this.msgs.showInfo("Registro Ingresado...")
       },
       complete: () => {},
@@ -99,6 +102,7 @@ export class AddClientComponent implements OnInit {
       return;
     }
     this.cliente = this.addClientForm.value;
+    this.cliente.listaClienteRespuestasDto= this.listRespuestasClientesDto;
     this.clienteSrv.updateClient(this.cliente).subscribe({
       next: (data) => {
           this.saving = false;
