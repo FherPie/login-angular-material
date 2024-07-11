@@ -42,6 +42,7 @@ export class AddClientComponent implements OnInit {
       this.clienteSrv.getClient(this.clienteLite.id).subscribe(
         (data) => {
           this.cliente = data;
+          this.listRespuestasClientesDto= this.cliente.listaClienteRespuestasDto;
           this.addClientForm = this.fb.group(this.cliente);
         },
         (error) => {
