@@ -1,6 +1,13 @@
 
-<h1 mat-dialog-title>Cliente</h1>
-<mat-dialog-content> <!-- instead of your <div>  or use <div mat-dialog-content> -->
+<!-- <mat-dialog-content> instead of your <div>  or use <div mat-dialog-content> -->
+  <div class="header-modal">
+    <h1 mat-dialog-title style="font-size: 1rem; font-weight:bold; padding-left:1rem">Registro de Cliente</h1>
+    <button mat-mini-fab aria-label="close" color="secondary" matTooltip="Cerrar"  (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+    </div>
+ <mat-tab-group>
+ <mat-tab label="Datos Personales"> 
 
 
     <form #form="ngForm" class="form-datos" [formGroup]="addClientForm">
@@ -62,7 +69,207 @@
 
 
     </form>
-    <mat-card-actions style="text-align: center;">
+
+
+  </mat-tab> 
+  <mat-tab label="Antecedentes Personales" disabled="{{ !cliente.id}}">
+  
+
+   <!--  <ul class="heroes">
+        <li *ngFor="let hero of listRespuestasClientesDto">
+          <button  type="button" >
+            <span class="badge">{{hero.id}}</span>
+            <span class="name">{{hero.pregunta?.maestro?.nombre}}</span>
+          </button>
+        </li>
+      </ul>-->
+      <mat-tab-group style="padding: 1rem;">
+        <mat-tab label="{{item.key}}" *ngFor="let item of newItems | keyvalue">
+            <div class="itemquest" *ngFor="let value of item.value" style="padding: 1rem;">
+                <p>{{value.pregunta?.nombre}}</p>
+                <mat-form-field class="input-data">
+                    <textarea matInput placeholder="{{value.pregunta?.nombre}}" [(ngModel)]="value.respuestText"  required="false"></textarea>
+                </mat-form-field>
+                <!-- <div>{{value.repuestText}}</div> -->
+                <br>
+              </div> 
+        </mat-tab>
+      </mat-tab-group>       
+<!-- 
+      <div *ngFor="let item of newItems | keyvalue">
+        <div id="{{item.key}}">
+          {{item.key}}
+          <div class="item" *ngFor="let value of item.value">
+            <div>{{value.pregunta?.nombre}}</div>
+            <mat-form-field class="input-data">
+                <textarea matInput placeholder="{{value.pregunta?.nombre}}" [(ngModel)]="value.respuestText"  required="false"></textarea>
+            </mat-form-field>
+            <div>{{value.repuestText}}</div>
+            <br>
+          </div>
+      </div>
+      </div> -->
+
+  </mat-tab>
+
+  <mat-tab label="Odontograma" style="height: 100%;">
+    
+
+    <mat-drawer-container class="example-container" autosize  [hasBackdrop]="true">
+   
+      
+
+          <!-- <div class="odontograma">
+            <div class="item item-{{item.pieza}}"  *ngFor="let item of  cliente.listaOdontogramaRespuestasDto" >
+                 {{item.pieza}}
+                </div>
+        </div> -->
+  
+
+
+        <mat-drawer #drawer class="example-sidenav" mode="side" position="end" style="width: 50%;">
+      
+         <div *ngIf="dienteSelected.id" style="padding: 1rem;">
+            <span class="material-symbols-outlined" color="primary" style="font-size:2rem">
+                dentistry
+            </span>
+            <h3>{{dienteSelected.pieza}}</h3>
+             <p>Anotaciones Adicionales</p>
+            <mat-form-field class="input-data">
+                <textarea matInput placeholder="Anotaciones Adicionales" [(ngModel)]="dienteSelected.descripcion"  required="false"></textarea>
+            </mat-form-field>
+
+   
+      
+            <div class="checks">
+            <mat-checkbox
+             class="example-margin"
+               [(ngModel)]="dienteSelected.machaBlanca">
+                Mancha blanca
+            </mat-checkbox>
+
+
+            <mat-checkbox
+            class="example-margin"
+              [(ngModel)]="dienteSelected.fractura">
+               Fractura
+           </mat-checkbox>
+
+           
+           <mat-checkbox
+           class="example-margin"
+             [(ngModel)]="dienteSelected.caries">
+             Caries
+          </mat-checkbox>
+
+
+          
+          <mat-checkbox
+          class="example-margin"
+            [(ngModel)]="dienteSelected.indicadoExtracciones">
+            Indicado para extracciones
+         </mat-checkbox>
+
+
+         <mat-checkbox
+         class="example-margin"
+           [(ngModel)]="dienteSelected.obturacionAmalgama">
+           Obturacion Amalgama
+        </mat-checkbox>
+
+            </div>
+         
+       
+
+         </div>
+           
+         </mat-drawer>
+
+          <div class="example-sidenav-content" >
+            <div class="odontograma"  >
+
+
+            <button type="button"  matBadge="8" matBadgePosition="after" class="item item-{{item.pieza}}"  *ngFor="let item of  listOdontogramaRespuestasDto" mat-button (click)="drawer.toggle(); seleccionarDiente(item)">
+
+              <span class="material-symbols-outlined" color="primary">
+                    dentistry
+                </span>
+               <span style="font-size: 0.5rem;"> {{item.pieza}}</span>         
+         
+            </button>
+          </div>
+
+
+
+
+    </div>  
+      
+      </mat-drawer-container>
+
+
+
+
+
+        
+
+
+  </mat-tab>
+
+  <mat-tab label="Documentos">
+    <div>
+      <mat-toolbar *ngIf="currentFile" class="progress-bar">
+        <mat-progress-bar color="accent" [value]="progress"></mat-progress-bar>
+        <span class="progress">{{ progress }}%</span>
+      </mat-toolbar>
+    
+      <mat-form-field style="width: 100% !important; padding: 20px !important;">
+        <div>
+          <mat-toolbar>
+            <input matInput [value]="fileName"  />
+    
+            <button
+              mat-flat-button
+              color="primary"
+              [disabled]="!currentFile"
+              (click)="upload()" >
+              Upload
+            </button>
+          </mat-toolbar>
+    
+          <input
+            type="file"
+            id="fileInput"
+            (change)="selectFile($event)"
+            name="fileInput"
+          />
+        </div>
+      </mat-form-field>
+    </div>
+    
+    <div *ngIf="message" class="message">
+      {{ message }}
+    </div>
+    
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>List of Files</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list role="list">
+          <mat-list-item role="listitem" *ngFor="let file of fileInfos | async">
+            <a href="{{ file.url }}">{{ file.name }}</a>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+    
+  </mat-tab>
+
+</mat-tab-group>
+
+
+
+    <mat-card-actions style="text-align: center;" class="btn-actions" style="margin-top: 20px">
 
         <button mat-raised-button type="submit" color="primary" class="Update-btn"
             (click)="cliente.id ?  onUpdateClient():onAddClient()"> {{cliente.id ? 'Actualizar':'Guardar'}}
@@ -70,4 +277,8 @@
 
         <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancelar</button>
     </mat-card-actions>
-</mat-dialog-content> <!-- instead of your </div> -->
+
+
+
+
+<!-- </mat-dialog-content> instead of your </div> -->

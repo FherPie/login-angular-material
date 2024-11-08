@@ -1,27 +1,190 @@
+<div class="header-modal">
+<h1 mat-dialog-title style="font-size: 1rem; font-weight:bold; padding-left:1rem">Registro de Pago</h1>
+<button mat-mini-fab aria-label="close" color="secondary" matTooltip="Cerrar"  (click)="closeDialog()">
+  <mat-icon>close</mat-icon>
+</button>
+</div>
 
-<!-- <div class="modal"> -->
-    <h3 >Registro de Ingreso</h3>
-<form #form="ngForm" class="form-datos" [formGroup]="addIngresoForm">
 
-   <!-- <div class="group-form">
-        <label for="selectTipo">Movimiento:</label>
-        <select name="selectTipo" formControlName="tipo">
-            <option [value]="1">Ingreso</option>
-            <option [value]="2">Egreso</option>
-        </select>
-    </div> -->
-    <div class="group-form">
-        <label for="concepto">Concepto:</label>
-        <input type="text" placeholder="Concepto" name="concepto" formControlName="concepto" required="true"/>
+<mat-stepper [linear]="true" #stepper (selectionChange)="onStepChange($event)">
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Elegir Cliente</ng-template>
+
+
+      <!-- <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+        </mat-form-field> -->
+
+      <app-vista-ordenes  [soloConsaldo]="true" [selectable]="true" *ngIf="enabled" (change)="countChange($event)"></app-vista-ordenes>
+
+
+      <div class="btn-actions">
+        <button mat-raised-button matStepperNext>Siguiente</button>
+      </div>
+
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="addIngresoForm" label="Registro de Pagos">
+    <!-- <form [formGroup]="addIngresoForm">
+        <mat-form-field>
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
         </div>
-     <div class="group-form">
-        <label for="precio">Precio:</label>
-        <input type="numbre" placeholder="Precio" name="precio" formControlName="precio" required="true"/>
+      </form> -->
+
+
+
+    <form #form="ngForm" class="form-datos" [formGroup]="addIngresoForm">
+
+
+      <div class="col-12">
+
+
+        <mat-card-actions>
+          <!-- [disabled]="form.invalid" -->
+          <button mat-raised-button type="submit" color="primary" class="Update-btn"
+            (click)="this.ingreso.id ?  agregarPago():agregarPago()">Agregar Pago</button>
+        </mat-card-actions>
+
+
+
+        <mat-table [dataSource]="dataSourcePacks">
+          <ng-container formArrayName="pagos">
+
+
+
+            <!-- Valor Column -->
+            <ng-container matColumnDef="detalle">
+              <mat-header-cell *matHeaderCellDef>Servicio o Producto</mat-header-cell>
+              <mat-cell *matCellDef="let element;" [formGroup]="element">
+
+                <div *ngIf="element.get('idDetalle').value!=''" style="text-align: center; font-weight: bold;">
+                  {{element.get('idDetalle').value.productoDto.nombre}}
+                </div>
+                <mat-form-field *ngIf="element.get('idDetalle').value==''">
+                  <!-- <input matInput placeholder="Valor" formControlName="precio" required> -->
+                  <mat-select placeholder="Seleccionar Producto o Servicio" [multiple]="false"  
+                    formControlName="idDetalle" (selectionChange)="doSomething($event, element)" >
+                    <mat-option *ngFor="let product of optionsDetallesVenta" [value]="product"> {{product.id
+                      }}-{{product.productoDto?.nombre}}</mat-option>
+                  </mat-select>
+
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Saldo Column -->
+            <ng-container matColumnDef="saldo">
+              <mat-header-cell *matHeaderCellDef>Saldo</mat-header-cell>
+              <mat-cell *matCellDef="let element;" [formGroup]="element">
+                <mat-form-field>
+                  <input matInput placeholder="Saldo" formControlName="saldo" readonly="true">
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Valor Column -->
+            <ng-container matColumnDef="valor">
+              <mat-header-cell *matHeaderCellDef>Valor</mat-header-cell>
+              <mat-cell *matCellDef="let element;" [formGroup]="element">
+                <mat-form-field>
+                  <input matInput placeholder="Valor" formControlName="precio" required>
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Descripcion Column -->
+            <ng-container matColumnDef="descripcion">
+              <mat-header-cell *matHeaderCellDef> Descripcion</mat-header-cell>
+              <mat-cell *matCellDef="let element;" [formGroup]="element">
+                <mat-form-field>
+                  <input matInput placeholder="Descripcion" formControlName="concepto" required>
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Delete Column -->
+            <ng-container matColumnDef="eliminar">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let element; index as i" [formGroup]="element">
+                <button type="button" (click)="deletePago(i, element)">
+                  <mat-icon matSuffix>delete</mat-icon>
+                </button>
+
+              </mat-cell>
+            </ng-container>
+
+            <!-- header titles -->
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </ng-container>
+        </mat-table>
+
+      </div>
+
+
+      <!-- <div class="row autocomplete" *ngIf="(!ingreso.id)">
+             <app-autocomplete-client  (fireSelectedClient)="setIngreso($event)" [inputClient]="this.ingreso.idCliente" ></app-autocomplete-client>
+         </div>
+      -->
+      <!--          
+         <div class="row autocomplete" *ngIf="(ingreso.id)">
+             <mat-form-field class="input-data">
+                 <input  matInput placeholder="CLIENTE" formControlName="nombreCliente" readonly="true">
+             </mat-form-field>
+         </div>
+     
+         <div class="group-form">
+          <mat-form-field class="input-data">
+              <input matInput placeholder="Valor" formControlName="precio" required="true">
+          </mat-form-field>
+      </div>
+         <div class="group-form">
+             <mat-form-field class="input-data">
+                 <input matInput placeholder="Descripcion" formControlName="concepto" required="true">
+             </mat-form-field>
+     
+        </div> -->
+
+
+      <!-- <app-vista-factura></app-vista-factura> -->
+
+      <!-- <div class="actions-container">
+             <button type="button" name="Guardar" (click)="save()">Guardar</button>
+             <button type="button" name="Cancelar" (click)="closeDialog()">Cancelar</button>
+         </div> -->
+      <div class="btn-actions">
+        <button mat-raised-button matStepperPrevious>Atrás</button>
+        <button mat-raised-button matStepperNext>Siguiente</button>
+      </div>
+
+
+    </form>
+
+
+
+
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <h5 style="margin-top: 50px; text-align:center">Esta listo para registrar el/los pago/s. Presione en Guardar</h5>
+    <div class="btn-actions-final" style="margin-top: 90px; text-align:center">
+      <button mat-raised-button matStepperPrevious>Atrás</button>
+      <button mat-raised-button type="submit" color="primary" class="Update-btn"
+        (click)="this.ingreso.id ?  save():save()"> {{this.ingreso.id ? 'Actualizar':'Guardar'}}</button>
+      <button mat-raised-button (click)="stepper.reset(); reloadTree(); ">Resetear el formulario</button>
+
+
     </div>
 
-    <div class="actions-container">
-        <button type="button" name="Guardar" (click)="save()">Guardar</button>
-        <button type="button" name="Cancelar" (click)="closeDialog()">Cancelar</button>
-    </div>
-</form>
+  </mat-step>
+</mat-stepper>
 <!-- </div> -->

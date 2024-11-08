@@ -17,8 +17,8 @@
 
 
  
+<div class="entradaTitle" style="margin-bottom: 20px;"><h4 class="title-page" >Servicios</h4></div>
 
-<h1 mat-dialog-title>Servicios</h1>
 <div class="header-screen">
   <mat-form-field class="filter">
     <input matInput (keyup)="applyFilter($event)" placeholder="Filtro" [(ngModel)]="filterValue">
@@ -27,12 +27,14 @@
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
-  <button mat-button class="primary" aria-label="Example icon button with a home icon" (click)="new()">
-    <mat-icon>add</mat-icon> Nuevo
-  </button>
+  <button mat-raised-button color="primary" expand="block" (click)="new()">     <mat-icon>add</mat-icon> Nuevo </button>  
+  
 </div>
+
+
+
 <div class="example-container">
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table mat-table [dataSource]="dataSource" matSort matTableResponsive>
     <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         {{col.label}}
@@ -46,7 +48,21 @@
             </button>
           </div>
           <span *ngSwitchDefault>
-            {{element[col.key]}}
+
+            <div [ngSwitch]="col.key">
+              <div class="btn-edit" *ngSwitchCase="'servdeOdontograma'">
+                <mat-checkbox class="example-margin"   [(ngModel)]="element[col.key]" disabled >
+
+              </mat-checkbox>
+                
+              </div>
+
+              <span *ngSwitchDefault>
+
+                {{element[col.key]}}
+              </span>
+            </div>
+          
           </span>
         </div>
       </td>

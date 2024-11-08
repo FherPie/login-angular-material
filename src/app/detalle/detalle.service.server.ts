@@ -26,4 +26,8 @@ export class DetalleServiceServer {
   update(data: any): Observable<any> {
     return this.http.put(baseUrl, data);
   }
+
+  formasPago(): Observable<any> {
+    return this.http.get(baseUrl+"/formasPago");
+  }
 }

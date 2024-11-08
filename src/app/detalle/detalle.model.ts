@@ -7,5 +7,5 @@ export class Detalle {
   parametros?: string;
   descripcion?: string;
 
-  maestro?: Maestro;
+  maestro: Maestro={nombre:""};
 }

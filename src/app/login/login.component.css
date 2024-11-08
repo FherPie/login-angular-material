@@ -1,11 +1,44 @@
 
+
+.bg-img{
+    background-image: url("../../assets/fondo_login.jpg") !important;
+    min-height: 380px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+
+    height: 100%;
+    /* min-height: 1024px; */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+}
+
+body, html{
+    height: 100%;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
 .container-login{
-    margin: 0 auto;
+   position: absolute;
+   right: 3%;
+   margin: 20px;
+   max-width: 420px;
+   width: 500px;
+   padding: 16px;
+   background-color: white;
+   filter: brightness(100%);
 }
 
 .form-login {
     display: grid;
-    padding: 1.7rem;
+    padding: 2.5rem;
 }
 
 .login-title{
@@ -23,9 +56,9 @@
 
 @media(min-width:950px) {
     
-.container-login{
+/* .container-login{
    max-width: 450px;
-}
+} */
 
 
 }

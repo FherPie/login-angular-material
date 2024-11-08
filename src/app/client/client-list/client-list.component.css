@@ -2,12 +2,3 @@
   
 }
 
-.header-screen{
-    display:flex;
-    flex-direction:row;
-    justify-content: start;
-    align-items: center;
-    font-size: 1rem;
-    padding-left: 0rem;
-    gap: 1rem;
-  }

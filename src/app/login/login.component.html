@@ -1,5 +1,6 @@
-<section class="container-login" *ngIf="!isLoggedIn">
-	<mat-card>
+<div class="bg-img" *ngIf="!isLoggedIn">
+
+	<mat-card class="container-login" >
 		<mat-toolbar  color="primary">
 			<h3 class="login-title">Bienvenido al Sistema</h3>
 		</mat-toolbar>
@@ -30,4 +31,6 @@
 			</div>
 		</form>
 	</mat-card>
-</section>
+	<h4>Datos, Agilidad y Organización para ti</h4>
+
+</div>

@@ -25,13 +25,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; font-size: 
 } */
 
 
+.header-modal{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:space-between;
+  gap: 5px;
+  margin-right: 10px;
+
+}
+
+
+
 
 
 
 mat-sidenav-content{
 
-    padding: 20px;;
-    padding-top: 10px;;
+    /* padding: 20px;;
+    padding-top: 10px;; */
 }
 
 .custom-snackbar {
@@ -77,3 +89,19 @@ mat-sidenav-content{
       color: white !important;
     }
   }
+
+
+  .header-screen{
+    display:flex;
+    flex-direction:row;
+    justify-content: start;
+    align-items: center;
+    font-size: 1rem;
+    padding-left: 0rem;
+    gap: 1rem;
+  }
+
+  
+.filter {
+  flex: 2;
+}

@@ -22,6 +22,7 @@ export class FinanzasService {
  }
 
   saveIngreso(data:any):Observable<any> {
+    console.log("DATA", data)
     return this.httpClient.post(`${baseUrl}`+'/entrada',data );
   }
 
@@ -45,6 +46,23 @@ export class FinanzasService {
 
  getEgreso(id: any): Observable<any> {
   return this.httpClient.get(`${baseUrl}/salida/${id}`);
+ }
+
+
+ 
+ guardarPagos(data:any):Observable<any> {
+  console.log("DATA", data)
+  return this.httpClient.post(`${baseUrl}`+'/guardarPagos',data );
+}
+
+
+
+getPagoSaldo(id: any): Observable<any> {
+  return this.httpClient.get(`${baseUrl}/entrada/${id}`);
+ }
+ 
+getPagosVenta(id: any): Observable<any> {
+  return this.httpClient.get(`${baseUrl}/pagosVenta/${id}`);
  }
 
 

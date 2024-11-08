@@ -149,6 +149,7 @@ export class AddProductoComponent implements OnInit {
       nombre: ['', [Validators.required]],
       precioUnitario: [null, [Validators.required]],
       precioCompra: [null],
+      servdeOdontograma: [null]
     });
   }
 }

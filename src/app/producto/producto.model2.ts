@@ -6,6 +6,7 @@ export class ProductoLite {
   precioCompra?: number;
   precioVenta?: number;
   descuentoUnitario?: number;
+  servdeOdontograma?: boolean=false;
 }
 
 
@@ -29,6 +30,11 @@ export const  COLUMNS_SCHEMA = [
     key: "precioCompra",
     type: "number",
     label: "Valor Compra"
+  },
+  {
+    key: "servdeOdontograma",
+    type: "number",
+    label: "Servicio de Odontograma"
   },
   {
     key: "actions",

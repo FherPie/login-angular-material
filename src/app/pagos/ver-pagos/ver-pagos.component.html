@@ -1,0 +1,64 @@
+<div class="header-modal">
+  <h1 mat-dialog-title style="font-size: 1rem; font-weight:bold; padding-left:1rem">Pagos</h1>
+  <button mat-mini-fab aria-label="close" color="secondary" matTooltip="Cerrar"  (click)="closeDialog()">
+    <mat-icon>close</mat-icon>
+  </button>
+  </div>
+  
+
+<mat-table [dataSource]="dataSource" matSort matTableResponsive>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row  *matRowDef="let row; columns: displayedColumns; ; let i = index"></mat-row>
+
+    <!-- id -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nro. </mat-header-cell>
+      <mat-cell *matCellDef="let i=index" data-label="i"> {{i+1}} </mat-cell>
+    </ng-container>
+
+    
+    <!--nombreProducto	-->
+    <ng-container matColumnDef="nombreProducto">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Productos/Servicios </mat-header-cell>
+        <mat-cell *matCellDef="let row" data-label="detalle"> {{row.nombreProducto}} </mat-cell>
+      </ng-container>
+
+    <!-- valor -->
+    <ng-container matColumnDef="precio">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Valor </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="precio"> {{row.precio}} </mat-cell>
+    </ng-container>
+
+    <!-- descripcion -->
+    <ng-container matColumnDef="concepto">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Concepto </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="descripcion"> {{row.concepto}} </mat-cell>
+    </ng-container>
+
+    <!--fechaFormat -->
+    <ng-container matColumnDef="createdDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="createdDate"> {{row.createdDate  | date:'short'}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef > Actions </mat-header-cell>
+
+     
+      <mat-cell *matCellDef="let row" >
+        <div  >
+        <!-- <button mat-icon-button (click)="openEditProposal(row)" *ngIf="!noEditable"> <mat-icon  >edit</mat-icon></button> -->
+        <!-- <button mat-icon-button (click)="deleteProposal(row)" color="warn" aria-label="Delete"  *ngIf="!noEditable">
+          <mat-icon>delete</mat-icon>
+        </button> -->
+        
+        <!-- <button mat-icon-button (click)="openVerDialogPagos(row)" color="primary" aria-label="VerPagos" *ngIf="verPagos"  >
+          <mat-icon>paid</mat-icon>
+        </button> -->
+
+      </div>
+      </mat-cell>
+  
+    </ng-container>
+  </mat-table>

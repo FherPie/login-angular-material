@@ -36,6 +36,16 @@ h3{
 }
 
 .page-header{
-    display:flex;   
-    justify-content:space-between;
+    display:flex;
+    flex-direction:row;
+    justify-content: flex-start;
+    align-items: baseline;
+    width: 900px;
+    font-size: 1rem;
+     gap: 1em;
+    padding-left: 0em;
 }
+
+mat-header-cell{
+    font-weight: bold;
+  }

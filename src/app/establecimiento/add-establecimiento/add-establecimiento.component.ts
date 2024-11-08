@@ -71,7 +71,7 @@ export class AddEstablismentComponent implements OnInit {
   public onAddClient(): void {
   
 
-    console.log("Pacient Info",this.addEstablishmentForm.value);
+    console.log("Establecimiento Info",this.addEstablishmentForm);
     if(this.addEstablishmentForm.invalid){
        this.markAsDirty(this.addEstablishmentForm);
        this._snackBar.open("Campos Obligatorios", 'X', {
@@ -101,8 +101,11 @@ export class AddEstablismentComponent implements OnInit {
     prepareFormData(establishment: EstablishmentDto): FormData{
      const formaData= new FormData();
      formaData.append('establecimientoDto', new Blob([JSON.stringify(establishment)], {type: 'application/json'}) );
-     for (var i=0; i< establishment.imageEstablishment.length; i++){
-      formaData.append('imageFile', establishment.imageEstablishment[i].file, establishment.imageEstablishment[i].file.name)
+     
+     if(establishment.imageEstablishment!=null){
+      for (var i=0; i< establishment.imageEstablishment.length; i++){
+        formaData.append('imageFile', establishment.imageEstablishment[i].file, establishment.imageEstablishment[i].file.name)
+       }
      }
       return formaData;
     }
@@ -136,7 +139,11 @@ export class AddEstablismentComponent implements OnInit {
   private markAsDirty(group: FormGroup | undefined): void {
     group?.markAsDirty();
     for (const i in group?.controls) {
-      group?.controls[i].markAsDirty();
+      if(group?.controls[i].status=="INVALID"){
+        group?.controls[i].markAsTouched();
+        group?.controls[i].markAsDirty();
+      }
+      
     }
   }
 
@@ -161,13 +168,13 @@ export class AddEstablismentComponent implements OnInit {
       id: null,
       nombre: ['', [Validators.required]],
       identificacion: ['', [Validators.required]],
-      direccion: ['', [Validators.required]],
+      direccion: [''],
       ciudad: ['', [Validators.required]],
       telefono2: [''],
-      telefono: [''],
-      codPostal: [''],
-      email: ['', [Validators.email]],
-      webSite: [''],
+      // telefono: [''],
+      // codPostal: [''],
+      // email: ['', [Validators.email]],
+      // webSite: [''],
       imageEstablishment: [null],
       });
   }

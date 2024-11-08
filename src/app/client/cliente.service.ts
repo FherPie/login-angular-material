@@ -21,6 +21,7 @@ export class ClienteService {
     return this.http.post(baseUrlCliente, data);
   }
   updateClient(data: any): Observable<any> {
+    console.log("data",data);
     return this.http.put(`${baseUrlCliente}`, data);
   }
   delete(id: any): Observable<any> {
@@ -36,4 +37,6 @@ export class ClienteService {
   subirArchivoExcelImportacion(formData: FormData,nameFile: any ): Observable<any> {
     return this.http.post(`${baseUrlCliente+'/uploadFile'}/${nameFile}`, formData);
   }
+
+
 }

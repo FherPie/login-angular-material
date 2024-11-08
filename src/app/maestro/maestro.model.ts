@@ -1,6 +1,6 @@
 export class Maestro {
   id?: number;
-  nombre?: string;
+  nombre: string="";
   descripcion?: string;
   codigo?: string;
 }

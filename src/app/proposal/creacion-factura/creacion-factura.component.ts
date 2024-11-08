@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, NgForm, FormGroup, FormControl } from '@angular/forms';
 import { Factura } from  '../models/factura';
 import { ItemFactura } from  '../models/itemFactura';
@@ -13,6 +13,10 @@ import { ProductoServiceServer } from '../../producto/producto.service.server';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProductService } from 'src/app/autocomplete-product/product-service.service';
 import { ClienteService } from 'src/app/client/cliente.service';
+import { Maestro } from 'src/app/maestro/maestro.model';
+import { MaestroServiceServer } from 'src/app/maestro/maestro.service.server';
+import { DetalleServiceServer } from 'src/app/detalle/detalle.service.server';
+import { Detalle } from 'src/app/detalle/detalle.model';
 
 
 const COLUMNS_SCHEMA = [
@@ -60,9 +64,51 @@ interface Product {
 })
 export class CreacionFacturaComponent implements OnInit, OnDestroy {
 
+  @ViewChild('myDiv') myDiv: ElementRef  | undefined;
+  maestrosList: Detalle[] = [];
+  id_maestro: String = '';
+
+  imprimir() {
+    var printHtml = this.myDiv!.nativeElement.innerHTML;
+    var currentPage = document.body.innerHTML;
+    var elementPage = '<html><head><title></title></head><body>' + printHtml + '</body>';
+    //change the body
+    document.body.innerHTML = elementPage;
+    //print
+    window.print();
+    //go back to the original
+    document.body.innerHTML = currentPage;
+}
+
+
+getMaestros(): void {
+  this.maestroService.formasPago().subscribe(
+    (data: Detalle[]) => {
+      this.maestrosList = data;
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+}
+
   removeRow(dto: any) {
     console.log("Element", dto);
     this.factura.detallesVentaDto = this.factura.detallesVentaDto.filter((u: any) => u !== dto);
+    this.dataService.deleteDetalle(this.factura)
+    .subscribe({
+      next: data => {
+          this.factura= data.objetoOb;
+          this.savingProposal=false;
+      },
+      complete: () => {
+      },
+      error: error => {
+        this.savingProposal=false;
+        //this.toastr.error('Error', error);
+      }
+    });
+ 
   }
 
   displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col!.key);
@@ -100,7 +146,7 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
   constructor(private fb: UntypedFormBuilder,  private  dataService:  DataService, 
     private clienteService: ClienteService
     , private prodcutoService: ProductoServiceServer, public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: any,   private maestroService: DetalleServiceServer
     ) {
   }
 
@@ -110,12 +156,14 @@ export class CreacionFacturaComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.getMaestros();
 
    this.factura=this.data;
    if(this.factura.id){
     this.dataService.getById(this.factura.id).subscribe({
       next:data=>{
         this.factura= data;
+        this.id_maestro= this.factura.formaPago!;
       },
       error:error=>{
 
@@ -183,6 +231,25 @@ listProduct(){
     this.factura.totalDescuento=this.totalDescuento; 
     console.log(this.factura);
     this.dataService.guardarVenta(this.factura)
+    .subscribe(
+      response => {
+        console.log(response);
+        this.dialog.closeAll();
+        this.savingProposal=false;
+      },
+      error => {
+        console.log(error);
+        this.savingProposal=false;
+      });
+  }
+
+
+  guardarCerrarVenta(){
+    this.savingProposal=true;
+    //this.factura=form.value;
+    this.factura.totalDescuento=this.totalDescuento; 
+    console.log(this.factura);
+    this.dataService.guardarCerrarVenta(this.factura)
     .subscribe(
       response => {
         console.log(response);
@@ -328,4 +395,24 @@ listProduct(){
     console.log("Producto", product);
     console.log("Producto", row);
   }
+
+
+  done(detallesVentaDto: ItemFactura){
+   detallesVentaDto.edit=!detallesVentaDto.edit;
+   this.dataService.doneDetalle(this.factura)
+   .subscribe({
+     next: data => {
+         this.factura= data.objetoOb;
+         this.savingProposal=false;
+     },
+     complete: () => {
+     },
+     error: error => {
+       this.savingProposal=false;
+       //this.toastr.error('Error', error);
+     }
+   });
+
+  }
+
 }

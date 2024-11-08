@@ -9,7 +9,6 @@ import { AddClientComponent } from '../add-client/add-client.component';
 import { Router } from '@angular/router';
 import { MessageService } from 'src/app/utils-services/message-service.service';
 import { ClienteService } from '../cliente.service';
-import {PagosComponent} from "../pagos/tablePagos/pagos.component";
 
 import { VistaFacturaComponent } from 'src/app/proposal/vista-factura/vista-factura.component';
 
@@ -154,9 +153,9 @@ export class ClientListComponent implements OnInit, AfterViewInit {
   openDialogClientForm(data: ClientLite | null) {
 
     const dialogRef = this.dialog.open(AddClientComponent, {
-      width: '640px', disableClose: true,
+      width: '100%', disableClose: true,
       data: data,
-      maxHeight: '120vh'
+      height: '100%'
     });
 
     dialogRef.afterClosed().subscribe(() => {
@@ -166,20 +165,6 @@ export class ClientListComponent implements OnInit, AfterViewInit {
 
   }
 
-  openDialogPagosdelCliente(data: ClientLite | null) {
-
-    const dialogRef = this.dialog.open(PagosComponent, {
-      width: '930px', disableClose: true,
-      data: data,
-      maxHeight: '120vh'
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      this.retrieveClients();
-    })
-
-
-  }
 
   openDialogPresupuestodelCliente(data: ClientLite | null) {
  
@@ -195,23 +180,6 @@ export class ClientListComponent implements OnInit, AfterViewInit {
 
 
     }
-
-  // searchIdentification(): void {
-  //   if (this.identification == null) {
-  //     this.identification = '';
-  //   }
-  //   this.clienteService.searchByNombre(this.identification).subscribe(
-  //     (data: ClientLite[]) => {
-  //       this.clients = data;
-  //       console.log(data);
-  //     },
-  //     (error: any) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // }
-
-
 
 
 }

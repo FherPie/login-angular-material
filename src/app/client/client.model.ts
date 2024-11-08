@@ -1,4 +1,5 @@
 import { ClienteRespuestasDto } from "./models/ClienteRespuestasDto";
+import { OdontogramaRespuestasDto } from "./models/OdontogramaRespuestasDto";
 
 export class ClientDto {
 
@@ -15,7 +16,9 @@ export class ClientDto {
     motivoConsulta?: string;
     referidoPor?: string;
     idPersona?: number;
-    listaClienteRespuestasDto?:ClienteRespuestasDto[];
+    listaClienteRespuestasDto:ClienteRespuestasDto[]=[];
+    listaOdontogramaRespuestasDto?:OdontogramaRespuestasDto[];
+    
     //     genero?: string;
     // estado?: string;
     // password?: string;

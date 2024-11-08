@@ -6,5 +6,5 @@ export class ClienteRespuestasDto{
     respuestInteger?: number;
     respuestBoolean?: boolean;
     respuestDouble?: number;
-    pregunta?: Detalle;
+    pregunta: Detalle={maestro:{nombre:""}};
 }

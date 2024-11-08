@@ -32,6 +32,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
+import {MatStepperModule} from '@angular/material/stepper'
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatBadgeModule} from '@angular/material/badge';
+
 
 import { AppComponent } from './app.component';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -70,8 +75,12 @@ import { ResultadosComponent } from './resultados/resultados/resultados.componen
 import { AddIngresoComponent } from './resultados/ingresos/addIngresos/addIngresos.component';
 import { PanelContenedorTodoComponent } from './resultados/panel-contenedor-todo/panel-contenedor-todo.component';
 import { AddEgresosComponent } from './resultados/egresos/add-egresos/add-egresos.component'
-import {AddPagosComponent} from 'src/app/client/pagos/addPagos/addPago.component';
-import{PagosComponent} from 'src/app/client/pagos/tablePagos/pagos.component';
+import { MatTableResponsiveDirective } from './mat-table-responsive/mat-table-responsive-directive';
+import { TableBasicExample } from './mat-table-responsive/TableBasicExample';
+import { CreacionOrdenesComponent } from './ordenes/creacion-ordenes/creacion-ordenes.component';
+import { VistaOrdenesComponent } from './ordenes/vista-ordenes/vista-ordenes.component';
+import { PagosComponent } from './pagos/pagos.component';
+import { VerPagosComponent } from './pagos/ver-pagos/ver-pagos.component';
 
 @NgModule({
   declarations: [
@@ -111,8 +120,12 @@ import{PagosComponent} from 'src/app/client/pagos/tablePagos/pagos.component';
     AddIngresoComponent,
     PanelContenedorTodoComponent,
     AddEgresosComponent,
-    AddPagosComponent,
-    PagosComponent
+    MatTableResponsiveDirective,
+    TableBasicExample,
+    CreacionOrdenesComponent,
+    VistaOrdenesComponent,
+    PagosComponent,
+    VerPagosComponent
       ],
   imports: [
     CommonModule,
@@ -147,7 +160,11 @@ import{PagosComponent} from 'src/app/client/pagos/tablePagos/pagos.component';
     MatAutocompleteModule,
     MatExpansionModule,
     MatSnackBarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatStepperModule,
+    MatCheckboxModule,
+    MatProgressBarModule,
+    MatBadgeModule
   ],
 providers: [DataService,  { provide: DateAdapter, useClass:  MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
  { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT_DATE }, {provide: MatDialogRef, useValue:{}}, authInterceptoProviders 

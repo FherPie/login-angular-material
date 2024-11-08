@@ -20,7 +20,9 @@ export class Factura {
     idCliente?: ClientLite;
     codigo?: string;
     estado?: string;
-    formaPago?: string;
+    formaPago: string="";
     fechayHora?: string;
     fechaFormat:string | undefined;
+    totalSinDescuento: number = 0;
+    motivoConsulta: string='';
   }

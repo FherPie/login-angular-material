@@ -3,7 +3,7 @@
     <form #form="ngForm" class="form-datos" [formGroup]="addEstablishmentForm">
        
         <!-- <mat-form-field class="input-data"> -->
-            <div class="input-data">
+            <!-- <div class="input-data">
             <input hidden  #selectFile type="file" value="select"
              (change)="onFileSelected($event)">
 
@@ -11,7 +11,7 @@
              class="Discard-btn" 
              (click)="selectFile.click()">Escoger la imagen</button>
              <span class="file-name">{{selectFile.name}}</span>
-            </div>
+            </div> -->
         <!-- </mat-form-field> -->
        
         <mat-form-field class="input-data">
@@ -37,7 +37,12 @@
                 required="false">
         </mat-form-field>
 
+        
         <mat-form-field class="input-data">
+            <textarea matInput placeholder="Dirección" formControlName="direccion" required="false"></textarea>
+        </mat-form-field> 
+
+    <mat-form-field class="input-data">
             <input matInput placeholder="Código Postal" formControlName="codPostal" required="false">
         </mat-form-field>
 
@@ -54,9 +59,6 @@
         <div class="input-data">
         </div>
 
-        <mat-form-field class="input-data">
-            <textarea matInput placeholder="Dirección" formControlName="direccion" required="false"></textarea>
-        </mat-form-field>
     </form>
     <mat-card-actions class="botones">
 

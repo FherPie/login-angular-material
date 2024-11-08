@@ -1,13 +1,25 @@
 
-<mat-tab-group>
-  <mat-tab label="Ingresos">
+<!-- <mat-tab-group> -->
+  <!-- <mat-tab label="Ingresos"> -->
     <div class="container-page">
-      <div class="page-header">
-        <button mat-button class="primary newButton" (click)="new()">
-            <mat-icon>add</mat-icon> Nuevo
-        </button>
+      <div class="entradaTitle" style="margin-bottom: 20px;"><h4 class="title-page" >Pagos</h4></div>
 
-        <mat-form-field>
+      <!-- <h3>Total: {{sumaEntradas | currency:'USD':true:'1.2-2'}}</h3> -->
+      <div class="header-screen">
+
+        <mat-form-field class="filter">
+          <input matInput (keyup)="applyFilter($event)" placeholder="Filtro" [(ngModel)]="filterValue">
+      
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="clearFilterValue()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+
+        <button mat-raised-button color="primary" expand="block" (click)="new()"> <mat-icon>add</mat-icon> Nuevo </button>    
+
+
+        <!-- <mat-form-field>
           <mat-label>Rango de Tiempo</mat-label>
           <mat-date-range-input [rangePicker]="picker">
             <input matStartDate placeholder="Start date">
@@ -16,18 +28,22 @@
           <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>
-        </mat-form-field>
+        </mat-form-field> -->
         
         </div> 
-      <div class="entradaTitle"><h3>Entradas</h3> <h3>Total: {{sumaEntradas | currency:'USD':true:'1.2-2'}}</h3></div>
-     <mat-table [dataSource]="dataSource" matSort>
+     <mat-table [dataSource]="dataSource" matSort matTableResponsive>
     
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row     *matRowDef="let row; columns: displayedColumns; ; let i = index"></mat-row>
-        <ng-container matColumnDef="precio">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Precio </mat-header-cell>
-            <mat-cell [style.color]="row.precio<1000 ? 'red':'green'"   *matCellDef="let row" data-label="precio"> {{row.precio | currency:'USD':true:'1.2-2'}} </mat-cell>
+
+
+        
+        <!-- Name Column -->
+        <ng-container matColumnDef="nombreCliente">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Cliente </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="nombreCliente"> {{row.nombreCliente}} </mat-cell>
         </ng-container>
+
     
         <ng-container matColumnDef="concepto">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Concepto </mat-header-cell>
@@ -38,7 +54,12 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Creacion </mat-header-cell>
             <mat-cell *matCellDef="let row" data-label="concepto"> {{row.createdDate | date :'dd/MM/yyyy, HH:mm a'}} </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="actions">
+
+        <ng-container matColumnDef="precio">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Valor </mat-header-cell>
+          <mat-cell   *matCellDef="let row" data-label="precio"> {{row.precio | currency:'USD':true:'1.2-2'}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef > Actions </mat-header-cell>
             <mat-cell *matCellDef="let row">
               <button mat-icon-button (click)="openEditItem(row)"> <mat-icon  >edit</mat-icon></button>
@@ -50,12 +71,14 @@
        </mat-table> 
        <mat-paginator [pageSizeOptions]="[50, 100]"></mat-paginator>
     </div>
-  </mat-tab>
-  <mat-tab label="Grafica">
 
-  </mat-tab>
+    <!-- <table-basic-example></table-basic-example> -->
+  <!-- </mat-tab> -->
+  <!-- <mat-tab label="Grafica">
 
-</mat-tab-group>
+  </mat-tab> -->
+
+<!-- </mat-tab-group> -->
 
 
 

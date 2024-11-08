@@ -3,12 +3,11 @@
 }
 
 .form-datos{
-    width: 100%;
-    max-width: 1200px;
+
     margin: 0 auto;
     display: grid;
-    row-gap: 1em;
-    padding: 1em 2em;
+
+    font-size: 1rem;
 }
 
 .group-form{
@@ -46,11 +45,36 @@ option{
     font-size: 1rem;
     padding: 1rem;
 }
-input{
-    padding: 0.5rem;
-}
 
 h3{
     padding: 0.5 rem;
     margin: 0.5rem;
 }
+
+.btn-actions{
+    display:flex;
+    flex-direction:row;
+    justify-content: start;
+    align-items: center;
+    font-size: 1rem;
+    padding-left: 0rem;
+    gap: 1rem;
+  }
+
+  .mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-mdc-form-field {
+    margin-top: 16px;
+  }
+
+  .btn-actions-final{
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    padding-left: 0rem;
+    gap: 1rem;
+  }

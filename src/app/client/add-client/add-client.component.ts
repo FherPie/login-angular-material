@@ -10,6 +10,12 @@ import { ActivatedRoute } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MessageService } from 'src/app/utils-services/message-service.service';
 import { ClienteRespuestasDto } from '../models/ClienteRespuestasDto';
+import { OdontogramaRespuestasDto } from '../models/OdontogramaRespuestasDto';
+import { async } from 'rxjs';
+import { Observable } from 'rxjs';
+import { FileUploadService } from 'src/app/utils-services/file-upload-service.service';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
+
 
 
 @Component({
@@ -18,18 +24,28 @@ import { ClienteRespuestasDto } from '../models/ClienteRespuestasDto';
   styleUrls: ['./add-client.component.css']
 })
 export class AddClientComponent implements OnInit {
+  dienteSelected:OdontogramaRespuestasDto={};
   cliente: ClientDto= new ClientDto();
   clienteLite: ClientLite= new ClientLite();
   submitted: boolean=false;
-  listRespuestasClientesDto:ClienteRespuestasDto[] | undefined;
+  listRespuestasClientesDto:ClienteRespuestasDto[]=[];
+  listOdontogramaRespuestasDto:OdontogramaRespuestasDto[] | undefined;
+
+  currentFile?: File;
+  progress = 0;
+  message = '';
+
+  fileName = 'Select File';
+  fileInfos?: Observable<any>;
 
   public addClientForm!: FormGroup;
   saving!: boolean;
   response!: ResponseGenerico;
 
-  
+  newItems = {};
 
-  constructor(
+
+  constructor(private uploadService: FileUploadService,
     private route: ActivatedRoute,
     private clienteSrv: ClienteService, 
     public dialog: MatDialog,
@@ -43,6 +59,10 @@ export class AddClientComponent implements OnInit {
         (data) => {
           this.cliente = data;
           this.listRespuestasClientesDto= this.cliente.listaClienteRespuestasDto;
+
+          this.newItems = this.groupByType( this.listRespuestasClientesDto);
+
+          this.listOdontogramaRespuestasDto= this.cliente.listaOdontogramaRespuestasDto;
           this.addClientForm = this.fb.group(this.cliente);
         },
         (error) => {
@@ -51,9 +71,25 @@ export class AddClientComponent implements OnInit {
       );
     }
     this.iniciarForms();
+    this.dienteSelected;
   }
 
 
+  closeDialog(): void {
+     this.dialog.closeAll();
+  }
+
+  seleccionarDiente(item: OdontogramaRespuestasDto) {
+      this.dienteSelected=item;
+  }
+
+  groupByType(array: any[]){
+    return array.reduce((r: { [x: string]: any[]; }, a:  ClienteRespuestasDto) => {
+          r[a.pregunta.maestro.nombre] = r[a.pregunta?.maestro?.nombre] || [];
+          r[a.pregunta?.maestro?.nombre].push(a);
+          return r;
+      }, Object.create(null));
+  }
 
 
   openDialog(): void {
@@ -82,6 +118,8 @@ export class AddClientComponent implements OnInit {
           this.response = data;
           this.cliente= data.objetoOb;
           this.listRespuestasClientesDto= this.cliente.listaClienteRespuestasDto;
+          this.listOdontogramaRespuestasDto= this.cliente.listaOdontogramaRespuestasDto;
+          this.obtenerDocumentos();
           this.msgs.showInfo("Registro Ingresado...")
       },
       complete: () => {},
@@ -94,7 +132,55 @@ export class AddClientComponent implements OnInit {
   })
   }
 
-  public onUpdateClient(): void {
+  selectFile(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      const file: File = event.target.files[0];
+      this.currentFile = file;
+      this.fileName = this.currentFile.name;
+    } else {
+      this.fileName = 'Select File';
+    }
+  }
+
+
+
+
+  upload(): void {
+    this.progress = 0;
+    this.message = '';
+
+    if (this.currentFile) {
+      this.uploadService.upload(this.currentFile, "cliente/uploadandSaveFileClient",this.currentFile.name, this.cliente.id).subscribe(
+        (event: any) => {
+          if (event.type === HttpEventType.UploadProgress) {
+            this.progress = Math.round((100 * event.loaded) / event.total);
+          } else if (event instanceof HttpResponse) {
+            this.message = event.body.message;
+            this.fileInfos = this.uploadService.getFiles();
+          }
+        },
+        (err: any) => {
+          console.log(err);
+          this.progress = 0;
+
+          if (err.error && err.error.message) {
+            this.message = err.error.message;
+          } else {
+            this.message = 'Could not upload the file!';
+          }
+
+          this.currentFile = undefined;
+        }
+      );
+    }
+  }
+
+  private obtenerDocumentos(){
+     console.log("servicio obtiene archivos")
+
+  }
+
+  public async onUpdateClient() {
     console.log("Client Info",this.addClientForm.value);
     if(this.addClientForm.invalid){
       this.markAsDirty(this.addClientForm);
@@ -103,7 +189,12 @@ export class AddClientComponent implements OnInit {
       return;
     }
     this.cliente = this.addClientForm.value;
-    this.cliente.listaClienteRespuestasDto= this.listRespuestasClientesDto;
+    //this.cliente.listaClienteRespuestasDto= this.listRespuestasClientesDto;
+   //console.log(Object.values(this.newItems));
+   console.log("unica",this.cliente);
+    this.cliente.listaClienteRespuestasDto=  await this.getValues(this.newItems)
+    this.cliente.listaOdontogramaRespuestasDto=this.listOdontogramaRespuestasDto;
+    console.log(this.cliente);
     this.clienteSrv.updateClient(this.cliente).subscribe({
       next: (data) => {
           this.saving = false;
@@ -126,6 +217,21 @@ export class AddClientComponent implements OnInit {
       group?.controls[i].markAsDirty();
     }
   }
+
+
+  private  async getValues(array: any){
+    let respuestas:ClienteRespuestasDto[]=[];
+  for (const [key, value ] of Object.entries(array)) {
+    let array2:Array<ClienteRespuestasDto>=value as Array<ClienteRespuestasDto>;
+     for(const element in array2){
+      // console.log("element",array2[element]);
+       respuestas.push(array2[element]);
+     }
+   }
+  return respuestas;
+  }
+
+
 
 
   iniciarForms() {

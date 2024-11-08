@@ -1,8 +1,8 @@
 <br />
 
 
-<mat-form-field class="full-width " >
-    <mat-label>Cliente: </mat-label>
+<mat-form-field style="width:100%" >
+    <mat-label>CLIENTE: </mat-label>
     <input type="text" placeholder="Escoger Uno" aria-label="Number" matInput [formControl]="customerFilterControl"
         [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="setActiveClient($event.option.value)"  >

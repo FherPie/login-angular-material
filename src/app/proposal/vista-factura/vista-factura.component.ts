@@ -39,7 +39,7 @@ export class VistaFacturaComponent implements OnInit, AfterViewInit {
   desde = moment();
   hasta = moment();
   estado: string = "";
-  title = 'Presupuestos';
+  title = 'Consultas';
 
   @ViewChild('form', { static: true }) ngForm: NgForm | undefined;
 
@@ -168,7 +168,7 @@ export class VistaFacturaComponent implements OnInit, AfterViewInit {
 
     const dialogRef = this.dialog.open(CreacionFacturaComponent,{
       height: '100%',
-      width: '100%',
+      width: '200%',
       disableClose: true,
      position: {top: '10px'} ,
       data: data

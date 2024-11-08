@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ResponseGenerico } from 'src/app/client/models/ResponseGenerico';
 import { DeleteConfirmDialogComponent } from 'src/app/proposal/util-components/delete-confirm-dialog/delete-confirm-dialog.component';
+import { MessageService } from 'src/app/utils-services/message-service.service';
 import { FinanzasService } from '../../service/finanzas-service.service';
 import { AddIngresoComponent } from '../addIngresos/addIngresos.component';
 import { Ingreso } from '../ingresoModel';
@@ -20,7 +21,8 @@ export class IngresosComponent implements OnInit {
 
 
 
-  constructor(private finanzasService: FinanzasService,public dialog: MatDialog) {
+  constructor(private finanzasService: FinanzasService,public dialog: MatDialog, 
+   private msgs:MessageService) {
 
   }
 
@@ -39,7 +41,7 @@ export class IngresosComponent implements OnInit {
     alert(this.startDate);
   }
 
-  displayedColumns = ['precio', 'concepto', 'createdDate', 'actions'];
+  displayedColumns = [ 'concepto', 'createdDate', 'nombreCliente',  'precio','actions'];
 
   ngOnInit(): void {
     this.listIngreso();
@@ -60,6 +62,23 @@ export class IngresosComponent implements OnInit {
     })
   }
 
+
+  
+  applyFilter(filterValue: any) {
+    filterValue= filterValue.target.value;
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  // this.toastr.success('Hello world!', filterValue);
+   }
+
+  
+  clearFilterValue() {
+    this.dataSource.filter="";
+    this.filterValue="";
+  }
+
+
   new() {
     this.openEditIngresoForm(new Ingreso());
   }
@@ -71,7 +90,7 @@ export class IngresosComponent implements OnInit {
        if(confirm){
         this.finanzasService.deleteIngreso(ingreso).subscribe({
           complete:()=>{
-            alert("Registro Eliminado");
+            this.msgs.showInfo("Registro Eliminado...")
             this.listIngreso();
           }
         })
@@ -86,7 +105,7 @@ export class IngresosComponent implements OnInit {
 
   openEditIngresoForm(data: Ingreso | null) {
     const dialogRef = this.dialog.open(AddIngresoComponent, {
-      width: '640px', disableClose: true,
+      width: '100%', disableClose: true,
       data: data,
       maxHeight: '120vh'
     });

@@ -1,0 +1,10 @@
+.btn-actions{
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    padding-left: 0.5rem;
+    gap: 1rem;
+    padding-top: 1rem;
+  }

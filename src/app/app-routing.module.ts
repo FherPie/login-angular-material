@@ -22,6 +22,8 @@ import { IngresosComponent } from './resultados/ingresos/tableIngresos/ingresos.
 import { EgresosComponent } from './resultados/egresos/tableEgresos/egresos.component';
 import { ResultadosComponent } from './resultados/resultados/resultados.component';
 import { PanelContenedorTodoComponent } from './resultados/panel-contenedor-todo/panel-contenedor-todo.component';
+import { VistaOrdenesComponent } from './ordenes/vista-ordenes/vista-ordenes.component';
+import { PagosComponent } from './pagos/pagos.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -49,6 +51,8 @@ const routes: Routes = [
   { path: 'egresos', component: EgresosComponent },
   { path: 'resultados', component: ResultadosComponent },
   { path: 'panelContenedorTodo', component: PanelContenedorTodoComponent },
+  { path: 'ordenes', component: VistaOrdenesComponent },
+  { path: 'pagos', component: PagosComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 

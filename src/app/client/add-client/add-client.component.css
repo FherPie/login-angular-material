@@ -1,6 +1,6 @@
 .form-datos {
     width: 100%;
-    max-width: 1200px;
+ 
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
@@ -25,3 +25,69 @@
     grid-column-start: 1.5;
   }
   
+
+  .btn-actions{
+    display:flex;
+    flex-direction:row;
+    justify-content: start;
+    align-items: center;
+    font-size: 1rem;
+    padding-left: 0.5rem;
+    gap: 1rem;
+  }
+
+
+  
+ /* Odontrograma */
+ .odontograma{
+  max-width: 1200px;
+  padding: 1rem;
+  margin: 0 auto;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  display: grid;
+  height: 100%;  
+  /* grid-template-columns: 100px repeat(4, 50px) 200px;
+  grid-template-rows: repeat(2, 1fr 2fr); */
+  grid-template-columns: repeat(8, 1fr) 0.7fr  repeat(8, 1fr) ; 
+  grid-template-rows: repeat(4, 1fr);
+  column-gap: 0.5em;
+  row-gap: 1em;
+ }
+ 
+ .item {
+  font-size: 1.5rem;
+  background: rgb(255, 255, 255);
+  color: rgb(71, 71, 66);
+  height: auto;
+  padding: 0.5em;
+
+}
+
+/* @media (min-width: 600px) {
+  .container { grid-template-columns: repeat(8, 1fr) 1fr  repeat(8, 1fr) ; }
+} */
+
+.item-55{
+  grid-column-start: 4;
+}
+
+.item-85{
+  grid-column-start: 4;
+}
+
+
+
+.item-48{
+  grid-column-start: 1;
+
+}
+
+.item-21, 
+.item-61,
+.item-71,
+.item-31{
+  grid-column-start: 10
+}
+
+ /* Odontrograma */

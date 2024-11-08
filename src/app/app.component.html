@@ -1,5 +1,5 @@
 
-<mat-toolbar class="toolBar" color="primary" style="justify-content: end"  *ngIf="isLoggeIn">
+<mat-toolbar class="toolBar" color="primary" style="justify-content: end; color:blueviolet ;"  *ngIf="isLoggeIn">
     <small  style="align-items: right">
       <button class="buttonToggle" (click)="drawer.toggle()">
         <mat-icon style="vertical-align: middle">menu</mat-icon></button>
@@ -127,21 +127,30 @@
                 <a  class="list-item-bar" routerLink="/vista-factura">
                     <mat-icon><span class="material-symbols-outlined">
                       calculate
-                      </span></mat-icon> &nbsp; Presupuestos</a
+                      </span></mat-icon> &nbsp; Consultas</a
                   >
+                  <a  class="list-item-bar" routerLink="/ordenes">
+                    <mat-icon><span class="material-symbols-outlined">
+                      payments
+                      </span></mat-icon>&nbsp; Ordenes</a>
                   <a  class="list-item-bar" routerLink="/ingresos">
                     <mat-icon><span class="material-symbols-outlined">
                       payments
-                      </span></mat-icon>&nbsp; Ingresos</a>
-                      <a  class="list-item-bar" routerLink="/egresos">
+                      </span></mat-icon>&nbsp; Registrar Pagos</a>
+
+                      <a  class="list-item-bar" routerLink="/pagos">
+                        <mat-icon><span class="material-symbols-outlined">
+                          payments
+                          </span></mat-icon>&nbsp; Ver Pagos</a>
+                      <!-- <a  class="list-item-bar" routerLink="/egresos">
                         <mat-icon><span class="material-symbols-outlined">
                           paid
-                          </span></mat-icon>&nbsp; Egresos</a>
-
+                          </span></mat-icon>&nbsp; Egresos</a> -->
+<!-- 
                           <a  class="list-item-bar" routerLink="/resultados">
                             <mat-icon><span class="material-symbols-outlined">
                               equal
-                              </span></mat-icon>&nbsp; Resultados</a>
+                              </span></mat-icon>&nbsp; Resultados</a> -->
             </mat-nav-list>
         </mat-expansion-panel>
   

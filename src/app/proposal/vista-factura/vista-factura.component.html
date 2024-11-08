@@ -1,7 +1,10 @@
 
-<h1>{{title}}
+<!-- <h1>{{title}} -->
   <!-- <button mat-raised-button color="" (click)="buscar()">   <mat-icon>search</mat-icon> Buscar </button> -->
-</h1>
+<!-- </h1> -->
+
+
+<h4 class="title-page" >{{title}}</h4>
 
 <!-- <div class="table-page-header">
 <app-buscar-factura (fireDatatoSearch)="search($event)" ></app-buscar-factura>
@@ -11,7 +14,7 @@
 </div> -->
 
 
-<div class="page-header">
+<div class="header-screen">
   <mat-form-field class="filter">
     <input matInput (keyup)="applyFilter($event)" placeholder="Filtro" [(ngModel)]="filterValue">
 
@@ -19,12 +22,7 @@
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
-  <button mat-button  class="primary" aria-label="add button" (click)="new()">
-    <mat-icon>add</mat-icon> Nuevo
-  </button>
-  <button mat-button aria-label="Example icon button with a bookmark icon">
-    <mat-icon>search</mat-icon> Buscar
-  </button>
+  <button mat-raised-button color="primary" expand="block" (click)="new()"> <mat-icon>add</mat-icon> Nuevo </button>          
   <!-- <button mat-button [matMenuTriggerFor]="menu"> <mat-icon>add</mat-icon>Mas Acciones</button>
     <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="viewOdontograma()" >Odontrograma</button>
@@ -65,7 +63,7 @@
 
 <div class="example-container">
   
-  <mat-table [dataSource]="dataSource" matSort>
+  <mat-table [dataSource]="dataSource" matSort matTableResponsive>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row  *matRowDef="let row; columns: displayedColumns; ; let i = index"></mat-row>
@@ -107,11 +105,6 @@
         <button mat-icon-button (click)="openEditProposal(row)"> <mat-icon  >edit</mat-icon></button>
         <button mat-icon-button (click)="deleteProposal(row)" color="warn" aria-label="Delete">
           <mat-icon>delete</mat-icon>
-        </button>
-
-        <button mat-icon-button (click)="deleteProposal(row)" color="info" aria-label="Delete">
-          <mat-icon>calculate</mat-icon>
-
         </button>
       </mat-cell>
     </ng-container>

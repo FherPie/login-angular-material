@@ -1,0 +1,223 @@
+<div #myDiv>
+
+<form #form="ngForm">
+
+
+    <mat-card appearance="outlined"  >
+
+        <h4 mat-dialog-title style="font-size: 1rem; font-weight:bold;" *ngIf="!(factura.id)"  >Nueva Orden </h4>
+        <h4 mat-dialog-title style="font-size: 1rem; font-weight:bold; " *ngIf="(factura.id)"  >Editar Orden</h4>
+        
+
+
+      <mat-card-content>
+        <div class="row">
+          <div class="col-12">
+        <mat-card appearance="outlined" >
+          <!-- <mat-card-header>
+            <mat-card-title>Datos de la Factura </mat-card-title>
+          </mat-card-header> -->
+          <div class="numeroFactura" *ngIf="(factura.id)">
+            <h2>#</h2>
+            <h2>{{factura.numeroFactura}}</h2>
+          </div>
+        
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput [matDatepicker]="picker" placeholder="Fecha Emision" name="date" type="text" [disabled]="true"  [(ngModel)]="fechaFactura"
+                  required>
+                <!-- <mat-hint>YYYY/MM/DD</mat-hint> -->
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          
+          <div class="row autocomplete" *ngIf="(!factura.id)">
+           <app-autocomplete-client  (fireSelectedClient)="setActiveClient($event)" [inputClient]="this.factura.idCliente" ></app-autocomplete-client>
+          </div>
+
+
+        
+          <mat-card *ngIf="(this.factura.idCliente?.id)" appearance="outlined" class="shipping-card">
+            <p><strong>Nombre:</strong> {{this.factura.idCliente?.nombres}} <strong>Apellido:</strong> {{this.factura.idCliente?.apellidos}} <strong>Identificacion:</strong> {{this.factura.idCliente?.identificacion}} </p>
+            <p> <strong> Teléfono: </strong> {{this.factura.idCliente?.telefono}} <strong> Email: </strong> {{this.factura.idCliente?.email}} </p>
+          </mat-card>
+
+          <div class="row autocomplete">
+            <mat-form-field class="full-width">
+              <mat-label> FORMA DE PAGO </mat-label>
+              <mat-select
+                [(value)]="this.factura.formaPago!"
+              >
+                <mat-option
+                  *ngFor="let maestro of maestrosList"
+                  [value]="maestro.nombre"
+                >
+                  {{ maestro.nombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        
+    
+
+        <!-- <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Descuento" name="totalDescuento" type="number" [(ngModel)]="totalDescuento" required>
+            </mat-form-field>
+          </div>
+        </div> -->
+        <mat-card-actions class="btn-actions">
+          <button mat-raised-button color="primary" [disabled]="form.invalid  ||  this.factura.detallesVentaDto.length == 0 || !this.factura.idCliente || savingProposal" expand="block" (click)="factura.id ?  guardarCerrarVenta():guardarCerrarVenta()"> {{factura.id ?  'Actualizar':'Guardar'}}</button>          
+          <button mat-raised-button color="primary"  expand="block" (click)="cancelDialog()">Cancelar</button>
+          <button mat-raised-button color="primary"  expand="block" (click)="imprimir()">Imprimir</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+      
+
+    <div class="col-12">
+    
+
+            <mat-card-actions>
+              <!-- [disabled]="form.invalid" -->
+              <button mat-raised-button color="primary" expand="block" type="button" (click)="agregarDetalle()">Agregar
+                Item </button>
+            </mat-card-actions>
+        
+            <!-- <table mat-table [dataSource]="dataSourceDetalleVentaDto">
+              <ng-container [matColumnDef]="col" *ngFor="let col of displayedColumns">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{col}}
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{element[col]}}
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table> -->
+            <table mat-table [dataSource]="factura.detallesVentaDto" matSort >
+              <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema" >
+                <th mat-header-cell *matHeaderCellDef   >
+                 <div>{{col.label}}</div> 
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  
+                  <div [ngSwitch]="col.type" *ngIf="!element.edit">
+                    <div class="btn-edit" *ngSwitchCase="'edit'">
+                      <button mat-button (click)="element.edit = !element.edit">Edit</button>
+                      <button
+                      mat-button
+                      class="button-remove"
+                      (click)="removeRow(element)">
+                      Delete
+                    </button>
+                    </div>
+                    <span *ngSwitchDefault>
+                     <p *ngIf="col.type!='object'">{{element[col.key] }}</p> 
+                     <p *ngIf="col.type=='object'">{{element[col.key].nombre }}</p> 
+
+                    </span>
+                  </div>
+
+                  <div *ngIf="element.edit">
+                    <div class="btn-edit" *ngIf="col.key === 'edit'; else dataField">
+                      <button mat-button (click)="done(element)">Done</button>
+                    </div>
+                    <ng-template #dataField>
+                      <mat-form-field  *ngIf="col.type!='id'"  >
+                        <input matInput [type]="col.type" *ngIf="col.type=='object' && element[col.id]" [disabled]="true" [(ngModel)]="element[col.key].nombre" [ngModelOptions]="{standalone: true}">
+                        <!-- <input matInput [type]="col.type" *ngIf="col.type=='object' && !element[col.id]" [disabled]="false" [(ngModel)]="element[col.key].nombre" [ngModelOptions]="{standalone: true}"> -->
+
+                        <!-- <app-autocomplete-product  (fireSelectedProduct)="setActiveProduct($event)" ></app-autocomplete-product> -->
+
+                        <!-- <select matNativeControl  matInput  *ngIf="col.type=='object' && !element[col.id]" [(ngModel)]="element[col.key]" (change)="changed(element[col.key].nombre, element)" [ngModelOptions]="{standalone: true}" >
+                          <option value="" selected></option>
+                          <option *ngFor="let product of optionsProduct" [value]="product">{{product.nombre}}</option>
+                        </select> -->
+
+                        <!-- <mat-selection-list  matInput [multiple]="false" *ngIf="col.type=='object' && !element[col.id]" [(ngModel)]="element[col.key]" (change)="changed(element[col.key].nombre, element)" [ngModelOptions]="{standalone: true}"  >
+                          <mat-list-option   *ngFor="let product of optionsProduct" [value]="product">
+                            {{product.nombre}}
+                          </mat-list-option>
+                        </mat-selection-list> -->
+
+
+                        <mat-select placeholder="Seleccionar Producto o Servicio" [multiple]="false" *ngIf="col.type=='object' && !element[col.id]" [(ngModel)]="element[col.key]" (change)="changed(element[col.key].nombre, element)" [ngModelOptions]="{standalone: true}">
+                          <mat-option  *ngFor="let product of optionsProduct" [value]="product"> {{product.nombre}}</mat-option>
+                         </mat-select>
+
+                        <input matInput [type]="col.type" *ngIf="col.type!='object'" [(ngModel)]="element[col.key]" [ngModelOptions]="{standalone: true}">
+
+
+                      </mat-form-field>
+                    </ng-template>
+                  </div>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+<!-- 
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" sortable="name">Producto</th>
+                  <th scope="col" sortable="name">Numero Items</th>
+                  <th scope="col" sortable="area">Valor</th>
+                  <th scope="col" sortable="area">Descuento</th>
+                  <th scope="col" sortable="area">Valor Final</th>
+                  <th scope="col" sortable="area">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of itemsFactura; let i = index" [class.active]="i == currentIndex">
+                  <th scope="row">{{ item.productoDto?.nombre}}</th>
+                  <td>
+                    <input matInput placeholder="precioUnitario"  name="precioUnitario" type="number" (ngModel)="item.cantidad" required>
+                  </td>
+                  <td>{{ item.precioUnitario | number:'1.2-2' }}</td>
+                  <td>{{ item.descuentoUnitario | number:'1.2-2' }}</td>
+                  <td>
+                  
+                     <button mat-icon-button (click)="editDetalle(i)"> <mat-icon  >edit</mat-icon></button>
+                    <button mat-icon-button (click)="deleteDetalle(i)" color="warn" aria-label="Delete"><mat-icon>delete</mat-icon>
+                    </button>
+            -->
+     
+
+
+
+          <br/>
+          <mat-card appearance="outlined" >
+          <mat-list>
+            <!-- {{factura | json}} -->
+            <mat-list-item style="position: relative;text-align: end;right: 1%; margin-bottom:2px"  ><span> Subtotal =  {{factura.totalSinDescuento | number:'1.2-2'}} </span></mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item  style="position: relative;text-align: end;right: 1%; margin-bottom:2px" ><span>Descuentos= {{factura.totalDescuento  | number:'1.2-2'}}</span> </mat-list-item>
+            <mat-divider></mat-divider>
+            <!-- <mat-list-item  style="position: relative;text-align: end;right: 1%; margin-bottom:2px" ><span>Total Impuestos  ({{impuestoAlaVenta | number:'1.2-2'}}%)= {{totalImpuestosFactura | number:'1.2-2'}} </span></mat-list-item>
+            <mat-divider></mat-divider> -->
+            <mat-list-item  style="position: relative;text-align: end;right: 1%; margin-bottom:2px"><span>Total= {{factura.total | number:'1.2-2'}}</span></mat-list-item>
+          </mat-list>
+          </mat-card>
+       
+    </div>
+
+      </div>
+
+      </mat-card-content>
+ 
+    </mat-card>
+  </form>
+  
+  <div class="mat-elevation-z8">
+  
+  </div>
+</div>

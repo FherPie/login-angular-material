@@ -43,6 +43,12 @@ export class DataService {
         return this.httpClient.post(baseUrl+'/guardarVenta', data);
       }
 
+    
+      guardarCerrarVenta(data: any): Observable<any> {
+        return this.httpClient.post(baseUrl+'/guardarCerrarVenta', data);
+      }
+
+
       getById(key:any): Observable<any> {
         return this.httpClient.get(`${baseUrl}`+'/getByIdVenta/' + key);
     }
@@ -60,5 +66,29 @@ export class DataService {
       }
 
 
+      deleteDetalle(data: any): Observable<any> {
+        return this.httpClient.post(baseUrl+'/deleteDetalle', data);
+      }
 
+      
+      doneDetalle(data: any): Observable<any> {
+        return this.httpClient.post(baseUrl+'/doneDetalle', data);
+      }
+      
+      getDataListOrdenes(): Observable < any > {
+        console.log("Pasa por Get data List Servicio")
+        return this.httpClient.get<Factura []>(`${baseUrl}`+'/listarOrdenes').pipe(
+            tap(async (res:  Factura[] ) => {
+                return of(res);
+            })
+          );
+    }
+
+    getDataListOrdenesConSaldo(): Observable < any > {
+      return this.httpClient.get<Factura []>(`${baseUrl}`+'/listarOrdenesConSaldo').pipe(
+          tap(async (res:  Factura[] ) => {
+              return of(res);
+          })
+        );
+  }
 }
